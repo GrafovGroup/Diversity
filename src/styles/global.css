@@ -9,3 +9,6 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 @media(forced-colors:active){.wordmark,.gradient-text{background:none;color:CanvasText}.button{border:1px solid ButtonText}.brand-descriptor{border-image:none;border-color:CanvasText}}
 @media print{.utility,.header,.breadcrumbs,.closing,.footer,.capability-tools,.related,.button-row,.skip-link{display:none!important}body{font-size:11pt;color:#000;background:#fff}.container{width:100%;max-width:none}.section,.page-hero{padding:15px 0}.page-hero h1{font-size:26pt}.page-hero .lead{font-size:12pt}.page-hero-image{display:none}.page-hero.with-image{display:block}.content-section{display:block;margin:12px 0;padding:10px 0}.content-section h2{font-size:16pt}.capability-grid{gap:14px}.capability-grid article{break-inside:avoid;padding:12px}.capability-grid h2{font-size:14pt}.capability-grid li,.capability-grid p{font-size:10pt}.wordmark,.gradient-text{background:none;color:#0a244c}a{text-decoration:none}.sources{background:none}.form-panel{display:none}}
+
+/* Allow translated content to shrink inside grid and flex tracks. */
+.container>*,.page-hero>div,.related a,.related h3,.service-intro>div,.content-section>*{min-width:0}

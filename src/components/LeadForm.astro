@@ -48,6 +48,8 @@ const audienceOptions=[['corporate',t('Corporation / private business','Entrepri
  const subject=t('Diversity.ca project enquiry','Diversity.ca — demande de projet');
  const params=new URLSearchParams(window.location.search);
  for(const key of ['service','audience','province']){const select=form.elements.namedItem(key);const value=params.get(key);if(select instanceof HTMLSelectElement&&value&&Array.from(select.options).some(o=>o.value===value))select.value=value;}
+ const syncLanguageLinks=()=>{for(const anchor of document.querySelectorAll<HTMLAnchorElement>('.language a')){const url=new URL(anchor.href);for(const key of ['service','audience','province']){const select=form.elements.namedItem(key) as HTMLSelectElement; if(select?.value)url.searchParams.set(key,select.value);else url.searchParams.delete(key);}anchor.href=url.toString();}};
+ syncLanguageLinks();for(const key of ['service','audience','province'])(form.elements.namedItem(key) as HTMLSelectElement)?.addEventListener('change',syncLanguageLinks);
  const deadline=form.elements.namedItem('deadline') as HTMLInputElement;
  const zone=form.elements.namedItem('deadline_timezone') as HTMLSelectElement;
  deadline?.addEventListener('input',()=>{zone.required=Boolean(deadline.value);});
