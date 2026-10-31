@@ -27,18 +27,18 @@ npm run qa
 
 ## Enquiries
 
-Copy `.env.example` to `.env` for local configuration. Never commit private keys or credentials.
+The owner-approved endpoint is the tracked default, so clean builds and WHC exports include it. Copy `.env.example` to `.env` only to override the configuration. Never commit private keys or credentials.
 
 ```text
-PUBLIC_FORM_ENDPOINT=https://formspree.io/f/OWNER_SUPPLIED_ID
+PUBLIC_FORM_ENDPOINT=https://formspree.io/f/xaeepeno
 PUBLIC_RELEASE_APPROVED=false
 ```
 
-The endpoint example must be replaced with the actual approved Formspree endpoint. Only an HTTPS `formspree.io/f/` URL is accepted. The public form identifier is configuration, not a secret. Recipient verification and service/audience routing are configured in the provider, not in client-controlled `_to` fields.
+The endpoint was supplied by the owner on 31 October 2026. Only an HTTPS `formspree.io/f/` URL is accepted. The public form identifier is configuration, not a secret. Recipient verification and service/audience routing are configured in the provider, not in client-controlled `_to` fields.
 
-With no endpoint, the form validates the request and prepares an email link. It **does not send a message or claim delivery**. A structured JSON download supports a CRM handoff; no visitor information is persisted in local storage or a site database. Attachments are intentionally unavailable until a suitable secure exchange process is established.
+An explicitly empty `PUBLIC_FORM_ENDPOINT` restores email-draft-only mode. In that mode, the form validates the request and prepares an email link. It **does not send a message or claim delivery**. A structured JSON download supports a CRM handoff; no visitor information is persisted in local storage or a site database. Attachments are intentionally unavailable until a suitable secure exchange process is established.
 
-After an endpoint is configured, the browser submits using AJAX and reports success only on a successful response with `ok: true`. Failures and timeouts preserve the visitor's input and offer email fallback. The no-JavaScript alternative is a direct email link. See `docs/LEAD_OPERATIONS.md` for routing and live testing requirements.
+The browser submits using vanilla JavaScript AJAX and reports success only on a successful response with `ok: true`. Failures and timeouts preserve the visitor's input and offer email fallback. Without JavaScript, the HTML form posts to Formspree, including language, enquiry type and source path; a direct email link is also available. See `docs/LEAD_OPERATIONS.md` for routing and live testing requirements.
 
 ## SEO and release guard
 
@@ -66,7 +66,8 @@ Use the supported Sites preview workflow in Work Mode. No browser binary, remote
 - `src/layouts/Layout.astro`: shared shell, language switching and metadata.
 - `src/components/`: page layouts, imagery, wordmark and lead form.
 - `src/styles/global.css`: brand tokens, responsive layouts and accessibility treatments.
-- `src/lib/intake.mjs`: endpoint validation and structured lead export.
+- `src/lib/intake.mjs`: approved endpoint, endpoint validation and structured lead export.
+- `src/lib/formspree.mjs`: AJAX submission, provider acceptance checks and timeout handling.
 - `public/brand/`: outlined SVG wordmarks, typographic favicon and bilingual social previews.
 - `scripts/generate-brand.py`: optional reproducible vector/social asset generation, using the licensed Inter font. Requires Python FontTools, Brotli and Pillow; not part of the normal build.
 - `docs/WHC_RELEASE_CHECKLIST.md`: host-specific release, backup, SSL, DNS and rollback instructions.

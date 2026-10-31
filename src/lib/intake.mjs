@@ -1,3 +1,5 @@
+// Owner-approved public form identifier. An explicit empty build override disables sending.
+export const approvedFormEndpoint = 'https://formspree.io/f/xaeepeno';
 export function validateEndpoint(value = '') {
   if (!value) return '';
   if (!/^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(value)) throw new Error('PUBLIC_FORM_ENDPOINT must be an approved https://formspree.io/f/ endpoint.');

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 — 31 October 2026 — Formspree integration
+
+- Connected the owner-approved `xaeepeno` endpoint to all eight EN/FR enquiry routes, with a build-time override.
+- Kept dependency-free vanilla JavaScript AJAX and added native HTML POST context for visitors without JavaScript.
+- Added subject, language, intake and source-path fields, duplicate-submission protection, busy state and context restoration after successful submission.
+- Added mocked acceptance/rejection/network/timeout tests and static checks for all eight form destinations.
+- Updated bilingual privacy disclosures and operational documentation. Inbox delivery remains to be verified; public launch and DNS changes remain unapproved.
+
 ## 1.0.0 — 31 October 2026 — approval preview
 
 - Implemented approved Gradient Modern #9 identity with complete outlined light/dark SVG wordmarks, typographic favicon and bilingual social assets.

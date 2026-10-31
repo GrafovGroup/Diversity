@@ -2,6 +2,14 @@
 
 Review build: 31 October 2026. Source: `GrafovGroup/Diversity`, branch `codex/diversity-production-review`. The original master brief and deployment runbook were read in full and remain unchanged.
 
+## Formspree update — 31 October 2026
+
+The supplied endpoint `https://formspree.io/f/xaeepeno` is integrated as the default in all eight EN/FR forms. The build environment can override it; an explicitly empty override disables sending. The existing vanilla JavaScript AJAX flow is retained without adding dependencies. Native HTML POST also sends the enquiry type, language, source path and notification subject.
+
+Executed checks for this update: Astro/TypeScript (16 files; zero errors/warnings/hints), ESLint, 13 passing Node tests, static build (115 pages), and generated output validation (4,655 internal links/assets; eight forms; zero failures). All eight rendered form actions and AJAX destinations were additionally checked against the supplied endpoint. JavaScript is 4,856 bytes; CSS remains 31,411 bytes before compression. Evidence: `evidence/formspree-static-checks.json`.
+
+Nine new mocked-network tests exercise provider acceptance, disabled/untrusted destinations, HTTP rejection, validation errors, unconfirmed or malformed responses, network failure and timeout cancellation. They do not send real submissions. The full-site browser audit below predates this endpoint activation; it was not represented as a new live submission test. Recipient verification, Formspree dashboard settings and actual inbox delivery remain unverified. No public launch or DNS change is authorized by this update.
+
 ## Phase status
 
 | Master-brief phase | Delivered | Status |
@@ -10,11 +18,11 @@ Review build: 31 October 2026. Source: `GrafovGroup/Diversity`, branch `codex/di
 | 1A — Identity | Gradient Modern #9 full wordmark; outlined light/dark SVGs, CSS variant, favicon and bilingual social images | Implemented; exact execution awaits owner approval |
 | 1B — Design system | Brand tokens, local Inter font, reusable components, desktop/mobile layouts | Complete for review |
 | 2 — Bilingual site | 114 substantive EN/FR routes plus bilingual 404; seven divisions, 14 subservices, corporate/government, procurement, national coverage and editorial guides | Complete for review |
-| 3 — Conversion | Four intake journeys, service/audience/location context, RFP fields, consent, spam trap, email fallback and CRM-ready JSON export | Implemented; provider activation and real delivery tests pending endpoint |
+| 3 — Conversion | Four intake journeys, service/audience/location context, RFP fields, consent, spam trap, email fallback and CRM-ready JSON export | Endpoint integrated; recipient verification and real delivery tests pending |
 | 4 — SEO/AEO and accessibility | Metadata, canonical/hreflang, grounded schema, sitemap, local optimized assets, keyboard navigation and responsive checks | Implemented and checked; independent assistive-technology review remains advisable |
 | 5 — QA and release | Local checks, browser evidence, GitHub review, static package and WHC release checklist | Review deliverables complete; public release, DNS/SSL and live verification intentionally pending approval |
 
-## Executed checks
+## Initial full-site checks
 
 `npm run qa` completed successfully on the final implementation:
 
@@ -41,7 +49,7 @@ Manual browser checks verified EN/FR desktop presentation, French mobile layout,
 ## Release limits and required inputs
 
 1. Approve the exact identity execution, design and EN/FR copy. Obtain final Canadian French and privacy/accessibility notice review.
-2. Supply the approved Formspree endpoint and verify its recipient/routing. Real success, delivery, spam and failure testing must be completed after configuration; no provider delivery is claimed now.
+2. Verify the recipient/routing for the supplied endpoint `https://formspree.io/f/xaeepeno`. Real success, inbox delivery and spam testing remain to be completed; no provider delivery is claimed now.
 3. Confirm the legal entity, privacy contact/process and address-display policy. Public telephone is omitted until approved. Consultant credentials, registrations and references must be supplied before they can be represented. The print capabilities overview is deliberately provisional; a verified downloadable capability statement remains pending this information.
 4. Supply authorized WHC/cPanel and DNS access through a secure connection, identify the actual document root and confirm existing mail/DNS arrangements. No hosting credentials should be committed or pasted into chat.
 5. Approve public release separately. WHC compatibility is based on standard static Apache hosting; the actual account, SSL, redirects, custom 404, headers and mailbox delivery still need host-level verification. See `WHC_RELEASE_CHECKLIST.md`.

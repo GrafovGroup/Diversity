@@ -7,7 +7,8 @@ The original `DEPLOYMENT_RUNBOOK.md` remains authoritative. This checklist recor
 - [ ] Owner approves the EN/FR website, Gradient Modern #9 execution and exact copy.
 - [ ] Confirm the legal entity operating Diversity.ca and the final privacy contact/process.
 - [ ] Review French content and privacy/accessibility drafts. Remove draft labels only after approval.
-- [ ] Supply and verify Formspree endpoint, recipient and provider routing. Execute delivery tests.
+- [x] Owner supplied Formspree endpoint `https://formspree.io/f/xaeepeno`; integrated in all EN/FR enquiry forms.
+- [ ] Verify Formspree recipient and provider routing. Execute delivery tests.
 - [ ] Confirm mailbox operation. Public phone remains omitted unless approved.
 - [ ] Verify any biographies, supplier registrations, insurance, security clearances and references before adding them. The print overview is explicitly provisional; it is not a certified capability statement.
 - [ ] Confirm actual WHC cPanel account, domain document root, hostname, SSL state and DNS authority. Never guess server IPs or nameservers.

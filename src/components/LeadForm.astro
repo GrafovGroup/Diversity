@@ -1,19 +1,23 @@
 ---
 import { divisions, regions, pathFor, type Lang, type Page } from '../data/site';
 import Arrow from './Arrow.astro';
-import { validateEndpoint } from '../lib/intake.mjs';
+import { approvedFormEndpoint, validateEndpoint } from '../lib/intake.mjs';
 interface Props { page: Page; lang: Lang; }
 const {page,lang}=Astro.props;
 const fr=lang==='fr';const t=(en:string,f:string)=>fr?f:en;
-const endpoint=validateEndpoint(import.meta.env.PUBLIC_FORM_ENDPOINT??'');
+const endpoint=validateEndpoint(import.meta.env.PUBLIC_FORM_ENDPOINT??approvedFormEndpoint);
 const audienceOptions=[['corporate',t('Corporation / private business','Entreprise privée')],['government',t('Government / public agency','Gouvernement / organisme public')],['education',t('Education','Éducation')],['community',t('Healthcare / community / non-profit','Santé / communauté / organisme sans but lucratif')],['other',t('Other organization','Autre organisation')]];
 ---
 <div class="intake-layout container">
  <aside class="intake-aside"><p class="eyebrow">{t('A CLEAR START','UN DÉPART CLAIR')}</p><h2>{t('A few details help us ask the right questions.','Quelques détails pour poser les bonnes questions.')}</h2><ol class="simple-steps"><li>{t('Tell us what you want to achieve.','Précisez votre objectif.')}</li><li>{t('We discuss the scope and delivery needs.','Nous discutons du mandat et des besoins.')}</li><li>{t('Agree on a proposal and next steps.','Convenons d’une proposition et des suites.')}</li></ol><div class="contact-note"><p>{t('Prefer to write directly?','Vous préférez nous écrire directement?')}</p><a href="mailto:info@diversity.ca">info@diversity.ca <span aria-hidden="true">↗</span></a></div><p class="small muted">{t('Please do not include sensitive employee information, medical details or confidential procurement documents. We can agree on a suitable transfer method later.','N’incluez pas de renseignements sensibles sur le personnel, de détails médicaux ni de documents d’achat confidentiels. Un mode de transfert approprié pourra être convenu ensuite.')}</p></aside>
  <div class="form-panel">
  <div class="form-notice" id="form-mode"><strong>{endpoint?t('Secure form submission via Formspree','Envoi du formulaire par Formspree'):t('Your enquiry starts by email','Votre demande commence par courriel')}</strong><p>{endpoint?t('Your details will be sent to Formspree for delivery to Diversity.ca.','Vos renseignements seront transmis à Formspree pour être remis à Diversity.ca.'):t('This form prepares a draft in your email app. Review it and send it there. Nothing is sent when you prepare the draft.','Ce formulaire prépare un brouillon dans votre application courriel. Vérifiez-le et envoyez-le depuis cette application. La préparation n’envoie aucun message.')}</p>{endpoint&&<a href="https://formspree.io/legal/privacy-policy/">{t('Formspree privacy policy','Politique de confidentialité de Formspree')}</a>}</div>
- <noscript><p class="form-notice">{t('JavaScript is needed for this form. Please email your project details to','Ce formulaire nécessite JavaScript. Veuillez envoyer votre projet à')} <a href="mailto:info@diversity.ca">info@diversity.ca</a>.</p></noscript>
+ <noscript><p class="form-notice">{endpoint?t('Submitting will open Formspree to complete your request. You can also email','L’envoi ouvrira Formspree pour terminer votre demande. Vous pouvez aussi écrire à'):t('Please email your project details to','Veuillez envoyer les détails de votre projet à')} <a href="mailto:info@diversity.ca">info@diversity.ca</a>.</p></noscript>
  <form id="lead-form" data-endpoint={endpoint} data-language={lang} data-intake={page.id} aria-describedby="form-mode" method="post" action={endpoint||'mailto:info@diversity.ca'} enctype={endpoint?'multipart/form-data':'text/plain'}>
+ <input type="hidden" name="subject" value={`Diversity.ca — ${page.id} (${lang.toUpperCase()})`} />
+ <input type="hidden" name="language" value={lang} />
+ <input type="hidden" name="intake" value={page.id} />
+ <input type="hidden" name="source_path" value={Astro.url.pathname} />
  <p class="small">{t('Fields marked * are required.','Les champs marqués * sont obligatoires.')}</p>
  <div class="form-grid">
  <div class="field"><label for="name">{t('Your name *','Votre nom *')}</label><input id="name" name="name" autocomplete="name" required maxlength="100" /></div>
@@ -39,6 +43,7 @@ const audienceOptions=[['corporate',t('Corporation / private business','Entrepri
 </div>
 <script>
  import { leadRecord, createMailto, recordText } from '../lib/intake.mjs';
+ import { submitEnquiry } from '../lib/formspree.mjs';
  const form=document.querySelector<HTMLFormElement>('#lead-form');
  if(form){
  const fr=form.dataset.language==='fr';const t=(en:string,f:string)=>fr?f:en;
@@ -47,7 +52,8 @@ const audienceOptions=[['corporate',t('Corporation / private business','Entrepri
  const link=document.querySelector<HTMLAnchorElement>('#email-fallback')!;
  const subject=t('Diversity.ca project enquiry','Diversity.ca — demande de projet');
  const params=new URLSearchParams(window.location.search);
- for(const key of ['service','audience','province']){const select=form.elements.namedItem(key);const value=params.get(key);if(select instanceof HTMLSelectElement&&value&&Array.from(select.options).some(o=>o.value===value))select.value=value;}
+ const applyContext=()=>{for(const key of ['service','audience','province']){const select=form.elements.namedItem(key);const value=params.get(key);if(select instanceof HTMLSelectElement&&value&&Array.from(select.options).some(o=>o.value===value))select.value=value;}};
+ applyContext();
  const syncLanguageLinks=()=>{for(const anchor of document.querySelectorAll<HTMLAnchorElement>('.language a')){const url=new URL(anchor.href);for(const key of ['service','audience','province']){const select=form.elements.namedItem(key) as HTMLSelectElement; if(select?.value)url.searchParams.set(key,select.value);else url.searchParams.delete(key);}anchor.href=url.toString();}};
  syncLanguageLinks();for(const key of ['service','audience','province'])(form.elements.namedItem(key) as HTMLSelectElement)?.addEventListener('change',syncLanguageLinks);
  const deadline=form.elements.namedItem('deadline') as HTMLInputElement;
@@ -55,16 +61,16 @@ const audienceOptions=[['corporate',t('Corporation / private business','Entrepri
  deadline?.addEventListener('input',()=>{zone.required=Boolean(deadline.value);});
  const record=()=>leadRecord(new FormData(form),{language:form.dataset.language,intake:form.dataset.intake,source_path:window.location.pathname});
  const showFallback=()=>{const mailto=createMailto(record(),subject);link.href=mailto;fallback.hidden=false;return mailto;};
+ let submitting=false;
  form.addEventListener('submit',async event=>{
-   event.preventDefault();if(!form.reportValidity())return;
+   event.preventDefault();if(submitting||!form.reportValidity())return;
    if((form.elements.namedItem('_gotcha') as HTMLInputElement).value){status.textContent=t('Please email us directly to complete your enquiry.','Veuillez nous écrire directement pour compléter la demande.');return;}
    const endpoint=form.dataset.endpoint;
    if(!endpoint){showFallback();status.textContent=t('Your email draft is ready. Open it below, review it and send it from your email app. Nothing has been sent yet.','Votre brouillon est prêt. Ouvrez-le ci-dessous, vérifiez-le et envoyez-le depuis votre application. Aucun message n’a été envoyé.');status.focus();return;}
-   const button=form.querySelector<HTMLButtonElement>('button[type="submit"]')!;button.disabled=true;status.textContent=t('Sending your enquiry…','Envoi de votre demande…');
-   const controller=new AbortController();const timeout=window.setTimeout(()=>controller.abort(),15000);
-   try{const body=new FormData(form);body.set('language',form.dataset.language??'en');body.set('intake',form.dataset.intake??'contact');body.set('source_path',window.location.pathname);const response=await fetch(endpoint,{method:'POST',body,headers:{Accept:'application/json'},signal:controller.signal});const result=await response.json();if(!response.ok||result.ok!==true)throw new Error('Submission not confirmed');status.textContent=t('Your enquiry was accepted by the form service. We will use the email address you provided to follow up.','Votre demande a été acceptée par le service de formulaire. Nous utiliserons le courriel fourni pour le suivi.');form.reset();fallback.hidden=true;}
+   const button=form.querySelector<HTMLButtonElement>('button[type="submit"]')!;submitting=true;button.disabled=true;form.setAttribute('aria-busy','true');fallback.hidden=true;status.textContent=t('Sending your enquiry…','Envoi de votre demande…');
+   try{const body=new FormData(form);await submitEnquiry(endpoint,body);status.textContent=t('Your enquiry was accepted by the form service. We will use the email address you provided to follow up.','Votre demande a été acceptée par le service de formulaire. Nous utiliserons le courriel fourni pour le suivi.');form.reset();zone.required=false;applyContext();syncLanguageLinks();fallback.hidden=true;}
    catch{status.textContent=t('Delivery could not be confirmed. Your details are still here. You can send them by email instead; if the provider received the first attempt, a duplicate may occur.','La livraison n’a pas pu être confirmée. Vos renseignements sont conservés dans le formulaire. Vous pouvez les envoyer par courriel; un doublon est possible si le premier envoi a été reçu.');showFallback();}
-   finally{window.clearTimeout(timeout);button.disabled=false;status.focus();}
+   finally{submitting=false;button.disabled=false;form.removeAttribute('aria-busy');status.focus();}
  });
  form.querySelector('[data-download]')?.addEventListener('click',()=>{if(!form.reportValidity())return;const blob=new Blob([JSON.stringify(record(),null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='diversity-project-request.json';a.click();window.setTimeout(()=>URL.revokeObjectURL(url),5000);status.textContent=t('Your request was saved to a JSON file. It has not been sent.','Votre demande a été enregistrée en JSON. Elle n’a pas été envoyée.');});
  form.querySelector('[data-copy]')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(recordText(record()));status.textContent=t('Request copied. Paste it into an email to info@diversity.ca.','Demande copiée. Collez-la dans un courriel à info@diversity.ca.');}catch{status.textContent=t('Copying is unavailable. Use the email link or save your request as JSON.','La copie est indisponible. Utilisez le lien courriel ou enregistrez la demande en JSON.');}});
