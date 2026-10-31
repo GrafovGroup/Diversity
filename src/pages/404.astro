@@ -1,0 +1,5 @@
+---
+import Layout from '../layouts/Layout.astro';import {bi,type Page} from '../data/site';
+const page:Page={id:'404',slug:bi('404','404'),title:bi('Page not found','Page introuvable'),eyebrow:bi('404','404'),summary:bi('This page could not be found. Return to the Diversity.ca home page.','Cette page est introuvable. Retournez à l’accueil de Diversity.ca.')};
+---
+<Layout page={page} lang="en" notFound><section class="section container error-page"><p class="eyebrow">404</p><h1>Let’s get you back on track.</h1><p>That page could not be found.</p><a class="button" href="/">ENGLISH HOME →</a><div lang="fr-CA"><h2>Retrouvons votre chemin.</h2><p>Cette page est introuvable.</p><a class="text-link" href="/fr/">ACCUEIL EN FRANÇAIS →</a></div></section></Layout>
