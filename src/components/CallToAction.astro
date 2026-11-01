@@ -1,8 +1,14 @@
 ---
 interface Props {
   locale: 'en' | 'fr';
+  destination?: string;
+  label?: string;
 }
-const { locale } = Astro.props;
+const {
+  locale,
+  destination = `/${Astro.props.locale}/request-proposal/`,
+  label,
+} = Astro.props;
 const en = locale === 'en';
 ---
 
@@ -22,10 +28,10 @@ const en = locale === 'en';
             : 'Transformons vos priorités en progrès concrets.'
         }
       </h2>
-    </div><a class="button button-white" href={`/${locale}/request-proposal/`}
-      >{en ? 'Start a conversation' : 'Entamons la conversation'}<span
-        aria-hidden="true">↗</span
-      ></a
+    </div><a class="button button-white" href={destination}
+      >{
+        label ?? (en ? 'Start a conversation' : 'Entamons la conversation')
+      }<span aria-hidden="true">↗</span></a
     >
   </div>
 </section>

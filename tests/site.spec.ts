@@ -418,7 +418,7 @@ for (const locale of ['en', 'fr'] as const) {
     expect(path).not.toBeNull();
     const record = JSON.parse(await readFile(path!, 'utf8'));
     expect(record).toMatchObject({
-      schemaVersion: 1,
+      schemaVersion: 2,
       locale,
       kind: 'proposal',
       name: 'QA Reviewer',

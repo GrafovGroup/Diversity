@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.0 — November 1, 2026
+
+Review-build improvements; production publication remains subject to approval.
+
+- Added 28 distinct bilingual sample deliverable outlines, preparation checklists and scope agreements across all service and subservice pages, with 56 plain-text downloads.
+- Added optional assessment, training and proposal questions; active details carry into email drafts, local JSON records and configured provider submissions.
+- Carried valid service/subservice context from service calls to action into forms and between language versions. Personal answers remain outside the URL.
+- Updated enquiry exports to schema version 2 with stable service identifiers, localized labels and structured active details.
+- Added regression checks for conditional field visibility, stale-data exclusion, context validation, provider resets, bilingual downloads and narrow-screen accessibility.
+
 ## 1.0.0 — October 31, 2026
 
 Initial website implementation for review; not a production-release announcement.

@@ -205,6 +205,12 @@ const nav = [
       </div>
     </footer>
     <script>
+      import {
+        resolveEnquiryContext,
+        isServiceAllowed,
+        type EnquiryKind,
+        type FormLocale,
+      } from '../lib/forms';
       const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const nav = document.querySelector<HTMLElement>('#primary-navigation');
       function closeMenu() {
@@ -228,6 +234,54 @@ const nav = [
       nav
         ?.querySelectorAll('a')
         .forEach((link) => link.addEventListener('click', closeMenu));
+
+      // Preserve only validated service context between translations. Contact
+      // details and free-text answers stay in the form and never enter a URL.
+      const enquiry = document.querySelector<HTMLFormElement>(
+        '[data-enquiry-form]',
+      );
+      if (enquiry) {
+        const kind = enquiry.dataset.kind as EnquiryKind;
+        const locale = enquiry.dataset.locale as FormLocale;
+        const updateLanguageLinks = (parameters: URLSearchParams) => {
+          const candidate = resolveEnquiryContext(parameters, locale);
+          const context =
+            candidate && isServiceAllowed(kind, candidate.serviceId)
+              ? candidate
+              : null;
+          for (const link of document.querySelectorAll<HTMLAnchorElement>(
+            'a[hreflang]',
+          )) {
+            const destination = new URL(link.href);
+            destination.search = '';
+            if (context) {
+              destination.searchParams.set('service', context.serviceId);
+              if (context.subserviceId)
+                destination.searchParams.set(
+                  'subservice',
+                  context.subserviceId,
+                );
+            }
+            link.href = destination.pathname + destination.search;
+          }
+        };
+        const synchronizeSelection = () => {
+          const parameters = new URLSearchParams();
+          const service =
+            enquiry.querySelector<HTMLSelectElement>('[name="service"]')?.value;
+          const subservice = enquiry.querySelector<HTMLInputElement>(
+            '[name="subservice"]',
+          )?.value;
+          if (service) parameters.set('service', service);
+          if (subservice) parameters.set('subservice', subservice);
+          updateLanguageLinks(parameters);
+        };
+        updateLanguageLinks(new URLSearchParams(window.location.search));
+        enquiry.addEventListener('change', synchronizeSelection);
+        enquiry.addEventListener('reset', () =>
+          queueMicrotask(synchronizeSelection),
+        );
+      }
     </script>
   </body>
 </html>

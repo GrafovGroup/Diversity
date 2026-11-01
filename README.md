@@ -65,6 +65,14 @@ Without a configured endpoint, the form prepares an email draft for `info@divers
 
 With a valid endpoint, the form submits to the provider and shows success only after a successful response. Verify receipt, spam handling, errors and privacy disclosures before production. Sensitive attachments are not accepted by the public form.
 
+Assessment enquiries can describe the scope, assets and known barriers. Training enquiries can specify audience size, roles, learning goals, delivery format and languages. Proposals can include the procurement reference, desired deliverables, constraints and a closing date/time with an explicit time zone. These additional details are optional; a supplied closing time needs its time zone. The general contact form adapts its questions to the selected service.
+
+Service-page links carry allowlisted service/subservice identifiers into the relevant form and preserve that context when switching languages. Names, email addresses and free-text answers are never copied into those links or stored in the browser. Changing the active question group excludes its inactive fields from email, JSON and provider payloads. JSON exports use schema version 2, retaining common enquiry fields and adding stable identifiers, localized context and structured details.
+
+## Sample deliverables
+
+Every division and subservice page contains a distinct illustrative deliverable outline, a preparation checklist and scope responsibilities. These are scoping examples rather than completed client work. Each English/French page has a matching plain-text outline download at `/en/samples/<service>/<subservice>.txt` or its French counterpart; division downloads omit the subservice segment. The final contents are agreed in the proposal. All files are generated locally during the static build.
+
 ## Release review
 
 Review [CONTENT-REVIEW.md](docs/CONTENT-REVIEW.md) and the [deployment instructions](docs/DEPLOYMENT.md) before publishing. Exact brand execution, bilingual content, business credentials, legal drafts, mailbox/form delivery and the final release require owner review. Unverified consultants, credentials, client results, offices and telephone numbers must not be invented.

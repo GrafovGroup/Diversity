@@ -1,0 +1,195 @@
+---
+import { engagementGuides } from '../data/engagements';
+import type { Locale } from '../data/services';
+
+interface Props {
+  locale: Locale;
+  guideKey: string;
+}
+const { locale, guideKey } = Astro.props;
+const guide = engagementGuides[guideKey];
+if (!guide) throw new Error(`Missing engagement guide: ${guideKey}`);
+const en = locale === 'en';
+---
+
+<div data-engagement-guide={guideKey} class="engagement-guide">
+  <section
+    class="content-section"
+    id="sample-deliverable"
+    aria-labelledby="sample-title"
+  >
+    <h2 id="sample-title">
+      {en ? 'Picture the deliverable.' : 'Un aperçu du livrable.'}
+    </h2>
+    <div class="sample-document">
+      <div class="sample-heading">
+        <span class="eyebrow"
+          >{en ? 'ILLUSTRATIVE OUTLINE' : 'EXEMPLE DE STRUCTURE'}</span
+        >
+        <span class="document-lines" aria-hidden="true"
+          ><i></i><i></i><i></i></span
+        >
+      </div>
+      <h3>{guide.sampleTitle[locale]}</h3>
+      <p>{guide.sampleIntro[locale]}</p>
+      <ol class="sample-sections">
+        {
+          guide.sampleSections[locale].map((section, index) => (
+            <li>
+              <span class="outline-number" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <>
+                  <h4>{section.title}</h4>
+                  <p>{section.description}</p>
+                </>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="sample-note">
+        {
+          en
+            ? 'An example to help you discuss the scope. The final methods, contents and responsibilities are agreed in your proposal.'
+            : 'Un exemple pour faciliter la discussion sur la portée. Les méthodes, le contenu et les responsabilités seront convenus dans votre proposition.'
+        }
+      </p>
+      <a class="text-link" href={`/${locale}/samples/${guideKey}.txt`} download>
+        {
+          en
+            ? 'Download this sample outline (.txt)'
+            : 'Télécharger cet exemple de structure (.txt)'
+        }<span aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </section>
+  <section class="content-section" id="prepare" aria-labelledby="prepare-title">
+    <h2 id="prepare-title">
+      {en ? 'A useful starting point.' : 'Bien préparer le premier échange.'}
+    </h2>
+    <p>
+      {
+        en
+          ? 'Gather what is already available. We can help identify gaps during scoping; a complete package is not required to start a conversation.'
+          : 'Rassemblez les éléments déjà disponibles. Les renseignements à compléter pourront être précisés ensemble; un dossier complet n’est pas nécessaire pour amorcer la conversation.'
+      }
+    </p>
+    <ul>{guide.prepare[locale].map((item) => <li>{item}</li>)}</ul>
+  </section>
+  <section
+    class="content-section scope-boundaries"
+    id="scope-boundaries"
+    aria-labelledby="boundaries-title"
+  >
+    <h2 id="boundaries-title">
+      {
+        en
+          ? 'What we agree before starting.'
+          : 'Ce qui sera convenu avant de commencer.'
+      }
+    </h2>
+    <ul>{guide.boundaries[locale].map((item) => <li>{item}</li>)}</ul>
+  </section>
+</div>
+
+<style>
+  .engagement-guide {
+    margin-top: 54px;
+    min-width: 0;
+  }
+  .sample-document {
+    padding: clamp(24px, 4vw, 42px);
+    border: 1px solid var(--line);
+    border-top: 3px solid #7352b6;
+    background: #fff;
+  }
+  .sample-heading {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .sample-heading .eyebrow {
+    color: #62409a;
+    font-size: 0.64rem;
+    margin-bottom: 22px;
+  }
+  .document-lines {
+    display: grid;
+    gap: 5px;
+    padding-top: 4px;
+    flex: 0 0 26px;
+  }
+  .document-lines i {
+    background: #afb9ca;
+    width: 26px;
+    height: 2px;
+  }
+  .document-lines i:last-child {
+    width: 17px;
+  }
+  .sample-document h3 {
+    font-size: clamp(1.45rem, 2.4vw, 2rem);
+    margin-bottom: 16px;
+  }
+  .sample-document p {
+    font-size: 0.92rem;
+  }
+  .sample-sections {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0;
+    border-top: 1px solid var(--line);
+  }
+  .sample-sections li {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    margin: 0;
+  }
+  .outline-number {
+    color: #62409a;
+    font-size: 0.7rem;
+    font-weight: 650;
+    padding-top: 5px;
+  }
+  .sample-sections h4 {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 7px;
+    font-weight: 600;
+  }
+  .sample-sections p {
+    margin: 0;
+    font-size: 0.88rem;
+  }
+  .sample-document .sample-note {
+    font-size: 0.79rem;
+    margin-bottom: 22px;
+  }
+  .sample-document .text-link {
+    line-height: 1.7;
+    align-items: start;
+  }
+  .scope-boundaries {
+    border-left: 2px solid #a7b4cf;
+    padding-left: 25px;
+  }
+  .scope-boundaries h2 {
+    font-size: 1.5rem;
+  }
+  @media (max-width: 400px) {
+    .sample-document {
+      padding: 21px 17px;
+    }
+    .sample-sections li {
+      gap: 10px;
+      grid-template-columns: 24px 1fr;
+    }
+  }
+</style>

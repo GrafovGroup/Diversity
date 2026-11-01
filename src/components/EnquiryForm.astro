@@ -1,9 +1,11 @@
 ---
 import {
   validateFormEndpoint,
+  isServiceAllowed,
   type FormLocale,
   type EnquiryKind,
 } from '../lib/forms';
+import { enquiryGroups, serviceOptions } from '../data/enquiry-fields';
 
 interface Props {
   locale: FormLocale;
@@ -96,27 +98,9 @@ const audiences = fr
       'Nonprofit organization',
       'Other',
     ];
-const services = fr
-  ? [
-      'Diversité, équité et inclusion',
-      'Accessibilité et audits',
-      'Ressources humaines et culture',
-      'Formation',
-      'Diversité des fournisseurs',
-      'Impact social et durabilité',
-      'Solutions d’accessibilité et mise en œuvre',
-      'À déterminer ensemble',
-    ]
-  : [
-      'Diversity, equity and inclusion',
-      'Accessibility and audits',
-      'People and organizational culture',
-      'Training',
-      'Supplier diversity',
-      'Social impact and sustainability',
-      'Accessibility solutions and implementation',
-      'Help me define the scope',
-    ];
+const services = serviceOptions.filter((service) =>
+  isServiceAllowed(kind, service.id),
+);
 const regions = fr
   ? [
       'À l’échelle du Canada',
@@ -185,7 +169,12 @@ const budgets = fr
       'To be determined',
     ];
 const defaultService =
-  kind === 'training' ? services[3] : kind === 'assessment' ? services[1] : '';
+  kind === 'training'
+    ? 'training'
+    : kind === 'assessment'
+      ? 'accessibility'
+      : '';
+const initialGroup = kind === 'contact' ? null : kind;
 ---
 
 <section class="enquiry-panel" aria-labelledby={`${id}-title`}>
@@ -198,9 +187,19 @@ const defaultService =
     data-locale={locale}
     data-kind={kind}
     data-endpoint={endpoint || ''}
+    data-default-service={defaultService}
     method="post"
     action={endpoint || undefined}
   >
+    <input type="hidden" name="subservice" value="" />
+    <p
+      class="context-note"
+      data-enquiry-context
+      role="status"
+      aria-live="polite"
+      hidden
+    >
+    </p>
     <div class="form-grid">
       <div class="field">
         <label for={`${id}-name`}
@@ -251,8 +250,8 @@ const defaultService =
         ><select id={`${id}-service`} name="service" required
           ><option value="">{words.select}</option>{
             services.map((option) => (
-              <option value={option} selected={option === defaultService}>
-                {option}
+              <option value={option.id} selected={option.id === defaultService}>
+                {option.label[locale]}
               </option>
             ))
           }</select
@@ -287,12 +286,6 @@ const defaultService =
           }</select
         >
       </div>
-      <div class="field">
-        <label for={`${id}-deadline`}
-          >{words.deadline}
-          <span class="optional">({words.optional})</span></label
-        ><input id={`${id}-deadline`} name="deadline" type="date" />
-      </div>
       <div class="field field-wide">
         <label for={`${id}-message`}
           >{words.message} <span aria-hidden="true">*</span></label
@@ -311,6 +304,75 @@ const defaultService =
         </p>
       </div>
     </div>
+    {
+      enquiryGroups.map((group) => (
+        <fieldset
+          class="tailored-fields"
+          data-enquiry-group={group.id}
+          hidden={group.id !== initialGroup}
+          disabled={group.id !== initialGroup}
+          aria-describedby={`${id}-${group.id}-intro`}
+        >
+          <legend>{group.title[locale]}</legend>
+          <p class="field-help group-intro" id={`${id}-${group.id}-intro`}>
+            {group.intro[locale]}
+          </p>
+          <div class="form-grid">
+            {group.fields.map((field) => (
+              <div class:list={['field', { 'field-wide': field.wide }]}>
+                <label for={`${id}-${field.id}`}>
+                  {field.label[locale]}
+                  <span class="optional" data-optional-label={field.id}>
+                    ({words.optional})
+                  </span>
+                </label>
+                {field.type === 'select' ? (
+                  <select
+                    id={`${id}-${field.id}`}
+                    name={field.id}
+                    aria-describedby={
+                      field.help ? `${id}-${field.id}-help` : undefined
+                    }
+                  >
+                    <option value="">{words.select}</option>
+                    {field.options?.map((option) => (
+                      <option value={option.value}>
+                        {option.label[locale]}
+                      </option>
+                    ))}
+                  </select>
+                ) : field.type === 'textarea' ? (
+                  <textarea
+                    id={`${id}-${field.id}`}
+                    name={field.id}
+                    rows="3"
+                    maxlength={field.maxLength}
+                    aria-describedby={
+                      field.help ? `${id}-${field.id}-help` : undefined
+                    }
+                  />
+                ) : (
+                  <input
+                    id={`${id}-${field.id}`}
+                    name={field.id}
+                    type={field.type}
+                    maxlength={field.maxLength}
+                    aria-describedby={
+                      field.help ? `${id}-${field.id}-help` : undefined
+                    }
+                  />
+                )}
+                {field.help && (
+                  <p class="field-help" id={`${id}-${field.id}-help`}>
+                    {field.help[locale]}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </fieldset>
+      ))
+    }
     <div class="honey-field" aria-hidden="true">
       <label for={`${id}-website`}>Leave this field empty</label><input
         id={`${id}-website`}
@@ -372,6 +434,10 @@ const defaultService =
   import {
     createEnquiryRecord,
     createEnquiryMailto,
+    createEnquiryPayload,
+    resolveEnquiryContext,
+    getEnquiryGroup,
+    isServiceAllowed,
     validateFormEndpoint,
     type FormLocale,
     type EnquiryKind,
@@ -391,7 +457,36 @@ const defaultService =
     const emailLink = form.querySelector<HTMLAnchorElement>(
       '[data-prepared-email]',
     )!;
+    const service = form.querySelector<HTMLSelectElement>('[name="service"]')!;
+    const subservice = form.querySelector<HTMLInputElement>(
+      '[name="subservice"]',
+    )!;
+    const contextNote = form.querySelector<HTMLElement>(
+      '[data-enquiry-context]',
+    )!;
+    const fieldsets = form.querySelectorAll<HTMLFieldSetElement>(
+      '[data-enquiry-group]',
+    );
+    const closingTime = form.querySelector<HTMLInputElement>(
+      '[name="deadline_time"]',
+    )!;
+    const closingZone = form.querySelector<HTMLSelectElement>(
+      '[name="deadline_timezone"]',
+    )!;
+    const zoneOptional = form.querySelector<HTMLElement>(
+      '[data-optional-label="deadline_timezone"]',
+    )!;
     const endpoint = validateFormEndpoint(form.dataset.endpoint);
+    const queryContext = resolveEnquiryContext(
+      new URLSearchParams(window.location.search),
+      locale,
+    );
+    const initialContext =
+      queryContext && isServiceAllowed(kind, queryContext.serviceId)
+        ? queryContext
+        : null;
+    const initialService =
+      initialContext?.serviceId ?? form.dataset.defaultService ?? '';
     let pending = false;
     const notify = (message: string, error = false) => {
       feedback.textContent = message;
@@ -399,17 +494,58 @@ const defaultService =
       feedback.dataset.error = String(error);
       feedback.focus();
     };
+    const syncDetails = () => {
+      const active =
+        kind === 'contact' ? getEnquiryGroup(kind, service.value) : kind;
+      fieldsets.forEach((fieldset) => {
+        const inactive = fieldset.dataset.enquiryGroup !== active;
+        fieldset.hidden = inactive;
+        fieldset.disabled = inactive || pending;
+      });
+      const needsZone = active === 'proposal' && Boolean(closingTime.value);
+      closingZone.required = needsZone;
+      zoneOptional.textContent = needsZone
+        ? fr
+          ? '(obligatoire avec une heure)'
+          : '(required with a closing time)'
+        : fr
+          ? '(facultatif)'
+          : '(optional)';
+      const params = new URLSearchParams({ service: service.value });
+      if (subservice.value) params.set('subservice', subservice.value);
+      const context = resolveEnquiryContext(params, locale);
+      contextNote.hidden = !context;
+      contextNote.textContent = context
+        ? `${fr ? 'Votre demande concerne' : 'Your enquiry concerns'} : ${context.serviceLabel}${context.subserviceLabel ? ' — ' + context.subserviceLabel : ''}`
+        : '';
+    };
+    const applyInitialContext = () => {
+      service.value = initialService;
+      subservice.value = initialContext?.subserviceId ?? '';
+      syncDetails();
+    };
     const record = () => createEnquiryRecord(new FormData(form), locale, kind);
+    applyInitialContext();
     submit.disabled = false;
     download.disabled = false;
 
+    service.addEventListener('change', () => {
+      subservice.value = '';
+      syncDetails();
+    });
+    closingTime.addEventListener('input', syncDetails);
     form.addEventListener('input', () => {
+      emailLink.hidden = true;
+      if (!pending) feedback.hidden = true;
+    });
+    // Native selects fire change; invalidate any draft even in browsers that omit input.
+    form.addEventListener('change', () => {
       emailLink.hidden = true;
       if (!pending) feedback.hidden = true;
     });
 
     download.addEventListener('click', () => {
-      if (!form.reportValidity()) return;
+      if (pending || !form.reportValidity()) return;
       try {
         const enquiry = record();
         const file = new Blob([JSON.stringify(enquiry, null, 2)], {
@@ -451,16 +587,12 @@ const defaultService =
           );
           return;
         }
+        const payload = createEnquiryPayload(enquiry);
         pending = true;
         submit.disabled = true;
         download.disabled = true;
         form.setAttribute('aria-busy', 'true');
         notify(fr ? 'Envoi de votre demande…' : 'Sending your enquiry…');
-        const payload = new FormData(form);
-        payload.set('locale', locale);
-        payload.set('enquiry_type', kind);
-        payload.set('created_at', enquiry.createdAt);
-        payload.set('_subject', `Diversity.ca — ${kind}`);
         form
           .querySelectorAll<
             HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -468,6 +600,7 @@ const defaultService =
           .forEach((field) => {
             field.disabled = true;
           });
+        syncDetails();
         const response = await fetch(endpoint, {
           method: 'POST',
           body: payload,
@@ -476,6 +609,7 @@ const defaultService =
         });
         if (!response.ok) throw new Error('Submission was not accepted');
         form.reset();
+        applyInitialContext();
         notify(
           fr
             ? 'Votre demande a été acceptée par le service d’envoi. Merci. Si elle est urgente, vous pouvez aussi nous écrire à info@diversity.ca.'
@@ -488,7 +622,7 @@ const defaultService =
             : 'We could not confirm delivery. Your details are still in this form. Try again or email info@diversity.ca; avoid resubmitting if you have already received confirmation.'
           : fr
             ? 'Impossible de préparer votre courriel. Vérifiez les champs et décrivez votre projet en au moins 20 caractères, ou écrivez directement à info@diversity.ca.'
-            : 'We could not prepare your email. Check the fields and describe your project in at least 20 characters, or email info@diversity.ca directly.';
+            : 'We could not prepare your email. Check the fields and describe your project in at least 20 characters, or email us directly.';
         notify(message, true);
       } finally {
         pending = false;
@@ -501,6 +635,7 @@ const defaultService =
           .forEach((field) => {
             field.disabled = false;
           });
+        syncDetails();
         form.removeAttribute('aria-busy');
       }
     });
@@ -533,6 +668,37 @@ const defaultService =
     border-left: 3px solid var(--blue, #1967f3);
     padding: 1rem 1.2rem;
     margin-bottom: 2rem;
+  }
+  .context-note {
+    margin: 0 0 1.5rem;
+    padding: 1rem 1.2rem;
+    background: #f0f4fc;
+    border-left: 3px solid #174ea6;
+    color: var(--ink, #14233f);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+  }
+  .tailored-fields {
+    min-width: 0;
+    margin: 2rem 0 0;
+    padding: 1.5rem 0 0;
+    border: 0;
+    border-top: 1px solid var(--line, #dce2ec);
+  }
+  .tailored-fields legend {
+    padding: 0 0.7rem 0 0;
+    max-width: 100%;
+    font-size: 1.25rem;
+    line-height: 1.45;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  .tailored-fields .group-intro {
+    margin: 0 0 1.5rem;
+  }
+  .tailored-fields textarea {
+    min-height: 7rem;
   }
   .form-grid {
     display: grid;

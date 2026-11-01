@@ -1,6 +1,9 @@
 # Apache / WHC shared hosting. Confirm AllowOverride support in the target account.
 DirectoryIndex index.html
 ErrorDocument 404 /404.html
+<IfModule mod_mime.c>
+  AddCharset UTF-8 .html .txt
+</IfModule>
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"

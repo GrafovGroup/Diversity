@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageImage from './PageImage.astro';
 import CallToAction from './CallToAction.astro';
+import EngagementGuide from './EngagementGuide.astro';
 import type { Locale, Service, Subservice } from '../data/services';
 
 interface Props {
@@ -32,6 +33,10 @@ const enquiryLabel =
       : en
         ? 'Request a proposal'
         : 'Demander une proposition';
+const enquiryParameters = new URLSearchParams({ service: service.slug });
+if (subservice) enquiryParameters.set('subservice', subservice.slug);
+const enquiryHref = `${href(enquiryPath)}?${enquiryParameters.toString()}`;
+const guideKey = `${service.slug}${subservice ? `/${subservice.slug}` : ''}`;
 
 const related = service.subservices.filter(
   (item) => item.slug !== subservice?.slug,
@@ -79,7 +84,7 @@ const related = service.subservices.filter(
           <h1>{content.title[locale]}</h1>
           <p class="lead">{content.intro[locale]}</p>
           <div class="button-row">
-            <a class="button" href={href(enquiryPath)}
+            <a class="button" href={enquiryHref}
               >{enquiryLabel}<span aria-hidden="true">↗</span></a
             >
             <a class="text-link" href="#scope"
@@ -103,6 +108,15 @@ const related = service.subservices.filter(
         <h2>{en ? 'In this service' : 'Dans ce service'}</h2>
         <a href="#scope">{en ? 'The scope' : 'La portée'}</a>
         <a href="#deliverables">{en ? 'What you receive' : 'Les livrables'}</a>
+        <a href="#sample-deliverable"
+          >{en ? 'Sample outline' : 'Exemple de structure'}</a
+        >
+        <a href="#prepare"
+          >{en ? 'What to prepare' : 'Préparer le premier échange'}</a
+        >
+        <a href="#scope-boundaries"
+          >{en ? 'Scope and responsibilities' : 'Portée et responsabilités'}</a
+        >
         <a href="#process"
           >{en ? 'How the work takes shape' : 'Le déroulement du mandat'}</a
         >
@@ -166,6 +180,7 @@ const related = service.subservices.filter(
             }
           </ul>
         </div>
+        <EngagementGuide locale={locale} guideKey={guideKey} />
         {
           subservice && (
             <div class="content-section">
@@ -283,7 +298,7 @@ const related = service.subservices.filter(
               : 'Chaque mandat tient compte de votre situation, de vos capacités et des décisions à venir. Les responsabilités, les méthodes et les livrables sont confirmés avant le début des travaux.'
           }
         </p>
-        <a class="text-link" href={href(enquiryPath)}
+        <a class="text-link" href={enquiryHref}
           >{enquiryLabel}<span aria-hidden="true">↗</span></a
         >
       </div>
@@ -337,7 +352,11 @@ const related = service.subservices.filter(
       </div>
     </div>
   </section>
-  <CallToAction locale={locale} />
+  <CallToAction
+    locale={locale}
+    destination={enquiryHref}
+    label={enquiryLabel}
+  />
 </SiteLayout>
 
 <style>
