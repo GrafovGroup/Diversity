@@ -1,0 +1,379 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageImage from './PageImage.astro';
+import { articles, type Article } from '../data/pages';
+
+interface Props {
+  locale: 'en' | 'fr';
+  article: Article;
+}
+const { locale, article } = Astro.props;
+const fr = locale === 'fr';
+const path = `insights/${article.slug}`;
+const author = fr
+  ? 'Équipe éditoriale de Diversity.ca'
+  : 'Diversity.ca editorial team';
+const date = new Intl.DateTimeFormat(fr ? 'fr-CA' : 'en-CA', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(`${article.published}T12:00:00Z`));
+const related = articles
+  .filter((item) => item.slug !== article.slug)
+  .slice(0, 2);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: article.title[locale],
+  description: article.intro[locale],
+  datePublished: article.published,
+  inLanguage: fr ? 'fr-CA' : 'en-CA',
+  author: {
+    '@type': 'Organization',
+    name: author,
+    url: 'https://diversity.ca',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Diversity.ca',
+    url: 'https://diversity.ca',
+  },
+  mainEntityOfPage: `https://diversity.ca/${locale}/${path}/`,
+};
+---
+
+<SiteLayout
+  locale={locale}
+  title={article.title[locale]}
+  description={article.intro[locale]}
+  path={path}
+>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+  />
+  <article>
+    <header class="page-hero article-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label={fr ? 'Fil d’Ariane' : 'Breadcrumb'}>
+          <a href={`/${locale}/`}>{fr ? 'Accueil' : 'Home'}</a><span
+            aria-hidden="true">/</span
+          ><a href={`/${locale}/insights/`}
+            >{fr ? 'Perspectives' : 'Insights'}</a
+          ><span aria-hidden="true">/</span><span aria-current="page"
+            >{fr ? 'Guide pratique' : 'Practical guide'}</span
+          >
+        </nav>
+        <p class="eyebrow">
+          {fr ? 'PERSPECTIVES / GUIDE PRATIQUE' : 'INSIGHTS / PRACTICAL GUIDE'}
+        </p>
+        <h1>{article.title[locale]}</h1>
+        <p class="lead">{article.intro[locale]}</p>
+        <div class="article-meta">
+          <span>{author}</span><span aria-hidden="true">·</span><time
+            datetime={article.published}>{date}</time
+          >
+        </div>
+      </div>
+    </header>
+    <div class="container article-visual">
+      <PageImage path={path} locale={locale} />
+    </div>
+    <div class="container section article-layout">
+      <aside
+        class="article-nav"
+        aria-label={fr ? 'Dans ce guide' : 'In this guide'}
+      >
+        <p class="eyebrow">{fr ? 'DANS CE GUIDE' : 'IN THIS GUIDE'}</p><ol>
+          {
+            article.sections.map((section, index) => (
+              <li>
+                <a href={`#section-${index + 1}`}>{section.heading[locale]}</a>
+              </li>
+            ))
+          }
+        </ol><a class="back-link" href={`/${locale}/insights/`}
+          ><span aria-hidden="true">←</span>
+          {fr ? 'Toutes les perspectives' : 'All insights'}</a
+        >
+      </aside>
+      <div class="article-body prose">
+        {
+          article.sections.map((section, index) => (
+            <section class="content-section" id={`section-${index + 1}`}>
+              <h2>{section.heading[locale]}</h2>
+              <p>{section.body[locale]}</p>
+              {section.items && (
+                <ul>
+                  {section.items[locale].map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))
+        }
+        <div class="editorial-note">
+          <p>
+            {
+              fr
+                ? 'Ce guide propose des pistes de réflexion générales. Il ne remplace pas une évaluation adaptée à votre contexte ni un avis juridique ou professionnel spécialisé.'
+                : 'This guide offers general planning considerations. It does not replace a context-specific assessment or specialized legal or professional advice.'
+            }
+          </p>
+        </div>
+        <div class="article-next">
+          <p class="eyebrow">
+            {fr ? 'PASSER À L’ACTION' : 'PUT IT INTO PRACTICE'}
+          </p><h2>
+            {
+              fr
+                ? 'Qu’est-ce que cela signifie pour votre organisation?'
+                : 'What does this mean for your organization?'
+            }
+          </h2><p>
+            {
+              fr
+                ? 'Parlons de votre point de départ, des décisions à prendre et d’une prochaine étape utile.'
+                : 'Let’s talk about your starting point, the decisions ahead and a useful next step.'
+            }
+          </p><a class="button" href={`/${locale}/contact/`}
+            >{fr ? 'Parlons-en' : 'Let’s talk'}
+            <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </div>
+    </div>
+  </article>
+  <section class="related-section section">
+    <div class="container">
+      <p class="eyebrow">
+        {fr ? 'POURSUIVRE LA RÉFLEXION' : 'CONTINUE EXPLORING'}
+      </p><h2>
+        {fr ? 'D’autres perspectives utiles.' : 'More practical perspectives.'}
+      </h2><div class="related-grid">
+        {
+          related.map((item) => (
+            <a class="related-card" href={`/${locale}/insights/${item.slug}/`}>
+              <>
+                <span class="eyebrow">
+                  {fr ? 'GUIDE PRATIQUE' : 'PRACTICAL GUIDE'}
+                </span>
+                <h3>{item.title[locale]}</h3>
+                <p>{item.intro[locale]}</p>
+                <span class="read-link">
+                  {fr ? 'LIRE LE GUIDE' : 'READ THE GUIDE'}{' '}
+                  <span aria-hidden="true">↗</span>
+                </span>
+              </>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .article-hero h1 {
+    max-width: 1050px;
+    font-size: clamp(2.4rem, 5vw, 4.8rem);
+  }
+  .article-hero .lead {
+    max-width: 800px;
+  }
+  .article-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.83rem;
+    color: var(--muted, #5e6a7d);
+    margin-top: 2rem;
+  }
+  .article-layout {
+    display: grid;
+    grid-template-columns: minmax(180px, 260px) minmax(0, 760px);
+    gap: clamp(3rem, 7vw, 7rem);
+    align-items: start;
+  }
+  .article-nav {
+    position: sticky;
+    top: 2rem;
+  }
+  .article-nav ol {
+    list-style: none;
+    counter-reset: sections;
+    padding: 0;
+    margin: 1.2rem 0 2rem;
+  }
+  .article-nav li {
+    counter-increment: sections;
+    display: grid;
+    grid-template-columns: 1.2rem 1fr;
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .article-nav li::before {
+    content: counter(sections, decimal-leading-zero);
+    color: #174ea6;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding-top: 0.18rem;
+  }
+  .article-nav li a {
+    text-decoration: none;
+    color: var(--muted, #5e6a7d);
+  }
+  .article-nav li a:hover {
+    text-decoration: underline;
+    color: var(--ink, #14233f);
+    text-underline-offset: 4px;
+  }
+  .back-link {
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: var(--ink, #14233f);
+    font-weight: 600;
+  }
+  .article-body {
+    max-width: none;
+  }
+  .content-section {
+    scroll-margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+  .content-section h2 {
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    line-height: 1.25;
+    letter-spacing: -0.04em;
+    margin: 0 0 1.2rem;
+  }
+  .content-section p,
+  .content-section li {
+    font-size: 1.03rem;
+    line-height: 1.85;
+    color: var(--muted, #5e6a7d);
+  }
+  .content-section ul {
+    padding-left: 1.3rem;
+    margin-top: 1.3rem;
+  }
+  .content-section li {
+    padding-left: 0.4rem;
+    margin: 0.65rem 0;
+  }
+  .content-section li::marker {
+    color: #1967f3;
+  }
+  .editorial-note {
+    border-top: 1px solid var(--line, #dce2ec);
+    padding-top: 1rem;
+    margin-top: 3rem;
+  }
+  .editorial-note p {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--muted, #5e6a7d);
+  }
+  .article-next {
+    padding: 2.3rem;
+    background: #f0f4fc;
+    border-radius: 0.8rem;
+    margin-top: 3rem;
+  }
+  .article-next h2 {
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+    margin: 0.8rem 0;
+  }
+  .article-next p:not(.eyebrow) {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--muted, #5e6a7d);
+    margin: 1rem 0 1.5rem;
+  }
+  .related-section {
+    background: #f6f7fa;
+    border-top: 1px solid var(--line, #dce2ec);
+  }
+  .related-section h2 {
+    font-size: clamp(1.9rem, 3vw, 3rem);
+    letter-spacing: -0.04em;
+    margin: 0.8rem 0 2rem;
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border: 1px solid var(--line, #dce2ec);
+    border-radius: 0.6rem;
+    text-decoration: none;
+    color: var(--ink, #14233f);
+    background: #fff;
+  }
+  .related-card h3 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    letter-spacing: -0.035em;
+    margin: 1rem 0;
+  }
+  .related-card p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--muted, #5e6a7d);
+    margin: 0 0 2rem;
+  }
+  .read-link {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .related-card:hover .read-link {
+    color: #174ea6;
+  }
+  @media (max-width: 800px) {
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .article-nav {
+      position: static;
+      border-bottom: 1px solid var(--line, #dce2ec);
+      padding-bottom: 1.5rem;
+    }
+    .article-nav ol {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .article-nav ol {
+      grid-template-columns: 1fr;
+    }
+    .article-next,
+    .related-card {
+      padding: 1.5rem;
+    }
+    .article-meta {
+      gap: 0.6rem;
+    }
+  }
+</style>

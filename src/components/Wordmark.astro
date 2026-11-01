@@ -1,0 +1,18 @@
+---
+interface Props {
+  locale?: 'en' | 'fr';
+  dark?: boolean;
+}
+const { locale = 'en', dark = false } = Astro.props;
+---
+
+<span class:list={['brand', { 'brand-dark': dark }]}>
+  <span class="wordmark">Diversity.ca</span>
+  <span class="brand-descriptor"
+    >{
+      locale === 'en'
+        ? 'PEOPLE | OPPORTUNITY | PROGRESS'
+        : 'GENS | OPPORTUNITÉS | PROGRÈS'
+    }</span
+  >
+</span>

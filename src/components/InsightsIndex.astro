@@ -1,0 +1,63 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageImage from './PageImage.astro';
+import { articles } from '../data/pages';
+import CallToAction from './CallToAction.astro';
+interface Props {
+  locale: 'en' | 'fr';
+}
+const { locale } = Astro.props;
+const en = locale === 'en';
+---
+
+<SiteLayout
+  locale={locale}
+  title={en ? 'Perspectives into practice' : 'Des perspectives à la pratique'}
+  description={en
+    ? 'Practical guides for planning accessibility work, inclusive procurement and learning that supports organizational change.'
+    : 'Des guides pratiques pour planifier l’accessibilité, l’approvisionnement inclusif et l’apprentissage au service du changement organisationnel.'}
+  path="insights"
+  ><section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label={en ? 'Breadcrumb' : 'Fil d’Ariane'}>
+        <a href={`/${locale}/`}>{en ? 'Home' : 'Accueil'}</a><span
+          aria-hidden="true">/</span
+        ><span>{en ? 'Insights' : 'Perspectives'}</span>
+      </nav><span class="eyebrow"
+        >{en ? 'IDEAS FOR THE WAY FORWARD' : 'DES IDÉES POUR AVANCER'}</span
+      ><h1>
+        {en ? 'Perspectives into practice.' : 'Des perspectives à la pratique.'}
+      </h1><p class="lead">
+        {
+          en
+            ? 'Useful questions, practical frameworks and a clearer starting point for your next decision.'
+            : 'Des questions utiles, des démarches concrètes et un point de départ plus clair pour votre prochaine décision.'
+        }
+      </p>
+    </div>
+  </section>
+  <div class="container index-visual">
+    <PageImage path="insights" locale={locale} />
+  </div>
+  <section class="section container">
+    <div class="insights-grid">
+      {
+        articles.map((article) => (
+          <a class="insight-card" href={`/${locale}/insights/${article.slug}/`}>
+            <>
+              <span class="eyebrow">
+                {en ? 'PRACTICAL GUIDE' : 'GUIDE PRATIQUE'}
+              </span>
+              <h2 style="font-size:1.65rem">{article.title[locale]}</h2>
+              <p>{article.intro[locale]}</p>
+              <span class="text-link">
+                {en ? 'Read the guide' : 'Lire le guide'}{' '}
+                <span aria-hidden="true">↗</span>
+              </span>
+            </>
+          </a>
+        ))
+      }
+    </div>
+  </section><CallToAction locale={locale} /></SiteLayout
+>

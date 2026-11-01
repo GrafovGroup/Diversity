@@ -1,0 +1,78 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageImage from './PageImage.astro';
+import CallToAction from './CallToAction.astro';
+import type { ContentPage as Page } from '../data/pages';
+interface Props {
+  locale: 'en' | 'fr';
+  page: Page;
+}
+const { locale, page } = Astro.props;
+const en = locale === 'en';
+const legal = ['privacy', 'accessibility-statement'].includes(page.slug);
+---
+
+<SiteLayout
+  locale={locale}
+  title={page.title[locale]}
+  description={page.intro[locale]}
+  path={page.slug}
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label={en ? 'Breadcrumb' : 'Fil d’Ariane'}>
+        <a href={`/${locale}/`}>{en ? 'Home' : 'Accueil'}</a><span
+          aria-hidden="true">/</span
+        ><span>{page.eyebrow[locale]}</span>
+      </nav><div class="page-hero-split">
+        <div>
+          <span class="eyebrow">{page.eyebrow[locale]}</span><h1>
+            {page.title[locale]}
+          </h1><p class="lead">{page.intro[locale]}</p>{
+            page.cta && (
+              <a class="button" href={`/${locale}${page.cta.path}`}>
+                {page.cta.label[locale]}
+                <span aria-hidden="true">↗</span>
+              </a>
+            )
+          }
+        </div>
+        <PageImage path={page.slug} locale={locale} />
+      </div>
+    </div>
+  </section>
+  <section class="section container content-grid">
+    <aside class="side-nav" aria-label={en ? 'On this page' : 'Sur cette page'}>
+      <h2>{en ? 'In this section' : 'Dans cette section'}</h2>{
+        page.sections.map((section, i) => (
+          <a href={`#section-${i + 1}`}>{section.heading[locale]}</a>
+        ))
+      }
+    </aside><div>
+      {
+        legal && (
+          <p class="legal-note">
+            {en
+              ? 'Draft for owner and legal review. The final policy and commitments must be confirmed before public launch.'
+              : 'Projet soumis à la révision du propriétaire et à un examen juridique. La politique finale et les engagements doivent être confirmés avant le lancement public.'}
+          </p>
+        )
+      }{
+        page.sections.map((section, i) => (
+          <section class="content-section" id={`section-${i + 1}`}>
+            <h2>{section.heading[locale]}</h2>
+            <p>{section.body[locale]}</p>
+            {section.items && (
+              <ul>
+                {section.items[locale].map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))
+      }
+    </div>
+  </section>
+  {!legal && <CallToAction locale={locale} />}
+</SiteLayout>

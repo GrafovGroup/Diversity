@@ -1,0 +1,735 @@
+---
+import {
+  validateFormEndpoint,
+  type FormLocale,
+  type EnquiryKind,
+} from '../lib/forms';
+
+interface Props {
+  locale: FormLocale;
+  kind?: EnquiryKind;
+}
+const { locale, kind = 'contact' } = Astro.props;
+const fr = locale === 'fr';
+const endpoint = validateFormEndpoint(import.meta.env.PUBLIC_FORM_ENDPOINT);
+const id = `enquiry-${kind}`;
+const words = fr
+  ? {
+      details: 'Parlons de votre projet',
+      intro:
+        'Quelques renseignements nous aideront à comprendre vos objectifs. Les champs marqués d’un astérisque sont obligatoires.',
+      name: 'Nom complet',
+      email: 'Courriel professionnel',
+      organization: 'Organisation',
+      audience: 'Type d’organisation',
+      service: 'Service recherché',
+      region: 'Province ou territoire',
+      timeline: 'Échéancier souhaité',
+      budget: 'Budget indicatif (CAD)',
+      deadline: 'Date limite de l’appel d’offres',
+      message: 'Votre projet',
+      messageHelp:
+        'Décrivez vos objectifs, les lieux ou les équipes concernés et vos besoins d’accessibilité. Évitez tout renseignement personnel sensible.',
+      select: 'Sélectionner une option',
+      optional: 'facultatif',
+      consent:
+        'J’accepte que Diversity.ca utilise ces renseignements pour répondre à ma demande.',
+      privacy: 'Lire l’avis de confidentialité',
+      send: 'ENVOYER LA DEMANDE',
+      prepare: 'PRÉPARER LE COURRIEL',
+      download: 'TÉLÉCHARGER MA DEMANDE',
+      fallback:
+        'Préparez un courriel avec les détails ci-dessous. Vous devrez l’envoyer dans votre application de messagerie; ce formulaire ne transmet rien directement.',
+      attachments:
+        'Des documents à partager? Indiquez-le dans votre message. Un moyen de transfert approprié pourra être convenu; ne joignez pas de renseignements confidentiels ici.',
+      exportNote:
+        'Le téléchargement enregistre une copie de vos renseignements sur votre appareil. Il ne transmet pas votre demande.',
+      emailLink: 'OUVRIR LE COURRIEL PRÉPARÉ',
+      noScript:
+        'Pour utiliser ce formulaire, activez JavaScript. Vous pouvez aussi nous écrire directement.',
+    }
+  : {
+      details: 'Tell us about your project',
+      intro:
+        'A few details will help us understand what you need. Fields marked with an asterisk are required.',
+      name: 'Full name',
+      email: 'Work email',
+      organization: 'Organization',
+      audience: 'Organization type',
+      service: 'Service of interest',
+      region: 'Province or territory',
+      timeline: 'Preferred timeline',
+      budget: 'Indicative budget (CAD)',
+      deadline: 'Procurement deadline',
+      message: 'Your project',
+      messageHelp:
+        'Tell us about your objectives, the locations or teams involved, and any accessibility needs. Please leave out sensitive personal information.',
+      select: 'Select an option',
+      optional: 'optional',
+      consent:
+        'I agree that Diversity.ca may use these details to respond to my enquiry.',
+      privacy: 'Read the privacy notice',
+      send: 'SEND ENQUIRY',
+      prepare: 'PREPARE EMAIL',
+      download: 'DOWNLOAD MY ENQUIRY',
+      fallback:
+        'Prepare an email using the details below. You will need to send it in your email app; this form does not submit anything directly.',
+      attachments:
+        'Have documents to share? Mention them in your message. An appropriate transfer method can be agreed; do not include confidential documents here.',
+      exportNote:
+        'Downloading saves a copy of your details to your device. It does not send your enquiry.',
+      emailLink: 'OPEN PREPARED EMAIL',
+      noScript: 'Enable JavaScript to use this form, or email us directly.',
+    };
+const audiences = fr
+  ? [
+      'Entreprise',
+      'Gouvernement ou organisme public',
+      'Établissement d’enseignement',
+      'Organisme sans but lucratif',
+      'Autre',
+    ]
+  : [
+      'Corporation',
+      'Government or public agency',
+      'Educational institution',
+      'Nonprofit organization',
+      'Other',
+    ];
+const services = fr
+  ? [
+      'Diversité, équité et inclusion',
+      'Accessibilité et audits',
+      'Ressources humaines et culture',
+      'Formation',
+      'Diversité des fournisseurs',
+      'Impact social et durabilité',
+      'Solutions d’accessibilité et mise en œuvre',
+      'À déterminer ensemble',
+    ]
+  : [
+      'Diversity, equity and inclusion',
+      'Accessibility and audits',
+      'People and organizational culture',
+      'Training',
+      'Supplier diversity',
+      'Social impact and sustainability',
+      'Accessibility solutions and implementation',
+      'Help me define the scope',
+    ];
+const regions = fr
+  ? [
+      'À l’échelle du Canada',
+      'Alberta',
+      'Colombie-Britannique',
+      'Île-du-Prince-Édouard',
+      'Manitoba',
+      'Nouveau-Brunswick',
+      'Nouvelle-Écosse',
+      'Nunavut',
+      'Ontario',
+      'Québec',
+      'Saskatchewan',
+      'Terre-Neuve-et-Labrador',
+      'Territoires du Nord-Ouest',
+      'Yukon',
+      'Plusieurs provinces ou territoires',
+    ]
+  : [
+      'Canada-wide',
+      'Alberta',
+      'British Columbia',
+      'Manitoba',
+      'New Brunswick',
+      'Newfoundland and Labrador',
+      'Northwest Territories',
+      'Nova Scotia',
+      'Nunavut',
+      'Ontario',
+      'Prince Edward Island',
+      'Quebec',
+      'Saskatchewan',
+      'Yukon',
+      'Multiple provinces or territories',
+    ];
+const timelines = fr
+  ? [
+      'Dès que possible',
+      'Dans 1 à 3 mois',
+      'Dans 3 à 6 mois',
+      'Dans plus de 6 mois',
+      'En cours de planification',
+    ]
+  : [
+      'As soon as practical',
+      'Within 1–3 months',
+      'Within 3–6 months',
+      'More than 6 months',
+      'Still planning',
+    ];
+const budgets = fr
+  ? [
+      'Moins de 10 000 $',
+      '10 000 $ à 25 000 $',
+      '25 000 $ à 50 000 $',
+      '50 000 $ à 100 000 $',
+      'Plus de 100 000 $',
+      'À déterminer',
+    ]
+  : [
+      'Under $10,000',
+      '$10,000–$25,000',
+      '$25,000–$50,000',
+      '$50,000–$100,000',
+      'Over $100,000',
+      'To be determined',
+    ];
+const defaultService =
+  kind === 'training' ? services[3] : kind === 'assessment' ? services[1] : '';
+---
+
+<section class="enquiry-panel" aria-labelledby={`${id}-title`}>
+  <h2 id={`${id}-title`}>{words.details}</h2>
+  <p class="form-intro">{words.intro}</p>
+  {!endpoint && <p class="delivery-note">{words.fallback}</p>}
+  <form
+    class="enquiry-form"
+    data-enquiry-form
+    data-locale={locale}
+    data-kind={kind}
+    data-endpoint={endpoint || ''}
+    method="post"
+    action={endpoint || undefined}
+  >
+    <div class="form-grid">
+      <div class="field">
+        <label for={`${id}-name`}
+          >{words.name} <span aria-hidden="true">*</span></label
+        ><input
+          id={`${id}-name`}
+          name="name"
+          autocomplete="name"
+          required
+          maxlength="120"
+        />
+      </div>
+      <div class="field">
+        <label for={`${id}-email`}
+          >{words.email} <span aria-hidden="true">*</span></label
+        ><input
+          id={`${id}-email`}
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="254"
+        />
+      </div>
+      <div class="field">
+        <label for={`${id}-organization`}
+          >{words.organization} <span aria-hidden="true">*</span></label
+        ><input
+          id={`${id}-organization`}
+          name="organization"
+          autocomplete="organization"
+          required
+          maxlength="160"
+        />
+      </div>
+      <div class="field">
+        <label for={`${id}-audience`}
+          >{words.audience} <span aria-hidden="true">*</span></label
+        ><select id={`${id}-audience`} name="audience" required
+          ><option value="">{words.select}</option>{
+            audiences.map((option) => <option value={option}>{option}</option>)
+          }</select
+        >
+      </div>
+      <div class="field">
+        <label for={`${id}-service`}
+          >{words.service} <span aria-hidden="true">*</span></label
+        ><select id={`${id}-service`} name="service" required
+          ><option value="">{words.select}</option>{
+            services.map((option) => (
+              <option value={option} selected={option === defaultService}>
+                {option}
+              </option>
+            ))
+          }</select
+        >
+      </div>
+      <div class="field">
+        <label for={`${id}-region`}
+          >{words.region} <span aria-hidden="true">*</span></label
+        ><select id={`${id}-region`} name="region" required
+          ><option value="">{words.select}</option>{
+            regions.map((option) => <option value={option}>{option}</option>)
+          }</select
+        >
+      </div>
+      <div class="field">
+        <label for={`${id}-timeline`}
+          >{words.timeline}
+          <span class="optional">({words.optional})</span></label
+        ><select id={`${id}-timeline`} name="timeline"
+          ><option value="">{words.select}</option>{
+            timelines.map((option) => <option value={option}>{option}</option>)
+          }</select
+        >
+      </div>
+      <div class="field">
+        <label for={`${id}-budget`}
+          >{words.budget}
+          <span class="optional">({words.optional})</span></label
+        ><select id={`${id}-budget`} name="budget"
+          ><option value="">{words.select}</option>{
+            budgets.map((option) => <option value={option}>{option}</option>)
+          }</select
+        >
+      </div>
+      <div class="field">
+        <label for={`${id}-deadline`}
+          >{words.deadline}
+          <span class="optional">({words.optional})</span></label
+        ><input id={`${id}-deadline`} name="deadline" type="date" />
+      </div>
+      <div class="field field-wide">
+        <label for={`${id}-message`}
+          >{words.message} <span aria-hidden="true">*</span></label
+        ><textarea
+          id={`${id}-message`}
+          name="message"
+          rows="6"
+          required
+          minlength="20"
+          maxlength="3000"
+          aria-describedby={`${id}-message-help`}></textarea><p
+          class="field-help"
+          id={`${id}-message-help`}
+        >
+          {words.messageHelp}
+        </p>
+      </div>
+    </div>
+    <div class="honey-field" aria-hidden="true">
+      <label for={`${id}-website`}>Leave this field empty</label><input
+        id={`${id}-website`}
+        name="_gotcha"
+        tabindex="-1"
+        autocomplete="off"
+      />
+    </div>
+    <p class="attachment-note">{words.attachments}</p>
+    <div class="consent-field">
+      <input
+        id={`${id}-consent`}
+        name="consent"
+        type="checkbox"
+        value="yes"
+        required
+      /><label for={`${id}-consent`}
+        >{words.consent}
+        <span aria-hidden="true">*</span>
+        <a href={`/${locale}/privacy/`}>{words.privacy}</a>.</label
+      >
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="form-primary" disabled
+        >{endpoint ? words.send : words.prepare}<span aria-hidden="true"
+          >↗</span
+        ></button
+      ><button type="button" class="form-download" data-download disabled
+        >{words.download}</button
+      >
+    </div>
+    <p class="field-help">{words.exportNote}</p>
+    <div
+      class="form-feedback"
+      data-feedback
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      tabindex="-1"
+      hidden
+    >
+    </div>
+    <a
+      class="prepared-email"
+      data-prepared-email
+      href="mailto:info@diversity.ca"
+      hidden>{words.emailLink} <span aria-hidden="true">↗</span></a
+    >
+    <noscript
+      ><p>
+        {words.noScript}
+        <a href="mailto:info@diversity.ca">info@diversity.ca</a>
+      </p></noscript
+    >
+  </form>
+</section>
+
+<script>
+  import {
+    createEnquiryRecord,
+    createEnquiryMailto,
+    validateFormEndpoint,
+    type FormLocale,
+    type EnquiryKind,
+  } from '../lib/forms';
+
+  for (const form of document.querySelectorAll<HTMLFormElement>(
+    '[data-enquiry-form]',
+  )) {
+    const locale = form.dataset.locale as FormLocale;
+    const kind = form.dataset.kind as EnquiryKind;
+    const fr = locale === 'fr';
+    const submit = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]',
+    )!;
+    const download = form.querySelector<HTMLButtonElement>('[data-download]')!;
+    const feedback = form.querySelector<HTMLDivElement>('[data-feedback]')!;
+    const emailLink = form.querySelector<HTMLAnchorElement>(
+      '[data-prepared-email]',
+    )!;
+    const endpoint = validateFormEndpoint(form.dataset.endpoint);
+    let pending = false;
+    const notify = (message: string, error = false) => {
+      feedback.textContent = message;
+      feedback.hidden = false;
+      feedback.dataset.error = String(error);
+      feedback.focus();
+    };
+    const record = () => createEnquiryRecord(new FormData(form), locale, kind);
+    submit.disabled = false;
+    download.disabled = false;
+
+    form.addEventListener('input', () => {
+      emailLink.hidden = true;
+      if (!pending) feedback.hidden = true;
+    });
+
+    download.addEventListener('click', () => {
+      if (!form.reportValidity()) return;
+      try {
+        const enquiry = record();
+        const file = new Blob([JSON.stringify(enquiry, null, 2)], {
+          type: 'application/json;charset=utf-8',
+        });
+        const url = URL.createObjectURL(file);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `diversity-enquiry-${enquiry.createdAt.slice(0, 10)}.json`;
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        notify(
+          fr
+            ? 'Le téléchargement de votre copie a démarré. Votre demande n’a pas été envoyée.'
+            : 'Your copy has started downloading. Your enquiry has not been sent.',
+        );
+      } catch {
+        notify(
+          fr
+            ? 'Impossible de préparer cette demande. Vérifiez les renseignements saisis ou écrivez-nous directement.'
+            : 'We could not prepare this enquiry. Review your details or email us directly.',
+          true,
+        );
+      }
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (pending || !form.reportValidity()) return;
+      try {
+        const enquiry = record();
+        if (!endpoint) {
+          emailLink.href = createEnquiryMailto(enquiry);
+          emailLink.hidden = false;
+          notify(
+            fr
+              ? 'Votre brouillon est prêt. Ouvrez-le avec le lien ci-dessous, vérifiez-le et envoyez-le dans votre application de messagerie. Rien n’a été envoyé depuis ce site.'
+              : 'Your draft is ready. Use the link below to open it, review it, and send it in your email app. Nothing has been sent from this website.',
+          );
+          return;
+        }
+        pending = true;
+        submit.disabled = true;
+        download.disabled = true;
+        form.setAttribute('aria-busy', 'true');
+        notify(fr ? 'Envoi de votre demande…' : 'Sending your enquiry…');
+        const payload = new FormData(form);
+        payload.set('locale', locale);
+        payload.set('enquiry_type', kind);
+        payload.set('created_at', enquiry.createdAt);
+        payload.set('_subject', `Diversity.ca — ${kind}`);
+        form
+          .querySelectorAll<
+            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+          >('input,select,textarea')
+          .forEach((field) => {
+            field.disabled = true;
+          });
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: payload,
+          headers: { Accept: 'application/json' },
+          signal: AbortSignal.timeout(20000),
+        });
+        if (!response.ok) throw new Error('Submission was not accepted');
+        form.reset();
+        notify(
+          fr
+            ? 'Votre demande a été acceptée par le service d’envoi. Merci. Si elle est urgente, vous pouvez aussi nous écrire à info@diversity.ca.'
+            : 'Your enquiry was accepted by the submission service. Thank you. For an urgent enquiry, you can also email info@diversity.ca.',
+        );
+      } catch {
+        const message = endpoint
+          ? fr
+            ? 'L’envoi n’a pas pu être confirmé. Vos renseignements sont conservés dans ce formulaire. Réessayez ou écrivez à info@diversity.ca; évitez un nouvel envoi si vous avez déjà reçu une confirmation.'
+            : 'We could not confirm delivery. Your details are still in this form. Try again or email info@diversity.ca; avoid resubmitting if you have already received confirmation.'
+          : fr
+            ? 'Impossible de préparer votre courriel. Vérifiez les champs et décrivez votre projet en au moins 20 caractères, ou écrivez directement à info@diversity.ca.'
+            : 'We could not prepare your email. Check the fields and describe your project in at least 20 characters, or email info@diversity.ca directly.';
+        notify(message, true);
+      } finally {
+        pending = false;
+        submit.disabled = false;
+        download.disabled = false;
+        form
+          .querySelectorAll<
+            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+          >('input,select,textarea')
+          .forEach((field) => {
+            field.disabled = false;
+          });
+        form.removeAttribute('aria-busy');
+      }
+    });
+  }
+</script>
+
+<style>
+  .enquiry-panel {
+    color: var(--ink, #14233f);
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    background: #fff;
+    border: 1px solid var(--line, #dce2ec);
+    border-radius: 1.25rem;
+  }
+  h2 {
+    font-size: clamp(1.65rem, 3vw, 2.3rem);
+    letter-spacing: -0.04em;
+    margin: 0 0 0.8rem;
+  }
+  .form-intro {
+    color: var(--muted, #5e6a7d);
+    line-height: 1.7;
+    max-width: 44rem;
+    margin: 0 0 1.7rem;
+  }
+  .delivery-note {
+    font-size: 0.94rem;
+    line-height: 1.7;
+    background: #f0f4fc;
+    border-left: 3px solid var(--blue, #1967f3);
+    padding: 1rem 1.2rem;
+    margin-bottom: 2rem;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    min-width: 0;
+  }
+  .field-wide {
+    grid-column: 1/-1;
+  }
+  label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .optional {
+    margin-left: 0.25em;
+    font-weight: 400;
+    color: var(--muted, #5e6a7d);
+    font-size: 0.8rem;
+  }
+  input,
+  select,
+  textarea {
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid #acb7ca;
+    border-radius: 0.35rem;
+    background: #fff;
+    color: var(--ink, #14233f);
+  }
+  input,
+  select {
+    min-height: 3.15rem;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 9rem;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  button:focus-visible,
+  a:focus-visible,
+  .form-feedback:focus-visible {
+    outline: 3px solid var(--blue, #1967f3);
+    outline-offset: 4px;
+  }
+  .field-help,
+  .attachment-note {
+    font-size: 0.83rem;
+    line-height: 1.65;
+    color: var(--muted, #5e6a7d);
+    margin: 0.15rem 0 0;
+  }
+  .attachment-note {
+    margin: 1rem 0 1.5rem;
+  }
+  .honey-field {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .consent-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+  }
+  .consent-field input {
+    flex: 0 0 1.15rem;
+    width: 1.15rem;
+    height: 1.15rem;
+    min-height: 0;
+    margin-top: 0.18rem;
+    accent-color: var(--blue, #1967f3);
+  }
+  .consent-field label {
+    font-weight: 400;
+    line-height: 1.7;
+  }
+  .consent-field a {
+    margin-left: 0.25em;
+  }
+  a {
+    color: #174ea6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0 0.8rem;
+  }
+  button {
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    min-height: 3.2rem;
+    border-radius: 0.3rem;
+    transition: background 0.2s ease;
+  }
+  button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  .form-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    background: var(--ink, #14233f);
+    color: #fff;
+    border: 1px solid var(--ink, #14233f);
+    padding: 1rem 1.4rem;
+  }
+  .form-primary:hover {
+    background: #0a2d6b;
+  }
+  .form-primary span {
+    font-size: 1.1rem;
+  }
+  .form-download {
+    border: 0;
+    border-bottom: 1px solid #acb7ca;
+    background: transparent;
+    padding: 0.7rem 0;
+    color: var(--ink, #14233f);
+    border-radius: 0;
+  }
+  .form-download:hover {
+    color: #174ea6;
+  }
+  .form-feedback {
+    font-size: 0.94rem;
+    line-height: 1.65;
+    background: #f0f4fc;
+    border: 1px solid #c6d5f2;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0 0;
+    border-radius: 0.35rem;
+  }
+  .form-feedback[data-error='true'] {
+    color: #862b27;
+    border-color: #e4b5b2;
+    background: #fff5f4;
+  }
+  .prepared-email {
+    display: inline-flex;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 1.25rem;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  @media (max-width: 640px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .form-actions {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    .form-primary {
+      width: 100%;
+    }
+    .enquiry-panel {
+      border-radius: 0.7rem;
+    }
+    .optional {
+      display: inline-block;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    button {
+      transition: none;
+    }
+  }
+</style>

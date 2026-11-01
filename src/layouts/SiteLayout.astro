@@ -1,0 +1,233 @@
+---
+import '../styles/global.css';
+import Wordmark from '../components/Wordmark.astro';
+interface Props {
+  locale: 'en' | 'fr';
+  title: string;
+  description: string;
+  path?: string;
+}
+const { locale, title, description, path = '' } = Astro.props;
+const en = locale === 'en';
+const other = en ? 'fr' : 'en';
+const href = (p = '') =>
+  `/${locale}/${p ? p.replace(/^\/+|\/+$/g, '') + '/' : ''}`;
+const canonical = new URL(href(path), Astro.site);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Diversity.ca',
+  url: 'https://diversity.ca',
+  logo: 'https://diversity.ca/brand/wordmark-light.svg',
+  areaServed: { '@type': 'Country', name: 'Canada' },
+};
+const nav = [
+  { path: 'services', label: en ? 'Expertise' : 'Expertises' },
+  { path: 'corporations', label: en ? 'Corporations' : 'Entreprises' },
+  { path: 'government', label: en ? 'Government' : 'Secteur public' },
+  { path: 'approach', label: en ? 'Our approach' : 'Notre approche' },
+  { path: 'insights', label: en ? 'Insights' : 'Perspectives' },
+];
+---
+
+<!doctype html>
+<html lang={en ? 'en-CA' : 'fr-CA'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#10213d" />
+    <meta name="description" content={description} />
+    <title>{title} | Diversity.ca</title>
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="alternate"
+      hreflang="en-CA"
+      href={new URL(`/en/${path ? path + '/' : ''}`, Astro.site)}
+    />
+    <link
+      rel="alternate"
+      hreflang="fr-CA"
+      href={new URL(`/fr/${path ? path + '/' : ''}`, Astro.site)}
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(`/en/${path ? path + '/' : ''}`, Astro.site)}
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Diversity.ca" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={en ? 'en_CA' : 'fr_CA'} />
+    <meta
+      property="og:image"
+      content="https://diversity.ca/images/social-card.png"
+    />
+    <meta
+      property="og:image:alt"
+      content={en
+        ? 'Diversity.ca — People, opportunity, progress'
+        : 'Diversity.ca — Gens, opportunités, progrès'}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main"
+      >{en ? 'Skip to content' : 'Aller au contenu'}</a
+    >
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <span
+          >{
+            en
+              ? 'A CANADA-WIDE PERSPECTIVE. A PEOPLE-FIRST APPROACH.'
+              : 'UNE PERSPECTIVE CANADIENNE. UNE APPROCHE HUMAINE.'
+          }</span
+        ><div class="languages">
+          <a
+            lang="en"
+            hreflang="en"
+            href={`/en/${path ? path + '/' : ''}`}
+            aria-current={en ? 'page' : undefined}>EN</a
+          ><span aria-hidden="true">/</span><a
+            lang="fr"
+            hreflang="fr"
+            href={`/fr/${path ? path + '/' : ''}`}
+            aria-current={!en ? 'page' : undefined}>FR</a
+          >
+        </div>
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a
+          href={href()}
+          class="brand-link"
+          aria-label={en ? 'Diversity.ca home' : 'Diversity.ca accueil'}
+          ><Wordmark locale={locale} /></a
+        >
+        <button
+          class="menu-toggle"
+          aria-controls="primary-navigation"
+          aria-expanded="false"
+          ><span>{en ? 'Menu' : 'Menu'}</span><span
+            class="menu-icon"
+            aria-hidden="true"><i></i><i></i></span
+          ></button
+        >
+        <nav
+          id="primary-navigation"
+          aria-label={en ? 'Main navigation' : 'Navigation principale'}
+        >
+          {
+            nav.map((item) => (
+              <a
+                href={href(item.path)}
+                aria-current={
+                  path === item.path || path.startsWith(item.path + '/')
+                    ? 'page'
+                    : undefined
+                }
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <a class="button button-small" href={href('contact')}
+            >{en ? 'Let’s talk' : 'Parlons-en'}<span aria-hidden="true">↗</span
+            ></a
+          >
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="container footer-top">
+        <div>
+          <a href={href()} class="brand-link"
+            ><Wordmark locale={locale} dark /></a
+          ><p>
+            {
+              en
+                ? 'Practical advice. Meaningful action.\nA more inclusive way forward.'
+                : 'Des conseils concrets. Des actions porteuses.\nVers un avenir plus inclusif.'
+            }
+          </p>
+        </div><div class="footer-column">
+          <h2>{en ? 'Explore' : 'Explorer'}</h2><a href={href('services')}
+            >{en ? 'Our expertise' : 'Nos expertises'}</a
+          ><a href={href('about')}>{en ? 'About us' : 'À propos'}</a><a
+            href={href('canada')}
+            >{en ? 'Across Canada' : 'Partout au Canada'}</a
+          ><a href={href('partners')}
+            >{en ? 'Careers & partnerships' : 'Carrières et partenariats'}</a
+          >
+        </div><div class="footer-column">
+          <h2>{en ? 'For your organization' : 'Pour votre organisation'}</h2><a
+            href={href('corporations')}>{en ? 'Corporations' : 'Entreprises'}</a
+          ><a href={href('government')}
+            >{
+              en
+                ? 'Government & public sector'
+                : 'Gouvernements et secteur public'
+            }</a
+          ><a href={href('procurement')}
+            >{en ? 'Procurement' : 'Approvisionnement'}</a
+          ><a href={href('industries')}>{en ? 'Industries' : 'Secteurs'}</a>
+        </div><div class="footer-column">
+          <h2>{en ? 'Start a conversation' : 'Entamons la conversation'}</h2><a
+            href="mailto:info@diversity.ca"
+            >info@diversity.ca <span aria-hidden="true">↗</span></a
+          ><a href={href('request-proposal')}
+            >{en ? 'Request a proposal' : 'Demander une proposition'}</a
+          ><a href={href('request-assessment')}
+            >{en ? 'Request an assessment' : 'Demander une évaluation'}</a
+          ><a href={href('training-enquiry')}
+            >{en ? 'Explore training' : 'Explorer la formation'}</a
+          >
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© {new Date().getFullYear()} Diversity.ca</span><div>
+          <a href={href('privacy')}>{en ? 'Privacy' : 'Confidentialité'}</a><a
+            href={href('accessibility-statement')}
+            >{en ? 'Accessibility' : 'Accessibilité'}</a
+          ><a
+            lang={other}
+            hreflang={other}
+            href={`/${other}/${path ? path + '/' : ''}`}
+            >{en ? 'Français' : 'English'}</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#primary-navigation');
+      function closeMenu() {
+        toggle?.setAttribute('aria-expanded', 'false');
+        nav?.classList.remove('is-open');
+      }
+      toggle?.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'true';
+        toggle.setAttribute('aria-expanded', String(open));
+        nav?.classList.toggle('is-open', open);
+      });
+      document.addEventListener('keydown', (event) => {
+        if (
+          event.key === 'Escape' &&
+          toggle?.getAttribute('aria-expanded') === 'true'
+        ) {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+      nav
+        ?.querySelectorAll('a')
+        .forEach((link) => link.addEventListener('click', closeMenu));
+    </script>
+  </body>
+</html>

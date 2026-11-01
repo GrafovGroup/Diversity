@@ -1,0 +1,24 @@
+---
+import { pageImages } from '../data/page-images';
+interface Props {
+  path: string;
+  locale: 'en' | 'fr';
+  class?: string;
+}
+const { path, locale, class: className } = Astro.props;
+const visual = pageImages[path];
+if (!visual) throw new Error(`Missing page image for ${path}`);
+---
+
+<img
+  data-page-image={path || 'home'}
+  class:list={[
+    className,
+    { 'editorial-illustration': visual.src.endsWith('.svg') },
+  ]}
+  src={visual.src}
+  alt={visual.alt[locale]}
+  width="1200"
+  height="900"
+  fetchpriority="high"
+/>

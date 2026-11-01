@@ -1,0 +1,31 @@
+---
+interface Props {
+  locale: 'en' | 'fr';
+}
+const { locale } = Astro.props;
+const en = locale === 'en';
+---
+
+<section class="cta-band">
+  <div class="container cta-inner">
+    <div>
+      <span class="eyebrow"
+        >{
+          en
+            ? 'THE NEXT STEP STARTS WITH A CONVERSATION'
+            : 'LE PROCHAIN PAS COMMENCE PAR UNE CONVERSATION'
+        }</span
+      ><h2>
+        {
+          en
+            ? 'Let’s turn your priorities into meaningful progress.'
+            : 'Transformons vos priorités en progrès concrets.'
+        }
+      </h2>
+    </div><a class="button button-white" href={`/${locale}/request-proposal/`}
+      >{en ? 'Start a conversation' : 'Entamons la conversation'}<span
+        aria-hidden="true">↗</span
+      ></a
+    >
+  </div>
+</section>

@@ -1,0 +1,184 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageImage from './PageImage.astro';
+import CallToAction from './CallToAction.astro';
+import { services } from '../data/services';
+import type { Locale } from '../data/services';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const en = locale === 'en';
+const title = en
+  ? 'Expertise that connects people, opportunity and progress.'
+  : 'Des expertises qui relient les gens, les opportunités et le progrès.';
+const description = en
+  ? 'Seven connected service divisions spanning inclusion, accessibility, people, training, procurement, social impact and practical implementation.'
+  : 'Sept domaines complémentaires : inclusion, accessibilité, ressources humaines, formation, approvisionnement, impact social et mise en œuvre concrète.';
+---
+
+<SiteLayout
+  locale={locale}
+  title={en ? 'Our expertise' : 'Nos expertises'}
+  description={description}
+  path="services"
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label={en ? 'Breadcrumb' : 'Fil d’Ariane'}>
+        <a href={`/${locale}/`}>{en ? 'Home' : 'Accueil'}</a><span
+          aria-hidden="true">/</span
+        ><span aria-current="page">{en ? 'Expertise' : 'Expertises'}</span>
+      </nav>
+      <div class="page-hero-split">
+        <div>
+          <span class="eyebrow"
+            >{
+              en
+                ? 'Seven divisions. A connected perspective.'
+                : 'Sept domaines. Une perspective commune.'
+            }</span
+          >
+          <h1>{title}</h1>
+          <p class="lead">{description}</p>
+          <a class="text-link" href="#divisions"
+            >{en ? 'Explore our services' : 'Découvrir nos services'}<span
+              aria-hidden="true">↓</span
+            ></a
+          >
+        </div>
+        <PageImage path="services" locale={locale} />
+      </div>
+    </div>
+  </section>
+  <section
+    class="section container"
+    id="divisions"
+    aria-labelledby="divisions-title"
+  >
+    <div class="section-intro">
+      <div>
+        <span class="eyebrow">{en ? 'Our expertise' : 'Nos expertises'}</span
+        ><h2 id="divisions-title">
+          {
+            en
+              ? 'The right support, where it matters.'
+              : 'Le bon soutien, là où il compte.'
+          }
+        </h2>
+      </div>
+      <p class="lead">
+        {
+          en
+            ? 'A focused assessment, a long-term strategy or help putting a plan into practice. Start with the priorities that matter to your organization.'
+            : 'Une évaluation ciblée, une stratégie à long terme ou un accompagnement dans l’action. Commencez par les priorités qui comptent pour votre organisation.'
+        }
+      </p>
+    </div>
+    <div class="service-grid">
+      {
+        services.map((service) => (
+          <a class="service-card" href={`/${locale}/services/${service.slug}/`}>
+            <div class="card-top">
+              <>
+                <span class="service-number">{service.number}</span>
+                <span class="card-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </>
+            </div>
+            <h3>{service.title[locale]}</h3>
+            <p>{service.intro[locale]}</p>
+          </a>
+        ))
+      }
+      <a class="service-card cta-card" href={`/${locale}/request-proposal/`}>
+        <div class="card-top">
+          <span class="eyebrow"
+            >{en ? 'Where to begin' : 'Par où commencer'}</span
+          ><span class="card-arrow" aria-hidden="true">↗</span>
+        </div>
+        <h3>
+          {
+            en
+              ? 'Let’s define the next step together.'
+              : 'Définissons ensemble la prochaine étape.'
+          }
+        </h3>
+        <p>
+          {
+            en
+              ? 'Tell us what you are working toward.'
+              : 'Parlez-nous des objectifs que vous souhaitez atteindre.'
+          }
+        </p>
+      </a>
+    </div>
+  </section>
+  <section class="soft-section section" aria-labelledby="connected-title">
+    <div class="container">
+      <div class="section-intro">
+        <div>
+          <span class="eyebrow"
+            >{en ? 'Advice through to action' : 'Du conseil à l’action'}</span
+          ><h2 id="connected-title">
+            {
+              en
+                ? 'Connected around your organization.'
+                : 'Une démarche adaptée à votre organisation.'
+            }
+          </h2>
+        </div>
+      </div>
+      <div class="three-columns">
+        <article>
+          <h3>
+            {en ? 'Understand the context.' : 'Comprendre le contexte.'}
+          </h3><p>
+            {
+              en
+                ? 'Start with your objectives, the people affected and the decisions ahead. We agree on a scope that fits your stage and capacity.'
+                : 'Partez de vos objectifs, des personnes concernées et des décisions à venir. Nous convenons d’une portée adaptée à votre situation et à vos capacités.'
+            }
+          </p>
+        </article>
+        <article>
+          <h3>
+            {en ? 'Connect the disciplines.' : 'Relier les expertises.'}
+          </h3><p>
+            {
+              en
+                ? 'An accessibility assessment may lead to training, a procurement review or an implementation project. Related services can be coordinated within one clear engagement.'
+                : 'Une évaluation en accessibilité peut mener à de la formation, à une révision de l’approvisionnement ou à un projet de mise en œuvre. Les services connexes peuvent être coordonnés dans un mandat clair.'
+            }
+          </p>
+        </article>
+        <article>
+          <h3>{en ? 'Make delivery clear.' : 'Clarifier la prestation.'}</h3><p>
+            {
+              en
+                ? 'Responsibilities, deliverables and any specialist partner roles are set out in the proposal. You know what the work covers and how progress will be reviewed.'
+                : 'Les responsabilités, les livrables et les rôles éventuels de partenaires spécialisés sont précisés dans la proposition. Vous connaissez la portée du travail et la façon dont les progrès seront suivis.'
+            }
+          </p>
+        </article>
+      </div>
+      <div class="button-row">
+        <a class="text-link" href={`/${locale}/corporations/`}
+          >{en ? 'For corporations' : 'Pour les entreprises'}<span
+            aria-hidden="true">↗</span
+          ></a
+        >
+        <a class="text-link" href={`/${locale}/government/`}
+          >{
+            en
+              ? 'For government & public sector'
+              : 'Pour les gouvernements et le secteur public'
+          }<span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </div>
+  </section>
+  <CallToAction locale={locale} />
+</SiteLayout>
