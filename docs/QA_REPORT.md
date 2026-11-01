@@ -1,6 +1,6 @@
 # Website implementation and QA
 
-Version 1.1.1 review build validated locally on November 1, 2026 (America/Toronto). This report covers the static review build, not a public production release.
+Version 1.1.2 review build validated locally on November 1, 2026 (America/Toronto). This report covers the static review build, not a public production release.
 
 ## Implemented
 
@@ -18,10 +18,10 @@ Version 1.1.1 review build validated locally on November 1, 2026 (America/Toront
 | Check                                     | Result                                                                                             |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Clean installation from package-lock.json | Initial build passed `npm ci`; dependency versions are unchanged                                   |
-| Astro / TypeScript                        | Passed: 34 files, zero errors, warnings or hints                                                   |
+| Astro / TypeScript                        | Passed: 35 files, zero errors, warnings or hints                                                   |
 | Formatting lint                           | Passed: `npm run lint`                                                                             |
 | Static build                              | Passed: 98 HTML pages plus sitemap and assets                                                      |
-| Browser and HTTP suite                    | Passed: 34 tests, zero failures or skips                                                           |
+| Browser and HTTP suite                    | Passed: 41 tests, zero failures or skips                                                           |
 | Unique imagery                            | Passed: image URLs and SHA-256 bytes across all 48 logical pages, including additional body images |
 | Bilingual imagery                         | Passed: matching EN/FR sources with localized alternative text                                     |
 | Editorial completeness                    | Passed: every supplied section heading and body on all 26 information/article pages                |
@@ -32,15 +32,21 @@ Version 1.1.1 review build validated locally on November 1, 2026 (America/Toront
 | Internal routes and assets                | Passed for every generated bilingual page and its internal links/assets                            |
 | Static asset budgets                      | Passed                                                                                             |
 
-The full browser suite passed all 34 tests with no failures or skips. This includes the original 18 regression scenarios and 16 new enquiry/content scenarios. All 56 service pages and their matching example downloads were checked in both languages. Active details reach mailto drafts, JSON exports and intercepted provider requests; hidden stale values are excluded. Provider failure preserves input and success restores the initial service context. Closing-time validation requires a timezone only for the active proposal scope. Invalid or unrelated URL parameters are discarded. Keyboard checks and automated accessibility scans also covered 640px and 320px content widths, corresponding to reflow at 200% and 400% for a 1280px viewport. These are browser checks rather than physical-device or human screen-reader testing. Automated checks support accessibility review; they do not establish full WCAG conformance.
+The full browser suite passed all 41 tests with no failures or skips. This includes the original 34 scenarios and seven new accessibility regressions. All 56 service pages and their matching example downloads were checked in both languages. Active details reach mailto drafts, JSON exports and intercepted provider requests; hidden stale values are excluded. Provider failure preserves input and success restores the initial service context. Closing-time validation requires a timezone only for the active proposal scope. Invalid or unrelated URL parameters are discarded. Keyboard checks and automated accessibility scans also covered 640px and 320px content widths, corresponding to reflow at 200% and 400% for a 1280px viewport. These are browser checks rather than actual browser-zoom, physical-device or human screen-reader testing. Automated checks support accessibility review; they do not establish full WCAG conformance.
 
 The imagery refresh replaces seven weakly related stock images with two verified CC0 photographs and five original editorial illustrations. Collaboration, inclusive workshops, captioned digital participation, low service counters, keyboard navigation, equitable supplier review and community belonging now appear in the relevant journeys. Image URL and byte uniqueness continues to pass across all logical pages. Additional imagery checks cover five changed journeys in both languages at 320, 390 and 1440 CSS pixels. These identified a narrow French service-grid overflow, corrected by switching to one column below 381 pixels.
 
+## Accessibility review and fixes
+
+A dated [accessibility review](ACCESSIBILITY_REVIEW.md) records the assistant-led keyboard, accessibility-tree, visual and form review, corrections and a human assistive-technology test protocol. Fixed issues include low-contrast input boundaries, clipped/low-contrast focus indicators, visible-label mismatches in accessible link names, header/card overflow under increased spacing and text size, a narrow 404 illustration, undisclosed message-length guidance and imprecise navigation names/states.
+
+All eight form journeys were exercised with keyboard input; provider failures were intercepted, with no real delivery. The broader reflow review covered 182 representative scenarios with the revised stylesheet and six final 404 scenarios, supplemented by six built-site target-spacing checks. The final build passes the seven new regression cases. The 200% text-size condition was a CSS simulation, not actual browser zoom. Human NVDA/VoiceOver, real-device and browser-zoom sessions remain outstanding; no human-review or full-conformance claim is made.
+
 ## Build size
 
-- Complete static output: 3,825,696 bytes (about 3.6 MiB).
-- Largest HTML document: 29,589 bytes.
-- Total JavaScript: 19,324 bytes; total CSS: 34,281 bytes.
+- Complete static output: 3,832,361 bytes (about 3.6 MiB).
+- Largest HTML document: 29,660 bytes.
+- Total JavaScript: 19,324 bytes; total CSS: 34,959 bytes.
 - Largest image: 274,736 bytes; locally hosted font: 352,240 bytes.
 - No third-party image or script requests are required by the homepage.
 

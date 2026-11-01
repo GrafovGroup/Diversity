@@ -78,3 +78,5 @@ Every division and subservice page contains a distinct illustrative deliverable 
 Review [CONTENT-REVIEW.md](docs/CONTENT-REVIEW.md) and the [deployment instructions](docs/DEPLOYMENT.md) before publishing. Exact brand execution, bilingual content, business credentials, legal drafts, mailbox/form delivery and the final release require owner review. Unverified consultants, credentials, client results, offices and telephone numbers must not be invented.
 
 The GitHub Actions workflow installs dependencies, checks types and formatting, builds and runs Playwright. It does not deploy the website or change DNS. Upload only the contents of a verified `dist/` build to the confirmed WHC document root after explicit production approval.
+
+The [accessibility review](docs/ACCESSIBILITY_REVIEW.md) records browser/keyboard findings, fixes and remaining human assistive-technology testing. It is not a human screen-reader audit or a conformance certification.

@@ -23,6 +23,7 @@
 }
 body {
   margin: 0;
+  overflow-wrap: anywhere;
 }
 html {
   scroll-behavior: smooth;
@@ -57,7 +58,7 @@ button {
   color: #10213d;
 }
 :focus-visible {
-  outline: 3px solid #ab35b2;
+  outline: 3px solid #ac42b4;
   outline-offset: 5px;
 }
 h1,
@@ -129,6 +130,8 @@ li + li {
   justify-content: center;
   gap: 2rem;
   min-height: 54px;
+  max-width: 100%;
+  text-align: center;
   padding: 15px 24px;
   background: var(--navy);
   color: #fff;
@@ -209,7 +212,8 @@ li + li {
   letter-spacing: 0.12em;
 }
 .topbar-inner {
-  height: 34px;
+  min-height: 34px;
+  padding-block: 2px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -223,7 +227,16 @@ li + li {
   flex-shrink: 0;
 }
 .languages a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 30px;
   padding: 8px 3px;
+}
+.languages a:focus-visible {
+  outline-color: #fff;
+  outline-offset: -3px;
 }
 .languages a[aria-current] {
   font-weight: 750;
@@ -240,9 +253,15 @@ li + li {
 .header-inner {
   min-height: 104px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 40px;
+  padding-block: 16px;
+}
+.brand-link {
+  min-width: 0;
+  max-width: 100%;
 }
 .brand {
   display: inline-flex;
@@ -267,6 +286,7 @@ li + li {
 }
 #primary-navigation {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 28px;
 }
@@ -289,7 +309,7 @@ li + li {
 }
 .home-hero {
   display: grid;
-  grid-template-columns: 1.08fr 1fr;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
   gap: 55px;
   align-items: center;
   padding-top: 50px;
@@ -347,6 +367,7 @@ li + li {
   z-index: 1;
   color: white;
   display: flex;
+  flex-wrap: wrap;
   align-items: end;
   justify-content: space-between;
   gap: 20px;
@@ -412,6 +433,7 @@ li + li {
 }
 .section-intro {
   display: flex;
+  flex-wrap: wrap;
   align-items: end;
   justify-content: space-between;
   gap: 40px;
@@ -544,7 +566,7 @@ li + li {
 }
 .approach-section {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 100px;
 }
 .approach-section h2 {
@@ -558,7 +580,7 @@ li + li {
 }
 .approach-step {
   display: grid;
-  grid-template-columns: 55px 1fr;
+  grid-template-columns: 55px minmax(0, 1fr);
   gap: 15px;
   padding: 27px 0;
   border-bottom: 1px solid var(--line);
@@ -580,7 +602,7 @@ li + li {
 }
 .insights-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
   gap: 30px;
 }
 .insight-card .image-wrap {
@@ -633,6 +655,7 @@ li + li {
 .cta-inner {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 60px;
@@ -694,12 +717,14 @@ li + li {
   border-top: 1px solid #27344a;
   padding-block: 23px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 25px;
   font-size: 0.63rem;
 }
 .footer-bottom > div {
   display: flex;
+  flex-wrap: wrap;
   gap: 27px;
 }
 .breadcrumb {
@@ -733,7 +758,7 @@ li + li {
 }
 .page-hero-split {
   display: grid;
-  grid-template-columns: 1.25fr 0.7fr;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.7fr);
   gap: 75px;
   align-items: center;
 }
@@ -839,7 +864,7 @@ li + li {
 }
 .three-columns {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: 45px;
 }
 .three-columns h3 {
@@ -938,6 +963,8 @@ li + li {
   }
   .menu-toggle {
     display: flex;
+    min-height: 44px;
+    margin-left: auto;
     gap: 15px;
     align-items: center;
     background: transparent;
@@ -977,6 +1004,7 @@ li + li {
     padding: 13px 0;
   }
   .home-hero {
+    grid-template-columns: 1fr;
     padding-top: 35px;
     gap: 25px;
   }
@@ -1005,7 +1033,7 @@ li + li {
     font-size: 1.1rem;
   }
   .purpose-inner {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
     gap: 15px;
   }
   .purpose-inner > span {
@@ -1026,6 +1054,7 @@ li + li {
     max-width: 300px;
   }
   .approach-section {
+    grid-template-columns: 1fr;
     gap: 40px;
   }
   .audience-content {
@@ -1042,6 +1071,7 @@ li + li {
     height: 190px;
   }
   .page-hero-split {
+    grid-template-columns: 1fr;
     gap: 35px;
   }
   .page-hero-split > img {
@@ -1069,7 +1099,7 @@ li + li {
     width: calc(100% - 40px);
   }
   .topbar-inner {
-    height: 33px;
+    min-height: 33px;
     gap: 10px;
   }
   .topbar-inner > span {

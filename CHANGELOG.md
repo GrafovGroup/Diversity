@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.2 — November 1, 2026
+
+- Corrected low-contrast form boundaries and focus indicators, including clipped language-link focus rings.
+- Preserved complete visible service-link labels in accessible names and clarified language/section navigation semantics.
+- Fixed overflow on the narrow 404 page and with increased text spacing and simulated text enlargement; added the message minimum to bilingual form instructions.
+- Added seven accessibility regression scenarios and a dated browser-review report with a separate human assistive-technology test protocol.
+
 ## 1.1.1 — November 1, 2026
 
 - Refocused homepage, DEI, accessibility and social-impact imagery on collaboration, participation, accessible technology and community.

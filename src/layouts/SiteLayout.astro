@@ -90,11 +90,13 @@ const nav = [
           <a
             lang="en"
             hreflang="en"
+            aria-label="English"
             href={`/en/${path ? path + '/' : ''}`}
             aria-current={en ? 'page' : undefined}>EN</a
           ><span aria-hidden="true">/</span><a
             lang="fr"
             hreflang="fr"
+            aria-label="Français"
             href={`/fr/${path ? path + '/' : ''}`}
             aria-current={!en ? 'page' : undefined}>FR</a
           >
@@ -127,9 +129,11 @@ const nav = [
               <a
                 href={href(item.path)}
                 aria-current={
-                  path === item.path || path.startsWith(item.path + '/')
+                  path === item.path
                     ? 'page'
-                    : undefined
+                    : path.startsWith(item.path + '/')
+                      ? 'true'
+                      : undefined
                 }
               >
                 {item.label}
