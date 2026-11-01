@@ -1,6 +1,6 @@
 # Diversity.ca
 
-A bilingual English/Canadian French consulting website built with Astro and TypeScript. It produces static HTML, CSS and JavaScript for WHC Pro shared hosting; production does not require a persistent Node.js server.
+A bilingual English/Canadian French consulting website built with Astro and TypeScript. It produces static HTML, CSS and JavaScript for static hosting; production does not require a persistent Node.js server.
 
 The implementation follows [CODEX_MASTER_BRIEF.md](CODEX_MASTER_BRIEF.md) and [DEPLOYMENT_RUNBOOK.md](DEPLOYMENT_RUNBOOK.md). The full blue → purple → magenta wordmark and the approved people/opportunity/progress descriptor form the brand system. The website is an implementation for review, not a claim that the business, forms or production domain have been verified or launched.
 
@@ -77,6 +77,8 @@ Every division and subservice page contains a distinct illustrative deliverable 
 
 Review [CONTENT-REVIEW.md](docs/CONTENT-REVIEW.md) and the [deployment instructions](docs/DEPLOYMENT.md) before publishing. Exact brand execution, bilingual content, business credentials, legal drafts, mailbox/form delivery and the final release require owner review. Unverified consultants, credentials, client results, offices and telephone numbers must not be invented.
 
-The GitHub Actions workflow installs dependencies, checks types and formatting, builds and runs Playwright. It does not deploy the website or change DNS. Upload only the contents of a verified `dist/` build to the confirmed WHC document root after explicit production approval.
+The GitHub Actions workflow installs dependencies, checks types and formatting, builds and runs Playwright. Successful runs retain the complete `dist/` output, including `.htaccess`, as `diversity-ca-static-<commit SHA>` for 30 days. Source, assets, tests and documentation are committed; generated build/test output and dependencies remain outside Git history. The workflow does not deploy the website or change DNS.
+
+The current hosting request is OpenAI Sites with `diversity.ca`. See the [hosting handoff](docs/HOSTING-HANDOFF.md) for the repository/build settings, routing requirements and remaining provider access. The WHC guide remains available for the earlier hosting plan; no OpenAI Sites deployment or domain connection has been verified.
 
 The [accessibility review](docs/ACCESSIBILITY_REVIEW.md) records browser/keyboard findings, fixes and remaining human assistive-technology testing. It is not a human screen-reader audit or a conformance certification.

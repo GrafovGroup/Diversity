@@ -1,5 +1,9 @@
 # Diversity.ca — Codex execution and WHC Pro deployment runbook
 
+## Current hosting request — November 1, 2026
+
+The owner now requests hosting on **OpenAI Sites**, connecting **diversity.ca** (domain provider: **Register.ca**), and synchronizing the complete site to **GrafovGroup/Diversity**. This supersedes the WHC hosting choice below and authorizes the requested publication/domain work. The session has no OpenAI Sites or DNS management tools; the provider project and DNS access remain unresolved. Use [the current hosting handoff](docs/HOSTING-HANDOFF.md). The WHC instructions are retained as the prior plan, not as the selected deployment destination.
+
 ## Approved configuration
 - Domain: diversity.ca; hosting: WHC.ca Pro; contact email: info@diversity.ca.
 - GitHub: GrafovGroup/Diversity, main branch.

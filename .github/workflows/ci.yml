@@ -37,6 +37,14 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Run browser and route checks
         run: npm test
+      - name: Retain the validated static website
+        uses: actions/upload-artifact@v4
+        with:
+          name: diversity-ca-static-${{ github.sha }}
+          path: dist/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
       - name: Retain test reports and review screenshots
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4

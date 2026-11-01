@@ -1,5 +1,7 @@
 # Static deployment to WHC Pro
 
+**Current request:** the owner selected OpenAI Sites on November 1, 2026. See [HOSTING-HANDOFF.md](HOSTING-HANDOFF.md) for the current deployment status and portable build settings. This document retains the technical instructions for the earlier WHC plan.
+
 This implementation exports a static website to `dist/`. WHC serves these files directly; a Node.js process is used for building and local development only. Follow the approved [deployment runbook](../DEPLOYMENT_RUNBOOK.md) together with this technical guide.
 
 No production deployment, DNS change, mailbox verification or public TLS check is implied by a successful local build.

@@ -1,5 +1,11 @@
 # Changelog
 
+## Hosting handoff — November 1, 2026
+
+- Recorded the requested OpenAI Sites hosting destination and Register.ca domain provider, superseding the earlier WHC plan.
+- Added a separate GitHub Actions artifact containing the complete validated static site, including hidden hosting configuration.
+- Documented portable build/routing settings and the missing Sites/DNS connection; no hosting or DNS change is claimed.
+
 ## 1.1.2 — November 1, 2026
 
 - Corrected low-contrast form boundaries and focus indicators, including clipped language-link focus rings.
