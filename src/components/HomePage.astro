@@ -85,7 +85,7 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
         }
       </p>
     </div>
-    <div class="hero-visual">
+    <div class="hero-visual people-visual">
       <PageImage path="" locale={locale} /><div class="photo-caption">
         <span
           >{
@@ -191,12 +191,14 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
           }
         </p>
       </div><div class="audience-grid">
-        <a class="audience-card" href={href('corporations')}
+        <a
+          class="audience-card audience-card-framed"
+          href={href('corporations')}
           ><img
             src={homeImages['@home-corporations'].src}
             alt=""
-            width="1200"
-            height="800"
+            width="1500"
+            height="1000"
             loading="lazy"
           /><div class="audience-content">
             <span class="eyebrow"
@@ -222,7 +224,7 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
               <span aria-hidden="true">↗</span></span
             >
           </div></a
-        ><a class="audience-card" href={href('government')}
+        ><a class="audience-card audience-card-framed" href={href('government')}
           ><img
             src={homeImages['@home-government'].src}
             alt=""
@@ -324,6 +326,10 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
                 <div class="image-wrap">
                   <img
                     src={homeImages[articleImages[i]].src}
+                    class:list={{
+                      'editorial-illustration':
+                        homeImages[articleImages[i]].src.endsWith('.svg'),
+                    }}
                     alt=""
                     width="800"
                     height="600"

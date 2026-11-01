@@ -69,6 +69,16 @@ Architecture is illustrative. Do not describe these buildings as Diversity.ca of
 
 ## Final image collection
 
-The final photo collection contains 18 distinct source photographs documented in `image-provenance.json`, with pinned upstream URLs, original source references, licence evidence and asset hashes. Seventeen are CC0; the Christin Hume photograph uses the Unsplash License. These editorial photographs do not represent Diversity.ca personnel, offices, engagements or verified Canadian locations. The site also contains 35 original topic-specific illustrations for detailed service, information and enquiry pages, plus a separate 404 illustration. No stock photo is reused across distinct pages; English/French counterparts intentionally share their matching visual.
+The current photo collection contains 13 distinct source photographs documented in `image-provenance.json`, with pinned upstream URLs, original source references, licence evidence and asset hashes. Twelve are CC0; the Christin Hume photograph uses the Unsplash License. These editorial photographs do not represent Diversity.ca personnel, offices, engagements or verified Canadian locations. The site also contains 40 original topic-specific illustrations for detailed service, information and enquiry pages, plus a separate 404 illustration. No stock photo is reused across distinct pages; English/French counterparts intentionally share their matching visual.
 
 Inter is locally hosted under the SIL Open Font License, retained at `public/fonts/OFL.txt`. The standalone full-wordmark SVGs contain outlined Inter glyphs, with separate light/dark and EN/FR variants.
+
+## DEI and accessibility imagery refresh — November 1, 2026
+
+The homepage now foregrounds genuine collaboration photography. New CC0 photographs from Automattic’s Lodestar and Coachben source distributions show digital work and community belonging, with pinned licence evidence in the manifest. The former homepage architecture, staircase, facade and mountain assets were retired where their connection to the content was weak.
+
+Five original SVG illustrations in `public/images/editorial/` show an inclusive workshop, accessible digital participation, an accessible public-service interaction, keyboard navigation/captions and equitable supplier evaluation. These are editorial scenes, not evidence of an engagement, an audited environment or a technical accessibility specification. No photograph is presented as Diversity.ca personnel or a client project.
+
+New people-centred heroes and audience cards retain the full composition. Captions sit below the photographs, and primary imagery has descriptive English/French alternative text. Supplementary linked-card imagery remains decorative because adjacent text supplies the link purpose. Matching language versions share their image; distinct pages never do.
+
+Research did not establish permission to extract W3C video frames as decorative stock photography. The Disabled And Here source was inaccessible under the current network policy. Neither source was incorporated.

@@ -14,11 +14,15 @@ if (!visual) throw new Error(`Missing page image for ${path}`);
   data-page-image={path || 'home'}
   class:list={[
     className,
-    { 'editorial-illustration': visual.src.endsWith('.svg') },
+    {
+      'editorial-illustration': visual.src.endsWith('.svg'),
+      'full-frame': visual.fit === 'contain',
+    },
   ]}
   src={visual.src}
   alt={visual.alt[locale]}
-  width="1200"
-  height="900"
+  width={visual.width ?? 1200}
+  height={visual.height ?? 900}
+  style={{ objectFit: visual.fit }}
   fetchpriority="high"
 />

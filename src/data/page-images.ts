@@ -5,14 +5,20 @@ import { subserviceImages } from './subservice-images';
 export interface PageVisual {
   src: string;
   alt: { en: string; fr: string };
+  fit?: 'cover' | 'contain';
+  width?: number;
+  height?: number;
 }
 
 const photographs: Record<string, PageVisual> = {
   '': {
-    src: '/images/photography/home-atrium.webp',
+    src: '/images/photography/corporate-collaboration.webp',
+    fit: 'contain',
+    width: 1024,
+    height: 785,
     alt: {
-      en: 'Modern museum atrium with intersecting corridors and daylight.',
-      fr: 'Un atrium de musée lumineux avec des passages et des courbes architecturales.',
+      en: 'Three people sharing ideas with laptops in a shared workspace.',
+      fr: 'Trois personnes échangent des idées avec leurs ordinateurs dans un espace de travail partagé.',
     },
   },
   government: {
@@ -23,10 +29,11 @@ const photographs: Record<string, PageVisual> = {
     },
   },
   'services/accessibility': {
-    src: '/images/photography/accessibility-environment.webp',
+    src: '/images/editorial/accessible-participation.svg',
+    fit: 'contain',
     alt: {
-      en: 'Stairs, handrails and escalators beneath an angular institutional roof.',
-      fr: 'Des escaliers, des mains courantes et des escaliers mécaniques sous un toit angulaire.',
+      en: 'Illustration of a wheelchair user at an adjustable-height desk with a keyboard, laptop and captioned video call.',
+      fr: 'Illustration d’une personne en fauteuil roulant à un bureau à hauteur réglable, avec clavier, ordinateur portable et appel vidéo sous-titré.',
     },
   },
   'insights/scope-an-accessibility-assessment': {
@@ -65,17 +72,21 @@ const photographs: Record<string, PageVisual> = {
     },
   },
   corporations: {
-    src: '/images/photography/corporate-collaboration.webp',
-    alt: {
-      en: 'Three women collaborating with laptops in a shared workspace.',
-      fr: 'Trois femmes collaborent avec leurs ordinateurs dans un espace de travail partagé.',
-    },
-  },
-  'services/dei': {
     src: '/images/photography/inclusion-conversation.webp',
+    fit: 'contain',
+    width: 960,
+    height: 1280,
     alt: {
       en: 'Small group exchanging ideas around an open publication and devices.',
       fr: 'Un petit groupe échange autour d’une publication et d’appareils numériques.',
+    },
+  },
+  'services/dei': {
+    src: '/images/editorial/inclusive-workshop.svg',
+    fit: 'contain',
+    alt: {
+      en: 'Illustration of three colleagues, including a wheelchair user, sharing ideas around a table.',
+      fr: 'Illustration de trois collègues, dont une personne en fauteuil roulant, échangeant des idées autour d’une table.',
     },
   },
   'services/implementation': {
@@ -93,41 +104,46 @@ const photographs: Record<string, PageVisual> = {
     },
   },
   'services/social-impact': {
-    src: '/images/photography/impact-landscape.webp',
+    src: '/images/photography/community-belonging.webp',
+    fit: 'contain',
+    width: 1280,
+    height: 1280,
     alt: {
-      en: 'Snow-covered mountain landscape and road.',
-      fr: 'Un paysage montagneux enneigé traversé par une route; le lieu n’est pas identifié.',
+      en: 'Four people standing outdoors with their arms around one another at sunset.',
+      fr: 'Quatre personnes debout à l’extérieur, les bras autour des épaules les unes des autres, au coucher du soleil.',
     },
   },
 };
 
 export const homeImages: Record<string, PageVisual> = {
   '@home-corporations': {
-    src: '/images/photography/home-corporations.webp',
+    src: '/images/photography/digital-work.webp',
+    width: 1500,
+    height: 1000,
     alt: {
-      en: 'Modern building exterior and geometric roof.',
-      fr: 'Un bâtiment contemporain aux lignes géométriques.',
+      en: 'Person working at a desktop computer with code visible on the screen.',
+      fr: 'Une personne travaille à un ordinateur de bureau dont l’écran affiche du code.',
     },
   },
   '@home-guide-1': {
-    src: '/images/photography/home-guide-accessibility.webp',
+    src: '/images/editorial/accessible-interface.svg',
     alt: {
-      en: 'Repetitive architectural windows and facade.',
-      fr: 'Des fenêtres et des ombres rythment une façade claire.',
+      en: 'Illustration of keyboard navigation, a visible focus indicator and video captions.',
+      fr: 'Illustration de la navigation au clavier, d’un indicateur de focus visible et de sous-titres vidéo.',
     },
   },
   '@home-government': {
-    src: '/images/photography/home-government.webp',
+    src: '/images/editorial/public-participation.svg',
     alt: {
-      en: 'Person moving through a modern gallery staircase.',
-      fr: 'Une personne traverse un escalier courbe dans une galerie.',
+      en: 'Illustration of people, including a wheelchair user, talking at an accessible service counter.',
+      fr: 'Illustration de personnes, dont une en fauteuil roulant, qui échangent à un comptoir de service accessible.',
     },
   },
   '@home-guide-2': {
-    src: '/images/photography/home-guide-procurement.webp',
+    src: '/images/editorial/equitable-procurement.svg',
     alt: {
-      en: 'Black-and-white repeating hotel balconies and windows.',
-      fr: 'Des balcons et des fenêtres se répètent sur une façade en noir et blanc.',
+      en: 'Illustration of three supplier proposals considered alongside a shared evaluation checklist.',
+      fr: 'Illustration de trois propositions de fournisseurs examinées à l’aide d’une grille d’évaluation commune.',
     },
   },
   '@home-guide-3': {

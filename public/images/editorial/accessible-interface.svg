@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f7f7f3"/>
+      <stop offset="1" stop-color="#edf0f8"/>
+    </linearGradient>
+    <linearGradient id="screen-edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dbe2ee"/>
+    </linearGradient>
+    <linearGradient id="video" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#e6e0f2"/>
+      <stop offset="1" stop-color="#dce7fa"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="17" flood-color="#14233f" flood-opacity="0.1"/>
+    </filter>
+    <filter id="small-shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#14233f" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#paper)"/>
+  <circle cx="358" cy="304" r="219" fill="#e5e9f5"/>
+  <circle cx="932" cy="550" r="169" fill="#ebe5f2"/>
+  <path d="M148 687H1063" stroke="#d8deea" stroke-width="2"/>
+  <ellipse cx="600" cy="699" rx="377" ry="22" fill="#14233f" opacity="0.045"/>
+
+  <!-- A clear, high-contrast interface with a captioned video. -->
+  <path d="M559 513H641L656 583H544Z" fill="#b9c7dd"/>
+  <path d="M503 584Q503 575 516 575H684Q697 575 697 584V593H503Z" fill="#d4ddea"/>
+  <rect x="214" y="133" width="772" height="402" rx="25" fill="url(#screen-edge)" filter="url(#shadow)"/>
+  <rect x="228" y="147" width="744" height="364" rx="14" fill="#ffffff"/>
+  <path d="M242 147H958Q972 147 972 161V196H228V161Q228 147 242 147Z" fill="#14233f"/>
+  <circle cx="253" cy="172" r="5" fill="#d6def0"/>
+  <circle cx="273" cy="172" r="5" fill="#aa9ad0"/>
+  <circle cx="293" cy="172" r="5" fill="#e1a18e"/>
+  <rect x="365" y="162" width="443" height="20" rx="7" fill="#32425e"/>
+  <circle cx="600" cy="522" r="3" fill="#a3b2ca"/>
+
+  <rect x="260" y="224" width="394" height="229" rx="12" fill="url(#video)"/>
+  <path d="M281 382L340 305L399 361L459 283L548 383Z" fill="#c0cfe8"/>
+  <circle cx="573" cy="269" r="20" fill="#f7f7f3" opacity="0.85"/>
+  <rect x="409" y="291" width="96" height="65" rx="18" fill="#ffffff" opacity="0.93"/>
+  <path d="M448 306L476 323L448 340Z" fill="#195cd4"/>
+  <path d="M260 391H654V441Q654 453 642 453H272Q260 453 260 441Z" fill="#14233f"/>
+  <rect x="295" y="408" width="280" height="7" rx="3.5" fill="#ffffff"/>
+  <rect x="329" y="425" width="246" height="7" rx="3.5" fill="#ffffff"/>
+  <rect x="601" y="407" width="27" height="27" rx="5" fill="none" stroke="#c6d4ed" stroke-width="2"/>
+  <path d="M612 417Q606 414 606 421Q606 428 612 425M622 417Q616 414 616 421Q616 428 622 425" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+
+  <rect x="689" y="228" width="214" height="10" rx="5" fill="#14233f"/>
+  <rect x="689" y="252" width="175" height="7" rx="3.5" fill="#6b7a94"/>
+  <rect x="689" y="269" width="204" height="7" rx="3.5" fill="#6b7a94"/>
+  <path d="M689 299H923" stroke="#e3e8f1" stroke-width="2"/>
+
+  <!-- Dark and light controls make the contrast relationship visible. -->
+  <rect x="689" y="319" width="64" height="45" rx="8" fill="#14233f"/>
+  <circle cx="721" cy="341.5" r="12" fill="#ffffff"/>
+  <path d="M721 329.5A12 12 0 0 1 721 353.5Z" fill="#14233f"/>
+  <rect x="767" y="319" width="64" height="45" rx="8" fill="#ffffff" stroke="#14233f" stroke-width="2"/>
+  <circle cx="799" cy="341.5" r="12" fill="#14233f"/>
+  <path d="M799 329.5A12 12 0 0 1 799 353.5Z" fill="#ffffff"/>
+  <rect x="850" y="332" width="65" height="6" rx="3" fill="#7c89a0"/>
+  <rect x="850" y="347" width="42" height="6" rx="3" fill="#b3bfd2"/>
+
+  <!-- The focused control has a separate, unmistakable outer ring. -->
+  <rect x="679" y="388" width="254" height="75" rx="15" fill="#ffffff" stroke="#195cd4" stroke-width="4"/>
+  <rect x="689" y="398" width="234" height="55" rx="8" fill="#195cd4"/>
+  <rect x="710" y="422" width="121" height="7" rx="3.5" fill="#ffffff"/>
+  <path d="M867 425H891M881 415L891 425L881 435" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="260" y="474" width="208" height="6" rx="3" fill="#8190a9"/>
+  <rect x="482" y="474" width="112" height="6" rx="3" fill="#ccd5e4"/>
+
+  <!-- A physical keyboard links navigation to the visible focus state. -->
+  <path d="M304 611H896L938 688Q941 703 924 706H276Q259 703 262 688Z" fill="#bdcadd"/>
+  <path d="M304 602H896L938 679Q941 694 924 697H276Q259 694 262 679Z" fill="#ffffff" stroke="#d0d9e7" stroke-width="2" filter="url(#small-shadow)"/>
+  <g fill="#e8edf5" stroke="#d3ddea" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M321 616H365L361 636H314Z"/>
+    <path d="M376 616H418L416 636H372Z"/>
+    <path d="M429 616H471L470 636H426Z"/>
+    <path d="M482 616H524V636H480Z"/>
+    <path d="M535 616H577V636H533Z"/>
+    <path d="M588 616H630L631 636H587Z"/>
+    <path d="M641 616H683L685 636H641Z"/>
+    <path d="M694 616H736L739 636H695Z"/>
+    <path d="M747 616H789L793 636H749Z"/>
+    <path d="M800 616H842L847 636H803Z"/>
+    <path d="M853 616H879L889 636H858Z"/>
+    <path d="M392 645H437L435 665H388Z"/>
+    <path d="M448 645H493L492 665H445Z"/>
+    <path d="M504 645H549V665H502Z"/>
+    <path d="M560 645H605L606 665H559Z"/>
+    <path d="M616 645H661L663 665H616Z"/>
+    <path d="M672 645H717L720 665H673Z"/>
+    <path d="M728 645H773L777 665H730Z"/>
+    <path d="M784 645H829L834 665H787Z"/>
+    <path d="M840 645H894L904 665H845Z"/>
+    <path d="M302 674H371L368 684H298Z"/>
+    <path d="M382 674H447L445 684H380Z"/>
+    <path d="M458 674H742L744 684H456Z"/>
+    <path d="M753 674H818L821 684H755Z"/>
+    <path d="M829 674H900L905 684H832Z"/>
+  </g>
+  <path d="M311 645H381L377 665H305Z" fill="#195cd4"/>
+  <path d="M326 655H355M349 650L355 655L349 660M360 649V661" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- A navigation path suggests the connection without a compliance claim. -->
+  <path d="M303 653H180Q161 653 161 634V560Q161 541 180 541H1009Q1032 541 1032 518V446Q1032 425 1011 425H950" fill="none" stroke="#8370b8" stroke-width="3" stroke-dasharray="6 9" stroke-linecap="round"/>
+  <path d="M960 416L949 425L960 434" fill="none" stroke="#8370b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="161" cy="590" r="7" fill="#df9c88" stroke="#f7f7f3" stroke-width="4"/>
+  <circle cx="1032" cy="479" r="7" fill="#df9c88" stroke="#f7f7f3" stroke-width="4"/>
+</svg>

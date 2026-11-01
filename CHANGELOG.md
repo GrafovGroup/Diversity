@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.1 — November 1, 2026
+
+- Refocused homepage, DEI, accessibility and social-impact imagery on collaboration, participation, accessible technology and community.
+- Added two verified CC0 photographs and five original editorial illustrations; retired seven less relevant stock images and preserved unique imagery across distinct pages.
+- Added full-frame hero/card layouts to keep people and assistive devices visible, with localized primary image descriptions.
+- Fixed narrow-screen French homepage service-grid overflow and refreshed bilingual visual/accessibility checks and photo provenance.
+
 ## 1.1.0 — November 1, 2026
 
 Review-build improvements; production publication remains subject to approval.

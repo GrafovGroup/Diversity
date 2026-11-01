@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f7f7f3"/>
+      <stop offset="1" stop-color="#eeeff7"/>
+    </linearGradient>
+    <linearGradient id="daylight" x1="0" y1="0" x2="0.9" y2="1">
+      <stop stop-color="#e1edfc"/>
+      <stop offset="1" stop-color="#f5f7fc"/>
+    </linearGradient>
+    <linearGradient id="counter" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e6eaf4"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-20%" y="-30%" width="140%" height="180%">
+      <feDropShadow dx="0" dy="12" stdDeviation="13" flood-color="#14233f" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#wall)"/>
+  <path d="M0 660H1200V800H0Z" fill="#e9eaf0"/>
+  <path d="M0 660H1200" stroke="#d3d9e4" stroke-width="2"/>
+  <path d="M80 660V198A92 92 0 0 1 172 106H1010A110 110 0 0 1 1120 216V660" fill="none" stroke="#ffffff" stroke-width="34"/>
+
+  <!-- Daylight and a level, open route through the public space. -->
+  <rect x="139" y="154" width="350" height="388" rx="13" fill="#ffffff"/>
+  <rect x="153" y="168" width="322" height="360" rx="5" fill="url(#daylight)"/>
+  <path d="M153 420L339 168H408L153 510Z" fill="#ffffff" opacity="0.48"/>
+  <path d="M314 168V528M153 350H475" stroke="#ffffff" stroke-width="11"/>
+  <rect x="139" y="531" width="350" height="13" rx="4" fill="#d7dfea"/>
+  <path d="M586 155H955" stroke="#e0e4ee" stroke-width="3"/>
+  <rect x="586" y="175" width="89" height="7" rx="3.5" fill="#cbd5e6"/>
+  <rect x="689" y="175" width="49" height="7" rx="3.5" fill="#ded5ee"/>
+  <ellipse cx="635" cy="679" rx="373" ry="22" fill="#14233f" opacity="0.055"/>
+
+  <!-- Staff member, looking toward the visitor and the shared document. -->
+  <path d="M747 430L735 646H770L789 487L805 646H840L830 430Z" fill="#273856"/>
+  <path d="M733 642H773V658H714Q709 647 733 642ZM804 642H840L860 652V658H804Z" fill="#14233f"/>
+  <path d="M750 331Q781 313 809 331Q833 343 836 377L843 438H715L722 375Q727 346 750 331Z" fill="#6e64ad"/>
+  <path d="M776 311V335Q786 345 798 333V308Z" fill="#d79c7c"/>
+  <path d="M751 268Q757 242 785 242Q814 242 820 269L816 294Q809 319 788 322Q765 319 756 301Z" fill="#e6af8e"/>
+  <path d="M750 278Q742 249 763 237Q786 219 811 241Q828 253 823 279L813 285L807 260Q783 272 760 260L758 284Z" fill="#433c45"/>
+  <path d="M768 285H773M797 285H802" stroke="#433c45" stroke-width="3" stroke-linecap="round"/>
+  <path d="M782 302Q790 307 797 301" fill="none" stroke="#955f50" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M741 358L706 403L659 416L669 439L727 420Q735 416 740 407L764 376" fill="#6e64ad"/>
+  <path d="M661 416L641 420L622 431Q619 437 627 438L646 432L660 438L672 434Z" fill="#e6af8e"/>
+  <path d="M818 359L836 407L799 424L807 442L854 423Q865 417 860 402L843 356" fill="#6e64ad"/>
+  <path d="M800 423L779 430Q774 438 782 442L806 440L810 433Z" fill="#e6af8e"/>
+  <path d="M779 351L776 393" stroke="#8e82c3" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- A low service counter with open space underneath. -->
+  <path d="M553 451H577V650H553ZM913 451H937V650H913Z" fill="#c9d2e2"/>
+  <path d="M577 459H913V485H577Z" fill="#d9e0ec"/>
+  <rect x="527" y="440" width="436" height="24" rx="9" fill="url(#counter)" filter="url(#soft-shadow)"/>
+  <rect x="527" y="440" width="436" height="7" rx="3.5" fill="#ffffff"/>
+  <path d="M601 413L691 417L712 438H615Z" fill="#ffffff" stroke="#c9d3e4" stroke-width="2"/>
+  <path d="M620 422L673 425M626 429L658 431" stroke="#9faec7" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M692 422L705 434" stroke="#195cd4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M847 370H880L877 433H850Z" fill="#c3cee0"/>
+  <path d="M830 433H895" stroke="#a6b5cc" stroke-width="8" stroke-linecap="round"/>
+  <rect x="816" y="326" width="103" height="65" rx="8" fill="#14233f"/>
+  <rect x="823" y="333" width="89" height="49" rx="4" fill="#e0e9fa"/>
+  <rect x="834" y="344" width="51" height="5" rx="2.5" fill="#a2b7db"/>
+  <rect x="834" y="355" width="65" height="5" rx="2.5" fill="#becde5"/>
+  <rect x="834" y="366" width="32" height="6" rx="3" fill="#195cd4"/>
+
+  <!-- Visitor participating in the conversation from their wheelchair. -->
+  <path d="M321 413L334 527H456" fill="none" stroke="#14233f" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M328 459L365 577L473 577L489 527" fill="none" stroke="#596c8b" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M372 502L469 501Q497 502 506 524L514 595L490 609L469 546L380 546Z" fill="#263a5d"/>
+  <path d="M492 594L515 590L533 608L552 613Q559 617 555 625H501Q490 619 492 607Z" fill="#14233f"/>
+  <path d="M346 389Q351 362 377 357L406 358Q433 367 444 401L455 492Q420 511 354 497Z" fill="#195cd4"/>
+  <path d="M373 338L375 362Q391 377 406 360L404 336Z" fill="#9e6249"/>
+  <path d="M359 300Q368 280 391 280Q416 281 425 302L429 327L416 330Q408 351 387 349Q366 345 360 324Z" fill="#ad7256"/>
+  <path d="M359 322Q347 304 353 286Q361 269 383 273Q404 264 417 281Q426 289 423 306L414 309L406 292Q386 307 367 298L369 318Z" fill="#242c3b"/>
+  <path d="M411 316H416" stroke="#242c3b" stroke-width="3" stroke-linecap="round"/>
+  <path d="M410 334Q415 336 420 331" fill="none" stroke="#754431" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M416 382Q430 379 437 394L468 434L562 428L569 450L461 459Q449 460 443 450L407 405Z" fill="#195cd4"/>
+  <path d="M560 428L581 426L600 431Q605 435 600 440L584 438L572 450L565 450Z" fill="#ad7256"/>
+  <path d="M367 395L360 444L384 470" fill="none" stroke="#144bb0" stroke-width="22" stroke-linecap="round"/>
+  <path d="M382 459L394 471L391 486Q383 491 379 483L373 471Z" fill="#ad7256"/>
+  <path d="M322 497H430" stroke="#14233f" stroke-width="11" stroke-linecap="round"/>
+  <path d="M455 529L487 613H535" fill="none" stroke="#596c8b" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="365" cy="566" r="87" fill="#f7f7f3" stroke="#14233f" stroke-width="13"/>
+  <circle cx="365" cy="566" r="70" fill="none" stroke="#a0acc1" stroke-width="4"/>
+  <path d="M365 496V636M295 566H435M315 516L415 616M315 616L415 516" stroke="#aeb9cb" stroke-width="2.5"/>
+  <circle cx="365" cy="566" r="11" fill="#195cd4"/>
+  <circle cx="519" cy="633" r="23" fill="#14233f"/>
+  <circle cx="519" cy="633" r="12" fill="#c8d3e5"/>
+  <path d="M507 612L519 632" stroke="#596c8b" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Quiet interior details keep attention on the interaction. -->
+  <path d="M1037 595V462M1037 530Q1002 493 1009 466Q1040 476 1037 516M1037 563Q1073 534 1068 508Q1039 516 1037 548M1037 487Q1058 460 1050 440Q1026 455 1037 487" fill="#9da99f" stroke="#7e9187" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M1006 587H1068L1058 652H1017Z" fill="#dba895"/>
+  <path d="M1006 587H1068" stroke="#c88b78" stroke-width="5" stroke-linecap="round"/>
+</svg>

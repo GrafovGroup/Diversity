@@ -1,65 +1,5 @@
 [
   {
-    "id": "museum",
-    "upstream_url": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/assets/images/museum.webp",
-    "license": "CC0 1.0",
-    "license_evidence": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/readme.txt",
-    "original_source": "https://www.rawpixel.com/image/3297419/free-photo-image-interior-hallway-architecture",
-    "subject": "Modern museum atrium with intersecting corridors and daylight",
-    "suggested_use": "existing civic-architecture.webp",
-    "sha256": "480d989bfa8ed057a5b287bcb02dd6d44603ee0015e497375a97d17e92516c6b",
-    "width": 1300,
-    "height": 1733,
-    "asset": "/images/photography/home-atrium.webp",
-    "usage": "",
-    "asset_sha256": "6dc7eb9644a339ad3fbb3cc88b69cf76834a922bf4c16bca52b4e0f16cc6bec2"
-  },
-  {
-    "id": "building-exterior",
-    "upstream_url": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/assets/images/building-exterior.webp",
-    "license": "CC0 1.0",
-    "license_evidence": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/readme.txt",
-    "original_source": "https://www.rawpixel.com/image/430335/free-photo-image-architecture-building-roof",
-    "subject": "Modern building exterior and geometric roof",
-    "suggested_use": "existing building-exterior.webp",
-    "sha256": "7ab1e25df9f0e9825e577187a3c73ebda9c0a068d9b35d2a235b8e924b9c58e5",
-    "width": 1500,
-    "height": 703,
-    "asset": "/images/photography/home-corporations.webp",
-    "usage": "@home-corporations",
-    "asset_sha256": "504d485cd1b902ef4a7feb7806b83d44b4ab986d8543648b83317e5bb5e5cdde"
-  },
-  {
-    "id": "windows",
-    "upstream_url": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/assets/images/windows.webp",
-    "license": "CC0 1.0",
-    "license_evidence": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/readme.txt",
-    "original_source": "https://www.rawpixel.com/image/3286615/free-photo-image-texture-architecture-building",
-    "subject": "Repetitive architectural windows and facade",
-    "suggested_use": "existing windows.webp",
-    "sha256": "a8b72c3a34a4ac883406005c0fab343d64894c978b3dda1b6bb00eed01e9409e",
-    "width": 1200,
-    "height": 799,
-    "asset": "/images/photography/home-guide-accessibility.webp",
-    "usage": "@home-guide-1",
-    "asset_sha256": "212bd17fee8b74834645ea00a2d726909c6531c5c20cc67e6babc72300512194"
-  },
-  {
-    "id": "art-gallery",
-    "upstream_url": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/assets/images/art-gallery.webp",
-    "license": "CC0 1.0",
-    "license_evidence": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/readme.txt",
-    "original_source": "https://www.rawpixel.com/image/3286187/free-photo-image-person-stairs-architecture",
-    "subject": "Person moving through a modern gallery staircase",
-    "suggested_use": "existing art-gallery.webp",
-    "sha256": "7b7ef1992e6ddc642b746e3f1136f971c09420664653b40d122c21ccdeacf82c",
-    "width": 1460,
-    "height": 846,
-    "asset": "/images/photography/home-government.webp",
-    "usage": "@home-government",
-    "asset_sha256": "330aa3044c54d60c443462a6a50d7a5f46c6f9faab3efb361a49b0a8c4f96468"
-  },
-  {
     "id": "tourist-and-building",
     "upstream_url": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/assets/images/tourist-and-building.webp",
     "license": "CC0 1.0",
@@ -75,21 +15,6 @@
     "asset_sha256": "cefa604fa40b9fe8b0377d7e24b706ffadb922f94742d746741f0ecda5c7aab5"
   },
   {
-    "id": "angular-roof",
-    "upstream_url": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/assets/images/angular-roof.webp",
-    "license": "CC0 1.0",
-    "license_evidence": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/readme.txt",
-    "original_source": "https://www.rawpixel.com/image/3289063/free-photo-image-architectural-detail-architecture",
-    "subject": "Stairs, handrails and escalators beneath an angular institutional roof",
-    "suggested_use": "Physical implementation or built-environment assessment",
-    "sha256": "ca00f40190463960617430dd503e18ac4181fa58ea7173e60bd3d6b12fa15182",
-    "width": 1286,
-    "height": 2000,
-    "asset": "/images/photography/accessibility-environment.webp",
-    "usage": "services/accessibility",
-    "asset_sha256": "948827e2e327faaea7180bd8d7db0a69140e2ccc983b69206d89b3513d1e83f7"
-  },
-  {
     "id": "green-staircase",
     "upstream_url": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/assets/images/green-staircase.webp",
     "license": "CC0 1.0",
@@ -103,21 +28,6 @@
     "asset": "/images/photography/assessment-handrail.webp",
     "usage": "insights/scope-an-accessibility-assessment",
     "asset_sha256": "90b6e5d5f6bd6e0695ecb319a39d553c8c61551b3a286c0c84ffe2e80aa87b5b"
-  },
-  {
-    "id": "hotel-facade",
-    "upstream_url": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/assets/images/hotel-facade.webp",
-    "license": "CC0 1.0",
-    "license_evidence": "https://raw.githubusercontent.com/WordPress/twentytwentyfour/a38224418bd1c0428567b6d988c737e8116eb46c/readme.txt",
-    "original_source": "https://www.rawpixel.com/image/3286725/free-photo-image-black-and-white-background-photos",
-    "subject": "Black-and-white repeating hotel balconies and windows",
-    "suggested_use": "Commercial premises and operations",
-    "sha256": "99639d08984605a70deefa2178b06cc11f93b5d09c262617a2f8ecf80f5145fe",
-    "width": 2000,
-    "height": 963,
-    "asset": "/images/photography/home-guide-procurement.webp",
-    "usage": "@home-guide-2",
-    "asset_sha256": "b698ae7d8c68fd3d5dcf647c6369e042bb47d3648a7a9a33906cb37b87ba5bac"
   },
   {
     "id": "conference_img-structure-people-auditorium-crowd-audience",
@@ -206,7 +116,7 @@
     "width": 1024,
     "height": 785,
     "asset": "/images/photography/corporate-collaboration.webp",
-    "usage": "corporations",
+    "usage": "",
     "asset_sha256": "c047a378fdf72394965cd79d8f9fd991d85d42e1366480f365aedd0e8d890aa8"
   },
   {
@@ -221,7 +131,7 @@
     "width": 960,
     "height": 1280,
     "asset": "/images/photography/inclusion-conversation.webp",
-    "usage": "services/dei",
+    "usage": "corporations",
     "asset_sha256": "fc9625b70792984853885736701dd627e135674851814d17b1f8b9f5f1fa04f5"
   },
   {
@@ -255,18 +165,37 @@
     "asset_sha256": "0d110ce6a603863c1e18f96dd79bf412397389986d3fbebed258eb7a51b7f826"
   },
   {
-    "id": "location_landscape-sea-tree-water-nature",
-    "upstream_url": "https://raw.githubusercontent.com/Automattic/themes/75faa8a1e0367a37c2638250a3c9ed0a0f8c0b7f/conference/assets/images/location_landscape-sea-tree-water-nature.jpg",
+    "id": "digital-work",
+    "upstream_url": "https://raw.githubusercontent.com/Automattic/themes/75faa8a1e0367a37c2638250a3c9ed0a0f8c0b7f/lodestar/assets/images/header.jpg",
     "license": "CC0 1.0",
-    "license_evidence": "https://raw.githubusercontent.com/Automattic/themes/75faa8a1e0367a37c2638250a3c9ed0a0f8c0b7f/conference/readme.txt",
-    "original_source": "https://pxhere.com/en/photo/1374255",
-    "subject": "Snow-covered mountain landscape and road",
-    "suggested_use": "Environment and regional delivery; location unverified, do not identify as Canada",
-    "sha256": "2fba3c28848f96b87a6b09970a77afca74857190c3f7fc9ad62b39a2faffc0e7",
-    "width": 960,
-    "height": 1279,
-    "asset": "/images/photography/impact-landscape.webp",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "license_evidence": "https://raw.githubusercontent.com/Automattic/themes/75faa8a1e0367a37c2638250a3c9ed0a0f8c0b7f/lodestar/readme.txt",
+    "original_source": "http://negativespace.co/photos/woman-coding/",
+    "attribution": "Negative Space, via Automattic Lodestar",
+    "subject": "Person working at a desktop computer with code on the screen.",
+    "sha256": "6295e53a8da33fbf76b34d2be15f6215d7c0b764b4d5130c18ab0f7bf6ae5757",
+    "width": 1500,
+    "height": 1000,
+    "asset": "/images/photography/digital-work.webp",
+    "usage": "@home-corporations",
+    "asset_sha256": "900c73a4d75a3a1aa2d8aa775c1beb91d63ee91ba1bef347e54a27b846fdc799",
+    "adaptation": "Encoded as WebP; full source composition retained."
+  },
+  {
+    "id": "community-belonging",
+    "upstream_url": "https://raw.githubusercontent.com/Automattic/themes/75faa8a1e0367a37c2638250a3c9ed0a0f8c0b7f/coachben/assets/images/coachben_stocksnap_6ZYX4YY4IR.jpg",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "license_evidence": "https://raw.githubusercontent.com/Automattic/themes/75faa8a1e0367a37c2638250a3c9ed0a0f8c0b7f/coachben/readme.txt",
+    "original_source": "https://stocksnap.io/photo/friends-hugging-6ZYX4YY4IR",
+    "attribution": "StockSnap, via Automattic Coachben",
+    "subject": "Four people standing together outdoors with their arms around one another at sunset.",
+    "sha256": "dbfc5f6142ad450b07c7684d876a2438d60e8d7af89ab26c1b0cc7e49014d1f1",
+    "width": 1280,
+    "height": 1280,
+    "asset": "/images/photography/community-belonging.webp",
     "usage": "services/social-impact",
-    "asset_sha256": "b0632555de76a5e0c4690e4c04532f60446f180df5340021c53a5ec4bee82d9a"
+    "asset_sha256": "54d1586e965aebcfb208f92a985f1964bc10c03c6f5e05a5d61c30ee31a5d525",
+    "adaptation": "Encoded as WebP; full source composition retained."
   }
 ]

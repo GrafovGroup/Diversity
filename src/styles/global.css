@@ -1300,6 +1300,14 @@ li + li {
 html[lang='fr-CA'] .hero-copy h1 {
   font-size: clamp(3.3rem, 5.4vw, 5.8rem);
 }
+@media (max-width: 380px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+  .service-card {
+    min-height: 0;
+  }
+}
 @media (max-width: 600px) {
   html[lang='fr-CA'] .hero-copy h1 {
     font-size: clamp(2.65rem, 12.5vw, 4.7rem);
@@ -1307,6 +1315,56 @@ html[lang='fr-CA'] .hero-copy h1 {
 }
 
 /* Editorial illustrations retain their entire composition at every viewport. */
+.hero-visual.people-visual {
+  height: auto;
+  align-self: center;
+  background: var(--navy);
+  border-radius: 48px 0 0 0;
+  overflow: hidden;
+}
+.hero-visual.people-visual > img {
+  height: auto;
+  border-radius: 0;
+}
+.hero-visual.people-visual::after {
+  content: none;
+}
+.people-visual .photo-caption {
+  position: static;
+  padding: 25px 30px;
+}
+.audience-card-framed {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--navy);
+}
+.audience-card-framed > img {
+  position: static;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  z-index: auto;
+  background: #edf1f6;
+}
+.audience-card-framed:hover > img {
+  transform: none;
+}
+.audience-card-framed::before {
+  content: none;
+}
+.audience-card-framed .audience-content {
+  max-width: none;
+  flex: 1;
+}
+.insight-card .image-wrap .editorial-illustration {
+  object-fit: contain;
+  background: #edf1f6;
+}
+.page-hero-split > .full-frame {
+  height: auto;
+  border-radius: 24px 0 0 0;
+}
 .page-hero-split > .editorial-illustration {
   object-fit: contain;
   border-radius: 0;

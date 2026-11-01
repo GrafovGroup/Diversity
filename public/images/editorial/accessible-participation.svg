@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#f7f7f3"/>
+  <path d="M180 532c-4-183 155-328 340-314 128 10 172 70 291 60 141-12 226 73 223 203-3 166-153 251-380 249-273-2-470-51-474-198Z" fill="#e7ecf3"/>
+  <path d="M151 744h903" stroke="#d4d9e0" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="635" cy="734" rx="365" ry="20" fill="#14233f" opacity=".045"/>
+
+  <!-- A window and a small plant give the scene a calm workplace setting. -->
+  <rect x="241" y="171" width="223" height="227" rx="14" fill="#fff"/>
+  <path d="M257 187h191v125H257Z" fill="#d9e5ee"/>
+  <path d="m257 276 66-50 56 49 69-37v74H257Z" fill="#c7d8dd"/>
+  <path d="M352 186v196m-96-69h193" stroke="#fff" stroke-width="8"/>
+  <path d="M260 383h186" stroke="#d7dfe9" stroke-width="7" stroke-linecap="round"/>
+  <path d="M1009 615V505" stroke="#3f7e79" stroke-width="5" stroke-linecap="round"/>
+  <path d="M1009 556c-34 0-49-20-43-42 30 1 44 19 43 42Zm0-28c30-5 39-24 29-42-26 6-36 21-29 42Zm1 64c32-3 48-23 40-44-28 3-45 20-40 44Z" fill="#649890"/>
+  <path d="m980 611 11 64h41l10-64Z" fill="#e4b8a8"/>
+  <path d="M978 612h66" stroke="#d49786" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Height-adjustable desk with two clearly visible telescoping legs. -->
+  <path d="M611 459h28v198h-28Zm327 0h28v198h-28Z" fill="#bac8d9"/>
+  <path d="M616 565h18v158h-18Zm327 0h18v158h-18Z" fill="#8ea3bf"/>
+  <path d="M586 727h78m251 0h78" stroke="#14233f" stroke-width="12" stroke-linecap="round"/>
+  <rect x="563" y="445" width="437" height="22" rx="8" fill="#c5d2e3"/>
+  <rect x="557" y="433" width="449" height="17" rx="8" fill="#fff"/>
+  <rect x="935" y="453" width="43" height="13" rx="5" fill="#14233f"/>
+  <path d="m946 460 3-3 3 3m10-3 3 3 3-3" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- A video call, with visible caption lines beneath the participants. -->
+  <path d="M798 375v43m-31 7h62" stroke="#14233f" stroke-width="13" stroke-linecap="round"/>
+  <rect x="670" y="223" width="260" height="163" rx="12" fill="#14233f"/>
+  <rect x="682" y="235" width="236" height="139" rx="5" fill="#fff"/>
+  <rect x="694" y="247" width="101" height="83" rx="5" fill="#eee6e3"/>
+  <rect x="805" y="247" width="101" height="83" rx="5" fill="#e3e7f2"/>
+  <path d="M718 330v-19c0-18 54-18 54 0v19Z" fill="#3f7e79"/>
+  <path d="M740 293v10h12v-10" fill="#b97856"/>
+  <ellipse cx="746" cy="279" rx="15" ry="20" fill="#b97856"/>
+  <path d="M730 279c-8-21 7-32 18-29 18-1 23 13 14 27-5-7-7-11-10-15-4 9-12 10-22 17Z" fill="#14233f"/>
+  <path d="M829 330v-18c0-18 54-18 54 0v18Z" fill="#195cd4"/>
+  <path d="M849 292v11h13v-11" fill="#efc19c"/>
+  <ellipse cx="856" cy="279" rx="15" ry="20" fill="#efc19c"/>
+  <path d="M840 280c-6-22 6-32 19-30 16 1 22 14 13 28-11-3-17-9-20-17-2 10-6 14-12 19Z" fill="#9f7370"/>
+  <rect x="694" y="340" width="212" height="24" rx="4" fill="#14233f"/>
+  <path d="M705 348h169m-169 8h139" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Laptop and a separate keyboard offer distinct input and display surfaces. -->
+  <path d="m889 349 85 7-10 69-88-7Z" fill="#8b9eba"/>
+  <path d="m895 356 72 6-8 55-75-6Z" fill="#f7f7f3"/>
+  <path d="m902 371 46 4m-48 9 35 3m-36 9 41 4" stroke="#b5c5d9" stroke-width="4" stroke-linecap="round"/>
+  <path d="m876 418 88 7 21 9-98-1-24-8Z" fill="#14233f"/>
+  <path d="m617 414 108 1 23 17H603Z" fill="#d4ddea" stroke="#a3b4cc" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M624 420h93m-101 6h115" stroke="#8ea3bf" stroke-width="3" stroke-dasharray="7 5"/>
+  <ellipse cx="849" cy="427" rx="12" ry="6" fill="#a3b4cc"/>
+
+  <!-- Wheelchair user sits directly at the desk with clear knee space. -->
+  <path d="M370 453v155h95" fill="none" stroke="#14233f" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m421 609 99 7 41 97h35" fill="none" stroke="#14233f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M390 541c29-13 56-10 83 1l58 24 28 111h-34l-35-81-79-10Z" fill="#14233f"/>
+  <path d="m523 669 35-1 30 23c8 6 6 15-4 15h-64Z" fill="#3f7e79"/>
+  <path d="M393 412c14-14 44-14 60 0 15 14 16 37 18 64l4 77c-30 17-63 16-87 1l-7-94c-3-21-1-35 12-48Z" fill="#b1a6d2"/>
+  <path d="M411 387v30c9 11 25 11 32-1v-30" fill="#86533d"/>
+  <ellipse cx="428" cy="361" rx="34" ry="42" fill="#86533d"/>
+  <path d="M395 367c-16-20-14-49 2-64 17-17 45-17 61-1 11 10 14 25 7 37-14-2-31-14-38-23-2 26-16 39-32 51Z" fill="#14233f"/>
+  <path d="M397 341c-8 20-10 40-5 60h-14c-7-26-3-49 7-63Z" fill="#14233f"/>
+  <circle cx="441" cy="360" r="2.5" fill="#14233f"/>
+  <path d="m457 364-3 8h-6m-17 13q9 6 17 0" fill="none" stroke="#593828" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="m453 437 51 31 94-33" fill="none" stroke="#b1a6d2" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m594 437 28-9 22 2" fill="none" stroke="#86533d" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m402 442 15 48 89 9 102-54" fill="none" stroke="#b1a6d2" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m605 446 30-11 24 1" fill="none" stroke="#86533d" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="408" cy="650" r="83" fill="#f7f7f3" stroke="#14233f" stroke-width="13"/>
+  <circle cx="408" cy="650" r="65" fill="none" stroke="#98abc5" stroke-width="4"/>
+  <path d="M408 585v130m-65-65h130m-111-46 92 92m-92 0 92-92" stroke="#b8c4d4" stroke-width="3"/>
+  <circle cx="408" cy="650" r="10" fill="#14233f"/>
+  <circle cx="574" cy="720" r="17" fill="#f7f7f3" stroke="#14233f" stroke-width="8"/>
+</svg>

@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f7f7f3"/>
+      <stop offset="1" stop-color="#eeeef6"/>
+    </linearGradient>
+    <linearGradient id="sheet" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f9fafc"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#14233f" flood-opacity="0.085"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#paper)"/>
+  <ellipse cx="600" cy="410" rx="492" ry="296" fill="#e7eaf4"/>
+  <path d="M142 163H1058M142 717H1058" stroke="#d9dfeb" stroke-width="2"/>
+  <circle cx="151" cy="163" r="5" fill="#c1cde0"/>
+  <circle cx="1049" cy="717" r="5" fill="#c1cde0"/>
+
+  <!-- Three equally sized proposals receive the same visual weight. -->
+  <g filter="url(#shadow)">
+    <rect x="169" y="194" width="262" height="256" rx="14" fill="#d8e0ee"/>
+    <rect x="169" y="184" width="262" height="256" rx="14" fill="url(#sheet)"/>
+    <rect x="469" y="194" width="262" height="256" rx="14" fill="#d8e0ee"/>
+    <rect x="469" y="184" width="262" height="256" rx="14" fill="url(#sheet)"/>
+    <rect x="769" y="194" width="262" height="256" rx="14" fill="#d8e0ee"/>
+    <rect x="769" y="184" width="262" height="256" rx="14" fill="url(#sheet)"/>
+  </g>
+  <path d="M183 184H417Q431 184 431 198V204H169V198Q169 184 183 184Z" fill="#195cd4"/>
+  <path d="M483 184H717Q731 184 731 198V204H469V198Q469 184 483 184Z" fill="#8370b8"/>
+  <path d="M783 184H1017Q1031 184 1031 198V204H769V198Q769 184 783 184Z" fill="#d3917d"/>
+
+  <circle cx="220" cy="253" r="24" fill="#e5edfc"/>
+  <path d="M208 262V246L220 239L232 246V262Z" fill="none" stroke="#195cd4" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="520" cy="253" r="24" fill="#eeebf5"/>
+  <path d="M508 245H532V262H508ZM516 237H524V245H516Z" fill="none" stroke="#8370b8" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="820" cy="253" r="24" fill="#f7eae4"/>
+  <path d="M808 262L820 239L832 262ZM812 254H828" fill="none" stroke="#c68470" stroke-width="3" stroke-linejoin="round"/>
+
+  <g fill="#14233f">
+    <rect x="258" y="240" width="131" height="8" rx="4"/>
+    <rect x="558" y="240" width="131" height="8" rx="4"/>
+    <rect x="858" y="240" width="131" height="8" rx="4"/>
+  </g>
+  <g fill="#a3b0c6">
+    <rect x="258" y="258" width="88" height="6" rx="3"/>
+    <rect x="558" y="258" width="88" height="6" rx="3"/>
+    <rect x="858" y="258" width="88" height="6" rx="3"/>
+  </g>
+  <g fill="#d8dfeb">
+    <rect x="199" y="298" width="202" height="6" rx="3"/>
+    <rect x="199" y="314" width="186" height="6" rx="3"/>
+    <rect x="199" y="330" width="202" height="6" rx="3"/>
+    <rect x="499" y="298" width="202" height="6" rx="3"/>
+    <rect x="499" y="314" width="186" height="6" rx="3"/>
+    <rect x="499" y="330" width="202" height="6" rx="3"/>
+    <rect x="799" y="298" width="202" height="6" rx="3"/>
+    <rect x="799" y="314" width="186" height="6" rx="3"/>
+    <rect x="799" y="330" width="202" height="6" rx="3"/>
+  </g>
+  <rect x="199" y="359" width="202" height="52" rx="8" fill="#eef3fd"/>
+  <rect x="499" y="359" width="202" height="52" rx="8" fill="#f1eef7"/>
+  <rect x="799" y="359" width="202" height="52" rx="8" fill="#faf0eb"/>
+  <g fill="#195cd4">
+    <rect x="215" y="373" width="6" height="24" rx="3"/>
+    <rect x="233" y="373" width="111" height="6" rx="3" opacity="0.55"/>
+    <rect x="233" y="388" width="145" height="5" rx="2.5" opacity="0.3"/>
+  </g>
+  <g fill="#8370b8">
+    <rect x="515" y="373" width="6" height="24" rx="3"/>
+    <rect x="533" y="373" width="111" height="6" rx="3" opacity="0.55"/>
+    <rect x="533" y="388" width="145" height="5" rx="2.5" opacity="0.3"/>
+  </g>
+  <g fill="#c68470">
+    <rect x="815" y="373" width="6" height="24" rx="3"/>
+    <rect x="833" y="373" width="111" height="6" rx="3" opacity="0.55"/>
+    <rect x="833" y="388" width="145" height="5" rx="2.5" opacity="0.3"/>
+  </g>
+
+  <!-- Every proposal connects to the same set of review criteria. -->
+  <path d="M300 450V465Q300 480 315 480H585Q600 480 600 495M900 450V465Q900 480 885 480H615Q600 480 600 495M600 450V495" fill="none" stroke="#8798b4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="300" cy="450" r="5" fill="#195cd4"/>
+  <circle cx="600" cy="450" r="5" fill="#8370b8"/>
+  <circle cx="900" cy="450" r="5" fill="#d3917d"/>
+  <rect x="402" y="504" width="396" height="202" rx="17" fill="#14233f" filter="url(#shadow)"/>
+  <rect x="415" y="517" width="370" height="176" rx="8" fill="#ffffff"/>
+  <path d="M554 499H577Q580 486 600 486Q620 486 623 499H646V532H554Z" fill="#b9c5d9"/>
+  <path d="M588 499Q600 491 612 499" fill="none" stroke="#f7f7f3" stroke-width="4" stroke-linecap="round"/>
+
+  <g fill="none" stroke="#14233f" stroke-width="2.5">
+    <rect x="438" y="552" width="18" height="18" rx="3"/>
+    <rect x="438" y="597" width="18" height="18" rx="3"/>
+    <rect x="438" y="642" width="18" height="18" rx="3"/>
+  </g>
+  <g fill="#65758f">
+    <rect x="474" y="557" width="136" height="6" rx="3"/>
+    <rect x="474" y="602" width="114" height="6" rx="3"/>
+    <rect x="474" y="647" width="128" height="6" rx="3"/>
+  </g>
+  <path d="M435 584H762M435 629H762" stroke="#e5e9f1" stroke-width="1.5"/>
+  <g fill="#195cd4">
+    <circle cx="654" cy="561" r="6"/>
+    <circle cx="654" cy="606" r="6"/>
+    <circle cx="654" cy="651" r="6"/>
+  </g>
+  <g fill="#8370b8">
+    <circle cx="695" cy="561" r="6"/>
+    <circle cx="695" cy="606" r="6"/>
+    <circle cx="695" cy="651" r="6"/>
+  </g>
+  <g fill="#d3917d">
+    <circle cx="736" cy="561" r="6"/>
+    <circle cx="736" cy="606" r="6"/>
+    <circle cx="736" cy="651" r="6"/>
+  </g>
+
+  <!-- Review tools suggest considered evaluation, without a selected winner. -->
+  <g transform="translate(903 590) rotate(-25)">
+    <rect x="-6" y="33" width="18" height="82" rx="8" fill="#14233f"/>
+    <rect x="-5" y="33" width="16" height="18" fill="#9baec9"/>
+    <circle r="43" fill="#ffffff" fill-opacity="0.72" stroke="#14233f" stroke-width="9"/>
+    <path d="M-24 -5Q-21 -24 -2 -26" fill="none" stroke="#c8d8ef" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(296 563) rotate(24)">
+    <rect x="-7" width="14" height="102" rx="4" fill="#195cd4"/>
+    <path d="M-7 102H7L0 125Z" fill="#d8bba2"/>
+    <path d="M-2.5 117H2.5L0 125Z" fill="#14233f"/>
+    <rect x="-7" y="12" width="14" height="5" fill="#8babdf"/>
+  </g>
+</svg>
