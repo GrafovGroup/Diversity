@@ -4,9 +4,17 @@ Updated November 1, 2026. Requested destination: **OpenAI Sites**. Canonical dom
 
 ## Status
 
-The owner requested publication and domain connection in this session. The selected cloud environment exposes repository/build tools but no OpenAI Sites deployment interface or DNS management connection. The owner reports having published previous sites with OpenAI Sites. Its dashboard/project URL, supported upload/import mechanism and provider-issued DNS records have not been supplied or verified in this session. This document does not establish that the site is deployed or the domain connected.
+The owner requested publication and domain connection in this session. The selected cloud environment exposes repository/build tools but no OpenAI Sites deployment interface or DNS management connection. The owner supplied `https://ferti.ca` as a previous Sites deployment, and its repository confirms a Sites project binding. A new Diversity Sites project, a supported publication interface and provider-issued DNS records remain unavailable in this session. This document does not establish that Diversity is deployed or its domain connected.
 
 The previous WHC plan is retained in `DEPLOYMENT_RUNBOOK.md` and `docs/DEPLOYMENT.md` for reference. Do not substitute that host for the owner's current request without agreement.
+
+## Verified Sites reference
+
+- [Ferti's project configuration at revision 324b996](https://github.com/GrafovGroup/Ferti/blob/324b996647e99c35f26cd2240329f99666395f78/.openai/hosting.json) contains its assigned Sites project identity. Its [README](https://github.com/GrafovGroup/Ferti/blob/324b996647e99c35f26cd2240329f99666395f78/README.md) documents Sites publication, Cloudflare Workers and connected `ferti.ca` / `www.ferti.ca` domains. The live site was not independently fetched: this environment denied its HTTPS destination.
+- The official [OpenAI Sites initializer](https://github.com/openai/sites/blob/7eb9d4b9cf93ad7e64aebc8a5ca70e29ec2cfb94/packages/create-sites/README.md) creates local files and explicitly does not provision resources. The [Sites Vite plugin](https://github.com/openai/sites/blob/7eb9d4b9cf93ad7e64aebc8a5ca70e29ec2cfb94/packages/sites-vite-plugin/README.md) packages hosting metadata; it is not a publishing client.
+- The inspected sources do not provide a supported project-creation, publication or domain-management CLI. Continuing requires a Sites-enabled workspace/integration with those capabilities for Diversity.
+- Ferti's project identity, database binding, form endpoint and domain records belong to Ferti. Do not copy them into Diversity or redeploy over that project.
+- Ferti uses a worker-based Vinext build. The inspected documentation does not establish whether Diversity's current Astro static output is accepted directly. Confirm the Sites build contract before choosing any adapter or framework migration.
 
 ## Repository and build
 
@@ -48,7 +56,7 @@ After adding the provider's records, verify its domain status, public DNS answer
 
 ## Inputs still needed for this session
 
-1. The OpenAI Sites dashboard/project URL and an available supported deployment interface.
+1. A new Diversity project in the OpenAI Sites publishing workflow, with its supported project/publication tools available to the working session.
 2. A supported connection to the Register.ca domain account or its authoritative DNS manager, so the actual provider-issued records can be applied.
 
 Use secure provider connections or account settings for credentials; do not put passwords, API keys or DNS secrets in chat or Git.
