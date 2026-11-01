@@ -1,0 +1,50 @@
+name: Website checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Check Astro and TypeScript
+        run: npm run check
+      - name: Check formatting
+        run: npm run lint
+      - name: Build static website
+        run: npm run build
+      - name: Check static asset budgets
+        run: npm run budget
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run browser and route checks
+        run: npm test
+      - name: Retain test reports and review screenshots
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-test-results
+          path: |
+            playwright-report/
+            test-results/
+            artifacts/
+          if-no-files-found: ignore
+          retention-days: 7
