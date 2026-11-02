@@ -6,7 +6,6 @@ import { homeImages } from '../data/page-images';
 import CallToAction from './CallToAction.astro';
 import SolutionsTeaser from './SolutionsTeaser.astro';
 import CoverageLinks from './CoverageLinks.astro';
-import { services } from '../data/services';
 import { articles } from '../data/pages';
 interface Props {
   locale: 'en' | 'fr';
@@ -44,141 +43,179 @@ const steps = en
       ],
     ];
 const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
+const homepageServices = [
+  {
+    slug: 'dei',
+    title: [
+      'Diversity & inclusion strategy',
+      'Stratégie de diversité et d’inclusion',
+    ],
+    summary: [
+      'Practical strategies for measurable progress.',
+      'Des stratégies concrètes pour des progrès mesurables.',
+    ],
+    icon: 'M16 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM8 28v-4a8 8 0 0 1 16 0v4M5 10a3 3 0 0 0 0 6m22-6a3 3 0 0 1 0 6M2 27v-3a6 6 0 0 1 4-6m24 9v-3a6 6 0 0 0-4-6',
+  },
+  {
+    slug: 'training',
+    title: ['Training & development', 'Formation et perfectionnement'],
+    summary: [
+      'Programs for lasting change.',
+      'Des programmes pour un changement durable.',
+    ],
+    icon: 'M3 6h10l3 3 3-3h10v20H19l-3 3-3-3H3ZM16 9v20M7 12h5M7 17h5m8-5h5m-5 5h5',
+  },
+  {
+    slug: 'accessibility',
+    title: ['Accessibility solutions', 'Solutions d’accessibilité'],
+    summary: [
+      'More inclusive spaces and services.',
+      'Des espaces et services plus accessibles.',
+    ],
+    icon: 'M16 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM4 12l12 3 12-3M16 15v6m0 0-7 9m7-9 7 9',
+  },
+  {
+    slug: 'people-culture',
+    title: ['HR & organizational advisory', 'Conseil en RH et organisation'],
+    summary: [
+      'Better systems, stronger teams.',
+      'De meilleurs systèmes, des équipes plus fortes.',
+    ],
+    icon: 'M12 3h8v7h-8ZM3 23h8v7H3Zm18 0h8v7h-8ZM16 10v7M7 23v-6h18v6',
+  },
+  {
+    slug: 'supplier-diversity',
+    title: ['Supplier diversity', 'Diversité des fournisseurs'],
+    summary: ['More inclusive procurement.', 'Des achats plus inclusifs.'],
+    icon: 'M16 3 29 10 16 17 3 10ZM3 10v14l13 7 13-7V10M16 17v14M10 6l13 7',
+  },
+  {
+    slug: 'social-impact',
+    title: ['Social impact', 'Impact social'],
+    summary: [
+      'Planning for measurable impact.',
+      'Planifier des retombées mesurables.',
+    ],
+    icon: 'M5 27h23M8 21v-5m8 5V9m8 12V4M4 5h6M7 2v6',
+  },
+  {
+    slug: 'implementation',
+    title: ['Implementation support', 'Soutien à la mise en œuvre'],
+    summary: [
+      'Turning plans into practical solutions.',
+      'Transformer les plans en solutions concrètes.',
+    ],
+    icon: 'M11 5H5v24h22V5h-6M11 3h10v6H11ZM10 19l4 4 9-10',
+  },
+];
 ---
 
 <SiteLayout
   locale={locale}
-  title={en ? 'People. Opportunity. Progress.' : 'Gens. Opportunités. Progrès.'}
+  title={en
+    ? 'Different Perspectives. Better Outcomes.'
+    : 'Des perspectives différentes. De meilleurs résultats.'}
   description={en
-    ? 'Advisory, training and implementation for more inclusive organizations and accessible places across Canada. Explore seven connected areas of expertise.'
-    : 'Conseil, formation et mise en œuvre pour des organisations plus inclusives et des lieux plus accessibles au Canada. Découvrez sept expertises complémentaires.'}
+    ? 'Canadian consulting, training, accessibility and implementation solutions for corporations and government. Build stronger, more inclusive workplaces with Diversity.ca.'
+    : 'Services-conseils, formation, accessibilité et mise en œuvre pour les entreprises et les organismes publics au Canada. Des milieux de travail plus inclusifs.'}
 >
-  <section
-    class:list={['home-hero', { 'home-hero--light': !en }]}
-    aria-labelledby="home-title"
-  >
-    {
-      en && (
-        <div class="hero-backdrop">
-          <PageImage path="" locale={locale} />
-        </div>
-      )
-    }
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="hero-backdrop">
+      <PageImage
+        path=""
+        locale={locale}
+        sizes="(max-width: 760px) 100vw, 60vw"
+      />
+    </div>
     <div class="container hero-inner">
       <div class="hero-copy">
         <span class="eyebrow"
           >{
             en
-              ? 'ADVISORY. TRAINING. IMPLEMENTATION.'
-              : 'CONSEIL. FORMATION. MISE EN ŒUVRE.'
+              ? 'STRATEGY · ADVISORY · IMPLEMENTATION'
+              : 'STRATÉGIE · CONSEIL · MISE EN ŒUVRE'
           }</span
-        ><h1 id="home-title">
-          {en ? 'People.' : 'Gens.'}<br />{
-            en ? 'Opportunity.' : 'Opportunités.'
-          }<br /><em>{en ? 'Progress.' : 'Progrès.'}</em>
-        </h1><p class="lead">
-          {
-            en
-              ? 'Building more inclusive organizations. Creating more accessible places. Turning good intentions into practical, lasting change.'
-              : 'Bâtir des organisations plus inclusives. Créer des lieux plus accessibles. Transformer les bonnes intentions en changements concrets et durables.'
-          }
-        </p><div class="button-row">
-          <a href={href('services')} class="button"
-            >{en ? 'Explore our expertise' : 'Découvrir nos expertises'}</a
-          ><a href={href('contact')} class="button button-outline"
-            >{en ? 'Let’s talk' : 'Parlons-en'}</a
+        >
+        <h1 id="home-title">
+          <span
+            >{
+              en ? 'Different Perspectives.' : 'Des perspectives différentes.'
+            }</span
           >
-        </div><p class="hero-note">
+          <em>{en ? 'Better Outcomes.' : 'De meilleurs résultats.'}</em>
+        </h1>
+        <p class="lead">
           {
             en
-              ? 'For corporations, governments and the people they serve.'
-              : 'Pour les entreprises, les gouvernements et leurs communautés.'
+              ? 'Strategic consulting, training, accessibility, and implementation solutions that help Canadian organizations build stronger, more inclusive workplaces.'
+              : 'Des services-conseils stratégiques, de la formation et des solutions d’accessibilité et de mise en œuvre pour aider les organisations canadiennes à créer des milieux de travail plus inclusifs et performants.'
           }
         </p>
+        <div class="button-row">
+          <a href={href('contact')} class="button"
+            >{en ? 'Request a consultation' : 'Demander une consultation'}</a
+          >
+          <a href={href('services')} class="button button-outline"
+            >{en ? 'Explore our services' : 'Découvrir nos services'}</a
+          >
+        </div>
       </div>
-      {
-        !en && (
-          <figure class="hero-feature">
-            <PageImage
-              path=""
-              locale={locale}
-              sizes="(max-width: 900px) calc(100vw - 32px), (min-width: 1896px) 850px, 46vw"
-            />
-            <figcaption>
-              De nouvelles perspectives. Plus de possibilités.
-            </figcaption>
-          </figure>
-        )
-      }
     </div>
   </section>
   <section
-    class="purpose-strip"
-    aria-label={en ? 'Our focus' : 'Nos priorités'}
+    class="home-services"
+    aria-label={en ? 'Our services' : 'Nos services'}
   >
-    <div class="container purpose-inner">
-      <span
-        >{
-          en
-            ? 'CONNECTED EXPERTISE.\nONE SHARED PURPOSE.'
-            : 'DES EXPERTISES COMPLÉMENTAIRES.\nUNE AMBITION COMMUNE.'
-        }</span
-      ><div>
-        {en ? 'People & organizations' : 'Personnes et organisations'}
-      </div><div>
-        {en ? 'Places & accessibility' : 'Lieux et accessibilité'}
-      </div><div>
-        {en ? 'Opportunity & impact' : 'Opportunités et retombées'}
-      </div>
-    </div>
-  </section>
-  <section class="section container">
-    <div class="section-intro">
-      <div>
-        <span class="eyebrow">{en ? 'OUR EXPERTISE' : 'NOS EXPERTISES'}</span
-        ><h2>
-          {
-            en
-              ? 'Different challenges.\nConnected solutions.'
-              : 'Des défis variés.\nDes solutions complémentaires.'
-          }
-        </h2>
-      </div><p class="lead">
-        {
-          en
-            ? 'Seven areas of expertise, brought together around your organization’s priorities — from the first assessment to implementation.'
-            : 'Sept domaines d’expertise réunis autour des priorités de votre organisation, de la première évaluation à la mise en œuvre.'
-        }
-      </p>
-    </div><div class="service-grid">
+    <div class="container home-services-grid">
       {
-        services.map((service) => (
-          <a class="service-card" href={href(`services/${service.slug}`)}>
-            <>
-              <h3>{service.shortTitle[locale]}</h3>
-              <p>{service.intro[locale]}</p>
-              <span class="service-link">
-                {en ? 'View services' : 'Découvrir les services'}
-              </span>
-            </>
+        homepageServices.map((service) => (
+          <a class="home-service" href={href(`services/${service.slug}`)}>
+            <svg
+              viewBox="0 0 32 32"
+              width="32"
+              height="32"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d={service.icon} />
+            </svg>
+            <h2>{service.title[en ? 0 : 1]}</h2>
+            <p>{service.summary[en ? 0 : 1]}</p>
           </a>
         ))
-      }<a class="service-card cta-card" href={href('request-proposal')}
-        ><div class="card-top">
-          <span class="eyebrow no-margin"
-            >{en ? 'YOUR NEXT CHAPTER' : 'VOTRE PROCHAIN CHAPITRE'}</span
-          >
-        </div><h3>
-          {en ? 'Where do you\nwant to go?' : 'Où souhaitez-vous\naller?'}
-        </h3><p>
-          {
-            en
-              ? 'Let’s build the path forward.'
-              : 'Traçons ensemble la voie à suivre.'
-          }
-        </p><span class="service-link"
-          >{en ? 'Discuss your project' : 'Parlons de votre projet'}</span
-        ></a
+      }
+    </div>
+  </section>
+  <section class="home-about" aria-labelledby="home-about-title">
+    <div class="container home-about-inner">
+      <span class="eyebrow"
+        >{
+          en
+            ? 'PEOPLE · OPPORTUNITY · PROGRESS'
+            : 'PERSONNES · POSSIBILITÉS · PROGRÈS'
+        }</span
+      >
+      <h2 id="home-about-title">
+        {
+          en
+            ? 'Building more inclusive organizations.'
+            : 'Bâtir des organisations plus inclusives.'
+        }
+      </h2>
+      <p class="lead">
+        {
+          en
+            ? 'Diversity.ca brings a national perspective to consulting, accessibility, training and implementation for corporate and public-sector organizations. Our focus is practical solutions and measurable progress.'
+            : 'Diversity.ca apporte une perspective pancanadienne aux services-conseils, à l’accessibilité, à la formation et à la mise en œuvre pour les entreprises et les organismes publics. Notre priorité : des solutions concrètes et des progrès mesurables.'
+        }
+      </p>
+      <a class="text-link" href={href('about')}
+        >{en ? 'Get to know Diversity.ca' : 'Découvrir Diversity.ca'}</a
       >
     </div>
   </section>

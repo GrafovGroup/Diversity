@@ -15,16 +15,16 @@ export interface PageVisual {
 
 const photographs: Record<string, PageVisual> = {
   '': {
-    src: '/images/photography/home-inclusive-workshop-v2.webp',
+    src: '/images/photography/home-perspectives-1600.webp',
     srcset:
-      '/images/photography/home-inclusive-workshop-v2-800.webp 800w, /images/photography/home-inclusive-workshop-v2-1200.webp 1200w, /images/photography/home-inclusive-workshop-v2.webp 1800w',
-    sizes: '100vw',
+      '/images/photography/home-perspectives-600.webp 600w, /images/photography/home-perspectives-1000.webp 1000w, /images/photography/home-perspectives-1600.webp 1600w',
+    sizes: '(max-width: 760px) 100vw, 60vw',
     fit: 'cover',
-    width: 1800,
-    height: 1200,
+    width: 1600,
+    height: 2399,
     alt: {
-      en: 'Colleagues exchanging ideas around a table in a bright meeting room.',
-      fr: 'Des collègues échangent des idées autour d’une table dans une salle de réunion lumineuse.',
+      en: 'Colleagues working together around a shared table with laptops.',
+      fr: 'Des collègues travaillent ensemble autour d’une table avec des ordinateurs portables.',
     },
   },
   government: {

@@ -501,5 +501,39 @@
       }
     ],
     "usage": "home"
+  },
+  {
+    "id": "home-perspectives",
+    "upstream_url": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=85",
+    "selected_source": "https://github.com/GrafovGroup/Diversity/blob/238716d6cec777c642c055809a9089cd111051ef/index.html",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "attribution": "Unsplash; photographer not independently identified",
+    "usage_note": "Illustrative stock photograph selected in the GitHub homepage design. People shown are not represented as Diversity.ca staff, clients, or endorsers.",
+    "adaptation": "Proportional resize and WebP encoding; full source composition retained. Responsive cropping uses CSS.",
+    "variants": [
+      {
+        "asset": "/images/photography/home-perspectives-600.webp",
+        "width": 600,
+        "height": 900,
+        "bytes": 40668,
+        "sha256": "b7d58288a4f475c40a70ddad43b3cfb7a6f4d5f92ffd20c26b5749c1c4511454"
+      },
+      {
+        "asset": "/images/photography/home-perspectives-1000.webp",
+        "width": 1000,
+        "height": 1499,
+        "bytes": 79762,
+        "sha256": "46eca64392fa0dd5cb117477dbcb8b34976874806cd9886e634a4230e048e62a"
+      },
+      {
+        "asset": "/images/photography/home-perspectives-1600.webp",
+        "width": 1600,
+        "height": 2399,
+        "bytes": 166104,
+        "sha256": "e6d6c88eaa568c39280c8a3ebf16df2ed442d2437e6a0022a196ad5101eb0c87"
+      }
+    ],
+    "usage": "English and French homepages"
   }
 ]
