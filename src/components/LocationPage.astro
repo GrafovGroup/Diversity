@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import CallToAction from './CallToAction.astro';
 import LocalServices from './LocalServices.astro';
+import artworkDescriptions from '../data/location-art.json';
 import { cityPath, regionCities, delivery, type City } from '../data/locations';
 import type { Region } from '../data/regions';
 import { services } from '../data/services';
@@ -13,8 +14,16 @@ interface Props {
 }
 const { locale, region, city } = Astro.props;
 const en = locale === 'en';
-const name = city?.slug === 'quebec-city' && !en ? 'Ville de Québec' : city?.name[locale] ?? region.name[locale];
+const name =
+  city?.slug === 'quebec-city' && !en
+    ? 'Ville de Québec'
+    : (city?.name[locale] ?? region.name[locale]);
 const path = city ? cityPath(city) : `canada/${region.slug}`;
+const placeSlug = city?.slug ?? region.slug;
+const descriptions: Record<string, { en: string; fr: string }> =
+  artworkDescriptions;
+const artAlt = descriptions[placeSlug][locale];
+const artwork = `/images/locations/${placeSlug}`;
 const title = en
   ? `DEI, accessibility & training — ${name}`
   : `EDI, accessibilité et formation — ${name}`;
@@ -99,6 +108,7 @@ const faqs = [
   path={path}
   breadcrumbs={breadcrumbs}
   structuredData={structuredData}
+  socialImage={{ src: `${artwork}.webp`, alt: artAlt }}
 >
   <section class="page-hero">
     <div class="container">
@@ -142,46 +152,38 @@ const faqs = [
               >{en ? 'Explore all services' : 'Explorer les services'}</a
             >
           </div>
-        </div><aside
-          class="location-summary"
-          aria-label={en ? 'Project overview' : 'Aperçu du projet'}
-        >
-          <h2>
-            {en ? 'A practical starting point.' : 'Un point de départ concret.'}
-          </h2><p>
-            {
-              en
-                ? 'For businesses, public agencies, educational institutions and nonprofit organizations.'
-                : 'Pour les entreprises, les organismes publics, les établissements d’enseignement et les organismes sans but lucratif.'
-            }
-          </p><ul>
-            <li>
-              {
-                en
-                  ? 'A focused scope and clear deliverables'
-                  : 'Un mandat ciblé et des livrables clairs'
-              }
-            </li><li>
-              {
-                en
-                  ? 'English and French, as agreed'
-                  : 'Français et anglais, selon le mandat'
-              }
-            </li><li>
-              {
-                en
-                  ? 'Remote and on-site arrangements confirmed in your proposal'
-                  : 'Modalités à distance et sur place confirmées dans la proposition'
-              }
-            </li>
-          </ul><a href={`/${locale}/procurement/`}
-            >{
-              en
-                ? 'Planning a public-sector procurement?'
-                : 'Vous préparez un achat public?'
-            }</a
-          >
-        </aside>
+        </div><figure class="location-art">
+          <img
+            src={`${artwork}.webp`}
+            srcset={`${artwork}-small.webp 420w, ${artwork}.webp 840w`}
+            sizes="(max-width: 1050px) calc(100vw - 32px), (min-width: 1900px) 840px, 45vw"
+            width="840"
+            height="560"
+            alt={artAlt}
+            fetchpriority="high"
+          />
+          <figcaption>
+            <span class="location-art-place">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                aria-hidden="true"
+                ><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"
+                ></path><circle cx="12" cy="10" r="2.5"></circle></svg
+              >
+              {city ? `${name}, ${region.name[locale]}` : `${name}, Canada`}
+            </span>
+            <span
+              >{
+                en ? 'Illustrated location guide' : 'Guide local illustré'
+              }</span
+            >
+          </figcaption>
+        </figure>
       </div><nav
         class="location-jumps"
         aria-label={en ? 'On this page' : 'Sur cette page'}
@@ -245,7 +247,48 @@ const faqs = [
           }
         </dd>
       </div>
-    </dl>{
+    </dl>
+    <aside
+      class="location-summary"
+      aria-label={en ? 'Project overview' : 'Aperçu du projet'}
+    >
+      <h2>
+        {en ? 'A practical starting point.' : 'Un point de départ concret.'}
+      </h2><p>
+        {
+          en
+            ? 'For businesses, public agencies, educational institutions and nonprofit organizations.'
+            : 'Pour les entreprises, les organismes publics, les établissements d’enseignement et les organismes sans but lucratif.'
+        }
+      </p><ul>
+        <li>
+          {
+            en
+              ? 'A focused scope and clear deliverables'
+              : 'Un mandat ciblé et des livrables clairs'
+          }
+        </li><li>
+          {
+            en
+              ? 'English and French, as agreed'
+              : 'Français et anglais, selon le mandat'
+          }
+        </li><li>
+          {
+            en
+              ? 'Remote and on-site arrangements confirmed in your proposal'
+              : 'Modalités à distance et sur place confirmées dans la proposition'
+          }
+        </li>
+      </ul><a href={`/${locale}/procurement/`}
+        >{
+          en
+            ? 'Planning a public-sector procurement?'
+            : 'Vous préparez un achat public?'
+        }</a
+      >
+    </aside>
+    {
       city && (
         <p class="location-source">
           {en

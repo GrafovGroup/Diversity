@@ -1,0 +1,262 @@
+{
+  "barrie": {
+    "en": "The Barrie waterfront along Kempenfelt Bay.",
+    "fr": "Le secteur riverain de Barrie, au bord de la baie Kempenfelt."
+  },
+  "brampton": {
+    "en": "Brick buildings and a public square in downtown Brampton.",
+    "fr": "Des bâtiments de brique et une place publique au centre-ville de Brampton."
+  },
+  "brandon": {
+    "en": "Historic downtown Brandon under a prairie sky.",
+    "fr": "Le centre-ville historique de Brandon sous un ciel des Prairies."
+  },
+  "burnaby": {
+    "en": "Burnaby’s towers beyond Deer Lake.",
+    "fr": "Les tours de Burnaby au-delà du lac Deer."
+  },
+  "calgary": {
+    "en": "The Bow River and Calgary’s downtown skyline.",
+    "fr": "La rivière Bow et les tours du centre-ville de Calgary."
+  },
+  "charlottetown": {
+    "en": "Charlottetown’s harbour and church spires.",
+    "fr": "Le port et les clochers de Charlottetown."
+  },
+  "edmonton": {
+    "en": "A bridge over the North Saskatchewan River in Edmonton.",
+    "fr": "Un pont au-dessus de la rivière Saskatchewan Nord à Edmonton."
+  },
+  "fort-mcmurray": {
+    "en": "The river valley and boreal forest at Fort McMurray.",
+    "fr": "La vallée fluviale et la forêt boréale à Fort McMurray."
+  },
+  "fredericton": {
+    "en": "The riverside and pedestrian bridge in Fredericton.",
+    "fr": "Les berges et le pont piétonnier de Fredericton."
+  },
+  "gatineau": {
+    "en": "Gatineau’s curving riverfront museum on the Ottawa River.",
+    "fr": "Les formes arrondies du musée de Gatineau au bord de la rivière des Outaouais."
+  },
+  "greater-sudbury": {
+    "en": "The Big Nickel above the rocky landscape of Greater Sudbury.",
+    "fr": "Le Big Nickel sur le relief rocheux du Grand Sudbury."
+  },
+  "halifax": {
+    "en": "The waterfront boardwalk and harbour in Halifax.",
+    "fr": "La promenade riveraine et le port d’Halifax."
+  },
+  "hamilton": {
+    "en": "Hamilton and its harbour below the Niagara Escarpment.",
+    "fr": "Hamilton et son port au pied de l’escarpement du Niagara."
+  },
+  "iqaluit": {
+    "en": "Colourful buildings and tundra along Frobisher Bay in Iqaluit.",
+    "fr": "Des bâtiments colorés et la toundra au bord de la baie Frobisher à Iqaluit."
+  },
+  "kamloops": {
+    "en": "The Thompson river valley and grassland hills around Kamloops.",
+    "fr": "La vallée de la Thompson et les collines herbeuses autour de Kamloops."
+  },
+  "kelowna": {
+    "en": "Kelowna’s lakeshore on Okanagan Lake.",
+    "fr": "Le secteur riverain de Kelowna au bord du lac Okanagan."
+  },
+  "kingston": {
+    "en": "Kingston’s limestone city hall and harbour.",
+    "fr": "L’hôtel de ville en pierre calcaire et le port de Kingston."
+  },
+  "kitchener-waterloo": {
+    "en": "The clock tower in Kitchener’s Victoria Park.",
+    "fr": "La tour de l’horloge du parc Victoria à Kitchener."
+  },
+  "laval": {
+    "en": "A river and wooded shoreline in Laval.",
+    "fr": "Une rivière et une berge boisée à Laval."
+  },
+  "lethbridge": {
+    "en": "The railway viaduct above the Oldman River in Lethbridge.",
+    "fr": "Le viaduc ferroviaire au-dessus de la rivière Oldman à Lethbridge."
+  },
+  "london": {
+    "en": "The Thames River and downtown London, Ontario.",
+    "fr": "La rivière Thames et le centre-ville de London, en Ontario."
+  },
+  "longueuil": {
+    "en": "A streetscape in Vieux-Longueuil.",
+    "fr": "Une rue du Vieux-Longueuil."
+  },
+  "markham": {
+    "en": "Historic storefronts in Unionville, Markham.",
+    "fr": "Des façades historiques à Unionville, dans la ville de Markham."
+  },
+  "mississauga": {
+    "en": "The curved towers of Mississauga’s skyline.",
+    "fr": "Les tours aux formes courbes de Mississauga."
+  },
+  "moncton": {
+    "en": "The tidal Petitcodiac River and Moncton waterfront.",
+    "fr": "La rivière Petitcodiac et les berges de Moncton."
+  },
+  "montreal": {
+    "en": "Montréal’s skyline seen from Mount Royal.",
+    "fr": "Le panorama de Montréal depuis le mont Royal."
+  },
+  "nanaimo": {
+    "en": "Nanaimo’s harbour and moored boats.",
+    "fr": "Le port de Nanaimo et ses bateaux amarrés."
+  },
+  "oshawa": {
+    "en": "Historic brick architecture in downtown Oshawa.",
+    "fr": "L’architecture de brique du centre-ville d’Oshawa."
+  },
+  "ottawa": {
+    "en": "Parliament Hill above the Ottawa River.",
+    "fr": "La colline du Parlement au-dessus de la rivière des Outaouais."
+  },
+  "prince-george": {
+    "en": "Rivers and forest around Prince George.",
+    "fr": "Les rivières et les forêts qui entourent Prince George."
+  },
+  "quebec-city": {
+    "en": "Old Québec overlooking the St. Lawrence River.",
+    "fr": "Le Vieux-Québec surplombant le fleuve Saint-Laurent."
+  },
+  "red-deer": {
+    "en": "A river crossing and wooded banks in Red Deer.",
+    "fr": "Un pont et des berges boisées à Red Deer."
+  },
+  "regina": {
+    "en": "Wascana Lake and the legislature in Regina.",
+    "fr": "Le lac Wascana et l’édifice de l’Assemblée législative à Regina."
+  },
+  "richmond-bc": {
+    "en": "The fishing wharf in Steveston, Richmond.",
+    "fr": "Le quai de pêche de Steveston, à Richmond."
+  },
+  "richmond-hill": {
+    "en": "The observatory dome and grounds in Richmond Hill.",
+    "fr": "Le dôme de l’observatoire et son terrain à Richmond Hill."
+  },
+  "saguenay": {
+    "en": "Chicoutimi on the Saguenay River.",
+    "fr": "Chicoutimi au bord de la rivière Saguenay."
+  },
+  "saint-john": {
+    "en": "The historic waterfront of Saint John, New Brunswick.",
+    "fr": "Le front de mer historique de Saint John, au Nouveau-Brunswick."
+  },
+  "saskatoon": {
+    "en": "Saskatoon’s bridges and riverfront skyline.",
+    "fr": "Les ponts et le secteur riverain de Saskatoon."
+  },
+  "sherbrooke": {
+    "en": "The Magog River and brick buildings in Sherbrooke.",
+    "fr": "La rivière Magog et des bâtiments de brique à Sherbrooke."
+  },
+  "st-johns": {
+    "en": "Colourful houses above the harbour in St. John’s.",
+    "fr": "Des maisons colorées surplombant le port de St. John’s."
+  },
+  "surrey": {
+    "en": "The elevated rail line and city centre in Surrey.",
+    "fr": "La voie ferrée surélevée et le centre-ville de Surrey."
+  },
+  "sydney": {
+    "en": "Sydney’s waterfront and giant fiddle.",
+    "fr": "Le front de mer de Sydney et son violon géant."
+  },
+  "thunder-bay": {
+    "en": "Thunder Bay’s waterfront on Lake Superior.",
+    "fr": "Le secteur riverain de Thunder Bay au bord du lac Supérieur."
+  },
+  "toronto": {
+    "en": "The CN Tower and Toronto skyline across Lake Ontario.",
+    "fr": "La tour CN et les immeubles de Toronto au-delà du lac Ontario."
+  },
+  "trois-rivieres": {
+    "en": "The waterfront in Trois-Rivières.",
+    "fr": "Le secteur riverain de Trois-Rivières."
+  },
+  "vancouver": {
+    "en": "Vancouver’s skyline, False Creek and the North Shore mountains.",
+    "fr": "Les tours de Vancouver, False Creek et les montagnes de la rive nord."
+  },
+  "vaughan": {
+    "en": "The transit plaza and towers of Vaughan Metropolitan Centre.",
+    "fr": "La place de la station et les tours du centre métropolitain de Vaughan."
+  },
+  "victoria": {
+    "en": "The Inner Harbour and legislative buildings in Victoria.",
+    "fr": "Le port intérieur et les édifices du Parlement à Victoria."
+  },
+  "whitehorse": {
+    "en": "A paddlewheeler on the Whitehorse waterfront.",
+    "fr": "Un bateau à aubes au bord du fleuve Yukon à Whitehorse."
+  },
+  "windsor": {
+    "en": "The Ambassador Bridge and Windsor’s riverfront.",
+    "fr": "Le pont Ambassador et les berges de Windsor."
+  },
+  "winnipeg": {
+    "en": "The riverfront at The Forks in Winnipeg.",
+    "fr": "Les berges à La Fourche, à Winnipeg."
+  },
+  "yellowknife": {
+    "en": "Yellowknife’s Old Town on Great Slave Lake.",
+    "fr": "La vieille ville de Yellowknife au bord du Grand lac des Esclaves."
+  },
+  "british-columbia": {
+    "en": "A coastal inlet and forested mountains in British Columbia.",
+    "fr": "Un bras de mer et des montagnes boisées de la Colombie-Britannique."
+  },
+  "alberta": {
+    "en": "Rocky Mountain peaks above an Alberta lake.",
+    "fr": "Des sommets des Rocheuses au-dessus d’un lac albertain."
+  },
+  "saskatchewan": {
+    "en": "Prairie fields and a grain elevator in Saskatchewan.",
+    "fr": "Des champs des Prairies et un silo à grains en Saskatchewan."
+  },
+  "manitoba": {
+    "en": "A waterway through Manitoba’s wooded parkland.",
+    "fr": "Un cours d’eau traversant une prairie boisée du Manitoba."
+  },
+  "ontario": {
+    "en": "White pines and granite islands on an Ontario lake.",
+    "fr": "Des pins blancs et des îles de granit sur un lac de l’Ontario."
+  },
+  "quebec": {
+    "en": "The St. Lawrence and the hills of Charlevoix, Quebec.",
+    "fr": "Le Saint-Laurent et les collines de Charlevoix, au Québec."
+  },
+  "new-brunswick": {
+    "en": "The tide-carved shore at Hopewell Rocks in New Brunswick.",
+    "fr": "Le rivage sculpté par les marées aux rochers Hopewell, au Nouveau-Brunswick."
+  },
+  "nova-scotia": {
+    "en": "Peggy’s Cove lighthouse on Nova Scotia’s granite coast.",
+    "fr": "Le phare de Peggy’s Cove sur la côte granitique de la Nouvelle-Écosse."
+  },
+  "prince-edward-island": {
+    "en": "Red cliffs and rolling fields on Prince Edward Island.",
+    "fr": "Des falaises rouges et des champs vallonnés à l’Île-du-Prince-Édouard."
+  },
+  "newfoundland-and-labrador": {
+    "en": "A fishing outport on Newfoundland’s rocky coast.",
+    "fr": "Un village de pêche sur la côte rocheuse de Terre-Neuve."
+  },
+  "yukon": {
+    "en": "A winding river and mountains in Yukon.",
+    "fr": "Une rivière sinueuse entre les montagnes du Yukon."
+  },
+  "northwest-territories": {
+    "en": "The Nahanni River in a canyon in the Northwest Territories.",
+    "fr": "La rivière Nahanni dans un canyon des Territoires du Nord-Ouest."
+  },
+  "nunavut": {
+    "en": "A glacier and fjord on Baffin Island, Nunavut.",
+    "fr": "Un glacier et un fjord sur l’île de Baffin, au Nunavut."
+  }
+}

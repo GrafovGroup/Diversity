@@ -8,6 +8,7 @@ interface Props {
   title: string;
   description: string;
   path?: string;
+  socialImage?: { src: string; alt: string };
   structuredData?: Record<string, unknown>[];
   breadcrumbs?: { name: string; path: string }[];
 }
@@ -16,6 +17,7 @@ const {
   title,
   description,
   path = '',
+  socialImage,
   structuredData = [],
   breadcrumbs = [],
 } = Astro.props;
@@ -110,13 +112,17 @@ const schema = {
     <meta property="og:locale" content={en ? 'en_CA' : 'fr_CA'} />
     <meta
       property="og:image"
-      content="https://diversity.ca/images/social-card.png"
+      content={new URL(
+        socialImage?.src ?? '/images/social-card.png',
+        Astro.site,
+      )}
     />
     <meta
       property="og:image:alt"
-      content={en
-        ? 'Diversity.ca — People, opportunity, progress'
-        : 'Diversity.ca — Gens, opportunités, progrès'}
+      content={socialImage?.alt ??
+        (en
+          ? 'Diversity.ca — People, opportunity, progress'
+          : 'Diversity.ca — Gens, opportunités, progrès')}
     />
     <meta name="twitter:card" content="summary_large_image" />
     <script
