@@ -1,5 +1,6 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import BidDesk from './BidDesk.astro';
 import PageImage from './PageImage.astro';
 import CallToAction from './CallToAction.astro';
 import SolutionsTeaser from './SolutionsTeaser.astro';
@@ -36,11 +37,31 @@ const legal = ['privacy', 'accessibility-statement'].includes(page.slug);
               </a>
             )
           }
+          {
+            page.slug === 'procurement' && (
+              <a class="text-link bid-alt-link" href="#bid-partnership">
+                {en
+                  ? 'Discuss a bid partnership'
+                  : 'Discuter d’un partenariat de soumission'}
+              </a>
+            )
+          }
+          {
+            page.slug === 'government' && (
+              <a
+                class="text-link bid-alt-link"
+                href={`/${locale}/procurement/`}
+              >
+                {en ? 'Bids & tenders' : 'Appels d’offres'}
+              </a>
+            )
+          }
         </div>
         <PageImage path={page.slug} locale={locale} />
       </div>
     </div>
   </section>
+  {page.slug === 'procurement' && <BidDesk locale={locale} />}
   <section class="section container content-grid">
     <aside class="side-nav" aria-label={en ? 'On this page' : 'Sur cette page'}>
       <h2>{en ? 'In this section' : 'Dans cette section'}</h2>{
@@ -89,3 +110,9 @@ const legal = ['privacy', 'accessibility-statement'].includes(page.slug);
   }
   {!legal && <CallToAction locale={locale} />}
 </SiteLayout>
+
+<style>
+  .bid-alt-link {
+    margin: 0.75rem 0.8rem;
+  }
+</style>

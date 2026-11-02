@@ -1,10 +1,10 @@
 ---
 import {
-  validateFormEndpoint,
   isServiceAllowed,
   type FormLocale,
   type EnquiryKind,
 } from '../lib/forms';
+import { formEndpoint as endpoint } from '../lib/form-endpoint';
 import { enquiryGroups, serviceOptions } from '../data/enquiry-fields';
 
 interface Props {
@@ -13,11 +13,6 @@ interface Props {
 }
 const { locale, kind = 'contact' } = Astro.props;
 const fr = locale === 'fr';
-// Keep the owner's approved public form URL in source so deployment imports
-// cannot silently lose direct delivery when build-time settings are absent.
-const endpoint = validateFormEndpoint(
-  import.meta.env.PUBLIC_FORM_ENDPOINT ?? 'https://formspree.io/f/xaeepeno',
-);
 const id = `enquiry-${kind}`;
 const words = fr
   ? {
@@ -477,7 +472,8 @@ const initialGroup = kind === 'contact' ? null : kind;
     <p class="success-copy">{words.successBody}</p>
     <p class="success-help">
       {words.successHelp}<br /><a href="mailto:info@diversity.ca"
-        >info@diversity.ca</a>
+        >info@diversity.ca</a
+      >
     </p>
     <button type="button" class="form-primary" data-new-enquiry
       >{words.another}</button
@@ -488,13 +484,13 @@ const initialGroup = kind === 'contact' ? null : kind;
 <script>
   import { resolveLocationContext } from '../lib/location-context';
   import {
+    validateFormEndpoint,
     createEnquiryRecord,
     createEnquiryMailto,
     createEnquiryPayload,
     resolveEnquiryContext,
     getEnquiryGroup,
     isServiceAllowed,
-    validateFormEndpoint,
     type FormLocale,
     type EnquiryKind,
   } from '../lib/forms';

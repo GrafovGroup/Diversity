@@ -1,0 +1,226 @@
+---
+import BidForm from './BidForm.astro';
+import { tenders } from '../data/tenders';
+interface Props {
+  locale: 'en' | 'fr';
+}
+const { locale } = Astro.props;
+const en = locale === 'en';
+const language = en ? 'en-CA' : 'fr-CA';
+const ordered = [...tenders].sort(
+  (a, b) => Date.parse(a.closes) - Date.parse(b.closes),
+);
+---
+
+<section
+  class="bid-desk container"
+  aria-label={en
+    ? 'Bid enquiries and tender notices'
+    : 'Demandes et avis d’appel d’offres'}
+>
+  <section class="intake-column">
+    <p class="eyebrow">
+      {en ? 'Work with Diversity.ca' : 'Travailler avec Diversity.ca'}
+    </p>
+    <h2>{en ? 'Have a contract in mind?' : 'Un mandat à proposer?'}</h2>
+    <p class="intro">
+      {
+        en
+          ? 'Choose the option that matches your role. We’ll use your scope and deadline to assess the opportunity.'
+          : 'Choisissez l’option qui correspond à votre rôle. Le mandat et l’échéance nous aideront à évaluer la demande.'
+      }
+    </p>
+    <BidForm locale={locale} />
+    <BidForm locale={locale} partner />
+  </section>
+  <section
+    class="notice-column"
+    data-tenders
+    id="tender-notices"
+    aria-labelledby="notices-title"
+  >
+    <p class="eyebrow">{en ? 'Public notices' : 'Avis publics'}</p>
+    <h2 id="notices-title">
+      {en ? 'Selected Canadian tenders' : 'Appels d’offres au Canada'}
+    </h2>
+    <p class="intro">
+      {
+        en
+          ? 'Consult the buyer’s notice for amendments, eligibility and submission instructions.'
+          : 'Consultez l’avis de l’acheteur pour les addendas, les conditions d’admissibilité et les modalités de dépôt.'
+      }
+    </p>
+    <div data-current>
+      {
+        ordered.map((tender) => (
+          <article class="notice" data-closes={tender.closes}>
+            <p class="category">
+              {tender.region[locale]} · {tender.category[locale]}
+            </p>
+            <h3>{tender.title[locale]}</h3>
+            <p class="notice-buyer">{tender.buyer[locale]}</p>
+            <p>{tender.scope[locale]}</p>
+            <dl>
+              <div>
+                <>
+                  <dt>{en ? 'Reference' : 'Référence'}</dt>
+                  <dd>{tender.reference}</dd>
+                </>
+              </div>
+              <div>
+                <>
+                  <dt>{en ? 'Closing deadline' : 'Date limite'}</dt>
+                  <dd>
+                    <time datetime={tender.closes}>
+                      {new Intl.DateTimeFormat(language, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: '2-digit',
+                        timeZoneName: 'short',
+                        timeZone: tender.zone,
+                      }).format(new Date(tender.closes))}
+                    </time>
+                  </dd>
+                </>
+              </div>
+              <div>
+                <>
+                  <dt>{en ? 'Last verified' : 'Dernière vérification'}</dt>
+                  <dd>
+                    <time datetime={tender.verified}>
+                      {new Intl.DateTimeFormat(language, {
+                        dateStyle: 'long',
+                        timeZone: 'UTC',
+                      }).format(new Date(tender.verified))}
+                    </time>
+                  </dd>
+                </>
+              </div>
+            </dl>
+            <a class="text-link" href={tender.source[locale]}>
+              {en
+                ? 'View notice on CanadaBuys'
+                : 'Consulter l’avis sur AchatsCanada'}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+    <p hidden data-empty>
+      {
+        en
+          ? 'There are currently no open notices on this shortlist.'
+          : 'Aucun avis ouvert ne figure actuellement dans cette sélection.'
+      }
+    </p>
+    <details hidden data-archive>
+      <summary>{en ? 'Closed tenders' : 'Appels d’offres clos'}</summary><div
+        data-closed
+      >
+      </div>
+    </details>
+  </section>
+</section>
+<script>
+  import { updateTenderArchive } from '../lib/tender-archive';
+  const desk = document.querySelector<HTMLElement>('[data-tenders]');
+  if (desk) {
+    let timer: number;
+    const refresh = () => {
+      window.clearTimeout(timer);
+      const delay = updateTenderArchive(desk, Date.now());
+      if (delay !== null)
+        timer = window.setTimeout(refresh, Math.min(delay, 86400000));
+    };
+    refresh();
+    window.addEventListener('pageshow', refresh);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) refresh();
+    });
+  }
+</script>
+<style>
+  .bid-desk {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    padding-block: clamp(3rem, 7vw, 6.5rem);
+    border-bottom: 1px solid var(--line);
+  }
+  .bid-desk h2 {
+    font-size: clamp(1.8rem, 3.2vw, 3rem);
+    line-height: 1.06;
+    letter-spacing: -0.045em;
+    margin: 0 0 1rem;
+  }
+  .bid-desk .eyebrow {
+    margin-bottom: 0.8rem;
+    color: #485470;
+  }
+  .intro,
+  .notice p {
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .intro {
+    margin: 0 0 1.4rem;
+  }
+  .notice {
+    background: #f0f4fb;
+    border: 1px solid #dce4f1;
+    border-radius: 12px;
+    padding: clamp(1.2rem, 2.5vw, 2.3rem);
+  }
+  .notice + .notice {
+    margin-top: 1rem;
+  }
+  .notice .category {
+    font-size: 0.79rem;
+    font-weight: 650;
+    color: #354d80;
+    margin: 0 0 0.85rem;
+  }
+  .notice h3 {
+    font-size: clamp(1.35rem, 2vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin: 0 0 0.45rem;
+  }
+  .notice .notice-buyer {
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .notice dl {
+    margin: 1rem 0 1.3rem;
+    font-size: 0.86rem;
+  }
+  .notice dl div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 0.7rem;
+    border-bottom: 1px solid #d1dbea;
+    padding: 0.54rem 0;
+  }
+  .notice dt {
+    font-weight: 600;
+  }
+  .notice dd {
+    margin: 0;
+  }
+  [data-archive] {
+    margin: 1rem 0;
+  }
+  [data-archive] summary {
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  @media (max-width: 900px) {
+    .bid-desk {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -325,16 +325,16 @@ export const pages: ContentPage[] = [
   {
     slug: 'procurement',
     eyebrow: {
-      en: 'PUBLIC SECTOR PROCUREMENT',
-      fr: 'APPROVISIONNEMENT DU SECTEUR PUBLIC',
+      en: 'PROCUREMENT',
+      fr: 'APPROVISIONNEMENT',
     },
     title: {
-      en: 'A clear scope. An informed procurement.',
-      fr: 'Un mandat clair. Un approvisionnement éclairé.',
+      en: 'Bids & tenders',
+      fr: 'Appels d’offres',
     },
     intro: {
-      en: 'Use this service overview to start a procurement conversation. A bid-specific proposal should confirm the team, qualifications, delivery model, commercial terms and mandatory requirements for your opportunity.',
-      fr: 'Utilisez cet aperçu des services pour amorcer une discussion d’approvisionnement. Une proposition propre à l’appel d’offres doit confirmer l’équipe, les qualifications, le mode de prestation, les conditions commerciales et les exigences obligatoires.',
+      en: 'Invite Diversity.ca to bid on an inclusion, accessibility or training contract. If you’re preparing a proposal, tell us which part you’d like a partner to deliver.',
+      fr: 'Invitez Diversity.ca à soumissionner pour un mandat en inclusion, en accessibilité ou en formation. Si vous préparez une soumission, précisez le volet que vous souhaitez confier à un partenaire.',
     },
     sections: [
       {
@@ -408,10 +408,10 @@ export const pages: ContentPage[] = [
     ],
     cta: {
       label: {
-        en: 'REQUEST A SCOPED PROPOSAL',
-        fr: 'DEMANDER UNE PROPOSITION CIBLÉE',
+        en: 'INVITE DIVERSITY.CA TO BID',
+        fr: 'INVITER DIVERSITY.CA À SOUMISSIONNER',
       },
-      path: '/request-proposal/',
+      path: '/procurement/#bid-invitation',
     },
   },
   {

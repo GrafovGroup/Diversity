@@ -9,7 +9,9 @@ export const GET: APIRoute = () => {
         // Actual editorial update date, not the build date. Update when these pages change.
         const lastmod =
           path === '' ||
-          path === 'services' ||
+          ['services', 'procurement', 'government', 'insights'].includes(
+            path,
+          ) ||
           path.startsWith('canada/') ||
           path in servicePhotography
             ? '<lastmod>2026-11-02</lastmod>'
