@@ -8,14 +8,12 @@ export const GET: APIRoute = () => {
         const suffix = path ? `${path}/` : '';
         // Actual editorial update date, not the build date. Update when these pages change.
         const lastmod =
-          path === '' || path in servicePhotography
+          path === '' || path === 'services' || path in servicePhotography
             ? '<lastmod>2026-11-02</lastmod>'
-            : path === '' ||
-                path === 'solutions' ||
+            : path === 'solutions' ||
                 path.startsWith('solutions/') ||
                 path === 'canada' ||
                 path.startsWith('canada/') ||
-                path === 'services' ||
                 path.startsWith('services/')
               ? '<lastmod>2026-11-01</lastmod>'
               : '';

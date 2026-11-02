@@ -11,19 +11,6 @@
   animation: none;
   transition: none;
 }
-.service-photo-card {
-  transition: none;
-}
-.service-photo-card > img.service-photograph {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 24px;
-  animation: none;
-  transition: none;
-}
 @media (max-width: 1000px) {
   .page-hero-split:has(> .service-photograph) {
     grid-template-columns: minmax(0, 1fr);

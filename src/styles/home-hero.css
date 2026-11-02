@@ -294,15 +294,24 @@ html[lang='fr-CA'] .hero-copy h1 {
 .home-service:hover .home-service-copy h2 {
   color: #6c28ba;
 }
-.home-service .home-service-photo {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  animation: none;
-  transition: none;
+.home-service-icon {
+  width: 45px;
+  height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  background: #eef4ff;
+  color: #2167ff;
+}
+.home-service--purple .home-service-icon {
+  background: #f1e6ff;
+  color: #9527e8;
+}
+.home-service--pink .home-service-icon {
+  background: #fbe5f5;
+  color: #d924b1;
 }
 .home-service h2 {
   font-size: clamp(0.68rem, 0.87vw, 0.87rem);
@@ -522,7 +531,7 @@ html[lang='fr-CA'] .hero-copy h1 {
   .home-service,
   .home-service:first-child {
     display: grid;
-    grid-template-columns: 88px minmax(0, 1fr) 20px;
+    grid-template-columns: 44px minmax(0, 1fr) 20px;
     align-items: center;
     gap: 13px;
     padding: 20px 0;
@@ -532,12 +541,10 @@ html[lang='fr-CA'] .hero-copy h1 {
   .home-service:last-child {
     border: 0;
   }
-  .home-service .home-service-photo {
-    width: 88px;
-    height: 78px;
-    aspect-ratio: auto;
+  .home-service-icon {
+    width: 42px;
+    height: 42px;
     margin: 0;
-    border-radius: 8px;
   }
   .home-service h2 {
     font-size: 0.7rem;

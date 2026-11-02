@@ -151,19 +151,4 @@ export const servicePhotography: Record<string, PageVisual> = {
       fr: 'Des participants prennent des notes lors d’une discussion autour d’une table.',
     },
   },
-  services: {
-    src: '/images/services/dei-1440.webp',
-    width: 1440,
-    height: 810,
-    fit: 'cover',
-    objectPosition: '50% 50%',
-    srcset:
-      '/images/services/dei-480.webp 480w, /images/services/dei-960.webp 960w, /images/services/dei-1440.webp 1440w',
-    sizes:
-      '(max-width: 1000px) calc(100vw - 32px), (min-width: 1920px) 850px, 46vw',
-    alt: {
-      en: 'Colleagues exchanging ideas in a bright shared office.',
-      fr: 'Des collègues échangent des idées dans un bureau lumineux.',
-    },
-  },
 };
