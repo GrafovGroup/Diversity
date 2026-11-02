@@ -76,6 +76,8 @@ async function completeEnquiry(page: Page) {
   await form.locator('[name="name"]').fill('QA Reviewer');
   await form.locator('[name="email"]').fill('reviewer@example.org');
   await form.locator('[name="organization"]').fill('Example QA Organization');
+  const more = form.locator('.extra-details:not([open]) > summary');
+  if (await more.count()) await more.click();
   for (const field of ['audience', 'service', 'region']) {
     await form.locator(`[name="${field}"]`).selectOption({ index: 1 });
   }
@@ -126,6 +128,13 @@ test('enquiry records accept valid enquiries without a consent claim and reject 
     expect(
       JSON.parse(String(payload.get('enquiry_record'))),
     ).not.toHaveProperty('consent');
+  }
+  for (const key of ['audience', 'service', 'region']) data.delete(key);
+  for (const locale of ['en', 'fr'] as const) {
+    const minimal = createEnquiryRecord(data, locale, 'contact');
+    expect(minimal.serviceId).toBe('unsure');
+    expect(minimal.region).toBe('');
+    expect(createEnquiryPayload(minimal).get('locale')).toBe(locale);
   }
   data.set('_gotcha', 'automated submission');
   expect(() => createEnquiryRecord(data, 'en', 'proposal')).toThrow();

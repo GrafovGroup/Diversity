@@ -1,4 +1,5 @@
 ---
+import { searchTitles } from '../data/search-titles';
 import '../styles/global.css';
 import '../styles/service-photography.css';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -14,13 +15,14 @@ interface Props {
 }
 const {
   locale,
-  title,
+  title: pageTitle,
   description,
   path = '',
   socialImage,
   structuredData = [],
   breadcrumbs = [],
 } = Astro.props;
+const title = searchTitles[path]?.[locale] ?? pageTitle;
 const en = locale === 'en';
 const href = (p = '') =>
   `/${locale}/${p ? p.replace(/^\/+|\/+$/g, '') + '/' : ''}`;
@@ -138,6 +140,8 @@ const schema = {
     <main id="main" tabindex="-1"><slot /></main>
     <SiteFooter locale={locale} path={path} />
     <script>
+      import { landingPage } from '../lib/landing-page';
+      landingPage();
       import {
         resolveLocationContext,
         regionOptions,

@@ -1,9 +1,6 @@
 ---
 import '../styles/site-header.css';
 import Wordmark from './Wordmark.astro';
-import { services } from '../data/services';
-import { solutions } from '../data/solutions';
-import { articles } from '../data/pages';
 interface Props {
   locale: 'en' | 'fr';
   path?: string;
@@ -19,29 +16,6 @@ const navigation = [
   { path: 'solutions', label: en ? 'Products' : 'Produits' },
   { path: 'insights', label: en ? 'Resources' : 'Ressources' },
   { path: 'contact', label: 'Contact' },
-];
-const searchPages = [
-  { path: 'about', label: en ? 'About' : 'À propos' },
-  ...navigation,
-  ...services.flatMap((service) => [
-    { path: `services/${service.slug}`, label: service.title[locale] },
-    ...service.subservices.map((sub) => ({
-      path: `services/${service.slug}/${sub.slug}`,
-      label: sub.title[locale],
-    })),
-  ]),
-  ...solutions.map((solution) => ({
-    path: `solutions/${solution.slug}`,
-    label: solution.title[locale],
-  })),
-  ...articles.map((article) => ({
-    path: `insights/${article.slug}`,
-    label: article.title[locale],
-  })),
-  {
-    path: 'canada',
-    label: en ? 'Service areas across Canada' : 'Zones de service au Canada',
-  },
 ];
 ---
 
@@ -133,6 +107,8 @@ const searchPages = [
   id="site-search"
   class="option-search-dialog"
   aria-labelledby="site-search-title"
+  data-index={'/' + locale + '/search-index.json'}
+  data-locale={locale}
 >
   <div class="option-search-heading">
     <h2 id="site-search-title">
@@ -150,8 +126,8 @@ const searchPages = [
   <label for="site-search-input"
     >{
       en
-        ? 'Search services, products and resources'
-        : 'Rechercher des services, produits et ressources'
+        ? 'Search by service, city, or buyer need'
+        : 'Rechercher un service, une ville ou un besoin'
     }</label
   >
   <input
@@ -169,9 +145,10 @@ const searchPages = [
         : 'Aucune page correspondante. Essayez un autre mot ou contactez-nous.'
     }
   </p>
+  <p class="sr-only" role="status" data-search-status></p>
   <ul class="option-search-results">
     {
-      searchPages.map((page) => (
+      navigation.map((page) => (
         <li>
           <a href={href(page.path)}>{page.label}</a>
         </li>
@@ -210,11 +187,6 @@ const searchPages = [
   );
   const dialog = document.querySelector<HTMLDialogElement>('#site-search');
   const input = document.querySelector<HTMLInputElement>('#site-search-input');
-  const normalize = (text: string) =>
-    text
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase();
   opener?.addEventListener('click', () => {
     dialog?.showModal();
     input?.focus();
@@ -229,17 +201,6 @@ const searchPages = [
       dialog.close();
     }
   });
-  input?.addEventListener('input', () => {
-    const words = normalize(input.value).trim().split(/\s+/).filter(Boolean);
-    let matches = 0;
-    dialog
-      ?.querySelectorAll<HTMLLIElement>('.option-search-results li')
-      .forEach((item) => {
-        const text = normalize(item.textContent ?? '');
-        item.hidden = !words.every((word) => text.includes(word));
-        if (!item.hidden) matches++;
-      });
-    const empty = dialog?.querySelector<HTMLElement>('.option-search-empty');
-    if (empty) empty.hidden = matches > 0;
-  });
+  if (dialog && input) enableSearch(dialog, input);
+  import { enableSearch } from '../lib/site-search';
 </script>

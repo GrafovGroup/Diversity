@@ -28,9 +28,9 @@ const words = fr
       timeline: 'Échéancier souhaité',
       budget: 'Budget indicatif (CAD)',
       deadline: 'Date limite de l’appel d’offres',
-      message: 'Votre projet',
+      message: 'Que souhaitez-vous accomplir?',
       messageHelp:
-        'Décrivez vos objectifs, les lieux ou les équipes concernés et vos besoins d’accessibilité en au moins 20 caractères. Évitez tout renseignement personnel sensible.',
+        'Une phrase sur votre objectif suffit (au moins 20 caractères). Évitez les renseignements personnels sensibles.',
       select: 'Sélectionner une option',
       optional: 'facultatif',
       privacy: 'Lire l’avis de confidentialité',
@@ -65,9 +65,9 @@ const words = fr
       timeline: 'Preferred timeline',
       budget: 'Indicative budget (CAD)',
       deadline: 'Procurement deadline',
-      message: 'Your project',
+      message: 'What are you trying to do?',
       messageHelp:
-        'Use at least 20 characters to tell us about your objectives, the locations or teams involved, and any accessibility needs. Please leave out sensitive personal information.',
+        'A sentence about your goal is enough (20 characters minimum). Please leave out sensitive personal information.',
       select: 'Select an option',
       optional: 'optional',
       privacy: 'Read the privacy notice',
@@ -247,83 +247,13 @@ const initialGroup = kind === 'contact' ? null : kind;
             maxlength="160"
           />
         </div>
-        <div class="field">
-          <label for={`${id}-audience`}
-            >{words.audience} <span aria-hidden="true">*</span></label
-          ><select id={`${id}-audience`} name="audience" required
-            ><option value="">{words.select}</option>{
-              audiences.map((option) => (
-                <option value={option}>{option}</option>
-              ))
-            }</select
-          >
-        </div>
-        <div class="field">
-          <label for={`${id}-service`}
-            >{words.service} <span aria-hidden="true">*</span></label
-          ><select id={`${id}-service`} name="service" required
-            ><option value="">{words.select}</option>{
-              services.map((option) => (
-                <option
-                  value={option.id}
-                  selected={option.id === defaultService}
-                >
-                  {option.label[locale]}
-                </option>
-              ))
-            }</select
-          >
-        </div>
-        <div class="field">
-          <label for={`${id}-region`}
-            >{words.region} <span aria-hidden="true">*</span></label
-          ><select id={`${id}-region`} name="region" required
-            ><option value="">{words.select}</option>{
-              regions.map((option) => <option value={option}>{option}</option>)
-            }</select
-          >
-        </div>
-        <div class="field">
-          <label for={`${id}-timeline`}
-            >{words.timeline}
-            <span class="optional">({words.optional})</span></label
-          ><select id={`${id}-timeline`} name="timeline"
-            ><option value="">{words.select}</option>{
-              timelines.map((option) => (
-                <option value={option}>{option}</option>
-              ))
-            }</select
-          >
-        </div>
-        <div class="field">
-          <label for={`${id}-project-city`}
-            >{fr ? 'Ville ou collectivité' : 'City or community'}
-            <span class="optional">({words.optional})</span></label
-          >
-          <input
-            id={`${id}-project-city`}
-            name="project_city"
-            maxlength="120"
-            autocomplete="off"
-          />
-        </div>
-        <div class="field">
-          <label for={`${id}-budget`}
-            >{words.budget}
-            <span class="optional">({words.optional})</span></label
-          ><select id={`${id}-budget`} name="budget"
-            ><option value="">{words.select}</option>{
-              budgets.map((option) => <option value={option}>{option}</option>)
-            }</select
-          >
-        </div>
         <div class="field field-wide">
           <label for={`${id}-message`}
             >{words.message} <span aria-hidden="true">*</span></label
           ><textarea
             id={`${id}-message`}
             name="message"
-            rows="6"
+            rows="4"
             required
             minlength="20"
             maxlength="3000"
@@ -335,75 +265,160 @@ const initialGroup = kind === 'contact' ? null : kind;
           </p>
         </div>
       </div>
-      {
-        enquiryGroups.map((group) => (
-          <fieldset
-            class="tailored-fields"
-            data-enquiry-group={group.id}
-            hidden={group.id !== initialGroup}
-            disabled={group.id !== initialGroup}
-            aria-describedby={`${id}-${group.id}-intro`}
-          >
-            <legend>{group.title[locale]}</legend>
-            <p class="field-help group-intro" id={`${id}-${group.id}-intro`}>
-              {group.intro[locale]}
-            </p>
-            <div class="form-grid">
-              {group.fields.map((field) => (
-                <div class:list={['field', { 'field-wide': field.wide }]}>
-                  <label for={`${id}-${field.id}`}>
-                    {field.label[locale]}
-                    <span class="optional" data-optional-label={field.id}>
-                      ({words.optional})
-                    </span>
-                  </label>
-                  {field.type === 'select' ? (
-                    <select
-                      id={`${id}-${field.id}`}
-                      name={field.id}
-                      aria-describedby={
-                        field.help ? `${id}-${field.id}-help` : undefined
-                      }
-                    >
-                      <option value="">{words.select}</option>
-                      {field.options?.map((option) => (
-                        <option value={option.value}>
-                          {option.label[locale]}
-                        </option>
-                      ))}
-                    </select>
-                  ) : field.type === 'textarea' ? (
-                    <textarea
-                      id={`${id}-${field.id}`}
-                      name={field.id}
-                      rows="3"
-                      maxlength={field.maxLength}
-                      aria-describedby={
-                        field.help ? `${id}-${field.id}-help` : undefined
-                      }
-                    />
-                  ) : (
-                    <input
-                      id={`${id}-${field.id}`}
-                      name={field.id}
-                      type={field.type}
-                      maxlength={field.maxLength}
-                      aria-describedby={
-                        field.help ? `${id}-${field.id}-help` : undefined
-                      }
-                    />
-                  )}
-                  {field.help && (
-                    <p class="field-help" id={`${id}-${field.id}-help`}>
-                      {field.help[locale]}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </fieldset>
-        ))
-      }
+      <details class="extra-details" open={kind !== 'contact'}>
+        <summary
+          >{
+            fr
+              ? 'Ajouter des précisions sur le projet (facultatif)'
+              : 'Add project details (optional)'
+          }</summary
+        >
+        <div class="form-grid">
+          <div class="field">
+            <label for={`${id}-audience`}>{words.audience}</label><select
+              id={`${id}-audience`}
+              name="audience"
+              ><option value="">{words.select}</option>{
+                audiences.map((option) => (
+                  <option value={option}>{option}</option>
+                ))
+              }</select
+            >
+          </div>
+          <div class="field">
+            <label for={`${id}-service`}>{words.service}</label><select
+              id={`${id}-service`}
+              name="service"
+              ><option value="">{words.select}</option>{
+                services.map((option) => (
+                  <option
+                    value={option.id}
+                    selected={option.id === defaultService}
+                  >
+                    {option.label[locale]}
+                  </option>
+                ))
+              }</select
+            >
+          </div>
+          <div class="field">
+            <label for={`${id}-region`}>{words.region}</label><select
+              id={`${id}-region`}
+              name="region"
+              ><option value="">{words.select}</option>{
+                regions.map((option) => (
+                  <option value={option}>{option}</option>
+                ))
+              }</select
+            >
+          </div>
+          <div class="field">
+            <label for={`${id}-timeline`}
+              >{words.timeline}
+              <span class="optional">({words.optional})</span></label
+            ><select id={`${id}-timeline`} name="timeline"
+              ><option value="">{words.select}</option>{
+                timelines.map((option) => (
+                  <option value={option}>{option}</option>
+                ))
+              }</select
+            >
+          </div>
+          <div class="field">
+            <label for={`${id}-project-city`}
+              >{fr ? 'Ville ou collectivité' : 'City or community'}
+              <span class="optional">({words.optional})</span></label
+            >
+            <input
+              id={`${id}-project-city`}
+              name="project_city"
+              maxlength="120"
+              autocomplete="off"
+            />
+          </div>
+          <div class="field">
+            <label for={`${id}-budget`}
+              >{words.budget}
+              <span class="optional">({words.optional})</span></label
+            ><select id={`${id}-budget`} name="budget"
+              ><option value="">{words.select}</option>{
+                budgets.map((option) => (
+                  <option value={option}>{option}</option>
+                ))
+              }</select
+            >
+          </div>
+        </div>
+        {
+          enquiryGroups.map((group) => (
+            <fieldset
+              class="tailored-fields"
+              data-enquiry-group={group.id}
+              hidden={group.id !== initialGroup}
+              disabled={group.id !== initialGroup}
+              aria-describedby={`${id}-${group.id}-intro`}
+            >
+              <legend>{group.title[locale]}</legend>
+              <p class="field-help group-intro" id={`${id}-${group.id}-intro`}>
+                {group.intro[locale]}
+              </p>
+              <div class="form-grid">
+                {group.fields.map((field) => (
+                  <div class:list={['field', { 'field-wide': field.wide }]}>
+                    <label for={`${id}-${field.id}`}>
+                      {field.label[locale]}
+                      <span class="optional" data-optional-label={field.id}>
+                        ({words.optional})
+                      </span>
+                    </label>
+                    {field.type === 'select' ? (
+                      <select
+                        id={`${id}-${field.id}`}
+                        name={field.id}
+                        aria-describedby={
+                          field.help ? `${id}-${field.id}-help` : undefined
+                        }
+                      >
+                        <option value="">{words.select}</option>
+                        {field.options?.map((option) => (
+                          <option value={option.value}>
+                            {option.label[locale]}
+                          </option>
+                        ))}
+                      </select>
+                    ) : field.type === 'textarea' ? (
+                      <textarea
+                        id={`${id}-${field.id}`}
+                        name={field.id}
+                        rows="3"
+                        maxlength={field.maxLength}
+                        aria-describedby={
+                          field.help ? `${id}-${field.id}-help` : undefined
+                        }
+                      />
+                    ) : (
+                      <input
+                        id={`${id}-${field.id}`}
+                        name={field.id}
+                        type={field.type}
+                        maxlength={field.maxLength}
+                        aria-describedby={
+                          field.help ? `${id}-${field.id}-help` : undefined
+                        }
+                      />
+                    )}
+                    {field.help && (
+                      <p class="field-help" id={`${id}-${field.id}-help`}>
+                        {field.help[locale]}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </fieldset>
+          ))
+        }
+      </details>
       <div class="honey-field" aria-hidden="true">
         <label for={`${id}-website`}>Leave this field empty</label><input
           id={`${id}-website`}
@@ -482,6 +497,7 @@ const initialGroup = kind === 'contact' ? null : kind;
 </section>
 
 <script>
+  import { landingPage } from '../lib/landing-page';
   import { resolveLocationContext } from '../lib/location-context';
   import {
     validateFormEndpoint,
@@ -584,10 +600,16 @@ const initialGroup = kind === 'contact' ? null : kind;
       if (subservice.value) params.set('subservice', subservice.value);
       if (solution.value) params.set('solution', solution.value);
       const context = resolveEnquiryContext(params, locale);
-      contextNote.hidden = !context;
+      const place = [projectCity.value, region.value]
+        .filter(Boolean)
+        .join(', ');
+      contextNote.hidden = !context && !place;
       contextNote.textContent = context
         ? `${fr ? 'Votre demande concerne' : 'Your enquiry concerns'} : ${context.serviceLabel}${context.solutionLabel ? ' — ' + context.solutionLabel : context.subserviceLabel ? ' — ' + context.subserviceLabel : ''}`
         : '';
+      if (place)
+        contextNote.textContent +=
+          (contextNote.textContent ? ' · ' : '') + place;
     };
     const applyInitialContext = () => {
       service.value = initialService;
@@ -598,6 +620,16 @@ const initialGroup = kind === 'contact' ? null : kind;
       if (initialLocation) region.value = initialLocation.regionLabel;
       syncDetails();
     };
+    form.addEventListener(
+      'invalid',
+      (event) => {
+        if (event.target instanceof HTMLElement) {
+          const details = event.target.closest('details');
+          if (details) details.open = true;
+        }
+      },
+      true,
+    );
     const record = () => createEnquiryRecord(new FormData(form), locale, kind);
     applyInitialContext();
     submit.disabled = false;
@@ -622,9 +654,11 @@ const initialGroup = kind === 'contact' ? null : kind;
     });
     projectCity.addEventListener('input', () => {
       cityContext.value = '';
+      syncDetails();
     });
     region.addEventListener('change', () => {
       cityContext.value = '';
+      syncDetails();
     });
     closingTime.addEventListener('input', syncDetails);
     form.addEventListener('input', () => {
@@ -681,6 +715,7 @@ const initialGroup = kind === 'contact' ? null : kind;
           return;
         }
         const payload = createEnquiryPayload(enquiry);
+        payload.set('landing_page', landingPage());
         pending = true;
         submit.disabled = true;
         download.disabled = true;
@@ -746,6 +781,18 @@ const initialGroup = kind === 'contact' ? null : kind;
 </script>
 
 <style>
+  .extra-details {
+    margin: 1.4rem 0;
+    border-block: 1px solid var(--line);
+    padding-block: 0.85rem;
+  }
+  .extra-details summary {
+    cursor: pointer;
+    font-weight: 650;
+  }
+  .extra-details[open] > .form-grid {
+    margin-top: 1rem;
+  }
   .enquiry-panel {
     color: var(--ink, #14233f);
     padding: clamp(1.5rem, 4vw, 3.5rem);

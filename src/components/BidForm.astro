@@ -162,11 +162,13 @@ const scope = partner
       {en ? 'Prefer email?' : 'Vous préférez le courriel?'}
       <a
         href={`mailto:info@diversity.ca?subject=${encodeURIComponent(subject)}`}
-        >info@diversity.ca</a>
+        >info@diversity.ca</a
+      >
     </p>
   </div>
 </details>
 <script>
+  import { landingPage } from '../lib/landing-page';
   function openIntake() {
     const target = document.getElementById(location.hash.slice(1));
     if (
@@ -206,6 +208,7 @@ const scope = partner
         validateZone();
         if (!form.reportValidity()) return;
         const data = new FormData(form);
+        data.set('landing_page', landingPage());
         if (String(data.get('_gotcha') ?? '').trim()) return;
         button.disabled = true;
         form.setAttribute('aria-busy', 'true');

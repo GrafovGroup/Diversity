@@ -7,6 +7,7 @@ import { cityPath, regionCities, delivery, type City } from '../data/locations';
 import type { Region } from '../data/regions';
 import { services } from '../data/services';
 import '../styles/locations.css';
+import { cityScopes } from '../data/city-scopes';
 interface Props {
   locale: 'en' | 'fr';
   region: Region;
@@ -19,6 +20,7 @@ const name =
     ? 'Ville de Québec'
     : (city?.name[locale] ?? region.name[locale]);
 const path = city ? cityPath(city) : `canada/${region.slug}`;
+const scope = city && cityScopes[city.slug];
 const placeSlug = city?.slug ?? region.slug;
 const descriptions: Record<string, { en: string; fr: string }> =
   artworkDescriptions;
@@ -82,9 +84,11 @@ const faqs = [
   },
   {
     q: en ? 'How much does a project cost?' : 'Combien coûte un projet?',
-    a: en
-      ? 'Pricing depends on the scope, number of sites or participants, documents, languages, travel and deliverables. Send a short description and your target date. The proposal identifies the work included, dependencies and fees before you commit.'
-      : 'Le prix dépend de la portée, du nombre de sites ou de personnes, des documents, des langues, des déplacements et des livrables. Envoyez une courte description et la date visée. La proposition précise les travaux inclus, les conditions et les honoraires avant votre engagement.',
+    a:
+      scope?.pricing[locale] ??
+      (en
+        ? 'Pricing depends on the scope, number of sites or participants, documents, languages, travel and deliverables. Send a short description and your target date. The proposal identifies the work included, dependencies and fees before you commit.'
+        : 'Le prix dépend de la portée, du nombre de sites ou de personnes, des documents, des langues, des déplacements et des livrables. Envoyez une courte description et la date visée. La proposition précise les travaux inclus, les conditions et les honoraires avant votre engagement.'),
   },
   {
     q: en
@@ -188,6 +192,13 @@ const faqs = [
         class="location-jumps"
         aria-label={en ? 'On this page' : 'Sur cette page'}
       >
+        {
+          scope && (
+            <a href="#scope-example">
+              {en ? 'Example brief' : 'Exemple de mandat'}
+            </a>
+          )
+        }
         <a href="#planning">{en ? 'Project planning' : 'Planification'}</a>{
           city && (
             <a href="#examples">
@@ -202,6 +213,54 @@ const faqs = [
       </nav>
     </div>
   </section>
+  {
+    scope && (
+      <section id="scope-example" class="section container location-section">
+        <span class="eyebrow">
+          {en ? 'Example project brief' : 'Exemple de mandat'}
+        </span>
+        <h2>{scope.question[locale]}</h2>
+        <dl class="location-facts">
+          <div>
+            <>
+              <dt>{en ? 'Focused project' : 'Mandat ciblé'}</dt>
+              <dd>{scope.focused[locale]}</dd>
+            </>
+          </div>
+          <div>
+            <>
+              <dt>{en ? 'Expanded scope' : 'Mandat élargi'}</dt>
+              <dd>{scope.expanded[locale]}</dd>
+            </>
+          </div>
+          <div>
+            <>
+              <dt>
+                {en
+                  ? 'What to request in the quote'
+                  : 'À demander dans l’offre'}
+              </dt>
+              <dd>{scope.deliverable[locale]}</dd>
+            </>
+          </div>
+        </dl>
+        <div class="button-row">
+          <a
+            class="text-link"
+            href={`/${locale}/services/${scope.service}/#sample-deliverable`}
+          >
+            {en ? 'View the sample deliverable' : 'Voir un exemple de livrable'}
+          </a>
+          <a
+            class="text-link"
+            href={`/${locale}/contact/?${new URLSearchParams({ service: scope.service, region: region.code, city: city!.slug })}`}
+          >
+            {en ? 'Discuss this scope' : 'Discuter de ce mandat'}
+          </a>
+        </div>
+      </section>
+    )
+  }
   <section class="section container location-section" id="planning">
     <div class="section-intro">
       <div>

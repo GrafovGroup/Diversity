@@ -35,6 +35,8 @@ async function fillIdentity(page: Page) {
   await form.locator('[name="name"]').fill('QA Reviewer');
   await form.locator('[name="email"]').fill('reviewer@example.org');
   await form.locator('[name="organization"]').fill('Example QA Organization');
+  const more = form.locator('.extra-details:not([open]) > summary');
+  if (await more.count()) await more.click();
   await form.locator('[name="audience"]').selectOption({ index: 1 });
   await form.locator('[name="region"]').selectOption({ index: 1 });
   await form

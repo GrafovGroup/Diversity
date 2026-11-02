@@ -121,24 +121,17 @@ export function createEnquiryRecord(
   if (String(data.get('_gotcha') ?? '').trim())
     throw new Error('Unable to prepare this enquiry.');
   const text = (key: string) => String(data.get(key) ?? '').trim();
-  for (const key of [
-    'name',
-    'email',
-    'organization',
-    'audience',
-    'service',
-    'region',
-    'message',
-  ]) {
+  for (const key of ['name', 'email', 'organization', 'message']) {
     if (!text(key)) throw new Error('Complete all required fields.');
   }
   if (text('message').length < 20)
     throw new Error(
       'Please provide at least 20 characters of project context.',
     );
-  const group = getEnquiryGroup(kind, text('service'));
+  const service = text('service') || 'unsure';
+  const group = getEnquiryGroup(kind, service);
   if (!group) throw new Error('Select a service for this enquiry.');
-  const params = new URLSearchParams({ service: text('service') });
+  const params = new URLSearchParams({ service });
   if (text('subservice')) params.set('subservice', text('subservice'));
   if (text('solution')) params.set('solution', text('solution'));
   const context = resolveEnquiryContext(params, locale)!;
