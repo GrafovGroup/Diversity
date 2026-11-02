@@ -15,16 +15,13 @@ export interface PageVisual {
 
 const photographs: Record<string, PageVisual> = {
   '': {
-    src: '/images/photography/home-perspectives-1600.webp',
-    srcset:
-      '/images/photography/home-perspectives-600.webp 600w, /images/photography/home-perspectives-1000.webp 1000w, /images/photography/home-perspectives-1600.webp 1600w',
-    sizes: '(max-width: 760px) 100vw, 60vw',
+    src: '/images/diversity_option1_exact_hero_crop.png',
     fit: 'cover',
-    width: 1600,
-    height: 2399,
+    width: 545,
+    height: 405,
     alt: {
-      en: 'Colleagues working together around a shared table with laptops.',
-      fr: 'Des collègues travaillent ensemble autour d’une table avec des ordinateurs portables.',
+      en: 'A smiling woman in a navy blazer with colleagues in a bright setting with a purple-blue background.',
+      fr: 'Une femme souriante en veston bleu marine avec des collègues dans un décor lumineux aux tons violets et bleus.',
     },
   },
   government: {

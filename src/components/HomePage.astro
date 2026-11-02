@@ -45,7 +45,8 @@ const steps = en
 const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
 const homepageServices = [
   {
-    slug: 'dei',
+    path: 'services/dei',
+    color: 'purple',
     title: [
       'Diversity & inclusion strategy',
       'Stratégie de diversité et d’inclusion',
@@ -57,55 +58,64 @@ const homepageServices = [
     icon: 'M16 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM8 28v-4a8 8 0 0 1 16 0v4M5 10a3 3 0 0 0 0 6m22-6a3 3 0 0 1 0 6M2 27v-3a6 6 0 0 1 4-6m24 9v-3a6 6 0 0 0-4-6',
   },
   {
-    slug: 'training',
+    path: 'services/training',
+    color: 'blue',
     title: ['Training & development', 'Formation et perfectionnement'],
     summary: [
-      'Programs for lasting change.',
-      'Des programmes pour un changement durable.',
+      'Engaging programs for lasting change.',
+      'Des programmes mobilisateurs pour un changement durable.',
     ],
-    icon: 'M3 6h10l3 3 3-3h10v20H19l-3 3-3-3H3ZM16 9v20M7 12h5M7 17h5m8-5h5m-5 5h5',
+    icon: 'M2 11 16 4l14 7-14 7ZM7 15v8l9 5 9-5v-8m5-4v12',
   },
   {
-    slug: 'accessibility',
+    path: 'services/accessibility',
+    color: 'pink',
     title: ['Accessibility solutions', 'Solutions d’accessibilité'],
     summary: [
       'More inclusive spaces and services.',
-      'Des espaces et services plus accessibles.',
+      'Des espaces et services plus inclusifs.',
     ],
-    icon: 'M16 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM4 12l12 3 12-3M16 15v6m0 0-7 9m7-9 7 9',
+    icon: 'M6 3h14l6 6v20H6ZM20 3v7h6M11 10h4m-4 6h10m-10 6h10',
   },
   {
-    slug: 'people-culture',
-    title: ['HR & organizational advisory', 'Conseil en RH et organisation'],
+    path: 'insights',
+    color: 'blue',
+    title: ['Research & insights', 'Recherche et perspectives'],
     summary: [
-      'Better systems, stronger teams.',
-      'De meilleurs systèmes, des équipes plus fortes.',
+      'Data-driven decisions for greater impact.',
+      'Des décisions éclairées pour un impact accru.',
     ],
-    icon: 'M12 3h8v7h-8ZM3 23h8v7H3Zm18 0h8v7h-8ZM16 10v7M7 23v-6h18v6',
+    icon: 'M4 28V18h5v10Zm10 0V10h5v18Zm10 0V3h5v25Z',
   },
   {
-    slug: 'supplier-diversity',
-    title: ['Supplier diversity', 'Diversité des fournisseurs'],
-    summary: ['More inclusive procurement.', 'Des achats plus inclusifs.'],
-    icon: 'M16 3 29 10 16 17 3 10ZM3 10v14l13 7 13-7V10M16 17v14M10 6l13 7',
-  },
-  {
-    slug: 'social-impact',
-    title: ['Social impact', 'Impact social'],
-    summary: [
-      'Planning for measurable impact.',
-      'Planifier des retombées mesurables.',
-    ],
-    icon: 'M5 27h23M8 21v-5m8 5V9m8 12V4M4 5h6M7 2v6',
-  },
-  {
-    slug: 'implementation',
+    path: 'services/implementation',
+    color: 'purple',
     title: ['Implementation support', 'Soutien à la mise en œuvre'],
     summary: [
-      'Turning plans into practical solutions.',
-      'Transformer les plans en solutions concrètes.',
+      'Turn strategy into real-world results.',
+      'Transformer la stratégie en résultats concrets.',
     ],
-    icon: 'M11 5H5v24h22V5h-6M11 3h10v6H11ZM10 19l4 4 9-10',
+    icon: 'M13 3h6l1 5 4-2 4 4-2 4 4 1v6l-4 1 2 4-4 4-4-2-1 4h-6l-1-4-4 2-4-4 2-4-4-1v-6l4-1-2-4 4-4 4 2ZM21 17a5 5 0 1 0-10 0 5 5 0 0 0 10 0Z',
+  },
+  {
+    path: 'government',
+    color: 'pink',
+    title: ['Government programs', 'Programmes gouvernementaux'],
+    summary: [
+      'Trusted expertise for public service.',
+      'Une expertise au service du secteur public.',
+    ],
+    icon: 'M2 12 8 5l7 2 3-2 6 2 6 7-6 10-6 5-7-3-5-7ZM8 5l8 8 4-3 7 9M7 19l8 7m-4-11 10 9',
+  },
+  {
+    path: 'corporations',
+    color: 'blue',
+    title: ['Corporate advisory', 'Conseils aux entreprises'],
+    summary: [
+      'Inclusive workplaces for stronger business.',
+      'Des milieux inclusifs pour des entreprises plus fortes.',
+    ],
+    icon: 'M5 29V3h15v26M20 12h7v17M2 29h28M9 8h2m4 0h1M9 13h2m4 0h1M9 18h2m4 0h1M10 29v-6h5v6m9-12v2m0 3v2',
   },
 ];
 ---
@@ -121,11 +131,13 @@ const homepageServices = [
 >
   <section class="home-hero" aria-labelledby="home-title">
     <div class="hero-backdrop">
-      <PageImage
-        path=""
-        locale={locale}
-        sizes="(max-width: 760px) 100vw, 60vw"
-      />
+      <picture>
+        <source
+          srcset="/images/diversity_option1_exact_hero_crop.webp"
+          type="image/webp"
+        />
+        <PageImage path="" locale={locale} />
+      </picture>
     </div>
     <div class="container hero-inner">
       <div class="hero-copy">
@@ -153,7 +165,15 @@ const homepageServices = [
         </p>
         <div class="button-row">
           <a href={href('contact')} class="button"
-            >{en ? 'Request a consultation' : 'Demander une consultation'}</a
+            >{en ? 'Request a consultation' : 'Demander une consultation'}<svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg
+            ></a
           >
           <a href={href('services')} class="button button-outline"
             >{en ? 'Explore our services' : 'Découvrir nos services'}</a
@@ -169,23 +189,42 @@ const homepageServices = [
     <div class="container home-services-grid">
       {
         homepageServices.map((service) => (
-          <a class="home-service" href={href(`services/${service.slug}`)}>
+          <a
+            class:list={['home-service', `home-service--${service.color}`]}
+            href={href(service.path)}
+          >
+            <span class="home-service-icon">
+              <svg
+                viewBox="0 0 32 32"
+                width="32"
+                height="32"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d={service.icon} />
+              </svg>
+            </span>
+            <div class="home-service-copy">
+              <h2>{service.title[en ? 0 : 1]}</h2>
+              <p>{service.summary[en ? 0 : 1]}</p>
+            </div>
             <svg
-              viewBox="0 0 32 32"
-              width="32"
-              height="32"
+              class="home-service-arrow"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              stroke-width="1.6"
               aria-hidden="true"
-              focusable="false"
             >
-              <path d={service.icon} />
+              <path d="M4 12h15m-6-6 6 6-6 6" />
             </svg>
-            <h2>{service.title[en ? 0 : 1]}</h2>
-            <p>{service.summary[en ? 0 : 1]}</p>
           </a>
         ))
       }
@@ -193,30 +232,50 @@ const homepageServices = [
   </section>
   <section class="home-about" aria-labelledby="home-about-title">
     <div class="container home-about-inner">
-      <span class="eyebrow"
-        >{
-          en
-            ? 'PEOPLE · OPPORTUNITY · PROGRESS'
-            : 'PERSONNES · POSSIBILITÉS · PROGRÈS'
-        }</span
-      >
-      <h2 id="home-about-title">
-        {
-          en
-            ? 'Building more inclusive organizations.'
-            : 'Bâtir des organisations plus inclusives.'
-        }
-      </h2>
-      <p class="lead">
-        {
-          en
-            ? 'Diversity.ca brings a national perspective to consulting, accessibility, training and implementation for corporate and public-sector organizations. Our focus is practical solutions and measurable progress.'
-            : 'Diversity.ca apporte une perspective pancanadienne aux services-conseils, à l’accessibilité, à la formation et à la mise en œuvre pour les entreprises et les organismes publics. Notre priorité : des solutions concrètes et des progrès mesurables.'
-        }
-      </p>
-      <a class="text-link" href={href('about')}
-        >{en ? 'Get to know Diversity.ca' : 'Découvrir Diversity.ca'}</a
-      >
+      <img
+        class="home-about-photo"
+        src="/images/option1-about.webp"
+        width="573"
+        height="296"
+        loading="lazy"
+        alt={en
+          ? 'Colleagues sharing ideas around a table.'
+          : 'Des collègues échangent des idées autour d’une table.'}
+      />
+      <div class="home-about-copy">
+        <span class="eyebrow"
+          >{
+            en
+              ? 'PEOPLE · OPPORTUNITY · PROGRESS'
+              : 'PERSONNES · POSSIBILITÉS · PROGRÈS'
+          }</span
+        >
+        <h2 id="home-about-title">
+          {
+            en
+              ? 'Building more inclusive organizations.'
+              : 'Bâtir des organisations plus inclusives.'
+          }
+        </h2>
+        <p class="lead">
+          {
+            en
+              ? 'We work with organizations across Canada to create more inclusive cultures, improve accessibility, and unlock the full potential of diverse talent through practical, results-driven solutions.'
+              : 'Nous accompagnons les organisations partout au Canada pour créer des cultures plus inclusives, améliorer l’accessibilité et développer le plein potentiel de talents diversifiés grâce à des solutions concrètes axées sur les résultats.'
+          }
+        </p>
+        <a class="button button-outline" href={href('about')}
+          >{en ? 'Learn more about us' : 'En savoir plus sur nous'}<svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg
+          ></a
+        >
+      </div>
     </div>
   </section>
   <section class="audience-section">

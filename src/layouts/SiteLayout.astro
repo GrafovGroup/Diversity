@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Wordmark from '../components/Wordmark.astro';
+import HomepageHeader from '../components/HomepageHeader.astro';
 interface Props {
   locale: 'en' | 'fr';
   title: string;
@@ -131,85 +132,105 @@ const nav = [
       set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
     />
   </head>
-  <body>
+  <body class:list={{ 'option-one-home': path === '' }}>
     <a class="skip-link" href="#main"
       >{en ? 'Skip to content' : 'Aller au contenu'}</a
     >
-    <div class="topbar">
-      <div class="container topbar-inner">
-        <span
-          >{
-            en
-              ? 'A CANADA-WIDE PERSPECTIVE. A PEOPLE-FIRST APPROACH.'
-              : 'UNE PERSPECTIVE CANADIENNE. UNE APPROCHE HUMAINE.'
-          }</span
-        ><div class="languages">
-          <a
-            lang="en"
-            hreflang="en"
-            aria-label="English"
-            href={`/en/${path ? path + '/' : ''}`}
-            aria-current={en ? 'page' : undefined}>EN</a
-          ><span aria-hidden="true">/</span><a
-            lang="fr"
-            hreflang="fr"
-            aria-label="Français"
-            href={`/fr/${path ? path + '/' : ''}`}
-            aria-current={!en ? 'page' : undefined}>FR</a
-          >
-        </div>
-      </div>
-    </div>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a
-          href={href()}
-          class="brand-link"
-          aria-label={en ? 'Diversity.ca home' : 'Diversity.ca accueil'}
-          ><Wordmark /></a
-        >
-        <button
-          class="menu-toggle"
-          aria-controls="primary-navigation"
-          aria-expanded="false"
-          ><span>{en ? 'Menu' : 'Menu'}</span><span
-            class="menu-icon"
-            aria-hidden="true"><i></i><i></i></span
-          ></button
-        >
-        <nav
-          id="primary-navigation"
-          aria-label={en ? 'Main navigation' : 'Navigation principale'}
-        >
-          {
-            nav.map((item) => (
+    {
+      path === '' ? (
+        <HomepageHeader locale={locale} />
+      ) : (
+        <>
+          <div class="topbar">
+            <div class="container topbar-inner">
+              <>
+                <span>
+                  {en
+                    ? 'A CANADA-WIDE PERSPECTIVE. A PEOPLE-FIRST APPROACH.'
+                    : 'UNE PERSPECTIVE CANADIENNE. UNE APPROCHE HUMAINE.'}
+                </span>
+                <div class="languages">
+                  <>
+                    <a
+                      lang="en"
+                      hreflang="en"
+                      aria-label="English"
+                      href={`/en/${path ? path + '/' : ''}`}
+                      aria-current={en ? 'page' : undefined}
+                    >
+                      EN
+                    </a>
+                    <span aria-hidden="true">/</span>
+                    <a
+                      lang="fr"
+                      hreflang="fr"
+                      aria-label="Français"
+                      href={`/fr/${path ? path + '/' : ''}`}
+                      aria-current={!en ? 'page' : undefined}
+                    >
+                      FR
+                    </a>
+                  </>
+                </div>
+              </>
+            </div>
+          </div>
+          <header class="site-header">
+            <div class="container header-inner">
               <a
-                href={href(item.path)}
-                aria-current={
-                  path === item.path
-                    ? 'page'
-                    : path.startsWith(item.path + '/')
-                      ? 'true'
-                      : undefined
-                }
+                href={href()}
+                class="brand-link"
+                aria-label={en ? 'Diversity.ca home' : 'Diversity.ca accueil'}
               >
-                {item.label}
+                <Wordmark />
               </a>
-            ))
-          }
-          <a class="button button-small" href={href('contact')}
-            >{en ? 'Let’s talk' : 'Parlons-en'}</a
-          >
-        </nav>
-      </div>
-    </header>
+              <button
+                class="menu-toggle"
+                aria-controls="primary-navigation"
+                aria-expanded="false"
+              >
+                <>
+                  <span>{en ? 'Menu' : 'Menu'}</span>
+                  <span class="menu-icon" aria-hidden="true">
+                    <>
+                      <i />
+                      <i />
+                    </>
+                  </span>
+                </>
+              </button>
+              <nav
+                id="primary-navigation"
+                aria-label={en ? 'Main navigation' : 'Navigation principale'}
+              >
+                {nav.map((item) => (
+                  <a
+                    href={href(item.path)}
+                    aria-current={
+                      path === item.path
+                        ? 'page'
+                        : path.startsWith(item.path + '/')
+                          ? 'true'
+                          : undefined
+                    }
+                  >
+                    {item.label}
+                  </a>
+                ))}
+                <a class="button button-small" href={href('contact')}>
+                  {en ? 'Let’s talk' : 'Parlons-en'}
+                </a>
+              </nav>
+            </div>
+          </header>
+        </>
+      )
+    }
     <main id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer">
       <div class="container footer-top">
         <div>
-          <a href={href()} class="brand-link"
-            ><Wordmark dark /></a
-          ><p>
+          <a href={href()} class="brand-link"><Wordmark dark /></a><p>
             {
               en
                 ? 'Practical advice. Meaningful action.\nA more inclusive way forward.'

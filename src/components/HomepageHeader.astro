@@ -1,0 +1,204 @@
+---
+import Wordmark from './Wordmark.astro';
+import { services } from '../data/services';
+import { solutions } from '../data/solutions';
+import { articles } from '../data/pages';
+interface Props {
+  locale: 'en' | 'fr';
+}
+const { locale } = Astro.props;
+const en = locale === 'en';
+const href = (path = '') => `/${locale}/${path ? path + '/' : ''}`;
+const navigation = [
+  { path: 'about', label: en ? 'About' : 'À propos' },
+  { path: 'services', label: en ? 'Our services' : 'Nos services' },
+  { path: 'corporations', label: en ? 'Corporate' : 'Entreprises' },
+  { path: 'government', label: en ? 'Government' : 'Secteur public' },
+  { path: 'solutions', label: en ? 'Products' : 'Produits' },
+  { path: 'insights', label: en ? 'Resources' : 'Ressources' },
+  { path: 'contact', label: 'Contact' },
+];
+const searchPages = [
+  ...navigation,
+  ...services.flatMap((service) => [
+    { path: `services/${service.slug}`, label: service.title[locale] },
+    ...service.subservices.map((sub) => ({
+      path: `services/${service.slug}/${sub.slug}`,
+      label: sub.title[locale],
+    })),
+  ]),
+  ...solutions.map((solution) => ({
+    path: `solutions/${solution.slug}`,
+    label: solution.title[locale],
+  })),
+  ...articles.map((article) => ({
+    path: `insights/${article.slug}`,
+    label: article.title[locale],
+  })),
+  {
+    path: 'canada',
+    label: en ? 'Service areas across Canada' : 'Zones de service au Canada',
+  },
+];
+---
+
+<header class="site-header option-header">
+  <div class="container option-header-inner">
+    <a
+      class="brand-link"
+      href={href()}
+      aria-label={en ? 'Diversity.ca home' : 'Diversity.ca accueil'}
+      ><Wordmark /></a
+    >
+    <nav
+      id="primary-navigation"
+      aria-label={en ? 'Main navigation' : 'Navigation principale'}
+    >
+      {navigation.map((item) => <a href={href(item.path)}>{item.label}</a>)}
+    </nav>
+    <div class="option-header-tools">
+      <button
+        class="option-search-button"
+        aria-label={en ? 'Search the site' : 'Rechercher sur le site'}
+        aria-haspopup="dialog"
+        aria-controls="homepage-search"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          aria-hidden="true"
+          ><circle cx="10" cy="10" r="6.5"></circle><path d="m15 15 6 6"
+          ></path></svg
+        >
+      </button>
+      <a
+        class="option-language"
+        href={en ? '/fr/' : '/en/'}
+        hreflang={en ? 'fr-CA' : 'en-CA'}
+        lang={en ? 'fr' : 'en'}
+        aria-label={en ? 'Français' : 'English'}>{en ? 'FR' : 'EN'}</a
+      >
+      <a class="button option-header-cta" href={href('contact')}
+        >{en ? 'Request a consultation' : 'Demander une consultation'}<svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"></path></svg
+        ></a
+      >
+      <button
+        class="menu-toggle option-menu"
+        aria-controls="primary-navigation"
+        aria-expanded="false"
+        aria-label={en ? 'Menu' : 'Menu'}
+        ><svg
+          width="23"
+          height="23"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          aria-hidden="true"><path d="M3 5h18M3 12h18M3 19h18"></path></svg
+        ></button
+      >
+    </div>
+  </div>
+</header>
+<dialog
+  id="homepage-search"
+  class="option-search-dialog"
+  aria-labelledby="homepage-search-title"
+>
+  <div class="option-search-heading">
+    <h2 id="homepage-search-title">
+      {
+        en
+          ? 'Find a service or resource'
+          : 'Trouver un service ou une ressource'
+      }
+    </h2><button
+      type="button"
+      data-close-search
+      aria-label={en ? 'Close search' : 'Fermer la recherche'}>×</button
+    >
+  </div>
+  <label for="homepage-search-input"
+    >{
+      en
+        ? 'Search services, products and resources'
+        : 'Rechercher des services, produits et ressources'
+    }</label
+  >
+  <input
+    id="homepage-search-input"
+    type="search"
+    autocomplete="off"
+    placeholder={en
+      ? 'Try accessibility or training'
+      : 'Essayez accessibilité ou formation'}
+  />
+  <p class="option-search-empty" hidden>
+    {
+      en
+        ? 'No matching pages. Try another word or contact us.'
+        : 'Aucune page correspondante. Essayez un autre mot ou contactez-nous.'
+    }
+  </p>
+  <ul class="option-search-results">
+    {
+      searchPages.map((page) => (
+        <li>
+          <a href={href(page.path)}>{page.label}</a>
+        </li>
+      ))
+    }
+  </ul>
+</dialog>
+<script>
+  const opener = document.querySelector<HTMLButtonElement>(
+    '.option-search-button',
+  );
+  const dialog = document.querySelector<HTMLDialogElement>('#homepage-search');
+  const input = document.querySelector<HTMLInputElement>(
+    '#homepage-search-input',
+  );
+  const normalize = (text: string) =>
+    text
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  opener?.addEventListener('click', () => {
+    dialog?.showModal();
+    input?.focus();
+  });
+  dialog
+    ?.querySelector('[data-close-search]')
+    ?.addEventListener('click', () => dialog.close());
+  dialog?.addEventListener('close', () => opener?.focus());
+  dialog?.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      dialog.close();
+    }
+  });
+  input?.addEventListener('input', () => {
+    const words = normalize(input.value).trim().split(/\s+/).filter(Boolean);
+    let matches = 0;
+    dialog
+      ?.querySelectorAll<HTMLLIElement>('.option-search-results li')
+      .forEach((item) => {
+        const text = normalize(item.textContent ?? '');
+        item.hidden = !words.every((word) => text.includes(word));
+        if (!item.hidden) matches++;
+      });
+    const empty = dialog?.querySelector<HTMLElement>('.option-search-empty');
+    if (empty) empty.hidden = matches > 0;
+  });
+</script>

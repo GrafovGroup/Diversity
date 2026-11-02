@@ -535,5 +535,36 @@
       }
     ],
     "usage": "English and French homepages"
+  },
+  {
+    "id": "option1-exact-approved-artwork",
+    "origin": "User-supplied approved Option 1 artwork and exact hero crop",
+    "hero_original_filename": "diversity_option1_exact_hero_crop.png",
+    "hero_library_file_id": "libfile_bdeb7e8079388191980a5fec94270992",
+    "mockup_library_file_id": "libfile_5de7e09d932481919635b10b293d6038",
+    "license": "User-supplied artwork for this website",
+    "adaptation": "Original hero PNG copied byte-for-byte. Lossless WebP verified to have identical RGB pixels. About photograph extracted from the supplied layout at (52,728)-(625,1024) without retouching or recolouring. Display cropping only uses CSS object-fit/object-position.",
+    "hero_dimensions": [
+      545,
+      405
+    ],
+    "variants": [
+      {
+        "asset": "/images/diversity_option1_exact_hero_crop.png",
+        "bytes": 287320,
+        "sha256": "7e481f7c9d4f98a164c8473a17b3d29ba499667bb0c30857b995c2aec7d96811"
+      },
+      {
+        "asset": "/images/diversity_option1_exact_hero_crop.webp",
+        "bytes": 200246,
+        "sha256": "ae15fab25b207ad52663f07ddec65e1658cb3bf05518516257de4f9424a41892"
+      },
+      {
+        "asset": "/images/option1-about.webp",
+        "bytes": 175808,
+        "sha256": "078c0267ca4893cc714ffa0a0935b10a0d4bbabe46eeb4f19bf11ca9f1277b77"
+      }
+    ],
+    "usage": "English and French homepages"
   }
 ]
