@@ -1,0 +1,289 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageImage from './PageImage.astro';
+import CallToAction from './CallToAction.astro';
+import LocalServices from './LocalServices.astro';
+import { regions } from '../data/regions';
+import {
+  cities,
+  cityRegion,
+  cityPath,
+  regionCities,
+  delivery,
+} from '../data/locations';
+import '../styles/locations.css';
+interface Props {
+  locale: 'en' | 'fr';
+}
+const { locale } = Astro.props;
+const en = locale === 'en';
+const title = en
+  ? 'DEI, accessibility & training across Canada'
+  : 'EDI, accessibilité et formation au Canada';
+const description = en
+  ? 'Find Diversity.ca services in 52 cities and regions across all 13 provinces and territories: inclusion, accessibility, training and supplier diversity.'
+  : 'Explorez les services de Diversity.ca dans 52 villes et régions des 13 provinces et territoires : inclusion, accessibilité, formation et diversité des fournisseurs.';
+const structuredData = [
+  {
+    '@type': 'ItemList',
+    name: en ? 'Canadian service areas' : 'Territoires desservis au Canada',
+    itemListElement: regions.map((region, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: region.name[locale],
+      url: `https://diversity.ca/${locale}/canada/${region.slug}/`,
+    })),
+  },
+];
+---
+
+<SiteLayout
+  locale={locale}
+  title={title}
+  description={description}
+  path="canada"
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: en ? 'Home' : 'Accueil', path: '' },
+    { name: en ? 'Across Canada' : 'Partout au Canada', path: 'canada' },
+  ]}
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label={en ? 'Breadcrumb' : 'Fil d’Ariane'}>
+        <a href={`/${locale}/`}>{en ? 'Home' : 'Accueil'}</a><span
+          aria-hidden="true">/</span
+        ><span aria-current="page">Canada</span>
+      </nav><div class="page-hero-split">
+        <div>
+          <span class="eyebrow"
+            >{en ? 'Across Canada' : 'Partout au Canada'}</span
+          ><h1>
+            {
+              en
+                ? 'National reach. A plan for your location.'
+                : 'Une portée nationale. Un plan adapté à votre région.'
+            }
+          </h1><p class="lead">
+            {
+              en
+                ? 'Diversity, equity and inclusion (DEI), accessibility, training and supplier diversity for businesses and government. Find your region, explore the scope and plan the work around your people and places.'
+                : 'Diversité, équité et inclusion (EDI), accessibilité, formation et diversité des fournisseurs pour les entreprises et le secteur public. Trouvez votre région et planifiez le travail selon vos équipes et vos lieux.'
+            }
+          </p><div class="button-row">
+            <a class="button" href="#cities"
+              >{en ? 'Find your city' : 'Trouver votre ville'}</a
+            ><a class="text-link" href="#services"
+              >{en ? 'Explore services' : 'Explorer les services'}</a
+            >
+          </div><p class="location-note">{delivery[locale]}</p>
+        </div><PageImage path="canada" locale={locale} />
+      </div>
+    </div>
+  </section>
+  <section class="section container location-section" id="regions">
+    <div class="section-intro">
+      <div>
+        <span class="eyebrow"
+          >{
+            en ? '10 provinces · 3 territories' : '10 provinces · 3 territoires'
+          }</span
+        ><h2>
+          {
+            en
+              ? 'Start with your province or territory.'
+              : 'Commencez par votre province ou territoire.'
+          }
+        </h2>
+      </div><p class="lead">
+        {
+          en
+            ? 'Planning notes and city guides help define the right scope, including locations outside the main urban centres.'
+            : 'Les repères de planification et les guides locaux aident à définir le mandat, y compris pour les lieux situés hors des grands centres.'
+        }
+      </p>
+    </div><div class="region-grid">
+      {
+        regions.map((region) => (
+          <article class="region-card">
+            <>
+              <h3>
+                <a href={`/${locale}/canada/${region.slug}/`}>
+                  {region.name[locale]}
+                </a>
+              </h3>
+              <p>
+                {regionCities(region.code)
+                  .map((city) => city.name[locale])
+                  .slice(0, 4)
+                  .join(' · ')}
+              </p>
+              <a class="text-link" href={`/${locale}/canada/${region.slug}/`}>
+                {en
+                  ? 'Explore regional services'
+                  : 'Explorer les services dans la région'}
+              </a>
+            </>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+  <section class="soft-section section location-section" id="cities">
+    <div class="container">
+      <div class="section-intro">
+        <div>
+          <span class="eyebrow"
+            >{
+              en
+                ? '52 cities and regional centres'
+                : '52 villes et centres régionaux'
+            }</span
+          ><h2>
+            {
+              en
+                ? 'Find services where you work.'
+                : 'Trouvez les services dans votre région.'
+            }
+          </h2>
+        </div><p class="lead">
+          {
+            en
+              ? 'Each city guide covers all seven service areas, practical project examples and nearby communities. Your city is not listed? Include it in your enquiry so we can confirm the delivery plan.'
+              : 'Chaque guide présente les sept domaines de services, des exemples de mandats et les collectivités voisines. Votre ville n’est pas affichée? Mentionnez-la dans votre demande pour que nous puissions confirmer les modalités.'
+          }
+        </p>
+      </div>
+      <div class="location-filter">
+        <label for="city-filter"
+          >{
+            en
+              ? 'Search by city, nearby community or province'
+              : 'Chercher une ville, une collectivité voisine ou une province'
+          }</label
+        ><input
+          id="city-filter"
+          type="search"
+          autocomplete="off"
+          placeholder={en
+            ? 'For example: Toronto, Montréal, BC'
+            : 'Par exemple : Toronto, Montréal, Québec'}
+        /><p data-city-count role="status" aria-live="polite">
+          {
+            en
+              ? `${cities.length} city guides`
+              : `${cities.length} guides locaux`
+          }
+        </p>
+      </div>
+      <div class="city-grid">
+        {
+          cities.map((city) => (
+            <article
+              class="city-card"
+              data-city-card
+              data-search={`${city.name.en} ${city.name.fr} ${cityRegion(city).name.en} ${cityRegion(city).name.fr} ${city.province} ${city.nearby.en.join(' ')} ${city.nearby.fr.join(' ')}`}
+            >
+              <>
+                <span class="eyebrow">{cityRegion(city).name[locale]}</span>
+                <h3>
+                  <a href={`/${locale}/${cityPath(city)}/`}>
+                    {city.name[locale]}
+                  </a>
+                </h3>
+                <p>{city.examples[0]?.title[locale]}</p>
+                <a class="text-link" href={`/${locale}/${cityPath(city)}/`}>
+                  {en
+                    ? 'View services and project planning'
+                    : 'Voir les services et la planification'}
+                </a>
+              </>
+            </article>
+          ))
+        }
+      </div>
+      <p data-city-empty hidden>
+        {
+          en
+            ? 'No matching guide. Try a province or tell us your location in the enquiry form.'
+            : 'Aucun guide correspondant. Cherchez une province ou indiquez votre lieu dans le formulaire.'
+        }
+        <a href={`/${locale}/request-proposal/`}
+          >{en ? 'Discuss your location' : 'Discuter de votre projet'}</a
+        >
+      </p>
+    </div>
+  </section>
+  <LocalServices locale={locale} />
+  <section class="soft-section section">
+    <div class="container">
+      <h2>
+        {
+          en
+            ? 'How do Canada-wide projects work?'
+            : 'Comment se déroulent les projets pancanadiens?'
+        }
+      </h2><dl class="location-facts">
+        <div>
+          <dt>
+            {en ? 'Single-site or multi-site' : 'Un site ou plusieurs'}
+          </dt><dd>
+            {
+              en
+                ? 'Identify the locations, decision-makers and representative sample. A pilot can establish the method before a wider rollout.'
+                : 'Précisez les lieux, les responsables et l’échantillon représentatif. Un projet pilote peut établir la méthode avant un déploiement élargi.'
+            }
+          </dd>
+        </div><div>
+          <dt>{en ? 'English and French' : 'Français et anglais'}</dt><dd>
+            {
+              en
+                ? 'Agree the working language, translations and review process for each audience. Other language support is scoped separately.'
+                : 'Convenez des langues de travail, des traductions et du processus de révision pour chaque public. Le soutien dans d’autres langues est défini séparément.'
+            }
+          </dd>
+        </div><div>
+          <dt>
+            {
+              en
+                ? 'A proposal before delivery'
+                : 'Une proposition avant le début'
+            }
+          </dt><dd>
+            {
+              en
+                ? 'Confirm objectives, deliverables, travel, timing and cost before work begins. Availability and on-site arrangements depend on the project.'
+                : 'Confirmez les objectifs, les livrables, les déplacements, les délais et les coûts avant le début. La disponibilité et les activités sur place dépendent du projet.'
+            }
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+  <CallToAction locale={locale} />
+</SiteLayout>
+<script>
+  const input = document.querySelector<HTMLInputElement>('#city-filter');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-city-card]')];
+  const status = document.querySelector<HTMLElement>('[data-city-count]');
+  const empty = document.querySelector<HTMLElement>('[data-city-empty]');
+  const normalize = (value: string) =>
+    value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+  input?.addEventListener('input', () => {
+    const query = normalize(input.value);
+    let count = 0;
+    for (const card of cards) {
+      card.hidden = !normalize(card.dataset.search ?? '').includes(query);
+      if (!card.hidden) count++;
+    }
+    if (status)
+      status.textContent = document.documentElement.lang.startsWith('fr')
+        ? `${count} ${count === 1 ? 'guide local' : 'guides locaux'}`
+        : `${count} ${count === 1 ? 'city guide' : 'city guides'}`;
+    if (empty) empty.hidden = count !== 0;
+  });
+</script>

@@ -1,0 +1,146 @@
+{
+  "inclusive-job-postings": {
+    "asset": "/images/solutions/inclusive-job-postings.webp",
+    "width": 1400,
+    "height": 933,
+    "alt": {
+      "en": "Person taking notes during an interview at a desk with a laptop.",
+      "fr": "Une personne prend des notes pendant un entretien à un bureau avec un ordinateur portable."
+    },
+    "attribution": "Sora Shimazaki",
+    "original_source": "https://www.pexels.com/photo/woman-filling-job-application-form-in-office-with-boss-5668858/",
+    "suggested_object_position": "center"
+  },
+  "structured-interview-toolkit": {
+    "asset": "/images/solutions/structured-interviews.webp",
+    "width": 1400,
+    "height": 933,
+    "alt": {
+      "en": "Two people seated across a desk during a job interview.",
+      "fr": "Deux personnes assises de part et d’autre d’un bureau pendant un entretien d’embauche."
+    },
+    "attribution": "Tima Miroshnichenko",
+    "original_source": "https://www.pexels.com/photo/a-man-interviewing-an-applicant-5439138/",
+    "suggested_object_position": "center"
+  },
+  "inclusion-pulse-survey": {
+    "asset": "/images/solutions/inclusion-listening.webp",
+    "width": 1400,
+    "height": 933,
+    "alt": {
+      "en": "Four colleagues listening and talking around a meeting table.",
+      "fr": "Quatre collègues échangent et s’écoutent autour d’une table de réunion."
+    },
+    "attribution": "Theo Decker",
+    "original_source": "https://www.pexels.com/photo/a-group-of-people-having-a-meeting-in-the-office-5945809/",
+    "suggested_object_position": "center"
+  },
+  "respectful-workplace-microlearning": {
+    "asset": "/images/solutions/respectful-workplace-learning.webp",
+    "width": 734,
+    "height": 1100,
+    "alt": {
+      "en": "Person wearing headphones and following a video lesson on a laptop.",
+      "fr": "Une personne portant un casque suit un cours vidéo sur un ordinateur portable."
+    },
+    "attribution": "Pavel Danilyuk",
+    "original_source": "https://www.pexels.com/photo/a-person-using-a-laptop-7120897/",
+    "suggested_object_position": "center 42%"
+  },
+  "accessible-documents": {
+    "asset": "/images/solutions/accessible-documents.webp",
+    "width": 733,
+    "height": 1100,
+    "alt": {
+      "en": "Annotated paper documents and eyeglasses beside a laptop.",
+      "fr": "Des documents papier annotés et des lunettes à côté d’un ordinateur portable."
+    },
+    "attribution": "Ron Lach",
+    "original_source": "https://www.pexels.com/photo/glasses-on-paperwork-and-laptop-on-table-8036339/",
+    "suggested_object_position": "center"
+  },
+  "plain-language-bilingual-review": {
+    "asset": "/images/solutions/plain-language-communications.webp",
+    "width": 1400,
+    "height": 933,
+    "alt": {
+      "en": "Two colleagues reviewing a printed booklet together.",
+      "fr": "Deux collègues examinent ensemble une brochure imprimée."
+    },
+    "attribution": "RDNE Stock project",
+    "original_source": "https://www.pexels.com/photo/professionals-looking-at-papers-7648029/",
+    "suggested_object_position": "center"
+  },
+  "accessible-meetings-events": {
+    "asset": "/images/solutions/accessible-events.webp",
+    "width": 1400,
+    "height": 934,
+    "alt": {
+      "en": "Presenter using a wheelchair explaining a diagram on a whiteboard.",
+      "fr": "Un présentateur en fauteuil roulant explique un schéma sur un tableau blanc."
+    },
+    "attribution": "Ivan S",
+    "original_source": "https://www.pexels.com/photo/a-man-on-a-wheelchair-doing-a-presentation-8127631/",
+    "suggested_object_position": "center"
+  },
+  "inclusive-supplier-onboarding": {
+    "asset": "/images/solutions/inclusive-procurement.webp",
+    "width": 1400,
+    "height": 1022,
+    "alt": {
+      "en": "Two people reviewing paperwork and taking notes at a desk.",
+      "fr": "Deux personnes examinent des documents et prennent des notes à un bureau."
+    },
+    "attribution": "Mikhail Nilov",
+    "original_source": "https://www.pexels.com/photo/two-people-sitting-at-desk-with-documents-7731352/",
+    "suggested_object_position": "center"
+  },
+  "bilingual-wayfinding-signs": {
+    "asset": "/images/solutions/wayfinding-signage.webp",
+    "width": 1400,
+    "height": 930,
+    "alt": {
+      "en": "Illuminated airport sign with baggage directions in several languages.",
+      "fr": "Panneau lumineux d’aéroport indiquant la direction des bagages en plusieurs langues."
+    },
+    "attribution": "Esther",
+    "original_source": "https://www.pexels.com/photo/close-up-photo-of-baggage-sign-746500/",
+    "suggested_object_position": "center"
+  },
+  "inclusive-name-badges": {
+    "asset": "/images/solutions/name-badges.webp",
+    "width": 734,
+    "height": 1100,
+    "alt": {
+      "en": "Event identification badges suspended from blue lanyards.",
+      "fr": "Badges d’identification pour un événement suspendus à des cordons bleus."
+    },
+    "attribution": "Pavel Danilyuk",
+    "original_source": "https://www.pexels.com/photo/close-up-shot-of-identification-badges-for-the-participants-8761297/",
+    "suggested_object_position": "center 70%"
+  },
+  "sensory-support-kits": {
+    "asset": "/images/solutions/sensory-support.webp",
+    "width": 733,
+    "height": 1100,
+    "alt": {
+      "en": "Yellow hearing-protection earmuffs resting on a wooden workbench.",
+      "fr": "Un casque antibruit jaune posé sur un établi en bois."
+    },
+    "attribution": "Ono Kosuki",
+    "original_source": "https://www.pexels.com/photo/protective-headphones-for-woodwork-on-wooden-table-5974011/",
+    "suggested_object_position": "center 63%"
+  },
+  "large-print-materials": {
+    "asset": "/images/solutions/large-print.webp",
+    "width": 733,
+    "height": 1100,
+    "alt": {
+      "en": "Woman reading a book with a magnifying glass at a table.",
+      "fr": "Une femme lit un livre à l’aide d’une loupe à une table."
+    },
+    "attribution": "Anna Shvets",
+    "original_source": "https://www.pexels.com/photo/elderly-woman-reading-book-in-room-5231267/",
+    "suggested_object_position": "center 70%"
+  }
+}

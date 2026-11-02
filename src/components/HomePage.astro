@@ -1,8 +1,11 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import '../styles/home-hero.css';
 import PageImage from './PageImage.astro';
 import { homeImages } from '../data/page-images';
 import CallToAction from './CallToAction.astro';
+import SolutionsTeaser from './SolutionsTeaser.astro';
+import CoverageLinks from './CoverageLinks.astro';
 import { services } from '../data/services';
 import { articles } from '../data/pages';
 interface Props {
@@ -50,51 +53,63 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
     ? 'Advisory, training and implementation for more inclusive organizations and accessible places across Canada. Explore seven connected areas of expertise.'
     : 'Conseil, formation et mise en œuvre pour des organisations plus inclusives et des lieux plus accessibles au Canada. Découvrez sept expertises complémentaires.'}
 >
-  <section class="container home-hero">
-    <div class="hero-copy">
-      <span class="eyebrow"
-        ><span class="dot" aria-hidden="true"></span>{
-          en
-            ? 'ADVISORY. TRAINING. IMPLEMENTATION.'
-            : 'CONSEIL. FORMATION. MISE EN ŒUVRE.'
-        }</span
-      ><h1>
-        {en ? 'People.' : 'Gens.'}<br />{
-          en ? 'Opportunity.' : 'Opportunités.'
-        }<br /><em>{en ? 'Progress.' : 'Progrès.'}</em>
-      </h1><p class="lead">
-        {
-          en
-            ? 'Building more inclusive organizations. Creating more accessible places. Turning good intentions into practical, lasting change.'
-            : 'Bâtir des organisations plus inclusives. Créer des lieux plus accessibles. Transformer les bonnes intentions en changements concrets et durables.'
-        }
-      </p><div class="button-row">
-        <a href={href('services')} class="button"
-          >{en ? 'Explore our expertise' : 'Découvrir nos expertises'}<span
-            aria-hidden="true">↗</span
-          ></a
-        ><a href={href('contact')} class="button button-outline"
-          >{en ? 'Let’s talk' : 'Parlons-en'}<span aria-hidden="true">↗</span
-          ></a
-        >
-      </div><p class="hero-note">
-        {
-          en
-            ? 'For corporations, governments and the people they serve.'
-            : 'Pour les entreprises, les gouvernements et leurs communautés.'
-        }
-      </p>
-    </div>
-    <div class="hero-visual people-visual">
-      <PageImage path="" locale={locale} /><div class="photo-caption">
-        <span
+  <section
+    class:list={['home-hero', { 'home-hero--light': !en }]}
+    aria-labelledby="home-title"
+  >
+    {
+      en && (
+        <div class="hero-backdrop">
+          <PageImage path="" locale={locale} />
+        </div>
+      )
+    }
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow"
           >{
             en
-              ? 'New perspectives.\nMore possibilities.'
-              : 'De nouvelles perspectives.\nPlus de possibilités.'
+              ? 'ADVISORY. TRAINING. IMPLEMENTATION.'
+              : 'CONSEIL. FORMATION. MISE EN ŒUVRE.'
           }</span
-        ><span class="circle-arrow" aria-hidden="true">↗</span>
+        ><h1 id="home-title">
+          {en ? 'People.' : 'Gens.'}<br />{
+            en ? 'Opportunity.' : 'Opportunités.'
+          }<br /><em>{en ? 'Progress.' : 'Progrès.'}</em>
+        </h1><p class="lead">
+          {
+            en
+              ? 'Building more inclusive organizations. Creating more accessible places. Turning good intentions into practical, lasting change.'
+              : 'Bâtir des organisations plus inclusives. Créer des lieux plus accessibles. Transformer les bonnes intentions en changements concrets et durables.'
+          }
+        </p><div class="button-row">
+          <a href={href('services')} class="button"
+            >{en ? 'Explore our expertise' : 'Découvrir nos expertises'}</a
+          ><a href={href('contact')} class="button button-outline"
+            >{en ? 'Let’s talk' : 'Parlons-en'}</a
+          >
+        </div><p class="hero-note">
+          {
+            en
+              ? 'For corporations, governments and the people they serve.'
+              : 'Pour les entreprises, les gouvernements et leurs communautés.'
+          }
+        </p>
       </div>
+      {
+        !en && (
+          <figure class="hero-feature">
+            <PageImage
+              path=""
+              locale={locale}
+              sizes="(max-width: 900px) calc(100vw - 32px), (min-width: 1896px) 850px, 46vw"
+            />
+            <figcaption>
+              De nouvelles perspectives. Plus de possibilités.
+            </figcaption>
+          </figure>
+        )
+      }
     </div>
   </section>
   <section
@@ -109,17 +124,11 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
             : 'DES EXPERTISES COMPLÉMENTAIRES.\nUNE AMBITION COMMUNE.'
         }</span
       ><div>
-        <span class="small-symbol" aria-hidden="true">◎</span>{
-          en ? 'People & organizations' : 'Personnes et organisations'
-        }
+        {en ? 'People & organizations' : 'Personnes et organisations'}
       </div><div>
-        <span class="small-symbol" aria-hidden="true">⌑</span>{
-          en ? 'Places & accessibility' : 'Lieux et accessibilité'
-        }
+        {en ? 'Places & accessibility' : 'Lieux et accessibilité'}
       </div><div>
-        <span class="small-symbol" aria-hidden="true">↗</span>{
-          en ? 'Opportunity & impact' : 'Opportunités et retombées'
-        }
+        {en ? 'Opportunity & impact' : 'Opportunités et retombées'}
       </div>
     </div>
   </section>
@@ -146,16 +155,11 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
         services.map((service) => (
           <a class="service-card" href={href(`services/${service.slug}`)}>
             <>
-              <div class="card-top">
-                <>
-                  <span class="service-number">{service.number}</span>
-                  <span class="card-arrow" aria-hidden="true">
-                    ↗
-                  </span>
-                </>
-              </div>
               <h3>{service.shortTitle[locale]}</h3>
               <p>{service.intro[locale]}</p>
+              <span class="service-link">
+                {en ? 'View services' : 'Découvrir les services'}
+              </span>
             </>
           </a>
         ))
@@ -163,7 +167,7 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
         ><div class="card-top">
           <span class="eyebrow no-margin"
             >{en ? 'YOUR NEXT CHAPTER' : 'VOTRE PROCHAIN CHAPITRE'}</span
-          ><span class="card-arrow" aria-hidden="true">↗</span>
+          >
         </div><h3>
           {en ? 'Where do you\nwant to go?' : 'Où souhaitez-vous\naller?'}
         </h3><p>
@@ -172,7 +176,9 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
               ? 'Let’s build the path forward.'
               : 'Traçons ensemble la voie à suivre.'
           }
-        </p></a
+        </p><span class="service-link"
+          >{en ? 'Discuss your project' : 'Parlons de votre projet'}</span
+        ></a
       >
     </div>
   </section>
@@ -221,8 +227,7 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
                   ? 'Explore corporate solutions'
                   : 'Découvrir les solutions pour les entreprises'
               }
-              <span aria-hidden="true">↗</span></span
-            >
+            </span>
           </div></a
         ><a class="audience-card audience-card-framed" href={href('government')}
           ><img
@@ -256,8 +261,7 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
                   ? 'Explore public sector solutions'
                   : 'Découvrir les solutions pour le secteur public'
               }
-              <span aria-hidden="true">↗</span></span
-            >
+            </span>
           </div></a
         >
       </div>
@@ -281,8 +285,7 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
         }
       </p><a class="text-link" href={href('approach')}
         >{en ? 'Discover our approach' : 'Découvrir notre approche'}
-        <span aria-hidden="true">↗</span></a
-      >
+      </a>
     </div><div class="approach-steps">
       {
         steps.map(([title, body], i) => (
@@ -316,8 +319,7 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
           </h2>
         </div><a class="text-link" href={href('insights')}
           >{en ? 'All insights' : 'Toutes les perspectives'}
-          <span aria-hidden="true">↗</span></a
-        >
+        </a>
       </div><div class="insights-grid">
         {
           articles.map((article, i) => (
@@ -343,7 +345,6 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
                 <h3>{article.title[locale]}</h3>
                 <span class="text-link">
                   {en ? 'Read the guide' : 'Lire le guide'}{' '}
-                  <span aria-hidden="true">↗</span>
                 </span>
               </>
             </a>
@@ -352,5 +353,7 @@ const articleImages = ['@home-guide-1', '@home-guide-2', '@home-guide-3'];
       </div>
     </div>
   </section>
+  <SolutionsTeaser locale={locale} />
+  <CoverageLinks locale={locale} />
   <CallToAction locale={locale} />
 </SiteLayout>

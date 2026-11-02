@@ -618,16 +618,16 @@ export const pages: ContentPage[] = [
   {
     slug: 'privacy',
     eyebrow: {
-      en: 'PRIVACY — REVIEW DRAFT',
-      fr: 'CONFIDENTIALITÉ — PROJET À RÉVISER',
+      en: 'PRIVACY',
+      fr: 'CONFIDENTIALITÉ',
     },
     title: {
       en: 'Your information deserves a clear explanation.',
       fr: 'Vos renseignements méritent une explication claire.',
     },
     intro: {
-      en: 'This notice is a review draft for the proposed website. The site owner must confirm the legal entity, responsible contact, service providers, retention practices and applicable requirements before production publication. It is not a statement that those operational arrangements are already in place.',
-      fr: 'Cet avis est un projet à réviser pour le site proposé. Avant sa publication en production, le propriétaire doit confirmer l’entité juridique, la personne responsable, les fournisseurs de services, les pratiques de conservation et les exigences applicables. Cet avis ne signifie pas que ces modalités opérationnelles sont déjà en place.',
+      en: 'This notice explains how Diversity.ca, operated by Grafov Group, handles information from website visitors and initial enquiries. Contact info@diversity.ca with privacy questions or requests.',
+      fr: 'Cet avis explique comment Diversity.ca, exploité par Grafov Group, traite les renseignements des visiteurs et les demandes initiales. Pour toute question ou demande relative à la confidentialité, écrivez à info@diversity.ca.',
     },
     sections: [
       {
@@ -636,76 +636,92 @@ export const pages: ContentPage[] = [
           fr: 'Les renseignements que vous choisissez de fournir',
         },
         body: {
-          en: 'The enquiry form asks for contact details and project information so a request can be understood and answered. Optional fields help describe your organization, service needs, location, timeline, budget and procurement deadline. Provide only what is necessary for the initial conversation; do not include health records, employee files or other sensitive information.',
-          fr: 'Le formulaire demande vos coordonnées et des renseignements sur le projet afin de comprendre votre demande et d’y répondre. Les champs facultatifs précisent l’organisation, les besoins, le lieu, l’échéancier, le budget et la date limite d’approvisionnement. Fournissez uniquement l’information nécessaire au premier échange; n’incluez pas de dossiers médicaux, de dossiers d’employés ni d’autres renseignements sensibles.',
+          en: 'The enquiry form asks for contact details and project information so we can understand your request, respond and discuss possible work together. Optional fields describe your organization, service needs, location, timeline, budget and procurement deadline. Provide only what is needed for an initial conversation. Please do not include health records, employee files, identity documents or other sensitive information.',
+          fr: 'Le formulaire demande vos coordonnées et des renseignements sur votre projet afin de comprendre votre demande, d’y répondre et de discuter d’un éventuel mandat. Les champs facultatifs précisent l’organisation, les besoins, le lieu, l’échéancier, le budget et la date limite d’approvisionnement. Fournissez uniquement les renseignements nécessaires au premier échange. Veuillez ne pas inclure de dossiers médicaux, de dossiers d’employés, de pièces d’identité ni d’autres renseignements sensibles.',
         },
       },
       {
         heading: {
-          en: 'How a request leaves your browser',
-          fr: 'Comment une demande quitte votre navigateur',
+          en: 'How your enquiry is sent',
+          fr: 'Comment votre demande est envoyée',
         },
         body: {
-          en: 'When online submission is configured, the form sends the information you enter to the selected form provider over HTTPS. The owner must confirm the provider’s processing locations and terms before enabling this option. When online submission is unavailable, the email option prepares a message in your own email application; you review and send it yourself. Preparing an email does not submit a request.',
-          fr: 'Lorsque l’envoi en ligne est configuré, le formulaire transmet les renseignements saisis au fournisseur sélectionné par HTTPS. Le propriétaire doit confirmer les lieux de traitement et les conditions du fournisseur avant d’activer cette option. Si l’envoi en ligne n’est pas disponible, l’option courriel prépare un message dans votre application; vous le révisez et l’envoyez vous-même. La préparation d’un courriel ne transmet pas la demande.',
+          en: 'When you submit a form, your enquiry is sent through Formspree for delivery to info@diversity.ca. Formspree and the services delivering our email, including Forward Email, process the submitted details to handle your request. A confirmation means the submission service accepted your enquiry. The download option only saves a copy on your device; it does not send your enquiry. If you choose an email link instead, your own email service processes the message when you send it.',
+          fr: 'Lorsque vous envoyez un formulaire, votre demande est transmise par Formspree à info@diversity.ca. Formspree et les services qui acheminent nos courriels, dont Forward Email, traitent les renseignements soumis afin de prendre en charge votre demande. Une confirmation indique que le service d’envoi a accepté votre demande. L’option de téléchargement enregistre uniquement une copie sur votre appareil; elle n’envoie pas votre demande. Si vous utilisez plutôt un lien de courriel, votre propre service de messagerie traite le message lors de l’envoi.',
         },
       },
       {
         heading: {
-          en: 'Technical data and cookies',
-          fr: 'Données techniques et témoins',
+          en: 'Website services and technical information',
+          fr: 'Services du site et renseignements techniques',
         },
         body: {
-          en: 'This version of the site does not include advertising trackers or analytics scripts. The hosting provider and any enabled form provider may process technical information such as IP addresses and request logs as part of delivering their services. Their actual practices must be confirmed for the production deployment. If optional tracking is introduced, this notice and any required consent controls must be updated first.',
-          fr: 'Cette version du site ne comprend pas de traceurs publicitaires ni de scripts d’analyse. L’hébergeur et le fournisseur de formulaires, s’il est activé, peuvent traiter des données techniques comme les adresses IP et les journaux de requêtes pour assurer leurs services. Leurs pratiques doivent être confirmées pour le déploiement en production. Tout ajout de suivi facultatif exige d’abord la mise à jour de cet avis et des mécanismes de consentement requis.',
+          en: 'Diversity.ca is hosted by Web Hosting Canada. A separately published version is hosted through OpenAI Sites. Hosting services may process IP addresses, request details and security logs to deliver and protect the website. The website code contains no advertising trackers or analytics scripts. Email and hosting providers have their own terms and privacy practices; the enquiry retention period below does not describe their technical logs or your own email account.',
+          fr: 'Diversity.ca est hébergé par Hébergement Web Canada. Une version publiée séparément est hébergée au moyen d’OpenAI Sites. Les services d’hébergement peuvent traiter les adresses IP, les détails des requêtes et les journaux de sécurité pour fournir et protéger le site. Le code du site ne contient aucun traceur publicitaire ni script d’analyse. Les fournisseurs de messagerie et d’hébergement ont leurs propres conditions et pratiques de confidentialité; la durée de conservation ci-dessous ne vise pas leurs journaux techniques ni votre propre compte de messagerie.',
         },
       },
       {
         heading: {
-          en: 'Access, retention and enquiries',
-          fr: 'Accès, conservation et demandes',
+          en: 'Retention of initial enquiries',
+          fr: 'Conservation des demandes initiales',
         },
         body: {
-          en: 'The owner must establish who can access enquiry records, how long they are kept and how access, correction or deletion requests are handled. These details remain pending review. The proposed contact address is info@diversity.ca; mailbox operation and the person responsible for privacy must be confirmed before launch. Do not send identity documents to make an initial privacy enquiry.',
-          fr: 'Le propriétaire doit déterminer qui peut accéder aux demandes, leur durée de conservation et les modalités de traitement des demandes d’accès, de rectification ou de suppression. Ces éléments restent à réviser. L’adresse proposée est info@diversity.ca; le fonctionnement de la boîte et la personne responsable de la protection des renseignements doivent être confirmés avant le lancement. N’envoyez pas de pièce d’identité lors d’une première demande.',
+          en: 'Enquiries that do not become client engagements are kept for up to 12 months. This period covers the initial enquiry and follow-up correspondence; it does not describe records created during a client engagement. We use enquiry information to respond to your request and manage the related conversation. Sending an enquiry does not subscribe you to a marketing list.',
+          fr: 'Les demandes qui ne donnent pas lieu à un mandat sont conservées pendant une durée maximale de 12 mois. Cette durée vise la demande initiale et les échanges de suivi; elle ne décrit pas la conservation des dossiers créés dans le cadre d’un mandat. Nous utilisons ces renseignements pour répondre à votre demande et gérer les échanges qui s’y rapportent. L’envoi d’une demande ne vous inscrit pas à une liste de marketing.',
+        },
+      },
+      {
+        heading: {
+          en: 'Privacy questions and requests',
+          fr: 'Questions et demandes relatives à la confidentialité',
+        },
+        body: {
+          en: 'Contact the Diversity.ca website owner, Grafov Group, at info@diversity.ca to ask about the information you provided, request access, correction or deletion, or ask us to stop following up. Describe your request and the email address used for the enquiry. Please do not send identity documents with an initial request. Any limits that affect a request can be discussed with you. This notice will be updated if the website’s enquiry or tracking practices change.',
+          fr: 'Écrivez au propriétaire du site Diversity.ca, Grafov Group, à info@diversity.ca pour poser une question sur les renseignements fournis, demander l’accès, la rectification ou la suppression, ou nous demander de cesser les suivis. Décrivez votre demande et indiquez l’adresse courriel utilisée lors du premier échange. Veuillez ne pas joindre de pièce d’identité à une demande initiale. Toute limite applicable pourra être discutée avec vous. Cet avis sera mis à jour si les pratiques du site concernant les demandes ou le suivi changent.',
         },
       },
     ],
-    cta: { label: { en: 'CONTACT US', fr: 'NOUS JOINDRE' }, path: '/contact/' },
+    cta: {
+      label: {
+        en: 'CONTACT US',
+        fr: 'NOUS JOINDRE',
+      },
+      path: '/contact/',
+    },
   },
   {
     slug: 'accessibility-statement',
     eyebrow: {
-      en: 'ACCESSIBILITY — REVIEW DRAFT',
-      fr: 'ACCESSIBILITÉ — PROJET À RÉVISER',
+      en: 'ACCESSIBILITY',
+      fr: 'ACCESSIBILITÉ',
     },
     title: {
       en: 'A website people can use.',
       fr: 'Un site que les personnes peuvent utiliser.',
     },
     intro: {
-      en: 'This statement describes the intended accessibility approach for the proposed Diversity.ca website. It is a review draft, not a certification or a claim of complete conformance. Findings from final testing and user feedback should inform the published statement.',
-      fr: 'Cette déclaration décrit l’approche d’accessibilité prévue pour le site Diversity.ca. Il s’agit d’un projet à réviser, et non d’une certification ou d’une déclaration de conformité complète. Les résultats des essais finaux et les commentaires des utilisateurs doivent guider la version publiée.',
+      en: 'We want people with disabilities to be able to read and use Diversity.ca. This statement describes the website’s accessibility features, the limits of our testing and how to tell us about a barrier.',
+      fr: 'Nous souhaitons que les personnes en situation de handicap puissent consulter et utiliser Diversity.ca. Cette déclaration décrit les fonctions d’accessibilité du site, les limites de nos essais et la façon de nous signaler un obstacle.',
     },
     sections: [
       {
         heading: {
-          en: 'Design and development goals',
-          fr: 'Objectifs de conception et de développement',
+          en: 'Our accessibility approach',
+          fr: 'Notre approche de l’accessibilité',
         },
         body: {
-          en: 'The design aims to support the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA where practical. Priorities include semantic page structure, keyboard operation, visible focus, readable contrast, responsive layouts and reduced-motion preferences. Meeting an automated check alone does not establish conformance.',
-          fr: 'La conception vise les Règles pour l’accessibilité des contenus Web (WCAG) 2.2, niveau AA, dans la mesure du possible. Les priorités comprennent une structure sémantique, la navigation au clavier, un indicateur de focus visible, des contrastes lisibles, des mises en page adaptatives et le respect des préférences de mouvement réduit. Un contrôle automatisé ne suffit pas à établir la conformité.',
+          en: 'WCAG 2.2 Level AA guides the site’s design and development. Features include structured headings, keyboard navigation, visible focus indicators, text alternatives for meaningful images, responsive layouts and support for reduced-motion preferences. These features and automated checks do not establish full conformance or certification.',
+          fr: 'Les WCAG 2.2, niveau AA, orientent la conception et le développement du site. Celui-ci comprend des titres structurés, une navigation au clavier, des indicateurs de focus visibles, des textes de remplacement pour les images porteuses de sens, des mises en page adaptatives et la prise en charge des préférences de mouvement réduit. Ces fonctions et les contrôles automatisés ne constituent pas une déclaration de conformité complète ni une certification.',
         },
       },
       {
         heading: {
-          en: 'Language, content and forms',
-          fr: 'Langues, contenu et formulaires',
+          en: 'Languages and enquiry forms',
+          fr: 'Langues et formulaires de demande',
         },
         body: {
-          en: 'English and Canadian French versions are provided with a language switch on each page. Forms are intended to use persistent labels, clear required-field indications and useful error messages. Where online submission is unavailable, a clearly identified email option allows you to prepare a request in your own application.',
-          fr: 'Des versions anglaise et française canadienne sont proposées, avec un changement de langue sur chaque page. Les formulaires visent des étiquettes permanentes, une indication claire des champs obligatoires et des messages d’erreur utiles. Lorsque l’envoi en ligne n’est pas disponible, une option courriel clairement identifiée permet de préparer une demande dans votre application.',
+          en: 'English and Canadian French versions are available, with a language switch on each page. Forms include persistent labels, required-field instructions and validation messages. You can submit an enquiry directly from the website and receive an on-screen confirmation or error message. If a form or download creates a barrier, email info@diversity.ca directly and describe what you need.',
+          fr: 'Des versions anglaise et française canadienne sont offertes, avec un sélecteur de langue sur chaque page. Les formulaires comportent des étiquettes permanentes, des consignes pour les champs obligatoires et des messages de validation. Vous pouvez envoyer une demande directement depuis le site et recevoir une confirmation ou un message d’erreur à l’écran. Si un formulaire ou un téléchargement présente un obstacle, écrivez directement à info@diversity.ca et décrivez votre besoin.',
         },
       },
       {
@@ -714,8 +730,8 @@ export const pages: ContentPage[] = [
           fr: 'Essais et limites connues',
         },
         body: {
-          en: 'The release review should cover keyboard use, screen-reader navigation, zoom, mobile layouts, contrast, language changes and form outcomes. Third-party email applications and any enabled form provider are outside the site’s direct control. A dated record of the tests performed and unresolved issues should be maintained for the actual production release.',
-          fr: 'La révision préalable au lancement doit couvrir le clavier, les lecteurs d’écran, le zoom, les mises en page mobiles, les contrastes, les changements de langue et le fonctionnement des formulaires. Les applications courriel et le fournisseur de formulaires éventuel échappent au contrôle direct du site. Un registre daté des essais et des problèmes non résolus devrait être conservé pour la version mise en production.',
+          en: 'The development review includes automated checks and keyboard and layout checks recorded in the project’s review notes. The website owner has reviewed the mobile layout; human screen-reader testing has not been completed. Browser-generated validation messages may appear in the browser’s language, even when a French page is selected. Direct submission requires JavaScript, an internet connection and availability of the form service. You can copy info@diversity.ca into your preferred email service if a form cannot be submitted.',
+          fr: 'La révision de développement comprend des contrôles automatisés ainsi que des vérifications du clavier et de la mise en page consignées dans les notes du projet. Le propriétaire du site a vérifié la présentation mobile; les essais humains avec lecteur d’écran n’ont pas été réalisés. Les messages de validation générés par le navigateur peuvent s’afficher dans la langue de celui-ci, même sur une page française. L’envoi direct nécessite JavaScript, une connexion Internet et la disponibilité du service de formulaires. Vous pouvez copier info@diversity.ca dans votre service de messagerie habituel si l’envoi du formulaire est impossible.',
         },
       },
       {
@@ -724,8 +740,8 @@ export const pages: ContentPage[] = [
           fr: 'Signalez-nous un obstacle',
         },
         body: {
-          en: 'When reporting an issue, describe the page, what you were trying to do and what prevented you from continuing. Your browser, device or assistive technology may help reproduce the issue, but you do not need to disclose a disability or medical information. The owner must confirm the feedback channel and response process before launch; no response time is promised in this draft.',
-          fr: 'Pour signaler un problème, indiquez la page, l’action souhaitée et ce qui vous a empêché de poursuivre. Le navigateur, l’appareil ou la technologie d’assistance peuvent aider à reproduire le problème, mais vous n’avez pas à communiquer de handicap ni de renseignement médical. Le propriétaire doit confirmer le canal de rétroaction et le processus de réponse avant le lancement; aucun délai de réponse n’est promis dans ce projet.',
+          en: 'Send accessibility feedback to info@diversity.ca. Include the page address, what you were trying to do, what prevented you from continuing and any alternative format that would help. Your browser, device or assistive technology can help us understand the issue, but you do not need to disclose a disability or medical information.',
+          fr: 'Envoyez vos commentaires sur l’accessibilité à info@diversity.ca. Indiquez l’adresse de la page, l’action souhaitée, l’obstacle rencontré et tout autre format qui pourrait vous aider. Le navigateur, l’appareil ou la technologie d’assistance peuvent nous aider à comprendre le problème, mais vous n’avez pas à communiquer de handicap ni de renseignement médical.',
         },
       },
     ],

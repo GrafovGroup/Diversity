@@ -1,0 +1,43 @@
+---
+import images from '../data/solution-images.json';
+interface Props {
+  slug: string;
+  locale: 'en' | 'fr';
+  product?: boolean;
+  card?: boolean;
+}
+const { slug, locale, product = false, card = false } = Astro.props;
+const visual = images[slug as keyof typeof images];
+if (!visual) throw new Error(`Missing solution image: ${slug}`);
+---
+
+<figure class:list={['solution-image', { 'solution-image-card': card }]}>
+  <img
+    src={visual.asset}
+    alt={card ? '' : visual.alt[locale]}
+    width={visual.width}
+    height={visual.height}
+    loading={card ? 'lazy' : 'eager'}
+    fetchpriority={card ? 'auto' : 'high'}
+    style={{ objectPosition: visual.suggested_object_position }}
+  />
+  {
+    !card && (
+      <figcaption>
+        {product && (
+          <span>
+            {locale === 'en'
+              ? 'Illustrative photograph. Final products are selected to your specifications.'
+              : 'Photo illustrative. Les produits sont choisis selon vos spécifications.'}{' '}
+          </span>
+        )}
+        <span>
+          Photo :{' '}
+          <a href={visual.original_source} rel="external">
+            {visual.attribution} / Pexels
+          </a>
+        </span>
+      </figcaption>
+    )
+  }
+</figure>

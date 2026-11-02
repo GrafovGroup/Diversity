@@ -1,9 +1,14 @@
-import { test, expect, type Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
+import { test, expect } from './fixtures';
 import AxeBuilder from '@axe-core/playwright';
 import { readdir, readFile, mkdir } from 'node:fs/promises';
 import { join, relative, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { validateFormEndpoint, createEnquiryRecord } from '../src/lib/forms';
+import {
+  validateFormEndpoint,
+  createEnquiryRecord,
+  createEnquiryPayload,
+} from '../src/lib/forms';
 import { pages as contentPages, articles } from '../src/data/pages';
 import { services } from '../src/data/services';
 
@@ -79,7 +84,6 @@ async function completeEnquiry(page: Page) {
     .fill(
       'Please help scope an accessibility assessment for our public information website.',
     );
-  await form.locator('[name="consent"]').check();
   return form;
 }
 
@@ -100,10 +104,29 @@ test('form configuration accepts only the intended HTTPS provider endpoint', () 
   }
 });
 
-test('enquiry records reject absent consent and the anti-spam field', () => {
+test('enquiry records accept valid enquiries without a consent claim and reject spam', () => {
   const data = new FormData();
   expect(() => createEnquiryRecord(data, 'en', 'proposal')).toThrow();
-  data.set('consent', 'yes');
+  for (const [key, value] of Object.entries({
+    name: 'QA Reviewer',
+    email: 'reviewer@example.org',
+    organization: 'Example QA',
+    audience: 'Corporation',
+    service: 'accessibility',
+    region: 'Ontario',
+    message: 'Please review our public website accessibility.',
+  }))
+    data.set(key, value);
+  for (const locale of ['en', 'fr'] as const) {
+    const record = createEnquiryRecord(data, locale, 'contact');
+    expect(record.schemaVersion).toBe(3);
+    expect(record).not.toHaveProperty('consent');
+    const payload = createEnquiryPayload(record);
+    expect(payload.has('consent')).toBe(false);
+    expect(
+      JSON.parse(String(payload.get('enquiry_record'))),
+    ).not.toHaveProperty('consent');
+  }
   data.set('_gotcha', 'automated submission');
   expect(() => createEnquiryRecord(data, 'en', 'proposal')).toThrow();
 });
@@ -374,13 +397,10 @@ for (const locale of ['en', 'fr'] as const) {
       'type',
       'email',
     );
-    await expect(form.locator('[name="consent"]')).toHaveAttribute(
-      'required',
-      '',
-    );
+    await expect(form.locator('[name="consent"]')).toHaveCount(0);
   });
 
-  test(`${locale}: fallback prepares an email and exports a consented enquiry without posting`, async ({
+  test(`${locale}: fallback prepares an email and exports an enquiry without posting`, async ({
     page,
   }) => {
     const postRequests: string[] = [];
@@ -418,12 +438,11 @@ for (const locale of ['en', 'fr'] as const) {
     expect(path).not.toBeNull();
     const record = JSON.parse(await readFile(path!, 'utf8'));
     expect(record).toMatchObject({
-      schemaVersion: 2,
+      schemaVersion: 3,
       locale,
       kind: 'proposal',
       name: 'QA Reviewer',
       email: 'reviewer@example.org',
-      consent: true,
     });
     expect(Number.isNaN(Date.parse(record.createdAt))).toBe(false);
     expect(postRequests).toEqual([]);
@@ -483,18 +502,23 @@ for (const accepted of [false, true]) {
     await form.locator('button[type="submit"]').click();
     const feedback = form.locator('[data-feedback]');
     if (accepted) {
-      await expect(feedback).toContainText(
-        'accepted by the submission service',
+      const success = page.locator('[data-success]');
+      await expect(success).toBeVisible();
+      await expect(success).toContainText(
+        'Thank you — your enquiry has been sent.',
       );
+      await expect(form).toBeHidden();
+      await expect(success).toBeFocused();
+      await page.locator('[data-new-enquiry]').click();
+      await expect(form).toBeVisible();
+      await expect(success).toBeHidden();
       await expect(form.locator('[name="email"]')).toHaveValue('');
-      await expect(form.locator('[name="consent"]')).not.toBeChecked();
     } else {
       await expect(feedback).toHaveAttribute('data-error', 'true');
       await expect(feedback).toContainText('could not confirm delivery');
       await expect(form.locator('[name="email"]')).toHaveValue(
         'reviewer@example.org',
       );
-      await expect(form.locator('[name="consent"]')).toBeChecked();
     }
     await expect(form.locator('button[type="submit"]')).toBeEnabled();
     expect(requests).toBe(1);

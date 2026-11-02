@@ -4,8 +4,9 @@ interface Props {
   path: string;
   locale: 'en' | 'fr';
   class?: string;
+  sizes?: string;
 }
-const { path, locale, class: className } = Astro.props;
+const { path, locale, class: className, sizes } = Astro.props;
 const visual = pageImages[path];
 if (!visual) throw new Error(`Missing page image for ${path}`);
 ---
@@ -20,9 +21,11 @@ if (!visual) throw new Error(`Missing page image for ${path}`);
     },
   ]}
   src={visual.src}
+  srcset={visual.srcset}
+  sizes={sizes ?? visual.sizes}
   alt={visual.alt[locale]}
   width={visual.width ?? 1200}
   height={visual.height ?? 900}
-  style={{ objectFit: visual.fit }}
+  style={{ objectFit: visual.fit, objectPosition: visual.objectPosition }}
   fetchpriority="high"
 />

@@ -6,23 +6,76 @@ interface Props {
   title: string;
   description: string;
   path?: string;
+  structuredData?: Record<string, unknown>[];
+  breadcrumbs?: { name: string; path: string }[];
 }
-const { locale, title, description, path = '' } = Astro.props;
+const {
+  locale,
+  title,
+  description,
+  path = '',
+  structuredData = [],
+  breadcrumbs = [],
+} = Astro.props;
 const en = locale === 'en';
 const other = en ? 'fr' : 'en';
 const href = (p = '') =>
   `/${locale}/${p ? p.replace(/^\/+|\/+$/g, '') + '/' : ''}`;
 const canonical = new URL(href(path), Astro.site);
-const schema = {
-  '@context': 'https://schema.org',
+const organization = {
   '@type': 'Organization',
+  '@id': 'https://diversity.ca/#organization',
   name: 'Diversity.ca',
   url: 'https://diversity.ca',
   logo: 'https://diversity.ca/brand/wordmark-light.svg',
   areaServed: { '@type': 'Country', name: 'Canada' },
+  email: 'info@diversity.ca',
+};
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    organization,
+    {
+      '@type': 'WebSite',
+      '@id': 'https://diversity.ca/#website',
+      url: 'https://diversity.ca/',
+      name: 'Diversity.ca',
+      publisher: { '@id': organization['@id'] },
+      inLanguage: ['en-CA', 'fr-CA'],
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: String(canonical),
+      name: title,
+      description,
+      inLanguage: en ? 'en-CA' : 'fr-CA',
+      isPartOf: { '@id': 'https://diversity.ca/#website' },
+      about: { '@id': organization['@id'] },
+      ...(breadcrumbs.length
+        ? { breadcrumb: { '@id': `${canonical}#breadcrumb` } }
+        : {}),
+    },
+    ...(breadcrumbs.length
+      ? [
+          {
+            '@type': 'BreadcrumbList',
+            '@id': `${canonical}#breadcrumb`,
+            itemListElement: breadcrumbs.map((item, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: item.name,
+              item: String(new URL(href(item.path), Astro.site)),
+            })),
+          },
+        ]
+      : []),
+    ...structuredData,
+  ],
 };
 const nav = [
   { path: 'services', label: en ? 'Expertise' : 'Expertises' },
+  { path: 'solutions', label: 'Solutions' },
   { path: 'corporations', label: en ? 'Corporations' : 'Entreprises' },
   { path: 'government', label: en ? 'Government' : 'Secteur public' },
   { path: 'approach', label: en ? 'Our approach' : 'Notre approche' },
@@ -37,6 +90,7 @@ const nav = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#10213d" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <title>{title} | Diversity.ca</title>
     <link rel="canonical" href={canonical} />
     <link
@@ -72,7 +126,10 @@ const nav = [
         : 'Diversity.ca — Gens, opportunités, progrès'}
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+    />
   </head>
   <body>
     <a class="skip-link" href="#main"
@@ -109,7 +166,7 @@ const nav = [
           href={href()}
           class="brand-link"
           aria-label={en ? 'Diversity.ca home' : 'Diversity.ca accueil'}
-          ><Wordmark locale={locale} /></a
+          ><Wordmark /></a
         >
         <button
           class="menu-toggle"
@@ -141,8 +198,7 @@ const nav = [
             ))
           }
           <a class="button button-small" href={href('contact')}
-            >{en ? 'Let’s talk' : 'Parlons-en'}<span aria-hidden="true">↗</span
-            ></a
+            >{en ? 'Let’s talk' : 'Parlons-en'}</a
           >
         </nav>
       </div>
@@ -152,7 +208,7 @@ const nav = [
       <div class="container footer-top">
         <div>
           <a href={href()} class="brand-link"
-            ><Wordmark locale={locale} dark /></a
+            ><Wordmark dark /></a
           ><p>
             {
               en
@@ -169,6 +225,9 @@ const nav = [
           ><a href={href('partners')}
             >{en ? 'Careers & partnerships' : 'Carrières et partenariats'}</a
           >
+          <a href={href('solutions')}
+            >{en ? 'Services & products' : 'Services et produits'}</a
+          >
         </div><div class="footer-column">
           <h2>{en ? 'For your organization' : 'Pour votre organisation'}</h2><a
             href={href('corporations')}>{en ? 'Corporations' : 'Entreprises'}</a
@@ -184,8 +243,8 @@ const nav = [
         </div><div class="footer-column">
           <h2>{en ? 'Start a conversation' : 'Entamons la conversation'}</h2><a
             href="mailto:info@diversity.ca"
-            >info@diversity.ca <span aria-hidden="true">↗</span></a
-          ><a href={href('request-proposal')}
+            >info@diversity.ca
+          </a><a href={href('request-proposal')}
             >{en ? 'Request a proposal' : 'Demander une proposition'}</a
           ><a href={href('request-assessment')}
             >{en ? 'Request an assessment' : 'Demander une évaluation'}</a
@@ -209,6 +268,10 @@ const nav = [
       </div>
     </footer>
     <script>
+      import {
+        resolveLocationContext,
+        regionOptions,
+      } from '../lib/location-context';
       import {
         resolveEnquiryContext,
         isServiceAllowed,
@@ -265,6 +328,14 @@ const nav = [
                   'subservice',
                   context.subserviceId,
                 );
+              if (context.solutionId)
+                destination.searchParams.set('solution', context.solutionId);
+            }
+            const location = resolveLocationContext(parameters, locale);
+            if (location) {
+              destination.searchParams.set('region', location.regionId);
+              if (location.cityId)
+                destination.searchParams.set('city', location.cityId);
             }
             link.href = destination.pathname + destination.search;
           }
@@ -278,10 +349,28 @@ const nav = [
           )?.value;
           if (service) parameters.set('service', service);
           if (subservice) parameters.set('subservice', subservice);
+          const solution =
+            enquiry.querySelector<HTMLInputElement>('[name="solution"]')?.value;
+          if (solution) parameters.set('solution', solution);
+          const region =
+            enquiry.querySelector<HTMLSelectElement>('[name="region"]')?.value;
+          const regionOption = regionOptions.find(
+            (item) => item.name[locale] === region,
+          );
+          if (regionOption) parameters.set('region', regionOption.code);
+          const city = enquiry.querySelector<HTMLInputElement>(
+            '[name="city_context"]',
+          )?.value;
+          if (city) parameters.set('city', city);
           updateLanguageLinks(parameters);
         };
         updateLanguageLinks(new URLSearchParams(window.location.search));
         enquiry.addEventListener('change', synchronizeSelection);
+        enquiry
+          .querySelector('[name="project_city"]')
+          ?.addEventListener('input', () =>
+            queueMicrotask(synchronizeSelection),
+          );
         enquiry.addEventListener('reset', () =>
           queueMicrotask(synchronizeSelection),
         );

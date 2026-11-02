@@ -32,9 +32,9 @@ npx playwright install --with-deps chromium
 npm test
 ```
 
-For direct form submission, supply `PUBLIC_FORM_ENDPOINT` through the build environment or an ignored `.env` file before building. The accepted format is an HTTPS Formspree endpoint such as `https://formspree.io/f/your-actual-id`. The endpoint is public browser configuration, not a secret. Never insert an API key into it. Rebuild whenever it changes.
+The owner-approved Formspree endpoint `https://formspree.io/f/xaeepeno` is the tracked default for all eight bilingual enquiry forms, with delivery configured by the owner to `info@diversity.ca`. This preserves the connection across imports and builds without local environment files. `PUBLIC_FORM_ENDPOINT` can override it before building. The endpoint is public browser configuration, not a secret. Never insert an API key into it. Rebuild whenever it changes.
 
-An unconfigured endpoint produces the explicit email-draft flow. Decide whether that reviewed fallback is acceptable for release; do not describe it as a working server-side form. A successful provider response also needs a real delivery check at the recipient mailbox.
+An explicitly empty `PUBLIC_FORM_ENDPOINT` enables the legacy email-draft flow for development; do not deploy that configuration or its current direct-delivery policy text without review. A successful provider response means provider acceptance, not independently confirmed inbox delivery. The owner confirmed receipt at `info@diversity.ca`. Browser tests block real Formspree traffic and use test-only HTML overrides and provider mocks.
 
 Record the exact Git revision, build date, test result and any accepted limitations. Review the actual output files under `dist/`, including both language trees, `sitemap.xml`, `robots.txt`, brand/media assets and the 404 output.
 

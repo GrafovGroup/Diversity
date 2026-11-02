@@ -1,0 +1,208 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import SolutionImage from './SolutionImage.astro';
+import { solutions, type Solution } from '../data/solutions';
+import { services } from '../data/services';
+import '../styles/solutions.css';
+interface Props {
+  locale: 'en' | 'fr';
+  solution: Solution;
+}
+const { locale, solution } = Astro.props;
+const en = locale === 'en';
+const product = solution.kind === 'product';
+const parent = services.find((service) => service.slug === solution.service)!;
+const params = new URLSearchParams({
+  service: solution.service,
+  subservice: solution.subservice,
+  solution: solution.slug,
+});
+const enquiry = `/${locale}/request-proposal/?${params.toString()}`;
+const related = solutions
+  .filter((item) => item.slug !== solution.slug)
+  .sort(
+    (a, b) =>
+      Number(b.service === solution.service) -
+        Number(a.service === solution.service) ||
+      Number(b.kind === solution.kind) - Number(a.kind === solution.kind),
+  )
+  .slice(0, 3);
+---
+
+<SiteLayout
+  locale={locale}
+  title={solution.title[locale]}
+  description={solution.summary[locale]}
+  path={`solutions/${solution.slug}`}
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label={en ? 'Breadcrumb' : 'Fil d’Ariane'}>
+        <a href={`/${locale}/`}>{en ? 'Home' : 'Accueil'}</a><span
+          aria-hidden="true">/</span
+        ><a href={`/${locale}/solutions/`}>Solutions</a><span aria-hidden="true"
+          >/</span
+        ><span aria-current="page">{solution.title[locale]}</span>
+      </nav>
+      <div class="page-hero-split solution-hero">
+        <div>
+          <span class="eyebrow"
+            >{
+              product
+                ? en
+                  ? 'Products & materials'
+                  : 'Produits et matériel'
+                : en
+                  ? 'Focused service'
+                  : 'Service ciblé'
+            }</span
+          ><h1>{solution.title[locale]}</h1><p class="lead">
+            {solution.summary[locale]}
+          </p><div class="button-row">
+            <a class="button" href={enquiry}
+              >{en ? 'Request a quote' : 'Demander une soumission'}</a
+            ><a class="text-link" href="#scope"
+              >{en ? 'See what’s included' : 'Voir les livrables'}</a>
+          </div><p class="solution-note">
+            {
+              en
+                ? 'For businesses and government. Scope, languages and timing agreed before work begins.'
+                : 'Pour les entreprises et le secteur public. Portée, langues et délais convenus avant le début du travail.'
+            }
+          </p>
+        </div><SolutionImage
+          slug={solution.slug}
+          locale={locale}
+          product={product}
+        />
+      </div>
+    </div>
+  </section>
+  <section class="section container content-grid">
+    <aside class="side-nav" aria-label={en ? 'On this page' : 'Sur cette page'}>
+      <h2>{en ? 'The details' : 'Les détails'}</h2><a href="#scope"
+        >{en ? 'Scope & deliverables' : 'Portée et livrables'}</a
+      ><a href="#use-cases"
+        >{en ? 'For your organization' : 'Pour votre organisation'}</a
+      ><a href="#prepare">{en ? 'Before we begin' : 'Avant de commencer'}</a><a
+        href="#boundaries">{en ? 'Scope notes' : 'Précisions sur la portée'}</a
+      ><a href="#related">{en ? 'Related solutions' : 'Solutions connexes'}</a>
+    </aside>
+    <div>
+      <section class="content-section" id="scope">
+        <h2>{en ? 'A focused scope.' : 'Un mandat ciblé.'}</h2><p>
+          {solution.scope[locale]}
+        </p><h3>
+          {
+            en
+              ? 'What your project can include'
+              : 'Ce que votre projet peut comprendre'
+          }
+        </h3><ul>
+          {solution.deliverables[locale].map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+      <section class="content-section" id="use-cases">
+        <h2>
+          {en ? 'For your organization.' : 'Pour votre organisation.'}
+        </h2><div class="solution-use-cases">
+          <article>
+            <h3>{en ? 'Business & B2B' : 'Entreprises et B2B'}</h3><p>
+              {solution.business[locale]}
+            </p>
+          </article><article>
+            <h3>
+              {
+                en
+                  ? 'Government & public sector'
+                  : 'Gouvernements et secteur public'
+              }
+            </h3><p>{solution.government[locale]}</p>
+          </article>
+        </div>
+      </section>
+      <section class="content-section" id="prepare">
+        <h2>{en ? 'Before we begin.' : 'Avant de commencer.'}</h2><p>
+          {
+            en
+              ? 'A brief description is enough for the first enquiry. Helpful details include:'
+              : 'Une brève description suffit pour le premier échange. Les renseignements utiles comprennent :'
+          }
+        </p><ul>{solution.prepare[locale].map((item) => <li>{item}</li>)}</ul><p
+        >
+          {
+            en
+              ? 'We’ll agree on a suitable transfer method if documents or personal information are needed later.'
+              : 'Nous conviendrons d’un mode de transfert approprié si des documents ou des renseignements personnels sont nécessaires par la suite.'
+          }
+        </p>
+      </section>
+      <section class="content-section" id="boundaries">
+        <h2>{en ? 'Scope notes.' : 'Précisions sur la portée.'}</h2><p>
+          {solution.boundary[locale]}
+        </p><p>
+          {
+            en
+              ? 'Your quote confirms the final deliverables, review rounds, languages, responsibilities, pricing and schedule.'
+              : 'Votre soumission confirme les livrables, les cycles de révision, les langues, les responsabilités, les prix et l’échéancier.'
+          }
+        </p><a class="text-link" href={`/${locale}/services/${parent.slug}/`}
+          >{en ? 'Explore the wider service: ' : 'Explorer le domaine : '}{
+            parent.shortTitle[locale]
+          }</a>
+      </section>
+      <div class="solution-enquiry">
+        <h2>
+          {en ? 'Start with this solution.' : 'Commencez par cette solution.'}
+        </h2><p>
+          {
+            en
+              ? 'Tell us the outcome you need and any purchasing requirements. This offering will be identified in your enquiry.'
+              : 'Décrivez le résultat souhaité et vos exigences d’achat. Cette offre sera précisée dans votre demande.'
+          }
+        </p><a class="button" href={enquiry}
+          >{en ? 'Request a quote' : 'Demander une soumission'}</a>
+      </div>
+    </div>
+  </section>
+  <section
+    class="section soft-section"
+    id="related"
+    aria-labelledby="related-title"
+  >
+    <div class="container">
+      <h2 id="related-title">
+        {en ? 'Related solutions.' : 'Solutions connexes.'}
+      </h2><div class="solution-grid">
+        {
+          related.map((item) => (
+            <a
+              class="solution-card"
+              href={`/${locale}/solutions/${item.slug}/`}
+            >
+              <>
+                <SolutionImage slug={item.slug} locale={locale} card />
+                <div class="solution-card-copy">
+                  <>
+                    <h3>{item.title[locale]}</h3>
+                    <p>{item.summary[locale]}</p>
+                    <span class="service-link">
+                      {en
+                        ? 'View scope & details'
+                        : 'Voir la portée et les détails'}
+                    </span>
+                  </>
+                </div>
+              </>
+            </a>
+          ))
+        }
+      </div><div class="button-row">
+        <a class="text-link" href={`/${locale}/solutions/`}
+          >{
+            en ? 'All services & products' : 'Tous les services et produits'
+          }</a>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

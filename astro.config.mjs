@@ -4,5 +4,5 @@ export default defineConfig({
   site: 'https://diversity.ca',
   output: 'static',
   trailingSlash: 'always',
-  vite: { server: { strictPort: true } },
+  vite: { server: { strictPort: true, allowedHosts: ['terminal.local'] } },
 });

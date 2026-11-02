@@ -35,7 +35,7 @@ These are settings of this repository, not verified field names or setup instruc
 
 Source, all site images/fonts, package lock, tests, workflows and documentation belong in Git. `node_modules`, `.env`, caches and generated test/build output do not. A successful **Website checks** GitHub Actions run retains the complete static output as **diversity-ca-static-&lt;commit SHA&gt;** for 30 days, separately from test evidence. Hidden files are included so `.htaccess` survives an artifact download. Download the artifact from the run matching the commit selected for deployment, then publish its contents rather than a surrounding directory.
 
-The current static output contains 98 HTML files, 56 sample-outline downloads and local assets. The site has no database or server-side application dependency. Without `PUBLIC_FORM_ENDPOINT`, enquiries prepare an email draft for `info@diversity.ca`; they do not send directly. This existing fallback is retained unless an actual endpoint is configured and rebuilt.
+The current static output contains 98 HTML files, 56 sample-outline downloads and local assets. The site has no database or server-side application dependency. All eight bilingual enquiry forms use the owner-approved `https://formspree.io/f/xaeepeno` endpoint by default. The owner confirms the recipient is `info@diversity.ca`. The tracked default prevents imports without environment settings from silently reverting to email drafts. An explicit build-time `PUBLIC_FORM_ENDPOINT` can override it.
 
 ## Hosting behavior to verify
 

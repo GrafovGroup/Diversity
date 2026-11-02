@@ -1,0 +1,34 @@
+---
+interface Props {
+  locale: 'en' | 'fr';
+}
+const { locale } = Astro.props;
+const en = locale === 'en';
+---
+
+<section class="section soft-section" aria-labelledby="focused-solutions-title">
+  <div class="container">
+    <div class="section-intro">
+      <div>
+        <span class="eyebrow"
+          >{en ? 'Services & products' : 'Services et produits'}</span
+        ><h2 id="focused-solutions-title">
+          {en ? 'Start with a specific need.' : 'Partez d’un besoin précis.'}
+        </h2>
+      </div><p class="lead">
+        {
+          en
+            ? 'A job posting review, an accessible document, bilingual signs or materials for your next event. Explore focused offerings for business and government.'
+            : 'Révision d’une offre d’emploi, document accessible, signalétique bilingue ou matériel pour votre prochain événement. Découvrez nos offres ciblées pour les entreprises et le secteur public.'
+        }
+      </p>
+    </div><div class="button-row">
+      <a class="button" href={`/${locale}/solutions/`}
+        >{
+          en ? 'Explore services & products' : 'Voir les services et produits'
+        }</a
+      ><a class="text-link" href={`/${locale}/solutions/#products`}
+        >{en ? 'Products & materials' : 'Produits et matériel'}</a>
+    </div>
+  </div>
+</section>

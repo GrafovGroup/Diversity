@@ -1,4 +1,5 @@
-import { test, expect, type Page, type Locator } from '@playwright/test';
+import type { Page, Locator } from '@playwright/test';
+import { test, expect } from './fixtures';
 import AxeBuilder from '@axe-core/playwright';
 import { readFile, mkdir } from 'node:fs/promises';
 import { services } from '../src/data/services';
@@ -41,7 +42,6 @@ async function fillIdentity(page: Page) {
     .fill(
       'Please help our organization define a practical scope and next steps.',
     );
-  await form.locator('[name="consent"]').check();
   return form;
 }
 
@@ -253,7 +253,7 @@ for (const locale of ['en', 'fr'] as const) {
       expect(body).toContain(subservice.title[locale]);
       const record = await downloadRecord(page, form);
       expect(record).toMatchObject({
-        schemaVersion: 2,
+        schemaVersion: 3,
         locale,
         kind: journey.group,
         serviceId: journey.service,
@@ -262,7 +262,6 @@ for (const locale of ['en', 'fr'] as const) {
           subserviceId: journey.subservice,
         },
         details: { group: journey.group },
-        consent: true,
       });
       for (const [id, value] of Object.entries(fields)) {
         const detail = record.details.fields.find(
@@ -438,11 +437,17 @@ for (const accepted of [false, true]) {
     await form.locator('[name="service"]').selectOption('training');
     await fillDetails(form, 'training');
     await form.locator('button[type="submit"]').click();
-    await expect(form.locator('[data-feedback]')).toContainText(
-      accepted
-        ? 'accepted by the submission service'
-        : 'could not confirm delivery',
-    );
+    if (accepted) {
+      await expect(page.locator('[data-success]')).toBeVisible();
+      await expect(form).toBeHidden();
+      await page.locator('[data-new-enquiry]').click();
+      await expect(form).toBeVisible();
+    } else {
+      await expect(form.locator('[data-feedback]')).toContainText(
+        'could not confirm delivery',
+      );
+      await expect(page.locator('[data-success]')).toBeHidden();
+    }
     expect(payload).toContain('reviewer@example.org');
     expect(payload).toContain('Front-line supervisors');
     expect(payload).toContain('bilingual');
@@ -450,7 +455,6 @@ for (const accepted of [false, true]) {
     expect(payload).not.toContain('Two public websites');
     if (accepted) {
       await expect(form.locator('[name="email"]')).toHaveValue('');
-      await expect(form.locator('[name="consent"]')).not.toBeChecked();
       await expect(form.locator('[name="service"]')).toHaveValue(
         'accessibility',
       );
@@ -468,7 +472,6 @@ for (const accepted of [false, true]) {
         'Front-line supervisors',
       );
       await expect(form.locator('[name="training_roles"]')).toBeEnabled();
-      await expect(form.locator('[name="consent"]')).toBeChecked();
       await assertActiveGroup(form, 'training');
     }
   });

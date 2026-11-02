@@ -5,7 +5,18 @@ export const GET: APIRoute = () => {
     .flatMap((locale) =>
       pagePaths.map((path) => {
         const suffix = path ? `${path}/` : '';
-        return `<url><loc>https://diversity.ca/${locale}/${suffix}</loc><xhtml:link rel="alternate" hreflang="en-CA" href="https://diversity.ca/en/${suffix}"/><xhtml:link rel="alternate" hreflang="fr-CA" href="https://diversity.ca/fr/${suffix}"/></url>`;
+        // Actual editorial update date, not the build date. Update when these pages change.
+        const lastmod =
+          path === '' ||
+          path === 'solutions' ||
+          path.startsWith('solutions/') ||
+          path === 'canada' ||
+          path.startsWith('canada/') ||
+          path === 'services' ||
+          path.startsWith('services/')
+            ? '<lastmod>2026-11-01</lastmod>'
+            : '';
+        return `<url><loc>https://diversity.ca/${locale}/${suffix}</loc>${lastmod}<xhtml:link rel="alternate" hreflang="en-CA" href="https://diversity.ca/en/${suffix}"/><xhtml:link rel="alternate" hreflang="fr-CA" href="https://diversity.ca/fr/${suffix}"/></url>`;
       }),
     )
     .join('');

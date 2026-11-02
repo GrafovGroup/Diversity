@@ -1,0 +1,77 @@
+---
+import { regions } from '../data/regions';
+import { cities, cityPath } from '../data/locations';
+import '../styles/locations.css';
+interface Props {
+  locale: 'en' | 'fr';
+  service?: string;
+}
+const { locale, service } = Astro.props;
+const en = locale === 'en';
+const featured = [
+  'toronto',
+  'montreal',
+  'vancouver',
+  'calgary',
+  'edmonton',
+  'ottawa',
+  'winnipeg',
+  'halifax',
+];
+const anchor = service ? `#${service}` : '';
+---
+
+<section class="section container">
+  <div class="section-intro">
+    <div>
+      <span class="eyebrow">{en ? 'Across Canada' : 'Partout au Canada'}</span
+      ><h2>
+        {
+          en
+            ? 'Find the right scope for your location.'
+            : 'Un mandat adapté à votre région.'
+        }
+      </h2>
+    </div><p class="lead">
+      {
+        en
+          ? 'City guides connect your service needs with regional project planning. Remote delivery and on-site arrangements are confirmed for each engagement.'
+          : 'Les guides locaux relient vos besoins de services à la planification régionale. La prestation à distance et les activités sur place sont confirmées pour chaque mandat.'
+      }
+    </p>
+  </div><div class="coverage-links">
+    {
+      featured
+        .map((slug) => cities.find((city) => city.slug === slug))
+        .filter(Boolean)
+        .map((city) => (
+          <a href={`/${locale}/${cityPath(city!)}${'/'}${anchor}`}>
+            {city!.name[locale]}
+          </a>
+        ))
+    }
+  </div><details>
+    <summary
+      >{
+        en
+          ? 'Browse all provinces and territories'
+          : 'Voir les provinces et les territoires'
+      }</summary
+    ><div class="coverage-links">
+      {
+        regions.map((region) => (
+          <a href={`/${locale}/canada/${region.slug}/${anchor}`}>
+            {region.name[locale]}
+          </a>
+        ))
+      }
+    </div>
+  </details><div class="button-row">
+    <a class="text-link" href={`/${locale}/canada/`}
+      >{
+        en
+          ? 'Explore all Canadian service areas'
+          : 'Explorer tous les territoires desservis au Canada'
+      }</a>
+  </div>
+</section>

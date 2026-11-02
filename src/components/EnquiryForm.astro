@@ -13,7 +13,11 @@ interface Props {
 }
 const { locale, kind = 'contact' } = Astro.props;
 const fr = locale === 'fr';
-const endpoint = validateFormEndpoint(import.meta.env.PUBLIC_FORM_ENDPOINT);
+// Keep the owner's approved public form URL in source so deployment imports
+// cannot silently lose direct delivery when build-time settings are absent.
+const endpoint = validateFormEndpoint(
+  import.meta.env.PUBLIC_FORM_ENDPOINT ?? 'https://formspree.io/f/xaeepeno',
+);
 const id = `enquiry-${kind}`;
 const words = fr
   ? {
@@ -34,9 +38,12 @@ const words = fr
         'Décrivez vos objectifs, les lieux ou les équipes concernés et vos besoins d’accessibilité en au moins 20 caractères. Évitez tout renseignement personnel sensible.',
       select: 'Sélectionner une option',
       optional: 'facultatif',
-      consent:
-        'J’accepte que Diversity.ca utilise ces renseignements pour répondre à ma demande.',
       privacy: 'Lire l’avis de confidentialité',
+      successTitle: 'Merci, votre demande a bien été envoyée.',
+      successBody:
+        'Nous examinerons les détails de votre projet et vous répondrons à l’adresse courriel indiquée.',
+      successHelp: 'Vous souhaitez ajouter un renseignement?',
+      another: 'ENVOYER UNE AUTRE DEMANDE',
       send: 'ENVOYER LA DEMANDE',
       prepare: 'PRÉPARER LE COURRIEL',
       download: 'TÉLÉCHARGER MA DEMANDE',
@@ -68,9 +75,12 @@ const words = fr
         'Use at least 20 characters to tell us about your objectives, the locations or teams involved, and any accessibility needs. Please leave out sensitive personal information.',
       select: 'Select an option',
       optional: 'optional',
-      consent:
-        'I agree that Diversity.ca may use these details to respond to my enquiry.',
       privacy: 'Read the privacy notice',
+      successTitle: 'Thank you — your enquiry has been sent.',
+      successBody:
+        'We’ll review your project details and reply to the email address you provided.',
+      successHelp: 'Need to add something?',
+      another: 'SEND ANOTHER ENQUIRY',
       send: 'SEND ENQUIRY',
       prepare: 'PREPARE EMAIL',
       download: 'DOWNLOAD MY ENQUIRY',
@@ -177,260 +187,306 @@ const defaultService =
 const initialGroup = kind === 'contact' ? null : kind;
 ---
 
-<section class="enquiry-panel" aria-labelledby={`${id}-title`}>
-  <h2 id={`${id}-title`}>{words.details}</h2>
-  <p class="form-intro">{words.intro}</p>
-  {!endpoint && <p class="delivery-note">{words.fallback}</p>}
-  <form
-    class="enquiry-form"
-    data-enquiry-form
-    data-locale={locale}
-    data-kind={kind}
-    data-endpoint={endpoint || ''}
-    data-default-service={defaultService}
-    method="post"
-    action={endpoint || undefined}
-  >
-    <input type="hidden" name="subservice" value="" />
-    <p
-      class="context-note"
-      data-enquiry-context
-      role="status"
-      aria-live="polite"
-      hidden
+<section
+  class="enquiry-panel"
+  data-enquiry-panel
+  aria-labelledby={`${id}-title`}
+>
+  <div data-enquiry-entry>
+    <h2 id={`${id}-title`}>{words.details}</h2>
+    <p class="form-intro">{words.intro}</p>
+    {!endpoint && <p class="delivery-note">{words.fallback}</p>}
+    <form
+      class="enquiry-form"
+      data-enquiry-form
+      data-locale={locale}
+      data-kind={kind}
+      data-endpoint={endpoint || ''}
+      data-default-service={defaultService}
+      method="post"
+      action={endpoint || undefined}
     >
-    </p>
-    <div class="form-grid">
-      <div class="field">
-        <label for={`${id}-name`}
-          >{words.name} <span aria-hidden="true">*</span></label
-        ><input
-          id={`${id}-name`}
-          name="name"
-          autocomplete="name"
-          required
-          maxlength="120"
-        />
-      </div>
-      <div class="field">
-        <label for={`${id}-email`}
-          >{words.email} <span aria-hidden="true">*</span></label
-        ><input
-          id={`${id}-email`}
-          name="email"
-          type="email"
-          autocomplete="email"
-          required
-          maxlength="254"
-        />
-      </div>
-      <div class="field">
-        <label for={`${id}-organization`}
-          >{words.organization} <span aria-hidden="true">*</span></label
-        ><input
-          id={`${id}-organization`}
-          name="organization"
-          autocomplete="organization"
-          required
-          maxlength="160"
-        />
-      </div>
-      <div class="field">
-        <label for={`${id}-audience`}
-          >{words.audience} <span aria-hidden="true">*</span></label
-        ><select id={`${id}-audience`} name="audience" required
-          ><option value="">{words.select}</option>{
-            audiences.map((option) => <option value={option}>{option}</option>)
-          }</select
-        >
-      </div>
-      <div class="field">
-        <label for={`${id}-service`}
-          >{words.service} <span aria-hidden="true">*</span></label
-        ><select id={`${id}-service`} name="service" required
-          ><option value="">{words.select}</option>{
-            services.map((option) => (
-              <option value={option.id} selected={option.id === defaultService}>
-                {option.label[locale]}
-              </option>
-            ))
-          }</select
-        >
-      </div>
-      <div class="field">
-        <label for={`${id}-region`}
-          >{words.region} <span aria-hidden="true">*</span></label
-        ><select id={`${id}-region`} name="region" required
-          ><option value="">{words.select}</option>{
-            regions.map((option) => <option value={option}>{option}</option>)
-          }</select
-        >
-      </div>
-      <div class="field">
-        <label for={`${id}-timeline`}
-          >{words.timeline}
-          <span class="optional">({words.optional})</span></label
-        ><select id={`${id}-timeline`} name="timeline"
-          ><option value="">{words.select}</option>{
-            timelines.map((option) => <option value={option}>{option}</option>)
-          }</select
-        >
-      </div>
-      <div class="field">
-        <label for={`${id}-budget`}
-          >{words.budget}
-          <span class="optional">({words.optional})</span></label
-        ><select id={`${id}-budget`} name="budget"
-          ><option value="">{words.select}</option>{
-            budgets.map((option) => <option value={option}>{option}</option>)
-          }</select
-        >
-      </div>
-      <div class="field field-wide">
-        <label for={`${id}-message`}
-          >{words.message} <span aria-hidden="true">*</span></label
-        ><textarea
-          id={`${id}-message`}
-          name="message"
-          rows="6"
-          required
-          minlength="20"
-          maxlength="3000"
-          aria-describedby={`${id}-message-help`}></textarea><p
-          class="field-help"
-          id={`${id}-message-help`}
-        >
-          {words.messageHelp}
-        </p>
-      </div>
-    </div>
-    {
-      enquiryGroups.map((group) => (
-        <fieldset
-          class="tailored-fields"
-          data-enquiry-group={group.id}
-          hidden={group.id !== initialGroup}
-          disabled={group.id !== initialGroup}
-          aria-describedby={`${id}-${group.id}-intro`}
-        >
-          <legend>{group.title[locale]}</legend>
-          <p class="field-help group-intro" id={`${id}-${group.id}-intro`}>
-            {group.intro[locale]}
+      <input type="hidden" name="subservice" value="" />
+      <input type="hidden" name="solution" value="" />
+      <input type="hidden" name="city_context" value="" />
+      <p
+        class="context-note"
+        data-enquiry-context
+        role="status"
+        aria-live="polite"
+        hidden
+      >
+      </p>
+      <div class="form-grid">
+        <div class="field">
+          <label for={`${id}-name`}
+            >{words.name} <span aria-hidden="true">*</span></label
+          ><input
+            id={`${id}-name`}
+            name="name"
+            autocomplete="name"
+            required
+            maxlength="120"
+          />
+        </div>
+        <div class="field">
+          <label for={`${id}-email`}
+            >{words.email} <span aria-hidden="true">*</span></label
+          ><input
+            id={`${id}-email`}
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            maxlength="254"
+          />
+        </div>
+        <div class="field">
+          <label for={`${id}-organization`}
+            >{words.organization} <span aria-hidden="true">*</span></label
+          ><input
+            id={`${id}-organization`}
+            name="organization"
+            autocomplete="organization"
+            required
+            maxlength="160"
+          />
+        </div>
+        <div class="field">
+          <label for={`${id}-audience`}
+            >{words.audience} <span aria-hidden="true">*</span></label
+          ><select id={`${id}-audience`} name="audience" required
+            ><option value="">{words.select}</option>{
+              audiences.map((option) => (
+                <option value={option}>{option}</option>
+              ))
+            }</select
+          >
+        </div>
+        <div class="field">
+          <label for={`${id}-service`}
+            >{words.service} <span aria-hidden="true">*</span></label
+          ><select id={`${id}-service`} name="service" required
+            ><option value="">{words.select}</option>{
+              services.map((option) => (
+                <option
+                  value={option.id}
+                  selected={option.id === defaultService}
+                >
+                  {option.label[locale]}
+                </option>
+              ))
+            }</select
+          >
+        </div>
+        <div class="field">
+          <label for={`${id}-region`}
+            >{words.region} <span aria-hidden="true">*</span></label
+          ><select id={`${id}-region`} name="region" required
+            ><option value="">{words.select}</option>{
+              regions.map((option) => <option value={option}>{option}</option>)
+            }</select
+          >
+        </div>
+        <div class="field">
+          <label for={`${id}-timeline`}
+            >{words.timeline}
+            <span class="optional">({words.optional})</span></label
+          ><select id={`${id}-timeline`} name="timeline"
+            ><option value="">{words.select}</option>{
+              timelines.map((option) => (
+                <option value={option}>{option}</option>
+              ))
+            }</select
+          >
+        </div>
+        <div class="field">
+          <label for={`${id}-project-city`}
+            >{fr ? 'Ville ou collectivité' : 'City or community'}
+            <span class="optional">({words.optional})</span></label
+          >
+          <input
+            id={`${id}-project-city`}
+            name="project_city"
+            maxlength="120"
+            autocomplete="off"
+          />
+        </div>
+        <div class="field">
+          <label for={`${id}-budget`}
+            >{words.budget}
+            <span class="optional">({words.optional})</span></label
+          ><select id={`${id}-budget`} name="budget"
+            ><option value="">{words.select}</option>{
+              budgets.map((option) => <option value={option}>{option}</option>)
+            }</select
+          >
+        </div>
+        <div class="field field-wide">
+          <label for={`${id}-message`}
+            >{words.message} <span aria-hidden="true">*</span></label
+          ><textarea
+            id={`${id}-message`}
+            name="message"
+            rows="6"
+            required
+            minlength="20"
+            maxlength="3000"
+            aria-describedby={`${id}-message-help`}></textarea><p
+            class="field-help"
+            id={`${id}-message-help`}
+          >
+            {words.messageHelp}
           </p>
-          <div class="form-grid">
-            {group.fields.map((field) => (
-              <div class:list={['field', { 'field-wide': field.wide }]}>
-                <label for={`${id}-${field.id}`}>
-                  {field.label[locale]}
-                  <span class="optional" data-optional-label={field.id}>
-                    ({words.optional})
-                  </span>
-                </label>
-                {field.type === 'select' ? (
-                  <select
-                    id={`${id}-${field.id}`}
-                    name={field.id}
-                    aria-describedby={
-                      field.help ? `${id}-${field.id}-help` : undefined
-                    }
-                  >
-                    <option value="">{words.select}</option>
-                    {field.options?.map((option) => (
-                      <option value={option.value}>
-                        {option.label[locale]}
-                      </option>
-                    ))}
-                  </select>
-                ) : field.type === 'textarea' ? (
-                  <textarea
-                    id={`${id}-${field.id}`}
-                    name={field.id}
-                    rows="3"
-                    maxlength={field.maxLength}
-                    aria-describedby={
-                      field.help ? `${id}-${field.id}-help` : undefined
-                    }
-                  />
-                ) : (
-                  <input
-                    id={`${id}-${field.id}`}
-                    name={field.id}
-                    type={field.type}
-                    maxlength={field.maxLength}
-                    aria-describedby={
-                      field.help ? `${id}-${field.id}-help` : undefined
-                    }
-                  />
-                )}
-                {field.help && (
-                  <p class="field-help" id={`${id}-${field.id}-help`}>
-                    {field.help[locale]}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </fieldset>
-      ))
-    }
-    <div class="honey-field" aria-hidden="true">
-      <label for={`${id}-website`}>Leave this field empty</label><input
-        id={`${id}-website`}
-        name="_gotcha"
+        </div>
+      </div>
+      {
+        enquiryGroups.map((group) => (
+          <fieldset
+            class="tailored-fields"
+            data-enquiry-group={group.id}
+            hidden={group.id !== initialGroup}
+            disabled={group.id !== initialGroup}
+            aria-describedby={`${id}-${group.id}-intro`}
+          >
+            <legend>{group.title[locale]}</legend>
+            <p class="field-help group-intro" id={`${id}-${group.id}-intro`}>
+              {group.intro[locale]}
+            </p>
+            <div class="form-grid">
+              {group.fields.map((field) => (
+                <div class:list={['field', { 'field-wide': field.wide }]}>
+                  <label for={`${id}-${field.id}`}>
+                    {field.label[locale]}
+                    <span class="optional" data-optional-label={field.id}>
+                      ({words.optional})
+                    </span>
+                  </label>
+                  {field.type === 'select' ? (
+                    <select
+                      id={`${id}-${field.id}`}
+                      name={field.id}
+                      aria-describedby={
+                        field.help ? `${id}-${field.id}-help` : undefined
+                      }
+                    >
+                      <option value="">{words.select}</option>
+                      {field.options?.map((option) => (
+                        <option value={option.value}>
+                          {option.label[locale]}
+                        </option>
+                      ))}
+                    </select>
+                  ) : field.type === 'textarea' ? (
+                    <textarea
+                      id={`${id}-${field.id}`}
+                      name={field.id}
+                      rows="3"
+                      maxlength={field.maxLength}
+                      aria-describedby={
+                        field.help ? `${id}-${field.id}-help` : undefined
+                      }
+                    />
+                  ) : (
+                    <input
+                      id={`${id}-${field.id}`}
+                      name={field.id}
+                      type={field.type}
+                      maxlength={field.maxLength}
+                      aria-describedby={
+                        field.help ? `${id}-${field.id}-help` : undefined
+                      }
+                    />
+                  )}
+                  {field.help && (
+                    <p class="field-help" id={`${id}-${field.id}-help`}>
+                      {field.help[locale]}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </fieldset>
+        ))
+      }
+      <div class="honey-field" aria-hidden="true">
+        <label for={`${id}-website`}>Leave this field empty</label><input
+          id={`${id}-website`}
+          name="_gotcha"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
+      <p class="attachment-note">{words.attachments}</p>
+      <p class="privacy-note">
+        <a href={`/${locale}/privacy/`}>{words.privacy}</a>
+      </p>
+      <div class="form-actions">
+        <button type="submit" class="form-primary" disabled
+          >{endpoint ? words.send : words.prepare}</button
+        ><button type="button" class="form-download" data-download disabled
+          >{words.download}</button
+        >
+      </div>
+      <p class="field-help">{words.exportNote}</p>
+      <div
+        class="form-feedback"
+        data-feedback
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
         tabindex="-1"
-        autocomplete="off"
-      />
-    </div>
-    <p class="attachment-note">{words.attachments}</p>
-    <div class="consent-field">
-      <input
-        id={`${id}-consent`}
-        name="consent"
-        type="checkbox"
-        value="yes"
-        required
-      /><label for={`${id}-consent`}
-        >{words.consent}
-        <span aria-hidden="true">*</span>
-        <a href={`/${locale}/privacy/`}>{words.privacy}</a>.</label
+        hidden
       >
-    </div>
-    <div class="form-actions">
-      <button type="submit" class="form-primary" disabled
-        >{endpoint ? words.send : words.prepare}<span aria-hidden="true"
-          >↗</span
-        ></button
-      ><button type="button" class="form-download" data-download disabled
-        >{words.download}</button
+      </div>
+      <a
+        class="prepared-email"
+        data-prepared-email
+        href="mailto:info@diversity.ca"
+        hidden
+        >{words.emailLink}
+      </a>
+      <noscript
+        ><p>
+          {words.noScript}
+          <a href="mailto:info@diversity.ca">info@diversity.ca</a>
+        </p></noscript
       >
-    </div>
-    <p class="field-help">{words.exportNote}</p>
-    <div
-      class="form-feedback"
-      data-feedback
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-      tabindex="-1"
-      hidden
+    </form>
+  </div>
+  <div
+    class="form-success"
+    data-success
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    tabindex="-1"
+    hidden
+  >
+    <span class="success-mark" aria-hidden="true"
+      ><svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+        ><path
+          d="m7 16 6 6L25 10"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path></svg
+      ></span
     >
-    </div>
-    <a
-      class="prepared-email"
-      data-prepared-email
-      href="mailto:info@diversity.ca"
-      hidden>{words.emailLink} <span aria-hidden="true">↗</span></a
+    <h2 id={`${id}-success-title`}>{words.successTitle}</h2>
+    <p class="success-copy">{words.successBody}</p>
+    <p class="success-help">
+      {words.successHelp}<br /><a href="mailto:info@diversity.ca"
+        >info@diversity.ca</a>
+    </p>
+    <button type="button" class="form-primary" data-new-enquiry
+      >{words.another}</button
     >
-    <noscript
-      ><p>
-        {words.noScript}
-        <a href="mailto:info@diversity.ca">info@diversity.ca</a>
-      </p></noscript
-    >
-  </form>
+  </div>
 </section>
 
 <script>
+  import { resolveLocationContext } from '../lib/location-context';
   import {
     createEnquiryRecord,
     createEnquiryMailto,
@@ -449,6 +505,11 @@ const initialGroup = kind === 'contact' ? null : kind;
     const locale = form.dataset.locale as FormLocale;
     const kind = form.dataset.kind as EnquiryKind;
     const fr = locale === 'fr';
+    const panel = form.closest<HTMLElement>('[data-enquiry-panel]')!;
+    const entry = panel.querySelector<HTMLElement>('[data-enquiry-entry]')!;
+    const success = panel.querySelector<HTMLElement>('[data-success]')!;
+    const titleId = panel.getAttribute('aria-labelledby')!;
+    let completed = false;
     const submit = form.querySelector<HTMLButtonElement>(
       'button[type="submit"]',
     )!;
@@ -461,6 +522,18 @@ const initialGroup = kind === 'contact' ? null : kind;
     const subservice = form.querySelector<HTMLInputElement>(
       '[name="subservice"]',
     )!;
+    const solution = form.querySelector<HTMLInputElement>('[name="solution"]')!;
+    const projectCity = form.querySelector<HTMLInputElement>(
+      '[name="project_city"]',
+    )!;
+    const cityContext = form.querySelector<HTMLInputElement>(
+      '[name="city_context"]',
+    )!;
+    const region = form.querySelector<HTMLSelectElement>('[name="region"]')!;
+    const initialLocation = resolveLocationContext(
+      new URLSearchParams(window.location.search),
+      locale,
+    );
     const contextNote = form.querySelector<HTMLElement>(
       '[data-enquiry-context]',
     )!;
@@ -513,15 +586,20 @@ const initialGroup = kind === 'contact' ? null : kind;
           : '(optional)';
       const params = new URLSearchParams({ service: service.value });
       if (subservice.value) params.set('subservice', subservice.value);
+      if (solution.value) params.set('solution', solution.value);
       const context = resolveEnquiryContext(params, locale);
       contextNote.hidden = !context;
       contextNote.textContent = context
-        ? `${fr ? 'Votre demande concerne' : 'Your enquiry concerns'} : ${context.serviceLabel}${context.subserviceLabel ? ' — ' + context.subserviceLabel : ''}`
+        ? `${fr ? 'Votre demande concerne' : 'Your enquiry concerns'} : ${context.serviceLabel}${context.solutionLabel ? ' — ' + context.solutionLabel : context.subserviceLabel ? ' — ' + context.subserviceLabel : ''}`
         : '';
     };
     const applyInitialContext = () => {
       service.value = initialService;
       subservice.value = initialContext?.subserviceId ?? '';
+      solution.value = initialContext?.solutionId ?? '';
+      projectCity.value = initialLocation?.cityLabel ?? '';
+      cityContext.value = initialLocation?.cityId ?? '';
+      if (initialLocation) region.value = initialLocation.regionLabel;
       syncDetails();
     };
     const record = () => createEnquiryRecord(new FormData(form), locale, kind);
@@ -529,9 +607,28 @@ const initialGroup = kind === 'contact' ? null : kind;
     submit.disabled = false;
     download.disabled = false;
 
+    panel
+      .querySelector<HTMLButtonElement>('[data-new-enquiry]')!
+      .addEventListener('click', () => {
+        if (pending) return;
+        completed = false;
+        success.hidden = true;
+        entry.hidden = false;
+        delete panel.dataset.state;
+        panel.setAttribute('aria-labelledby', titleId);
+        form.querySelector<HTMLInputElement>('[name="name"]')!.focus();
+      });
+
     service.addEventListener('change', () => {
       subservice.value = '';
+      solution.value = '';
       syncDetails();
+    });
+    projectCity.addEventListener('input', () => {
+      cityContext.value = '';
+    });
+    region.addEventListener('change', () => {
+      cityContext.value = '';
     });
     closingTime.addEventListener('input', syncDetails);
     form.addEventListener('input', () => {
@@ -545,7 +642,7 @@ const initialGroup = kind === 'contact' ? null : kind;
     });
 
     download.addEventListener('click', () => {
-      if (pending || !form.reportValidity()) return;
+      if (pending || completed || !form.reportValidity()) return;
       try {
         const enquiry = record();
         const file = new Blob([JSON.stringify(enquiry, null, 2)], {
@@ -574,7 +671,7 @@ const initialGroup = kind === 'contact' ? null : kind;
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      if (pending || !form.reportValidity()) return;
+      if (pending || completed || !form.reportValidity()) return;
       try {
         const enquiry = record();
         if (!endpoint) {
@@ -610,11 +707,21 @@ const initialGroup = kind === 'contact' ? null : kind;
         if (!response.ok) throw new Error('Submission was not accepted');
         form.reset();
         applyInitialContext();
-        notify(
-          fr
-            ? 'Votre demande a été acceptée par le service d’envoi. Merci. Si elle est urgente, vous pouvez aussi nous écrire à info@diversity.ca.'
-            : 'Your enquiry was accepted by the submission service. Thank you. For an urgent enquiry, you can also email info@diversity.ca.',
-        );
+        completed = true;
+        feedback.hidden = true;
+        emailLink.hidden = true;
+        entry.hidden = true;
+        success.hidden = false;
+        panel.dataset.state = 'success';
+        panel.setAttribute('aria-labelledby', success.querySelector('h2')!.id);
+        success.focus({ preventScroll: true });
+        panel.scrollIntoView({
+          block: 'center',
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)')
+            .matches
+            ? 'instant'
+            : 'smooth',
+        });
       } catch {
         const message = endpoint
           ? fr
@@ -648,7 +755,7 @@ const initialGroup = kind === 'contact' ? null : kind;
     padding: clamp(1.5rem, 4vw, 3.5rem);
     background: #fff;
     border: 1px solid var(--line, #dce2ec);
-    border-radius: 1.25rem;
+    border-radius: 0.5rem;
   }
   h2 {
     font-size: clamp(1.65rem, 3vw, 2.3rem);
@@ -774,26 +881,51 @@ const initialGroup = kind === 'contact' ? null : kind;
     height: 1px;
     overflow: hidden;
   }
-  .consent-field {
+  .privacy-note {
+    font-size: 0.8rem;
+    margin: 1rem 0;
+  }
+  .form-success {
+    min-height: 390px;
     display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-    margin: 1.5rem 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-block: 1.5rem;
   }
-  .consent-field input {
-    flex: 0 0 1.15rem;
-    width: 1.15rem;
-    height: 1.15rem;
-    min-height: 0;
-    margin-top: 0.18rem;
-    accent-color: var(--blue, #1967f3);
+  .form-success:focus {
+    outline: none;
   }
-  .consent-field label {
-    font-weight: 400;
-    line-height: 1.7;
+  .success-mark {
+    display: grid;
+    place-items: center;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    color: #24634b;
+    background: #e8f4ed;
+    margin-bottom: 1.6rem;
+    flex-shrink: 0;
   }
-  .consent-field a {
-    margin-left: 0.25em;
+  .form-success h2 {
+    max-width: 20ch;
+  }
+  .success-copy {
+    max-width: 42ch;
+    margin: 0.6rem 0 1.5rem;
+    color: var(--muted, #5e6a7d);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .success-help {
+    margin: 0 0 1.7rem;
+    font-size: 0.86rem;
+    line-height: 1.8;
+    color: var(--muted, #5e6a7d);
+  }
+  .form-success .form-primary {
+    max-width: 100%;
   }
   a {
     color: #174ea6;
@@ -814,7 +946,7 @@ const initialGroup = kind === 'contact' ? null : kind;
     letter-spacing: 0.08em;
     cursor: pointer;
     min-height: 3.2rem;
-    border-radius: 0.3rem;
+    border-radius: var(--button-radius, 6px);
     transition: background 0.2s ease;
   }
   button:disabled {
@@ -824,8 +956,8 @@ const initialGroup = kind === 'contact' ? null : kind;
   .form-primary {
     display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    justify-content: center;
+    gap: 0.5rem;
     background: var(--ink, #14233f);
     color: #fff;
     border: 1px solid var(--ink, #14233f);
@@ -833,9 +965,6 @@ const initialGroup = kind === 'contact' ? null : kind;
   }
   .form-primary:hover {
     background: #0a2d6b;
-  }
-  .form-primary span {
-    font-size: 1.1rem;
   }
   .form-download {
     border: 0;
@@ -863,6 +992,8 @@ const initialGroup = kind === 'contact' ? null : kind;
     background: #fff5f4;
   }
   .prepared-email {
+    text-decoration: underline;
+    text-underline-offset: 4px;
     display: inline-flex;
     gap: 2rem;
     align-items: center;
@@ -887,7 +1018,7 @@ const initialGroup = kind === 'contact' ? null : kind;
       width: 100%;
     }
     .enquiry-panel {
-      border-radius: 0.7rem;
+      border-radius: 0.5rem;
     }
     .optional {
       display: inline-block;

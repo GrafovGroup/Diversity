@@ -105,8 +105,7 @@ const steps = fr
           <p class="lead">{content.description}</p>
           <a class="text-link" href="#enquiry"
             >{fr ? 'Commencer votre demande' : 'Start your enquiry'}
-            <span aria-hidden="true">↓</span></a
-          >
+          </a>
         </div>
         <PageImage path={path} locale={locale} />
       </div>
@@ -158,15 +157,7 @@ const steps = fr
       <div class="contact-direct">
         <h3>
           {fr ? 'Vous préférez nous écrire?' : 'Prefer to write directly?'}
-        </h3><a href="mailto:info@diversity.ca"
-          >info@diversity.ca <span aria-hidden="true">↗</span></a
-        ><p>
-          {
-            fr
-              ? 'La réception des messages à cette adresse doit être confirmée avant le lancement public. Pour une demande urgente, faites confirmer sa réception.'
-              : 'Mailbox delivery needs confirmation before public launch. For any time-sensitive enquiry, confirm that your message has been received.'
-          }
-        </p>
+        </h3><a href="mailto:info@diversity.ca">info@diversity.ca </a>
       </div>
       {
         kind === 'proposal' && (
@@ -186,7 +177,6 @@ const steps = fr
                 {fr
                   ? 'Approvisionnement du secteur public'
                   : 'Public sector procurement'}{' '}
-                <span aria-hidden="true">↗</span>
               </a>
             </>
           </div>

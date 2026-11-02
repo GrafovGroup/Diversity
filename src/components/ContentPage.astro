@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageImage from './PageImage.astro';
 import CallToAction from './CallToAction.astro';
+import SolutionsTeaser from './SolutionsTeaser.astro';
 import type { ContentPage as Page } from '../data/pages';
 interface Props {
   locale: 'en' | 'fr';
@@ -32,7 +33,6 @@ const legal = ['privacy', 'accessibility-statement'].includes(page.slug);
             page.cta && (
               <a class="button" href={`/${locale}${page.cta.path}`}>
                 {page.cta.label[locale]}
-                <span aria-hidden="true">↗</span>
               </a>
             )
           }
@@ -53,8 +53,8 @@ const legal = ['privacy', 'accessibility-statement'].includes(page.slug);
         legal && (
           <p class="legal-note">
             {en
-              ? 'Draft for owner and legal review. The final policy and commitments must be confirmed before public launch.'
-              : 'Projet soumis à la révision du propriétaire et à un examen juridique. La politique finale et les engagements doivent être confirmés avant le lancement public.'}
+              ? 'Last updated: November 1, 2026.'
+              : 'Dernière mise à jour : le 1er novembre 2026.'}
           </p>
         )
       }{
@@ -72,7 +72,20 @@ const legal = ['privacy', 'accessibility-statement'].includes(page.slug);
           </section>
         ))
       }
+      {
+        legal && (
+          <p class="legal-note">
+            {en ? 'Questions or feedback: ' : 'Questions ou commentaires : '}
+            <a href="mailto:info@diversity.ca">info@diversity.ca</a>
+          </p>
+        )
+      }
     </div>
   </section>
+  {
+    ['corporations', 'government', 'procurement'].includes(page.slug) && (
+      <SolutionsTeaser locale={locale} />
+    )
+  }
   {!legal && <CallToAction locale={locale} />}
 </SiteLayout>

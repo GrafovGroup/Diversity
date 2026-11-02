@@ -8,17 +8,23 @@ export interface PageVisual {
   fit?: 'cover' | 'contain';
   width?: number;
   height?: number;
+  srcset?: string;
+  sizes?: string;
+  objectPosition?: string;
 }
 
 const photographs: Record<string, PageVisual> = {
   '': {
-    src: '/images/photography/corporate-collaboration.webp',
-    fit: 'contain',
-    width: 1024,
-    height: 785,
+    src: '/images/photography/home-inclusive-workshop-v2.webp',
+    srcset:
+      '/images/photography/home-inclusive-workshop-v2-800.webp 800w, /images/photography/home-inclusive-workshop-v2-1200.webp 1200w, /images/photography/home-inclusive-workshop-v2.webp 1800w',
+    sizes: '100vw',
+    fit: 'cover',
+    width: 1800,
+    height: 1200,
     alt: {
-      en: 'Three people sharing ideas with laptops in a shared workspace.',
-      fr: 'Trois personnes échangent des idées avec leurs ordinateurs dans un espace de travail partagé.',
+      en: 'Colleagues exchanging ideas around a table in a bright meeting room.',
+      fr: 'Des collègues échangent des idées autour d’une table dans une salle de réunion lumineuse.',
     },
   },
   government: {

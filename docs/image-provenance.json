@@ -197,5 +197,309 @@
     "usage": "services/social-impact",
     "asset_sha256": "54d1586e965aebcfb208f92a985f1964bc10c03c6f5e05a5d61c30ee31a5d525",
     "adaptation": "Encoded as WebP; full source composition retained."
+  },
+  {
+    "id": "inclusive-job-postings",
+    "asset": "/images/solutions/inclusive-job-postings.webp",
+    "original_source": "https://www.pexels.com/photo/woman-filling-job-application-form-in-office-with-boss-5668858/",
+    "upstream_url": "https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Sora Shimazaki",
+    "width": 1400,
+    "height": 933,
+    "asset_sha256": "f5b2e58bb9988cc1a8b459cecad39342a864922985c14e183c2d9c631e230e81",
+    "bytes": 52190,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Person taking notes during an interview at a desk with a laptop.",
+      "fr": "Une personne prend des notes pendant un entretien à un bureau avec un ordinateur portable."
+    },
+    "subject": "Person taking notes during an interview at a desk with a laptop.",
+    "usage_note": "Illustrative stock photograph; the people depicted are not represented as Diversity.ca staff or clients.",
+    "suggested_object_position": "center",
+    "usage": "solutions/inclusive-job-postings"
+  },
+  {
+    "id": "structured-interviews",
+    "asset": "/images/solutions/structured-interviews.webp",
+    "original_source": "https://www.pexels.com/photo/a-man-interviewing-an-applicant-5439138/",
+    "upstream_url": "https://images.pexels.com/photos/5439138/pexels-photo-5439138.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Tima Miroshnichenko",
+    "width": 1400,
+    "height": 933,
+    "asset_sha256": "f2df700e9847087a427939bb0cac669895369138116da2cbde458351f8616633",
+    "bytes": 84492,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Two people seated across a desk during a job interview.",
+      "fr": "Deux personnes assises de part et d’autre d’un bureau pendant un entretien d’embauche."
+    },
+    "subject": "Two people seated across a desk during a job interview.",
+    "usage_note": "Illustrative stock photograph; the people depicted are not represented as Diversity.ca staff or clients.",
+    "suggested_object_position": "center",
+    "usage": "solutions/structured-interview-toolkit"
+  },
+  {
+    "id": "inclusion-listening",
+    "asset": "/images/solutions/inclusion-listening.webp",
+    "original_source": "https://www.pexels.com/photo/a-group-of-people-having-a-meeting-in-the-office-5945809/",
+    "upstream_url": "https://images.pexels.com/photos/5945809/pexels-photo-5945809.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Theo Decker",
+    "width": 1400,
+    "height": 933,
+    "asset_sha256": "ac8e73afd8dcc3624bc99b28163f60153e470f999bbba01859f258b08d000e12",
+    "bytes": 117402,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Four colleagues listening and talking around a meeting table.",
+      "fr": "Quatre collègues échangent et s’écoutent autour d’une table de réunion."
+    },
+    "subject": "Four colleagues listening and talking around a meeting table.",
+    "usage_note": "Illustrative stock photograph; the people depicted are not represented as Diversity.ca staff or clients.",
+    "suggested_object_position": "center",
+    "usage": "solutions/inclusion-pulse-survey"
+  },
+  {
+    "id": "respectful-workplace-learning",
+    "asset": "/images/solutions/respectful-workplace-learning.webp",
+    "original_source": "https://www.pexels.com/photo/a-person-using-a-laptop-7120897/",
+    "upstream_url": "https://images.pexels.com/photos/7120897/pexels-photo-7120897.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Pavel Danilyuk",
+    "width": 734,
+    "height": 1100,
+    "asset_sha256": "fe5e6ed81681fecf658df36602147ba50a8ebeade5cba6bbd4b55e7051afe1b3",
+    "bytes": 34656,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Person wearing headphones and following a video lesson on a laptop.",
+      "fr": "Une personne portant un casque suit un cours vidéo sur un ordinateur portable."
+    },
+    "subject": "Person wearing headphones and following a video lesson on a laptop.",
+    "usage_note": "Illustrative stock photograph; the people depicted are not represented as Diversity.ca staff or clients.",
+    "suggested_object_position": "center 42%",
+    "usage": "solutions/respectful-workplace-microlearning"
+  },
+  {
+    "id": "accessible-documents",
+    "asset": "/images/solutions/accessible-documents.webp",
+    "original_source": "https://www.pexels.com/photo/glasses-on-paperwork-and-laptop-on-table-8036339/",
+    "upstream_url": "https://images.pexels.com/photos/8036339/pexels-photo-8036339.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Ron Lach",
+    "width": 733,
+    "height": 1100,
+    "asset_sha256": "e4a068c2e1b8c835458e0606dc6d41e8992dc8c9577c0dfb06d56666a7d52c87",
+    "bytes": 47862,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Annotated paper documents and eyeglasses beside a laptop.",
+      "fr": "Des documents papier annotés et des lunettes à côté d’un ordinateur portable."
+    },
+    "subject": "Annotated paper documents and eyeglasses beside a laptop.",
+    "usage_note": "Illustrative stock photograph; the people depicted are not represented as Diversity.ca staff or clients.",
+    "suggested_object_position": "center",
+    "usage": "solutions/accessible-documents"
+  },
+  {
+    "id": "plain-language-communications",
+    "asset": "/images/solutions/plain-language-communications.webp",
+    "original_source": "https://www.pexels.com/photo/professionals-looking-at-papers-7648029/",
+    "upstream_url": "https://images.pexels.com/photos/7648029/pexels-photo-7648029.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "RDNE Stock project",
+    "width": 1400,
+    "height": 933,
+    "asset_sha256": "63b7eb8101029ef2017b86d20caed1ba4803d9bdc0b6d7d9b32ed0b9a33747f8",
+    "bytes": 103688,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Two colleagues reviewing a printed booklet together.",
+      "fr": "Deux collègues examinent ensemble une brochure imprimée."
+    },
+    "subject": "Two colleagues reviewing a printed booklet together.",
+    "usage_note": "Illustrative stock photograph; the people depicted are not represented as Diversity.ca staff or clients.",
+    "suggested_object_position": "center",
+    "usage": "solutions/plain-language-bilingual-review"
+  },
+  {
+    "id": "accessible-events",
+    "asset": "/images/solutions/accessible-events.webp",
+    "original_source": "https://www.pexels.com/photo/a-man-on-a-wheelchair-doing-a-presentation-8127631/",
+    "upstream_url": "https://images.pexels.com/photos/8127631/pexels-photo-8127631.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Ivan S",
+    "width": 1400,
+    "height": 934,
+    "asset_sha256": "e58127bb05019e8a619076fc3177f6724ea96b89d683867bb8a62871c077f389",
+    "bytes": 77238,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Presenter using a wheelchair explaining a diagram on a whiteboard.",
+      "fr": "Un présentateur en fauteuil roulant explique un schéma sur un tableau blanc."
+    },
+    "subject": "Presenter using a wheelchair explaining a diagram on a whiteboard.",
+    "usage_note": "Illustrative stock photograph; the people depicted are not represented as Diversity.ca staff or clients.",
+    "suggested_object_position": "center",
+    "usage": "solutions/accessible-meetings-events"
+  },
+  {
+    "id": "inclusive-procurement",
+    "asset": "/images/solutions/inclusive-procurement.webp",
+    "original_source": "https://www.pexels.com/photo/two-people-sitting-at-desk-with-documents-7731352/",
+    "upstream_url": "https://images.pexels.com/photos/7731352/pexels-photo-7731352.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Mikhail Nilov",
+    "width": 1400,
+    "height": 1022,
+    "asset_sha256": "31c533abbebc6f8629c520c35edf3b5bd39a9ee4588bf7a279297ae6a1145166",
+    "bytes": 98492,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Two people reviewing paperwork and taking notes at a desk.",
+      "fr": "Deux personnes examinent des documents et prennent des notes à un bureau."
+    },
+    "subject": "Two people reviewing paperwork and taking notes at a desk.",
+    "usage_note": "Illustrative stock photograph; the people depicted are not represented as Diversity.ca staff or clients.",
+    "suggested_object_position": "center",
+    "usage": "solutions/inclusive-supplier-onboarding"
+  },
+  {
+    "id": "wayfinding-signage",
+    "asset": "/images/solutions/wayfinding-signage.webp",
+    "original_source": "https://www.pexels.com/photo/close-up-photo-of-baggage-sign-746500/",
+    "upstream_url": "https://images.pexels.com/photos/746500/pexels-photo-746500.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Esther",
+    "width": 1400,
+    "height": 930,
+    "asset_sha256": "1076847ad263d23ca364188791a3fb8ef368c44e6d526ee67e7a4ceab95da63c",
+    "bytes": 133836,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Illuminated airport sign with baggage directions in several languages.",
+      "fr": "Panneau lumineux d’aéroport indiquant la direction des bagages en plusieurs langues."
+    },
+    "subject": "Illuminated airport sign with baggage directions in several languages.",
+    "usage_note": "Illustrative stock photograph; not a photograph of supplied inventory, a specific model, or a Diversity.ca client project.",
+    "suggested_object_position": "center",
+    "usage": "solutions/bilingual-wayfinding-signs"
+  },
+  {
+    "id": "name-badges",
+    "asset": "/images/solutions/name-badges.webp",
+    "original_source": "https://www.pexels.com/photo/close-up-shot-of-identification-badges-for-the-participants-8761297/",
+    "upstream_url": "https://images.pexels.com/photos/8761297/pexels-photo-8761297.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Pavel Danilyuk",
+    "width": 734,
+    "height": 1100,
+    "asset_sha256": "b465a88c825eb083199b0e95b5613b3a8d742248e14109603bee4b60563651d3",
+    "bytes": 90538,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Event identification badges suspended from blue lanyards.",
+      "fr": "Badges d’identification pour un événement suspendus à des cordons bleus."
+    },
+    "subject": "Event identification badges suspended from blue lanyards.",
+    "usage_note": "Illustrative stock photograph; not a photograph of supplied inventory, a specific model, or a Diversity.ca client project.",
+    "suggested_object_position": "center 70%",
+    "usage": "solutions/inclusive-name-badges"
+  },
+  {
+    "id": "sensory-support",
+    "asset": "/images/solutions/sensory-support.webp",
+    "original_source": "https://www.pexels.com/photo/protective-headphones-for-woodwork-on-wooden-table-5974011/",
+    "upstream_url": "https://images.pexels.com/photos/5974011/pexels-photo-5974011.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Ono Kosuki",
+    "width": 733,
+    "height": 1100,
+    "asset_sha256": "e874cf9ff777939dc212354170fc28b526b9c6edff05cc4607a4dc83ecb07e0b",
+    "bytes": 49978,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Yellow hearing-protection earmuffs resting on a wooden workbench.",
+      "fr": "Un casque antibruit jaune posé sur un établi en bois."
+    },
+    "subject": "Yellow hearing-protection earmuffs resting on a wooden workbench.",
+    "usage_note": "Illustrative stock photograph; not a photograph of supplied inventory, a specific model, or a Diversity.ca client project.",
+    "suggested_object_position": "center 63%",
+    "usage": "solutions/sensory-support-kits"
+  },
+  {
+    "id": "large-print",
+    "asset": "/images/solutions/large-print.webp",
+    "original_source": "https://www.pexels.com/photo/elderly-woman-reading-book-in-room-5231267/",
+    "upstream_url": "https://images.pexels.com/photos/5231267/pexels-photo-5231267.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Anna Shvets",
+    "width": 733,
+    "height": 1100,
+    "asset_sha256": "cf3efed996d184b23f6e7abf106794232cf29de1f39705717174db94713c0959",
+    "bytes": 98490,
+    "adaptation": "Proportional resize and WebP encoding; full composition retained.",
+    "alt": {
+      "en": "Woman reading a book with a magnifying glass at a table.",
+      "fr": "Une femme lit un livre à l’aide d’une loupe à une table."
+    },
+    "subject": "Woman reading a book with a magnifying glass at a table.",
+    "usage_note": "Illustrative stock photograph; not a photograph of supplied inventory, a specific model, or a Diversity.ca client project.",
+    "suggested_object_position": "center 70%",
+    "usage": "solutions/large-print-materials"
+  },
+  {
+    "id": "home-inclusive-workshop-v2",
+    "original_source": "https://www.pexels.com/photo/office-working-smiling-on-meeting-7792761/",
+    "upstream_url": "https://images.pexels.com/photos/7792761/pexels-photo-7792761.jpeg?auto=compress&cs=tinysrgb&w=1800",
+    "license": "Pexels License",
+    "license_evidence": "https://www.pexels.com/license/",
+    "attribution": "Yan Krukau / Pexels",
+    "subject": "Five colleagues exchanging ideas around a table with laptops, documents and a flip chart in a bright meeting room.",
+    "alt": {
+      "en": "Colleagues exchanging ideas around a table in a bright meeting room.",
+      "fr": "Des collègues échangent des idées autour d’une table dans une salle de réunion lumineuse."
+    },
+    "usage_note": "Illustrative stock photograph; people depicted are not represented as Diversity.ca staff, clients, or endorsers.",
+    "adaptation": "Proportional resize and WebP encoding, full source composition retained.",
+    "suggested_object_position": "55% 50%",
+    "variants": [
+      {
+        "asset": "/images/photography/home-inclusive-workshop-v2.webp",
+        "width": 1800,
+        "height": 1200,
+        "bytes": 107754,
+        "sha256": "2334f4d6b51c8f27d2521e9ee341956055636e71b985fbb7ff44b9a0a03b2630"
+      },
+      {
+        "asset": "/images/photography/home-inclusive-workshop-v2-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 65542,
+        "sha256": "f6b79a0185c1f7863e8171d3d1e8d9a11e078786d853863e7811eabdd6ec8035"
+      },
+      {
+        "asset": "/images/photography/home-inclusive-workshop-v2-800.webp",
+        "width": 800,
+        "height": 533,
+        "bytes": 40168,
+        "sha256": "2333ec43f33209dbfc716802b8e46eb3652c47a4f2e3adb31f7ce8c5aadc42ae"
+      }
+    ],
+    "usage": "home"
   }
 ]

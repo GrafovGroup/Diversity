@@ -3,6 +3,9 @@ import HomePage from '../../components/HomePage.astro';
 import ContentPage from '../../components/ContentPage.astro';
 import ServicePage from '../../components/ServicePage.astro';
 import ServicesIndex from '../../components/ServicesIndex.astro';
+import SolutionsIndex from '../../components/SolutionsIndex.astro';
+import SolutionPage from '../../components/SolutionPage.astro';
+import { solutions } from '../../data/solutions';
 import InsightsIndex from '../../components/InsightsIndex.astro';
 import ContactPage from '../../components/ContactPage.astro';
 import ArticlePage from '../../components/ArticlePage.astro';
@@ -10,6 +13,10 @@ import { services } from '../../data/services';
 import { pages, articles } from '../../data/pages';
 import { pagePaths } from '../../lib/routes';
 import type { EnquiryKind } from '../../lib/forms';
+import CanadaIndex from '../../components/CanadaIndex.astro';
+import LocationPage from '../../components/LocationPage.astro';
+import { regions } from '../../data/regions';
+import { cities } from '../../data/locations';
 
 export function getStaticPaths() {
   return (['en', 'fr'] as const).flatMap((locale) =>
@@ -25,9 +32,14 @@ interface Props {
 }
 const { locale, path } = Astro.props;
 const segments = path.split('/');
+const solution = solutions.find((solution) => solution.slug === segments[1]);
 const service = services.find((service) => service.slug === segments[1]);
 const subservice = service?.subservices.find((sub) => sub.slug === segments[2]);
 const page = pages.find((page) => page.slug === path);
+const region = regions.find((region) => region.slug === segments[1]);
+const city = cities.find(
+  (city) => city.slug === segments[2] && city.province === region?.code,
+);
 const article = articles.find((article) => article.slug === segments[1]);
 const kinds: Record<string, EnquiryKind> = {
   contact: 'contact',
@@ -39,8 +51,20 @@ const kinds: Record<string, EnquiryKind> = {
 
 {path === '' && <HomePage locale={locale} />}
 {path === 'services' && <ServicesIndex locale={locale} />}
+{path === 'solutions' && <SolutionsIndex locale={locale} />}
+{
+  segments[0] === 'solutions' && solution && (
+    <SolutionPage locale={locale} solution={solution} />
+  )
+}
 {path === 'insights' && <InsightsIndex locale={locale} />}
-{page && <ContentPage locale={locale} page={page} />}
+{path === 'canada' && <CanadaIndex locale={locale} />}
+{
+  segments[0] === 'canada' && region && (
+    <LocationPage locale={locale} region={region} city={city} />
+  )
+}
+{page && path !== 'canada' && <ContentPage locale={locale} page={page} />}
 {
   segments[0] === 'services' && service && (
     <ServicePage locale={locale} service={service} subservice={subservice} />

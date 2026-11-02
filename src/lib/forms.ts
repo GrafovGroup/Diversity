@@ -3,6 +3,7 @@ import {
   serviceOptions,
   type EnquiryGroup,
 } from '../data/enquiry-fields';
+import { solutionOptions } from '../data/solution-options';
 
 export type FormLocale = 'en' | 'fr';
 export type EnquiryKind = 'proposal' | 'assessment' | 'training' | 'contact';
@@ -12,6 +13,8 @@ export interface EnquiryContext {
   subserviceId: string | null;
   serviceLabel: string;
   subserviceLabel: string | null;
+  solutionId: string | null;
+  solutionLabel: string | null;
 }
 export interface EnquiryDetail {
   id: string;
@@ -20,7 +23,7 @@ export interface EnquiryDetail {
   displayValue: string;
 }
 export interface EnquiryRecord {
-  schemaVersion: 2;
+  schemaVersion: 3;
   createdAt: string;
   locale: FormLocale;
   kind: EnquiryKind;
@@ -31,11 +34,11 @@ export interface EnquiryRecord {
   service: string;
   serviceId: string;
   region: string;
+  projectCity: string;
   timeline: string;
   budget: string;
   deadline: string;
   message: string;
-  consent: true;
   context: EnquiryContext;
   details: { group: EnquiryGroup; fields: EnquiryDetail[] };
 }
@@ -78,11 +81,22 @@ export function resolveEnquiryContext(
     search.getAll('subservice').length === 1
       ? service.subservices.find((item) => item.id === search.get('subservice'))
       : undefined;
+  const solution =
+    search.getAll('solution').length === 1
+      ? solutionOptions.find(
+          (item) =>
+            item.slug === search.get('solution') &&
+            item.service === service.id &&
+            item.subservice === subservice?.id,
+        )
+      : undefined;
   return {
     serviceId: service.id,
     subserviceId: subservice?.id ?? null,
     serviceLabel: service.label[locale],
     subserviceLabel: subservice?.label[locale] ?? null,
+    solutionId: solution?.slug ?? null,
+    solutionLabel: solution?.title[locale] ?? null,
   };
 }
 
@@ -104,7 +118,6 @@ export function createEnquiryRecord(
   kind: EnquiryKind,
   now = new Date(),
 ): EnquiryRecord {
-  if (data.get('consent') !== 'yes') throw new Error('Consent is required.');
   if (String(data.get('_gotcha') ?? '').trim())
     throw new Error('Unable to prepare this enquiry.');
   const text = (key: string) => String(data.get(key) ?? '').trim();
@@ -127,6 +140,7 @@ export function createEnquiryRecord(
   if (!group) throw new Error('Select a service for this enquiry.');
   const params = new URLSearchParams({ service: text('service') });
   if (text('subservice')) params.set('subservice', text('subservice'));
+  if (text('solution')) params.set('solution', text('solution'));
   const context = resolveEnquiryContext(params, locale)!;
   const definition = enquiryGroups.find((item) => item.id === group)!;
   const fields: EnquiryDetail[] = [];
@@ -155,7 +169,7 @@ export function createEnquiryRecord(
     throw new Error('Specify the time zone for the closing time.');
   }
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     createdAt: now.toISOString(),
     locale,
     kind,
@@ -166,11 +180,11 @@ export function createEnquiryRecord(
     service: context.serviceLabel,
     serviceId: context.serviceId,
     region: text('region'),
+    projectCity: text('project_city').slice(0, 120),
     timeline: text('timeline'),
     budget: text('budget'),
     deadline: group === 'proposal' ? text('deadline') : '',
     message: text('message'),
-    consent: true,
     context,
     details: { group, fields },
   };
@@ -219,6 +233,12 @@ export function createEnquiryMailto(record: EnquiryRecord): string {
     lines.push(
       `${french ? 'Service ciblé' : 'Specific service'}: ${record.context.subserviceLabel}`,
     );
+  if (record.projectCity)
+    lines.push(
+      `${french ? 'Ville ou collectivité' : 'City or community'}: ${record.projectCity}`,
+    );
+  if (record.context.solutionLabel)
+    lines.push(`Solution: ${record.context.solutionLabel}`);
   lines.push(
     ...record.details.fields.map(
       (field) => `${field.label}: ${field.displayValue}`,
@@ -246,7 +266,7 @@ export function createEnquiryPayload(record: EnquiryRecord): FormData {
   ] as const) {
     payload.set(key, record[key]);
   }
-  payload.set('consent', 'yes');
+  if (record.projectCity) payload.set('project_city', record.projectCity);
   payload.set('locale', record.locale);
   payload.set('enquiry_type', record.kind);
   payload.set('created_at', record.createdAt);
@@ -256,6 +276,10 @@ export function createEnquiryPayload(record: EnquiryRecord): FormData {
     payload.set('subservice', record.context.subserviceLabel!);
   }
   payload.set('detail_group', record.details.group);
+  if (record.context.solutionId) {
+    payload.set('solution_id', record.context.solutionId);
+    payload.set('solution', record.context.solutionLabel!);
+  }
   for (const field of record.details.fields)
     payload.set(field.id, field.displayValue);
   payload.set('enquiry_record', JSON.stringify(record));

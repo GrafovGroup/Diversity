@@ -1,0 +1,410 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import CallToAction from './CallToAction.astro';
+import LocalServices from './LocalServices.astro';
+import { cityPath, regionCities, delivery, type City } from '../data/locations';
+import type { Region } from '../data/regions';
+import { services } from '../data/services';
+import '../styles/locations.css';
+interface Props {
+  locale: 'en' | 'fr';
+  region: Region;
+  city?: City;
+}
+const { locale, region, city } = Astro.props;
+const en = locale === 'en';
+const name = city?.slug === 'quebec-city' && !en ? 'Ville de Québec' : city?.name[locale] ?? region.name[locale];
+const path = city ? cityPath(city) : `canada/${region.slug}`;
+const title = en
+  ? `DEI, accessibility & training — ${name}`
+  : `EDI, accessibilité et formation — ${name}`;
+const description = en
+  ? `DEI, accessibility, training and supplier diversity in ${name}. Explore scopes and deliverables for business and government projects.`
+  : `Inclusion, accessibilité, formation et diversité des fournisseurs — ${name}. Mandats et livrables pour entreprises et secteur public.`;
+const query = new URLSearchParams({ service: 'unsure', region: region.code });
+if (city) query.set('city', city.slug);
+const enquiry = `/${locale}/request-proposal/?${query}`;
+const related = regionCities(region.code).filter(
+  (item) => item.slug !== city?.slug,
+);
+const breadcrumbs = [
+  { name: en ? 'Home' : 'Accueil', path: '' },
+  { name: en ? 'Across Canada' : 'Partout au Canada', path: 'canada' },
+  { name: region.name[locale], path: `canada/${region.slug}` },
+  ...(city ? [{ name: city.name[locale], path }] : []),
+];
+const area = {
+  '@type': city ? 'City' : 'AdministrativeArea',
+  name,
+  containedInPlace: city
+    ? {
+        '@type': 'AdministrativeArea',
+        name: region.name[locale],
+        containedInPlace: { '@type': 'Country', name: 'Canada' },
+      }
+    : { '@type': 'Country', name: 'Canada' },
+};
+const structuredData = services.map((service) => ({
+  '@type': 'Service',
+  '@id': `https://diversity.ca/${locale}/${path}/#${service.slug}`,
+  name: `${service.title[locale]} — ${name}`,
+  serviceType: service.title[locale],
+  description: service.description[locale],
+  provider: { '@id': 'https://diversity.ca/#organization' },
+  areaServed: area,
+  url: `https://diversity.ca/${locale}/${path}/#${service.slug}`,
+}));
+const faqs = [
+  {
+    q: en
+      ? `Which services can I request in ${name}?`
+      : `Quels services puis-je demander — ${name}?`,
+    a: en
+      ? 'You can discuss diversity, equity and inclusion, accessibility, people and culture, training, supplier diversity, social impact, and implementation. Choose a focused review or combine related services with agreed deliverables.'
+      : 'Vous pouvez discuter de diversité, d’équité et d’inclusion, d’accessibilité, de personnel et culture, de formation, de diversité des fournisseurs, d’impact social et de mise en œuvre. Choisissez une révision ciblée ou combinez plusieurs services avec des livrables convenus.',
+  },
+  {
+    q: en
+      ? 'Can the work be delivered remotely or on site?'
+      : 'Le travail peut-il se faire à distance ou sur place?',
+    a: en
+      ? 'Document reviews, planning and some learning can be scoped remotely. Site observations and in-person sessions require a confirmed location, schedule and travel arrangements. We agree the format and availability in the proposal; a service-area page does not identify a local office.'
+      : 'La révision documentaire, la planification et certaines formations peuvent être réalisées à distance. Les observations et les rencontres sur place nécessitent un lieu, un horaire et des déplacements confirmés. Les modalités et la disponibilité sont convenues dans la proposition; cette page ne désigne pas un bureau local.',
+  },
+  {
+    q: en ? 'How much does a project cost?' : 'Combien coûte un projet?',
+    a: en
+      ? 'Pricing depends on the scope, number of sites or participants, documents, languages, travel and deliverables. Send a short description and your target date. The proposal identifies the work included, dependencies and fees before you commit.'
+      : 'Le prix dépend de la portée, du nombre de sites ou de personnes, des documents, des langues, des déplacements et des livrables. Envoyez une courte description et la date visée. La proposition précise les travaux inclus, les conditions et les honoraires avant votre engagement.',
+  },
+  {
+    q: en
+      ? 'Can one engagement cover nearby communities?'
+      : 'Un même mandat peut-il couvrir les collectivités voisines?',
+    a: city
+      ? en
+        ? `Include ${city.nearby.en.join(', ')} or other relevant communities in your brief. Name each site and the people involved so the proposal can distinguish shared work from location-specific visits, materials and responsibilities.`
+        : `Mentionnez ${city.nearby.fr.join(', ')} ou d’autres collectivités pertinentes dans votre demande. Précisez chaque lieu et les personnes concernées pour distinguer les travaux communs des visites, des documents et des responsabilités propres à chaque site.`
+      : en
+        ? 'Yes, a proposal can combine several locations. List each community, service point and team, including rural or remote locations, so the scope and delivery requirements can be confirmed.'
+        : 'Oui, une proposition peut réunir plusieurs lieux. Indiquez chaque collectivité, point de service et équipe, y compris en milieu rural ou éloigné, afin de confirmer la portée et les modalités de réalisation.',
+  },
+];
+---
+
+<SiteLayout
+  locale={locale}
+  title={title}
+  description={description}
+  path={path}
+  breadcrumbs={breadcrumbs}
+  structuredData={structuredData}
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label={en ? 'Breadcrumb' : 'Fil d’Ariane'}>
+        {
+          breadcrumbs.map((crumb, index) => (
+            <>
+              {index > 0 && <span aria-hidden="true">/</span>}
+              {index === breadcrumbs.length - 1 ? (
+                <span aria-current="page">{crumb.name}</span>
+              ) : (
+                <a href={`/${locale}/${crumb.path ? crumb.path + '/' : ''}`}>
+                  {crumb.name}
+                </a>
+              )}
+            </>
+          ))
+        }
+      </nav><div class="location-hero">
+        <div>
+          <span class="eyebrow"
+            >{
+              city
+                ? `${region.name[locale]} · ${en ? 'Service area' : 'Territoire desservi'}`
+                : en
+                  ? 'Regional services'
+                  : 'Services régionaux'
+            }</span
+          ><h1>
+            {
+              en
+                ? `Inclusion, accessibility and training in ${name}.`
+                : `Inclusion, accessibilité et formation — ${name}.`
+            }
+          </h1><p class="lead">
+            {city ? city.context[locale] : region.intro[locale]}
+          </p><div class="button-row">
+            <a class="button" href={enquiry}
+              >{en ? 'Discuss your project' : 'Discuter de votre projet'}</a
+            ><a class="text-link" href="#services"
+              >{en ? 'Explore all services' : 'Explorer les services'}</a
+            >
+          </div>
+        </div><aside
+          class="location-summary"
+          aria-label={en ? 'Project overview' : 'Aperçu du projet'}
+        >
+          <h2>
+            {en ? 'A practical starting point.' : 'Un point de départ concret.'}
+          </h2><p>
+            {
+              en
+                ? 'For businesses, public agencies, educational institutions and nonprofit organizations.'
+                : 'Pour les entreprises, les organismes publics, les établissements d’enseignement et les organismes sans but lucratif.'
+            }
+          </p><ul>
+            <li>
+              {
+                en
+                  ? 'A focused scope and clear deliverables'
+                  : 'Un mandat ciblé et des livrables clairs'
+              }
+            </li><li>
+              {
+                en
+                  ? 'English and French, as agreed'
+                  : 'Français et anglais, selon le mandat'
+              }
+            </li><li>
+              {
+                en
+                  ? 'Remote and on-site arrangements confirmed in your proposal'
+                  : 'Modalités à distance et sur place confirmées dans la proposition'
+              }
+            </li>
+          </ul><a href={`/${locale}/procurement/`}
+            >{
+              en
+                ? 'Planning a public-sector procurement?'
+                : 'Vous préparez un achat public?'
+            }</a
+          >
+        </aside>
+      </div><nav
+        class="location-jumps"
+        aria-label={en ? 'On this page' : 'Sur cette page'}
+      >
+        <a href="#planning">{en ? 'Project planning' : 'Planification'}</a>{
+          city && (
+            <a href="#examples">
+              {en ? 'Possible projects' : 'Exemples de mandats'}
+            </a>
+          )
+        }<a href="#services"
+          >{en ? 'Seven service areas' : 'Sept domaines de services'}</a
+        ><a href="#questions"
+          >{en ? 'Questions and answers' : 'Questions et réponses'}</a
+        >
+      </nav>
+    </div>
+  </section>
+  <section class="section container location-section" id="planning">
+    <div class="section-intro">
+      <div>
+        <span class="eyebrow">{name}</span><h2>
+          {
+            en
+              ? 'Plan around your operating context.'
+              : 'Planifiez selon votre réalité.'
+          }
+        </h2>
+      </div><p class="lead">
+        {city ? city.planning[locale] : region.planning[locale]}
+      </p>
+    </div><dl class="location-facts">
+      <div>
+        <dt>{en ? 'Locations and people' : 'Lieux et personnes'}</dt><dd>
+          {
+            city
+              ? en
+                ? `Include ${city.name.en} and any participating sites in ${city.nearby.en.join(', ')} or elsewhere.`
+                : `Précisez les sites à ${city.name.fr}, ainsi qu’à ${city.nearby.fr.join(', ')} ou ailleurs.`
+              : en
+                ? 'List each workplace, public-facing location and remote team that needs to participate.'
+                : 'Énumérez les milieux de travail, les lieux d’accueil du public et les équipes à distance qui doivent participer.'
+          }
+        </dd>
+      </div><div>
+        <dt>
+          {en ? 'Decisions and deliverables' : 'Décisions et livrables'}
+        </dt><dd>
+          {
+            en
+              ? 'Identify the policy, process, training or physical barrier you want to address, and who will approve the recommendations.'
+              : 'Précisez la politique, le processus, la formation ou l’obstacle physique à traiter, ainsi que les personnes qui approuveront les recommandations.'
+          }
+        </dd>
+      </div><div>
+        <dt>{en ? 'Languages and timing' : 'Langues et échéancier'}</dt><dd>
+          {
+            en
+              ? 'State the working languages, accessible participation needs, target date and any procurement deadline.'
+              : 'Indiquez les langues de travail, les besoins de participation accessible, la date visée et toute échéance d’approvisionnement.'
+          }
+        </dd>
+      </div>
+    </dl>{
+      city && (
+        <p class="location-source">
+          {en
+            ? 'Regional context reference: '
+            : 'Référence pour le contexte régional : '}
+          <a href={city.source.url}>{city.source.label[locale]}</a>.{' '}
+          {en
+            ? 'The project ideas below are proposed scopes, not client case studies.'
+            : 'Les idées ci-dessous sont des exemples de mandats possibles, et non des réalisations chez des clients.'}
+        </p>
+      )
+    }
+  </section>
+  {
+    city && (
+      <section class="soft-section section location-section" id="examples">
+        <div class="container">
+          <>
+            <span class="eyebrow">
+              {en
+                ? 'From context to a useful scope'
+                : 'Du contexte à un mandat utile'}
+            </span>
+            <h2>
+              {en
+                ? `Possible projects for ${name} organizations.`
+                : `Des mandats possibles pour les organisations — ${name}.`}
+            </h2>
+            <div class="location-example-grid">
+              {city.examples.map((example) => (
+                <article class="location-example">
+                  <h3>{example.title[locale]}</h3>
+                  <p>{example.body[locale]}</p>
+                  <a class="text-link" href={`#${example.service}`}>
+                    {
+                      services.find(
+                        (service) => service.slug === example.service,
+                      )?.shortTitle[locale]
+                    }
+                  </a>
+                </article>
+              ))}
+            </div>
+          </>
+        </div>
+      </section>
+    )
+  }
+  {
+    !city && (
+      <section class="soft-section section">
+        <div class="container">
+          <>
+            <h2>
+              {en
+                ? 'Explore city and regional guides.'
+                : 'Explorez les guides locaux.'}
+            </h2>
+            <div class="city-grid">
+              {related.map((item) => (
+                <article class="city-card">
+                  <h3>
+                    <a href={`/${locale}/${cityPath(item)}/`}>
+                      {item.name[locale]}
+                    </a>
+                  </h3>
+                  <p>{item.examples[0]?.title[locale]}</p>
+                  <a class="text-link" href={`/${locale}/${cityPath(item)}/`}>
+                    {en
+                      ? 'View services and local planning'
+                      : 'Voir les services et la planification'}
+                  </a>
+                </article>
+              ))}
+            </div>
+            <p>
+              {en
+                ? 'Outside these centres? Tell us the community and project requirements so we can confirm an appropriate delivery plan.'
+                : 'Votre projet se situe ailleurs? Indiquez la collectivité et vos besoins afin que nous puissions confirmer un plan de réalisation approprié.'}
+            </p>
+          </>
+        </div>
+      </section>
+    )
+  }
+  <LocalServices locale={locale} region={region} city={city} />
+  <section class="soft-section section location-section" id="questions">
+    <div class="container">
+      <h2>
+        {
+          en
+            ? `Planning a project in ${name}?`
+            : `Vous planifiez un projet — ${name}?`
+        }
+      </h2><div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <details>
+              <>
+                <summary>{faq.q}</summary>
+                <p>{faq.a}</p>
+              </>
+            </details>
+          ))
+        }
+      </div><p class="location-note">{delivery[locale]}</p>
+    </div>
+  </section>
+  <section class="section container">
+    <h2>{en ? 'Continue planning.' : 'Poursuivez votre planification.'}</h2><div
+      class="coverage-links"
+    >
+      <a href={`/${locale}/canada/`}
+        >{
+          en
+            ? 'All Canadian service areas'
+            : 'Tous les territoires desservis au Canada'
+        }</a
+      >{
+        city && (
+          <a href={`/${locale}/canada/${region.slug}/`}>
+            {region.name[locale]}
+          </a>
+        )
+      }<a href={`/${locale}/solutions/`}
+        >{
+          en ? 'Focused services and products' : 'Services ciblés et produits'
+        }</a
+      ><a href={`/${locale}/insights/scope-an-accessibility-assessment/`}
+        >{
+          en
+            ? 'How to scope an accessibility assessment'
+            : 'Définir la portée d’une évaluation de l’accessibilité'
+        }</a
+      >
+    </div>{
+      city && related.length > 0 && (
+        <>
+          <>
+            <h3>
+              {en
+                ? 'Other guides in this province or territory'
+                : 'Autres guides de cette province ou de ce territoire'}
+            </h3>
+            <div class="coverage-links">
+              {related.map((item) => (
+                <a href={`/${locale}/${cityPath(item)}/`}>
+                  {item.name[locale]}
+                </a>
+              ))}
+            </div>
+          </>
+        </>
+      )
+    }
+  </section>
+  <CallToAction
+    locale={locale}
+    destination={enquiry}
+    label={en ? 'Discuss your project' : 'Discuter de votre projet'}
+  />
+</SiteLayout>

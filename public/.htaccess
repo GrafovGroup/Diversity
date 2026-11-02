@@ -1,6 +1,19 @@
 # Apache / WHC shared hosting. Confirm AllowOverride support in the target account.
 DirectoryIndex index.html
 ErrorDocument 404 /404.html
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Keep the canonical host and the default language consistent on WHC.
+  # Scope these rules to Diversity.ca so Sites previews keep their own URL.
+  RewriteCond %{HTTP_HOST} ^(?:www\.)?diversity\.ca(?::\d+)?$ [NC]
+  RewriteRule ^$ https://diversity.ca/en/ [R=301,L]
+  # Leave certificate-validation paths available over HTTP for renewals.
+  RewriteCond %{HTTP_HOST} ^(?:www\.)?diversity\.ca(?::\d+)?$ [NC]
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\.diversity\.ca(?::\d+)?$ [NC]
+  RewriteRule ^ https://diversity.ca%{REQUEST_URI} [R=301,L,NE]
+</IfModule>
 <IfModule mod_mime.c>
   AddCharset UTF-8 .html .txt
 </IfModule>

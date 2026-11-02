@@ -1,0 +1,513 @@
+{
+  "regions": [
+    {
+      "code": "bc",
+      "name": {
+        "en": "British Columbia",
+        "fr": "Colombie-Britannique"
+      }
+    },
+    {
+      "code": "ab",
+      "name": {
+        "en": "Alberta",
+        "fr": "Alberta"
+      }
+    },
+    {
+      "code": "sk",
+      "name": {
+        "en": "Saskatchewan",
+        "fr": "Saskatchewan"
+      }
+    },
+    {
+      "code": "mb",
+      "name": {
+        "en": "Manitoba",
+        "fr": "Manitoba"
+      }
+    },
+    {
+      "code": "on",
+      "name": {
+        "en": "Ontario",
+        "fr": "Ontario"
+      }
+    },
+    {
+      "code": "qc",
+      "name": {
+        "en": "Quebec",
+        "fr": "Québec"
+      }
+    },
+    {
+      "code": "nb",
+      "name": {
+        "en": "New Brunswick",
+        "fr": "Nouveau-Brunswick"
+      }
+    },
+    {
+      "code": "ns",
+      "name": {
+        "en": "Nova Scotia",
+        "fr": "Nouvelle-Écosse"
+      }
+    },
+    {
+      "code": "pe",
+      "name": {
+        "en": "Prince Edward Island",
+        "fr": "Île-du-Prince-Édouard"
+      }
+    },
+    {
+      "code": "nl",
+      "name": {
+        "en": "Newfoundland and Labrador",
+        "fr": "Terre-Neuve-et-Labrador"
+      }
+    },
+    {
+      "code": "yt",
+      "name": {
+        "en": "Yukon",
+        "fr": "Yukon"
+      }
+    },
+    {
+      "code": "nt",
+      "name": {
+        "en": "Northwest Territories",
+        "fr": "Territoires du Nord-Ouest"
+      }
+    },
+    {
+      "code": "nu",
+      "name": {
+        "en": "Nunavut",
+        "fr": "Nunavut"
+      }
+    }
+  ],
+  "cities": [
+    {
+      "slug": "barrie",
+      "province": "on",
+      "name": {
+        "en": "Barrie",
+        "fr": "Barrie"
+      }
+    },
+    {
+      "slug": "brampton",
+      "province": "on",
+      "name": {
+        "en": "Brampton",
+        "fr": "Brampton"
+      }
+    },
+    {
+      "slug": "brandon",
+      "province": "mb",
+      "name": {
+        "en": "Brandon",
+        "fr": "Brandon"
+      }
+    },
+    {
+      "slug": "burnaby",
+      "province": "bc",
+      "name": {
+        "en": "Burnaby",
+        "fr": "Burnaby"
+      }
+    },
+    {
+      "slug": "calgary",
+      "province": "ab",
+      "name": {
+        "en": "Calgary",
+        "fr": "Calgary"
+      }
+    },
+    {
+      "slug": "charlottetown",
+      "province": "pe",
+      "name": {
+        "en": "Charlottetown",
+        "fr": "Charlottetown"
+      }
+    },
+    {
+      "slug": "edmonton",
+      "province": "ab",
+      "name": {
+        "en": "Edmonton",
+        "fr": "Edmonton"
+      }
+    },
+    {
+      "slug": "fort-mcmurray",
+      "province": "ab",
+      "name": {
+        "en": "Fort McMurray",
+        "fr": "Fort McMurray"
+      }
+    },
+    {
+      "slug": "fredericton",
+      "province": "nb",
+      "name": {
+        "en": "Fredericton",
+        "fr": "Fredericton"
+      }
+    },
+    {
+      "slug": "gatineau",
+      "province": "qc",
+      "name": {
+        "en": "Gatineau",
+        "fr": "Gatineau"
+      }
+    },
+    {
+      "slug": "greater-sudbury",
+      "province": "on",
+      "name": {
+        "en": "Greater Sudbury",
+        "fr": "Grand Sudbury"
+      }
+    },
+    {
+      "slug": "halifax",
+      "province": "ns",
+      "name": {
+        "en": "Halifax",
+        "fr": "Halifax"
+      }
+    },
+    {
+      "slug": "hamilton",
+      "province": "on",
+      "name": {
+        "en": "Hamilton",
+        "fr": "Hamilton"
+      }
+    },
+    {
+      "slug": "iqaluit",
+      "province": "nu",
+      "name": {
+        "en": "Iqaluit",
+        "fr": "Iqaluit"
+      }
+    },
+    {
+      "slug": "kamloops",
+      "province": "bc",
+      "name": {
+        "en": "Kamloops",
+        "fr": "Kamloops"
+      }
+    },
+    {
+      "slug": "kelowna",
+      "province": "bc",
+      "name": {
+        "en": "Kelowna",
+        "fr": "Kelowna"
+      }
+    },
+    {
+      "slug": "kingston",
+      "province": "on",
+      "name": {
+        "en": "Kingston",
+        "fr": "Kingston"
+      }
+    },
+    {
+      "slug": "kitchener-waterloo",
+      "province": "on",
+      "name": {
+        "en": "Kitchener–Waterloo",
+        "fr": "Kitchener–Waterloo"
+      }
+    },
+    {
+      "slug": "laval",
+      "province": "qc",
+      "name": {
+        "en": "Laval",
+        "fr": "Laval"
+      }
+    },
+    {
+      "slug": "lethbridge",
+      "province": "ab",
+      "name": {
+        "en": "Lethbridge",
+        "fr": "Lethbridge"
+      }
+    },
+    {
+      "slug": "london",
+      "province": "on",
+      "name": {
+        "en": "London",
+        "fr": "London"
+      }
+    },
+    {
+      "slug": "longueuil",
+      "province": "qc",
+      "name": {
+        "en": "Longueuil",
+        "fr": "Longueuil"
+      }
+    },
+    {
+      "slug": "markham",
+      "province": "on",
+      "name": {
+        "en": "Markham",
+        "fr": "Markham"
+      }
+    },
+    {
+      "slug": "mississauga",
+      "province": "on",
+      "name": {
+        "en": "Mississauga",
+        "fr": "Mississauga"
+      }
+    },
+    {
+      "slug": "moncton",
+      "province": "nb",
+      "name": {
+        "en": "Moncton",
+        "fr": "Moncton"
+      }
+    },
+    {
+      "slug": "montreal",
+      "province": "qc",
+      "name": {
+        "en": "Montréal",
+        "fr": "Montréal"
+      }
+    },
+    {
+      "slug": "nanaimo",
+      "province": "bc",
+      "name": {
+        "en": "Nanaimo",
+        "fr": "Nanaimo"
+      }
+    },
+    {
+      "slug": "oshawa",
+      "province": "on",
+      "name": {
+        "en": "Oshawa",
+        "fr": "Oshawa"
+      }
+    },
+    {
+      "slug": "ottawa",
+      "province": "on",
+      "name": {
+        "en": "Ottawa",
+        "fr": "Ottawa"
+      }
+    },
+    {
+      "slug": "prince-george",
+      "province": "bc",
+      "name": {
+        "en": "Prince George",
+        "fr": "Prince George"
+      }
+    },
+    {
+      "slug": "quebec-city",
+      "province": "qc",
+      "name": {
+        "en": "Québec City",
+        "fr": "Québec"
+      }
+    },
+    {
+      "slug": "red-deer",
+      "province": "ab",
+      "name": {
+        "en": "Red Deer",
+        "fr": "Red Deer"
+      }
+    },
+    {
+      "slug": "regina",
+      "province": "sk",
+      "name": {
+        "en": "Regina",
+        "fr": "Regina"
+      }
+    },
+    {
+      "slug": "richmond-bc",
+      "province": "bc",
+      "name": {
+        "en": "Richmond",
+        "fr": "Richmond"
+      }
+    },
+    {
+      "slug": "richmond-hill",
+      "province": "on",
+      "name": {
+        "en": "Richmond Hill",
+        "fr": "Richmond Hill"
+      }
+    },
+    {
+      "slug": "saguenay",
+      "province": "qc",
+      "name": {
+        "en": "Saguenay",
+        "fr": "Saguenay"
+      }
+    },
+    {
+      "slug": "saint-john",
+      "province": "nb",
+      "name": {
+        "en": "Saint John",
+        "fr": "Saint John"
+      }
+    },
+    {
+      "slug": "saskatoon",
+      "province": "sk",
+      "name": {
+        "en": "Saskatoon",
+        "fr": "Saskatoon"
+      }
+    },
+    {
+      "slug": "sherbrooke",
+      "province": "qc",
+      "name": {
+        "en": "Sherbrooke",
+        "fr": "Sherbrooke"
+      }
+    },
+    {
+      "slug": "st-johns",
+      "province": "nl",
+      "name": {
+        "en": "St. John’s",
+        "fr": "St. John’s"
+      }
+    },
+    {
+      "slug": "surrey",
+      "province": "bc",
+      "name": {
+        "en": "Surrey",
+        "fr": "Surrey"
+      }
+    },
+    {
+      "slug": "sydney",
+      "province": "ns",
+      "name": {
+        "en": "Sydney",
+        "fr": "Sydney"
+      }
+    },
+    {
+      "slug": "thunder-bay",
+      "province": "on",
+      "name": {
+        "en": "Thunder Bay",
+        "fr": "Thunder Bay"
+      }
+    },
+    {
+      "slug": "toronto",
+      "province": "on",
+      "name": {
+        "en": "Toronto",
+        "fr": "Toronto"
+      }
+    },
+    {
+      "slug": "trois-rivieres",
+      "province": "qc",
+      "name": {
+        "en": "Trois-Rivières",
+        "fr": "Trois-Rivières"
+      }
+    },
+    {
+      "slug": "vancouver",
+      "province": "bc",
+      "name": {
+        "en": "Vancouver",
+        "fr": "Vancouver"
+      }
+    },
+    {
+      "slug": "vaughan",
+      "province": "on",
+      "name": {
+        "en": "Vaughan",
+        "fr": "Vaughan"
+      }
+    },
+    {
+      "slug": "victoria",
+      "province": "bc",
+      "name": {
+        "en": "Victoria",
+        "fr": "Victoria"
+      }
+    },
+    {
+      "slug": "whitehorse",
+      "province": "yt",
+      "name": {
+        "en": "Whitehorse",
+        "fr": "Whitehorse"
+      }
+    },
+    {
+      "slug": "windsor",
+      "province": "on",
+      "name": {
+        "en": "Windsor",
+        "fr": "Windsor"
+      }
+    },
+    {
+      "slug": "winnipeg",
+      "province": "mb",
+      "name": {
+        "en": "Winnipeg",
+        "fr": "Winnipeg"
+      }
+    },
+    {
+      "slug": "yellowknife",
+      "province": "nt",
+      "name": {
+        "en": "Yellowknife",
+        "fr": "Yellowknife"
+      }
+    }
+  ]
+}
