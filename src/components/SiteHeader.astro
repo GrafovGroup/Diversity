@@ -1,16 +1,18 @@
 ---
+import '../styles/site-header.css';
 import Wordmark from './Wordmark.astro';
 import { services } from '../data/services';
 import { solutions } from '../data/solutions';
 import { articles } from '../data/pages';
 interface Props {
   locale: 'en' | 'fr';
+  path?: string;
 }
-const { locale } = Astro.props;
+const { locale, path = '' } = Astro.props;
+const other = locale === 'en' ? 'fr' : 'en';
 const en = locale === 'en';
 const href = (path = '') => `/${locale}/${path ? path + '/' : ''}`;
 const navigation = [
-  { path: 'about', label: en ? 'About' : 'À propos' },
   { path: 'services', label: en ? 'Our services' : 'Nos services' },
   { path: 'corporations', label: en ? 'Corporate' : 'Entreprises' },
   { path: 'government', label: en ? 'Government' : 'Secteur public' },
@@ -19,6 +21,7 @@ const navigation = [
   { path: 'contact', label: 'Contact' },
 ];
 const searchPages = [
+  { path: 'about', label: en ? 'About' : 'À propos' },
   ...navigation,
   ...services.flatMap((service) => [
     { path: `services/${service.slug}`, label: service.title[locale] },
@@ -54,14 +57,29 @@ const searchPages = [
       id="primary-navigation"
       aria-label={en ? 'Main navigation' : 'Navigation principale'}
     >
-      {navigation.map((item) => <a href={href(item.path)}>{item.label}</a>)}
+      {
+        navigation.map((item) => (
+          <a
+            href={href(item.path)}
+            aria-current={
+              path === item.path
+                ? 'page'
+                : path.startsWith(item.path + '/')
+                  ? 'true'
+                  : undefined
+            }
+          >
+            {item.label}
+          </a>
+        ))
+      }
     </nav>
     <div class="option-header-tools">
       <button
         class="option-search-button"
         aria-label={en ? 'Search the site' : 'Rechercher sur le site'}
         aria-haspopup="dialog"
-        aria-controls="homepage-search"
+        aria-controls="site-search"
       >
         <svg
           width="20"
@@ -77,9 +95,9 @@ const searchPages = [
       </button>
       <a
         class="option-language"
-        href={en ? '/fr/' : '/en/'}
-        hreflang={en ? 'fr-CA' : 'en-CA'}
-        lang={en ? 'fr' : 'en'}
+        href={`/${other}/${path ? path + '/' : ''}`}
+        hreflang={other}
+        lang={other}
         aria-label={en ? 'Français' : 'English'}>{en ? 'FR' : 'EN'}</a
       >
       <a class="button option-header-cta" href={href('contact')}
@@ -97,7 +115,7 @@ const searchPages = [
         class="menu-toggle option-menu"
         aria-controls="primary-navigation"
         aria-expanded="false"
-        aria-label={en ? 'Menu' : 'Menu'}
+        aria-label="Menu"
         ><svg
           width="23"
           height="23"
@@ -112,12 +130,12 @@ const searchPages = [
   </div>
 </header>
 <dialog
-  id="homepage-search"
+  id="site-search"
   class="option-search-dialog"
-  aria-labelledby="homepage-search-title"
+  aria-labelledby="site-search-title"
 >
   <div class="option-search-heading">
-    <h2 id="homepage-search-title">
+    <h2 id="site-search-title">
       {
         en
           ? 'Find a service or resource'
@@ -129,7 +147,7 @@ const searchPages = [
       aria-label={en ? 'Close search' : 'Fermer la recherche'}>×</button
     >
   </div>
-  <label for="homepage-search-input"
+  <label for="site-search-input"
     >{
       en
         ? 'Search services, products and resources'
@@ -137,7 +155,7 @@ const searchPages = [
     }</label
   >
   <input
-    id="homepage-search-input"
+    id="site-search-input"
     type="search"
     autocomplete="off"
     placeholder={en
@@ -162,13 +180,36 @@ const searchPages = [
   </ul>
 </dialog>
 <script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('#primary-navigation');
+  function closeMenu() {
+    toggle?.setAttribute('aria-expanded', 'false');
+    nav?.classList.remove('is-open');
+  }
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    nav?.classList.toggle('is-open', open);
+    if (open) nav?.querySelector('a')?.focus();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (
+      event.key === 'Escape' &&
+      toggle?.getAttribute('aria-expanded') === 'true'
+    ) {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+  nav
+    ?.querySelectorAll('a')
+    .forEach((link) => link.addEventListener('click', closeMenu));
+
   const opener = document.querySelector<HTMLButtonElement>(
     '.option-search-button',
   );
-  const dialog = document.querySelector<HTMLDialogElement>('#homepage-search');
-  const input = document.querySelector<HTMLInputElement>(
-    '#homepage-search-input',
-  );
+  const dialog = document.querySelector<HTMLDialogElement>('#site-search');
+  const input = document.querySelector<HTMLInputElement>('#site-search-input');
   const normalize = (text: string) =>
     text
       .normalize('NFD')

@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 ---
 
 <!doctype html>
@@ -11,8 +13,10 @@ import '../styles/global.css';
     /><meta name="robots" content="noindex" /><title>
       Page not found · Page introuvable | Diversity.ca
     </title></head
-  ><body
-    ><main class="container section">
+  ><body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader locale="en" />
+    <main id="main" tabindex="-1" class="container section">
       <span class="eyebrow">DIVERSITY.CA · 404</span><h1
         style="font-size:clamp(3rem,8vw,6rem)"
       >
@@ -36,6 +40,7 @@ import '../styles/global.css';
           lang="fr">Accueil en français</a
         >
       </div>
-    </main></body
-  >
+    </main>
+    <SiteFooter locale="en" />
+  </body>
 </html>

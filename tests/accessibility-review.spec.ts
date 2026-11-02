@@ -15,7 +15,11 @@ test('the bilingual error page keeps its image and recovery links inside a narro
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
-    for (const selector of ['main img', 'a[href="/en/"]', 'a[href="/fr/"]']) {
+    for (const selector of [
+      'main img',
+      'main a[href="/en/"]',
+      'main a[href="/fr/"]',
+    ]) {
       const box = await page.locator(selector).boundingBox();
       expect(box!.x).toBeGreaterThanOrEqual(0);
       expect(box!.x + box!.width).toBeLessThanOrEqual(320);
@@ -62,12 +66,15 @@ for (const locale of ['en', 'fr'] as const) {
       await expect(
         page.locator('#primary-navigation a[aria-current]'),
       ).toHaveAttribute('aria-current', 'true');
-      await expect(
-        page.locator('.languages a[lang="en"]'),
-      ).toHaveAccessibleName('English');
-      await expect(
-        page.locator('.languages a[lang="fr"]'),
-      ).toHaveAccessibleName('Français');
+      const alternate = locale === 'en' ? 'fr' : 'en';
+      const switcher = page.locator('header .option-language');
+      await expect(switcher).toHaveAccessibleName(
+        alternate === 'fr' ? 'Français' : 'English',
+      );
+      await expect(switcher).toHaveAttribute(
+        'href',
+        `/${alternate}/services/accessibility/${suffix}`,
+      );
     }
     await page.goto(`/${locale}/services/`);
     await expect(
@@ -94,12 +101,19 @@ for (const locale of ['en', 'fr'] as const) {
       3,
     );
     await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    const language = page.locator('.languages a').first();
+    const language = page.locator('header .option-language');
+    for (
+      let step = 0;
+      step < 12 &&
+      !(await language.evaluate((el) => el === document.activeElement));
+      step++
+    ) {
+      await page.keyboard.press('Tab');
+    }
     await expect(language).toBeFocused();
     const focus = await language.evaluate((element) => {
       const style = getComputedStyle(element);
-      const backdrop = getComputedStyle(element.closest('.topbar')!);
+      const backdrop = getComputedStyle(element.closest('header')!);
       const rect = element.getBoundingClientRect();
       return {
         color: style.outlineColor,
