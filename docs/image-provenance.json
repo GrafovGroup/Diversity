@@ -566,5 +566,375 @@
       }
     ],
     "usage": "English and French homepages"
+  },
+  {
+    "id": "service-photography-dei",
+    "original_source": "https://unsplash.com/photos/5V6KbvRcnV8",
+    "upstream_url": "https://images.unsplash.com/photo-1758691737543-09a1b2b715fa?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Vitaly Gariev",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "services/dei",
+    "subject": "Colleagues exchanging ideas in a bright shared office.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "60a59d7491cf1cfc632dd9895d5b74e4ab37c6776f693be6822aeafd48155a09",
+    "variants": [
+      {
+        "asset": "/images/services/dei-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 22590,
+        "sha256": "fff28e02e5ca30078de63579cb888db30849e243b66f1752c4966857cc666de1"
+      },
+      {
+        "asset": "/images/services/dei-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 60358,
+        "sha256": "e9f798ddaae58c2cda95a3f2dbe820cb26be1612e1f9874e3e121eb73d62f26b"
+      },
+      {
+        "asset": "/images/services/dei-1440.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 100902,
+        "sha256": "31c5a07eec7301bdeab2a1fcf7e7f58d96e8c24f1fe7925c46768c42cac8e699"
+      }
+    ]
+  },
+  {
+    "id": "service-photography-corporate",
+    "original_source": "https://unsplash.com/photos/_4tpElFQemQ",
+    "upstream_url": "https://images.unsplash.com/photo-1758518731706-be5d5230e5a5?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Vitaly Gariev",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "corporations",
+    "subject": "Four professionals discussing documents around a meeting table.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "882551de5b1156e95aace6ad1d8a28b79a61380b696221e7fa26505adf77bf55",
+    "variants": [
+      {
+        "asset": "/images/services/corporate-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 19968,
+        "sha256": "d842cb5fdadc3ddaac2610c952136e0ef7eebaf3cb015e323d6f2456b9db3a27"
+      },
+      {
+        "asset": "/images/services/corporate-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 48456,
+        "sha256": "149a22daefa955bf280a4675f172e92575a30b2befeebdc4f16080d8c3478614"
+      },
+      {
+        "asset": "/images/services/corporate-1440.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 83220,
+        "sha256": "cfce7cc21d0e67c70a13d3baac13ba684528c27a0a75ef657e3ec47c0c45357d"
+      }
+    ]
+  },
+  {
+    "id": "service-photography-research",
+    "original_source": "https://unsplash.com/photos/5fNmWej4tAA",
+    "upstream_url": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Scott Graham",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "insights",
+    "subject": "Colleagues reviewing written notes beside laptops during a working session.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "80791336d7d7b083da6c12d87e78a6da70d82ccf1465f383f391be48171b8b69",
+    "variants": [
+      {
+        "asset": "/images/services/research-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 20046,
+        "sha256": "ddd6f5256b92e96436c9c092e6d0ed5561a6313b3cf2721282f5f1a38d3389d3"
+      },
+      {
+        "asset": "/images/services/research-960.webp",
+        "width": 960,
+        "height": 641,
+        "bytes": 50320,
+        "sha256": "4bf9234544c976e7dfe1d943744e645827186bb75ecf1bafb84e4bfd473f0140"
+      },
+      {
+        "asset": "/images/services/research-1440.webp",
+        "width": 1440,
+        "height": 961,
+        "bytes": 91660,
+        "sha256": "f91047eec2668f8778d7e4a400f85e95da379af1ab4ff14b2de363339d8dad59"
+      }
+    ]
+  },
+  {
+    "id": "service-photography-training",
+    "original_source": "https://unsplash.com/photos/0g-iLtxmMhA",
+    "upstream_url": "https://images.unsplash.com/photo-1573166801077-d98391a43199?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Christina @ wocintechchat.com",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "services/training",
+    "subject": "A facilitator preparing ideas on a whiteboard.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "b8bc8dea678e831fae17661e633b055404d03174395e89e85960a67fd7458a00",
+    "variants": [
+      {
+        "asset": "/images/services/training-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 8406,
+        "sha256": "54a7759c2608e7e3ed7a74ebdb09b2d46369df21745a3443286bfadf52c76472"
+      },
+      {
+        "asset": "/images/services/training-960.webp",
+        "width": 960,
+        "height": 641,
+        "bytes": 27728,
+        "sha256": "960c20abc2b9428bfc484e24d251480d9564d7241f7c544079a006f9ee89dd97"
+      },
+      {
+        "asset": "/images/services/training-1440.webp",
+        "width": 1440,
+        "height": 961,
+        "bytes": 61368,
+        "sha256": "6fcc5cd4b4d9406445ea645f7025864eb485c5feb84588333335d354d186e182"
+      }
+    ]
+  },
+  {
+    "id": "service-photography-implementation",
+    "original_source": "https://unsplash.com/photos/yhq2ymcPlZE",
+    "upstream_url": "https://images.unsplash.com/photo-1573496546471-398eacdbd679?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Christina @ wocintechchat.com",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "services/implementation",
+    "subject": "Two colleagues mapping a plan together on a whiteboard.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "d515c0ab9a26402ab8c9c827755c5d92a9b12abb8b04e2fe18e5b256e5b32034",
+    "variants": [
+      {
+        "asset": "/images/services/implementation-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 16312,
+        "sha256": "2c3eab6823f526b942ef3ae8927194ac85520176dc1f60d81c959524fde3a17e"
+      },
+      {
+        "asset": "/images/services/implementation-960.webp",
+        "width": 960,
+        "height": 641,
+        "bytes": 45178,
+        "sha256": "84ceefc29490af67d153f53a21ee316db9a991ce16d084f15d3631f42b5479f3"
+      },
+      {
+        "asset": "/images/services/implementation-1440.webp",
+        "width": 1440,
+        "height": 961,
+        "bytes": 83408,
+        "sha256": "90f711864907800257ffd89f443257bb707430323f64aaefdaee63608503cac8"
+      }
+    ]
+  },
+  {
+    "id": "service-photography-people-culture",
+    "original_source": "https://unsplash.com/photos/PviMD8jDeYE",
+    "upstream_url": "https://images.unsplash.com/photo-1573166826272-5acd0ef8f650?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Christina @ wocintechchat.com",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "services/people-culture",
+    "subject": "Two colleagues having a conversation in front of a shared planning board.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "f8bf0c658289906f827b03f5feedc74cf7f259bc258040fc158e67ca86c12b5a",
+    "variants": [
+      {
+        "asset": "/images/services/people-culture-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 16664,
+        "sha256": "6299e390779bf6839a7f31dcd9ce979618a2c694455ee42879678b783872a56c"
+      },
+      {
+        "asset": "/images/services/people-culture-960.webp",
+        "width": 960,
+        "height": 641,
+        "bytes": 51776,
+        "sha256": "6063ca27511816a26938ca71c689c8dc77e27b8ab273cc0925b700de5ff26cf1"
+      },
+      {
+        "asset": "/images/services/people-culture-1440.webp",
+        "width": 1440,
+        "height": 961,
+        "bytes": 100374,
+        "sha256": "931ff985bfecf163dd5a9bcc7f94ea18af97ac957fae57cf8b2618c55951c237"
+      }
+    ]
+  },
+  {
+    "id": "service-photography-accessibility",
+    "original_source": "https://unsplash.com/photos/4MoIpDcSlr4",
+    "upstream_url": "https://images.unsplash.com/photo-1574887427561-d3d5d58c9273?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Compagnons / Sigmund",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "services/accessibility",
+    "subject": "Hands using a refreshable braille display beside a computer keyboard.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "9a07032dd4cc045c3c83af9a34339ac1bd9928a84b71fecfafdd02e4022b981c",
+    "variants": [
+      {
+        "asset": "/images/services/accessibility-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 27466,
+        "sha256": "51fa2237db09f02f3c6dcc95f4314118223ab33f6b8a9f816f06257b14b6dce0"
+      },
+      {
+        "asset": "/images/services/accessibility-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 67732,
+        "sha256": "de9653b46a9583171b163e9f472ce633a7f56d664fb683fae44dee5b6b36a758"
+      },
+      {
+        "asset": "/images/services/accessibility-1440.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 117454,
+        "sha256": "db0d16afb3ab4288019b9542ad6c645854d30f96adc0829aaa64ac7bbfe01c97"
+      }
+    ]
+  },
+  {
+    "id": "service-photography-supplier-diversity",
+    "original_source": "https://unsplash.com/photos/two-businessmen-shaking-hands-across-a-table-lZXX-QVdyXY",
+    "upstream_url": "https://images.unsplash.com/photo-1758519288905-38b7b00c1023?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Vitaly Gariev",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "services/supplier-diversity",
+    "subject": "Two business partners shaking hands over documents at a table.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "aceddb187aed1476c4b627f4307a79d48de748abe316c7274170f66804c0731f",
+    "variants": [
+      {
+        "asset": "/images/services/supplier-diversity-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 15868,
+        "sha256": "4495f9235921670d76e28a13de3ca37871bb7a4e70eac8dbff49a39c1ffc13f9"
+      },
+      {
+        "asset": "/images/services/supplier-diversity-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 37726,
+        "sha256": "6b9a4beea7eb8b827892eeb62a8c7c947a8d8290ca6e4c1d571695d5e68747d7"
+      },
+      {
+        "asset": "/images/services/supplier-diversity-1440.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 62880,
+        "sha256": "b9a2f86b57b3d1cd0a7a5be9439ff5c7b9c948fe3d9d7d5e4624c75b2cf42256"
+      }
+    ]
+  },
+  {
+    "id": "service-photography-social-impact",
+    "original_source": "https://unsplash.com/photos/3k3l2brxmwQ",
+    "upstream_url": "https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Joel Muniz",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "services/social-impact",
+    "subject": "Volunteers working together to sort donated food.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "88492fd2f89ce5abc861e6a87708ad6372f8fa2022911d5587889113b918778e",
+    "variants": [
+      {
+        "asset": "/images/services/social-impact-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 25042,
+        "sha256": "0fb651a9a44865ec3814e1e334179cd618b601bf5818bf1ba04f942d4cd421b7"
+      },
+      {
+        "asset": "/images/services/social-impact-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 57866,
+        "sha256": "da2ac36d284831ebb1a6c4038a046cc889d6f7f5a460e312813a5aa5e639ba86"
+      },
+      {
+        "asset": "/images/services/social-impact-1440.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 93458,
+        "sha256": "cebdcf4add19bdb12eafa4cb07a6e063939d5592bd3a237e7774343bed465f16"
+      }
+    ]
+  },
+  {
+    "id": "service-photography-government",
+    "original_source": "https://unsplash.com/photos/KdeqA3aTnBY",
+    "upstream_url": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?fit=max&w=1440&q=90&fm=jpg",
+    "photographer": "Dylan Gillis",
+    "license": "Unsplash License",
+    "license_evidence": "https://unsplash.com/license",
+    "retrieved": "2026-11-02",
+    "usage": "government",
+    "subject": "Participants taking notes during a collaborative roundtable discussion.",
+    "usage_note": "Illustrative stock photography. The depicted people and premises are not represented as Diversity.ca staff, clients, offices or endorsers.",
+    "adaptation": "Proportional resizing and WebP encoding only. No generation, compositing, recolouring or animation. Responsive framing uses CSS.",
+    "source_sha256": "d18c9ffe3fd663781afde02bd201be7a221b94957623b910a7c82eca6cb5678f",
+    "variants": [
+      {
+        "asset": "/images/services/government-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 22934,
+        "sha256": "5a1d6924fd1ceb39184c42e9e55a8c0d5b9f10bb59d7c46e48ad1be82f704190"
+      },
+      {
+        "asset": "/images/services/government-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 56460,
+        "sha256": "3ee84b21c556175a148703ea0afe029fdcb6edea0c130f24fcc76e3db0c744e5"
+      },
+      {
+        "asset": "/images/services/government-1440.webp",
+        "width": 1440,
+        "height": 960,
+        "bytes": 98960,
+        "sha256": "3d6d519e39cb5f66b540c1b0755b5196715e25efaa693fd86dfdcc91dff598ee"
+      }
+    ]
   }
 ]

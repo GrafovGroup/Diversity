@@ -1,0 +1,36 @@
+.page-hero-split:has(> .service-photograph) {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 72px);
+}
+.page-hero-split > img.service-photograph {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 18px;
+  animation: none;
+  transition: none;
+}
+.service-photo-card {
+  transition: none;
+}
+.service-photo-card > img.service-photograph {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  animation: none;
+  transition: none;
+}
+@media (max-width: 1000px) {
+  .page-hero-split:has(> .service-photograph) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .page-hero-split > img.service-photograph {
+    max-height: 480px;
+    border-radius: 12px;
+  }
+}

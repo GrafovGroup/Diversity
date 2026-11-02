@@ -79,7 +79,16 @@ const description = en
     <div class="service-grid">
       {
         services.map((service) => (
-          <a class="service-card" href={`/${locale}/services/${service.slug}/`}>
+          <a
+            class="service-card service-photo-card"
+            href={`/${locale}/services/${service.slug}/`}
+          >
+            <PageImage
+              path={`services/${service.slug}`}
+              locale={locale}
+              priority={false}
+              sizes="(max-width: 700px) calc(100vw - 64px), (max-width: 1100px) 44vw, 22vw"
+            />
             <h3>{service.title[locale]}</h3>
             <p>{service.intro[locale]}</p>
             <span class="service-link">

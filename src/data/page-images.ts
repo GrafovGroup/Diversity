@@ -1,6 +1,7 @@
 import { coreImages } from './core-images';
 import { utilityImages } from './utility-images';
 import { subserviceImages } from './subservice-images';
+import { servicePhotography } from './service-photography';
 
 export interface PageVisual {
   src: string;
@@ -161,6 +162,7 @@ export const homeImages: Record<string, PageVisual> = {
 export const pageImages: Record<string, PageVisual> = {
   ...photographs,
   ...coreImages,
+  ...servicePhotography,
   ...utilityImages,
   ...Object.fromEntries(
     Object.entries(subserviceImages).map(([key, value]) => [
