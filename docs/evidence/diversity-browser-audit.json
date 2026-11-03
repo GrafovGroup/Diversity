@@ -1,0 +1,682 @@
+{
+  "routes": 114,
+  "axeChecks": 114,
+  "reflowChecks": 456,
+  "violations": [
+    {
+      "route": "/fr/",
+      "id": "label-content-name-mismatch",
+      "impact": "serious",
+      "nodes": [
+        {
+          "html": "<a class=\"text-link\" href=\"/fr/ressources/preparer-evaluation-accessibilite/\" aria-label=\"Lire : Que préparer avant une évaluation de l’accessibilité?\">",
+          "target": [
+            ".article-card:nth-child(1) > .text-link"
+          ],
+          "summary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+        },
+        {
+          "html": "<a class=\"text-link\" href=\"/fr/ressources/mandat-approvisionnement-accessible/\" aria-label=\"Lire : Intégrer l’accessibilité tôt dans le mandat d’achat\">",
+          "target": [
+            ".article-card:nth-child(2) > .text-link"
+          ],
+          "summary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+        },
+        {
+          "html": "<a class=\"text-link\" href=\"/fr/ressources/concevoir-formation-utile/\" aria-label=\"Lire : Rendre la formation utile après la séance\">",
+          "target": [
+            ".article-card:nth-child(3) > .text-link"
+          ],
+          "summary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "id": "label-content-name-mismatch",
+      "impact": "serious",
+      "nodes": [
+        {
+          "html": "<a class=\"text-link\" href=\"/insights/preparing-an-accessibility-assessment/\" aria-label=\"Read : What to prepare before an accessibility assessment\">",
+          "target": [
+            ".article-card:nth-child(1) > .text-link"
+          ],
+          "summary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+        },
+        {
+          "html": "<a class=\"text-link\" href=\"/insights/accessible-procurement-brief/\" aria-label=\"Read : Put accessibility into the procurement brief early\">",
+          "target": [
+            ".article-card:nth-child(2) > .text-link"
+          ],
+          "summary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+        },
+        {
+          "html": "<a class=\"text-link\" href=\"/insights/designing-useful-workplace-training/\" aria-label=\"Read : Make workplace training useful after the session\">",
+          "target": [
+            ".article-card:nth-child(3) > .text-link"
+          ],
+          "summary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+        }
+      ]
+    }
+  ],
+  "overflow": [
+    {
+      "route": "/fr/approvisionnement-public/",
+      "width": 320,
+      "scrollWidth": 325,
+      "elements": [
+        {
+          "tag": "DIV",
+          "class": "",
+          "text": "Approvisionnement et propositionsUn point de départ concret pour votre"
+        },
+        {
+          "tag": "P",
+          "class": "eyebrow",
+          "text": "Approvisionnement et propositions"
+        },
+        {
+          "tag": "H1",
+          "class": "",
+          "text": "Un point de départ concret pour votre équipe d’approvisionnement."
+        },
+        {
+          "tag": "P",
+          "class": "lead",
+          "text": "Précisez votre besoin, le processus décisionnel et les exigences de ré"
+        },
+        {
+          "tag": "DIV",
+          "class": "button-row",
+          "text": "DISCUTER DE VOTRE PROJET"
+        }
+      ]
+    },
+    {
+      "route": "/fr/entreprises/",
+      "width": 768,
+      "scrollWidth": 775,
+      "elements": [
+        {
+          "tag": "A",
+          "class": "",
+          "text": "Diversité des fournisseurs et approvisionnement"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "incomplete": [
+    {
+      "route": "/about/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/accessibility/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/brand-review/",
+      "id": "color-contrast",
+      "count": 7
+    },
+    {
+      "route": "/canada/alberta/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/british-columbia/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/manitoba/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/new-brunswick/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/newfoundland-labrador/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/northwest-territories/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/nova-scotia/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/nunavut/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/ontario/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/prince-edward-island/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/quebec/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/saskatchewan/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/canada/yukon/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/capabilities/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/careers-partners/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/contact/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/corporations/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/delivery-team/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/a-propos/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/accessibilite/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/approvisionnement-public/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/alberta/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/british-columbia/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/manitoba/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/new-brunswick/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/newfoundland-labrador/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/northwest-territories/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/nova-scotia/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/nunavut/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/ontario/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/prince-edward-island/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/quebec/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/saskatchewan/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/canada/yukon/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/capacites/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/carrieres-partenaires/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/confidentialite/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/contact/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/demande-de-formation/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/demander-une-evaluation/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/demander-une-proposition/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/entreprises/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/equipe-et-prestation/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/conseil-en-accessibilite/accessibilite-numerique/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/conseil-en-accessibilite/environnement-bati/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/conseil-en-accessibilite/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/diversite-equite-inclusion/diagnostic-organisationnel/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/diversite-equite-inclusion/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/diversite-equite-inclusion/strategie-et-politiques/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/diversite-fournisseurs-approvisionnement/conception-programme-fournisseurs/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/diversite-fournisseurs-approvisionnement/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/diversite-fournisseurs-approvisionnement/mobilisation-fournisseurs/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/formation-developpement-competences/formation-accessibilite/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/formation-developpement-competences/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/formation-developpement-competences/leadership-inclusif/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/impact-social-durabilite/approvisionnement-social-suivi/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/impact-social-durabilite/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/impact-social-durabilite/mobilisation-parties-prenantes/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/ressources-humaines-organisation/culture-experience-employe/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/ressources-humaines-organisation/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/ressources-humaines-organisation/leadership-gestion-changement/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/solutions-accessibilite-mise-en-oeuvre/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/solutions-accessibilite-mise-en-oeuvre/operateurs-portes-automatiques/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/expertises/solutions-accessibilite-mise-en-oeuvre/signalisation-orientation-obstacles/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/gouvernement-secteur-public/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/",
+      "id": "color-contrast",
+      "count": 6
+    },
+    {
+      "route": "/fr/notre-demarche/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/ressources/concevoir-formation-utile/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/ressources/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/ressources/mandat-approvisionnement-accessible/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/ressources/preparer-evaluation-accessibilite/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/fr/revision-identite/",
+      "id": "color-contrast",
+      "count": 7
+    },
+    {
+      "route": "/fr/secteurs/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/government-public-sector/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/",
+      "id": "color-contrast",
+      "count": 6
+    },
+    {
+      "route": "/industries/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/insights/accessible-procurement-brief/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/insights/designing-useful-workplace-training/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/insights/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/insights/preparing-an-accessibility-assessment/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/our-approach/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/privacy/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/public-sector-procurement/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/request-a-proposal/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/request-an-assessment/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/accessibility-advisory/built-environment/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/accessibility-advisory/digital-accessibility/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/accessibility-advisory/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/accessibility-solutions-implementation/automatic-door-operators/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/accessibility-solutions-implementation/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/accessibility-solutions-implementation/signage-wayfinding-barrier-removal/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/diversity-equity-inclusion/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/diversity-equity-inclusion/organizational-assessment/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/diversity-equity-inclusion/strategy-and-policy/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/human-resources-organization/culture-employee-experience/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/human-resources-organization/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/human-resources-organization/leadership-change-management/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/social-impact-sustainability/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/social-impact-sustainability/social-procurement-reporting/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/social-impact-sustainability/stakeholder-engagement/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/supplier-diversity-procurement/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/supplier-diversity-procurement/supplier-engagement/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/supplier-diversity-procurement/supplier-program-design/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/training-capacity-building/accessibility-learning/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/training-capacity-building/inclusive-leadership/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/services/training-capacity-building/",
+      "id": "color-contrast",
+      "count": 5
+    },
+    {
+      "route": "/training-enquiry/",
+      "id": "color-contrast",
+      "count": 5
+    }
+  ]
+}

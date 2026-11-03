@@ -1,0 +1,9 @@
+---
+import type { Lang } from '../data/site';
+interface Props { lang: Lang; dark?: boolean; descriptor?: boolean; }
+const {lang, dark=false, descriptor=false}=Astro.props;
+---
+<span class:list={['brand',{'brand-dark':dark,'brand-full':descriptor}]}>
+  <span class="wordmark">Diversity.ca</span>
+  {descriptor && <span class="brand-descriptor">{lang==='fr'?'GENS | OPPORTUNITÉS | PROGRÈS':'PEOPLE | OPPORTUNITY | PROGRESS'}</span>}
+</span>
