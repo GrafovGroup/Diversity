@@ -62,7 +62,8 @@ const related = solutions
             <a class="button" href={enquiry}
               >{en ? 'Request a quote' : 'Demander une soumission'}</a
             ><a class="text-link" href="#scope"
-              >{en ? 'See what’s included' : 'Voir les livrables'}</a>
+              >{en ? 'See what’s included' : 'Voir les livrables'}</a
+            >
           </div><p class="solution-note">
             {
               en
@@ -149,7 +150,8 @@ const related = solutions
         </p><a class="text-link" href={`/${locale}/services/${parent.slug}/`}
           >{en ? 'Explore the wider service: ' : 'Explorer le domaine : '}{
             parent.shortTitle[locale]
-          }</a>
+          }</a
+        >
       </section>
       <div class="solution-enquiry">
         <h2>
@@ -161,7 +163,8 @@ const related = solutions
               : 'Décrivez le résultat souhaité et vos exigences d’achat. Cette offre sera précisée dans votre demande.'
           }
         </p><a class="button" href={enquiry}
-          >{en ? 'Request a quote' : 'Demander une soumission'}</a>
+          >{en ? 'Request a quote' : 'Demander une soumission'}</a
+        >
       </div>
     </div>
   </section>
@@ -199,9 +202,8 @@ const related = solutions
         }
       </div><div class="button-row">
         <a class="text-link" href={`/${locale}/solutions/`}
-          >{
-            en ? 'All services & products' : 'Tous les services et produits'
-          }</a>
+          >{en ? 'All services & products' : 'Tous les services et produits'}</a
+        >
       </div>
     </div>
   </section>

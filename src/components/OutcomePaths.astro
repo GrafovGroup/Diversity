@@ -1,0 +1,192 @@
+---
+interface Props {
+  locale: 'en' | 'fr';
+}
+const { locale } = Astro.props;
+const en = locale === 'en';
+const paths = en
+  ? [
+      {
+        title: 'Make decisions more inclusive',
+        body: 'Give staff a practical inclusion lens they can apply to policies, programs and everyday choices.',
+        output: 'Editable tool · Staff guide · Pilot feedback',
+        anchor: 'section-2',
+      },
+      {
+        title: 'Make services easier to access',
+        body: 'Listen to the people you serve and identify what gets in the way of participation.',
+        output: 'Engagement findings · Barrier map · Priorities',
+        anchor: 'section-3',
+      },
+      {
+        title: 'Put your plan into practice',
+        body: 'Connect recommendations to owners, available resources and a clear way to measure progress.',
+        output: 'Phased roadmap · Measures · Team handover',
+        anchor: 'section-5',
+      },
+    ]
+  : [
+      {
+        title: 'Rendre les décisions plus inclusives',
+        body: 'Outiller le personnel avec une grille d’analyse applicable aux politiques, aux programmes et aux décisions quotidiennes.',
+        output: 'Outil modifiable · Guide · Mise à l’essai',
+        anchor: 'section-2',
+      },
+      {
+        title: 'Faciliter l’accès aux services',
+        body: 'Écouter les personnes desservies et repérer les obstacles à leur participation.',
+        output: 'Consultation · Portrait des obstacles · Priorités',
+        anchor: 'section-3',
+      },
+      {
+        title: 'Passer du plan à l’action',
+        body: 'Relier les recommandations aux responsables, aux ressources disponibles et aux mesures de progrès.',
+        output: 'Feuille de route · Indicateurs · Transfert',
+        anchor: 'section-5',
+      },
+    ];
+---
+
+<section class="outcome-section" aria-labelledby="outcome-heading">
+  <div class="container">
+    <div class="outcome-heading">
+      <div>
+        <span class="eyebrow"
+          >{en ? 'START WITH YOUR PRIORITY' : 'PARTIR DE VOTRE PRIORITÉ'}</span
+        >
+        <h2 id="outcome-heading">
+          {en ? 'What needs to work better?' : 'Que souhaitez-vous améliorer?'}
+        </h2>
+      </div>
+      <p>
+        {
+          en
+            ? 'Focused projects for workplaces, public services and communities. Build on the work you have already started.'
+            : 'Des mandats ciblés pour les milieux de travail, les services publics et les communautés. Prenez appui sur le travail déjà amorcé.'
+        }
+      </p>
+    </div>
+    <div class="outcome-grid">
+      {
+        paths.map((path, i) => (
+          <a
+            class="outcome-card"
+            href={`/${locale}/idea-advisory/#${path.anchor}`}
+          >
+            <span class="outcome-number" aria-hidden="true">
+              0{i + 1}
+            </span>
+            <>
+              <h3>{path.title}</h3>
+              <p>{path.body}</p>
+            </>
+            <span class="outcome-output">{path.output}</span>
+            <span class="outcome-link">
+              {en ? 'View the scope' : 'Voir la portée'}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+    <p class="outcome-note">
+      {
+        en
+          ? 'Inclusion, diversity, equity and accessibility (IDEA), translated into practical work. '
+          : 'Inclusion, diversité, équité et accessibilité (IDEA) : des engagements traduits en actions. '
+      }<a href={`/${locale}/idea-advisory/`}
+        >{en ? 'Explore IDEA advisory' : 'Découvrir le conseil en IDEA'}</a
+      >
+    </p>
+  </div>
+</section>
+<style>
+  .outcome-section {
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    background: #f4f5fb;
+    border-block: 1px solid #e3e6f0;
+  }
+  .outcome-heading {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .outcome-heading h2 {
+    margin: 0.65rem 0 0;
+  }
+  .outcome-heading p {
+    margin: 0;
+    max-width: 50ch;
+  }
+  .outcome-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  .outcome-card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.35rem, 2.4vw, 2.2rem);
+    border: 1px solid #dce0ed;
+    border-radius: 14px;
+    background: white;
+    text-decoration: none;
+    color: #071333;
+  }
+  .outcome-card:hover {
+    border-color: #6553c6;
+    box-shadow: 0 8px 26px #18224b0a;
+  }
+  .outcome-card:focus-visible {
+    outline: 3px solid #6141c8;
+    outline-offset: 4px;
+  }
+  .outcome-number {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: #6553a6;
+  }
+  .outcome-card h3 {
+    font-size: clamp(1.25rem, 1.6vw, 1.6rem);
+    line-height: 1.25;
+    margin: 1.2rem 0 0.75rem;
+  }
+  .outcome-card p {
+    color: #45516a;
+    margin: 0 0 1.5rem;
+  }
+  .outcome-output {
+    margin-top: auto;
+    border-top: 1px solid #e3e6f0;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #45516a;
+  }
+  .outcome-link {
+    display: block;
+    font-weight: 700;
+    margin-top: 1.15rem;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .outcome-note {
+    margin: 1.6rem 0 0;
+    font-size: 0.9rem;
+  }
+  .outcome-note a {
+    font-weight: 700;
+    text-underline-offset: 0.2em;
+  }
+  @media (max-width: 760px) {
+    .outcome-heading,
+    .outcome-grid {
+      grid-template-columns: 1fr;
+    }
+    .outcome-heading {
+      gap: 1rem;
+    }
+  }
+</style>

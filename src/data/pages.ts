@@ -1,3 +1,4 @@
+import { ideaAdvisory } from './idea-advisory';
 export type Locale = 'en' | 'fr';
 export type Localized<T = string> = Record<Locale, T>;
 export type ContentSection = {
@@ -12,9 +13,11 @@ export type ContentPage = {
   intro: Localized;
   sections: ContentSection[];
   cta?: { label: Localized; path: string };
+  faq?: { q: Localized; a: Localized }[];
 };
 
 export const pages: ContentPage[] = [
+  ideaAdvisory,
   {
     slug: 'about',
     eyebrow: { en: 'ABOUT DIVERSITY.CA', fr: 'À PROPOS DE DIVERSITY.CA' },
@@ -257,8 +260,8 @@ export const pages: ContentPage[] = [
       fr: 'Des actions concrètes au service de l’intérêt public.',
     },
     intro: {
-      en: 'Scope advisory and implementation support around your mandate, the people you serve and your procurement process. Our proposed services address accessibility, workforce practices, training, supplier participation and social impact.',
-      fr: 'Définissez les services-conseils et le soutien à la mise en œuvre selon votre mandat, les personnes que vous servez et votre processus d’approvisionnement. Les services proposés couvrent l’accessibilité, les pratiques de gestion, la formation, la participation des fournisseurs et l’impact social.',
+      en: 'Make inclusion part of everyday public service. Scope practical decision tools, community engagement, accessible communications and implementation support around your existing plan, the people you serve and your procurement requirements.',
+      fr: 'Intégrez l’inclusion aux services publics au quotidien. Définissez des outils décisionnels, une consultation communautaire, des communications accessibles et un soutien à la mise en œuvre selon votre plan actuel, les personnes desservies et vos exigences d’approvisionnement.',
     },
     sections: [
       {

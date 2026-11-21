@@ -41,17 +41,17 @@ export const services: Service[] = [
       'Faire de l’inclusion une pratique organisationnelle au quotidien.',
     ),
     description: localized(
-      'Connect your commitment to inclusion with the decisions that shape hiring, advancement and participation. We help define the questions, examine policies and employee experience, and develop a practical plan with clear ownership. The work starts with your context and the people affected by it.',
-      'Reliez votre engagement envers l’inclusion aux décisions qui façonnent l’embauche, l’avancement et la participation. Nous vous aidons à préciser les questions à examiner, à analyser les politiques et l’expérience du personnel, puis à élaborer un plan concret assorti de responsabilités claires. Le travail commence par votre réalité et les personnes concernées.',
+      'Connect your commitment to inclusion with the decisions that shape employment, public services and community participation. We help define the questions, examine policies and employee experience, and develop a practical plan with clear ownership. The work starts with your context and the people affected by it.',
+      'Reliez votre engagement envers l’inclusion aux décisions qui façonnent l’emploi, les services publics et la participation communautaire. Nous vous aidons à préciser les questions à examiner, à analyser les politiques et l’expérience du personnel, puis à élaborer un plan concret assorti de responsabilités claires. Le travail commence par votre réalité et les personnes concernées.',
     ),
     outcomes: localized(
       [
-        'A clearer picture of barriers across the employee experience.',
+        'A clearer picture of barriers in the employee or service-user experience.',
         'Priorities that connect inclusion to organizational objectives.',
         'An action plan with accountable owners and meaningful indicators.',
       ],
       [
-        'Un portrait plus clair des obstacles dans le parcours du personnel.',
+        'Un portrait plus clair des obstacles dans le parcours du personnel ou des usagers.',
         'Des priorités qui relient l’inclusion aux objectifs de l’organisation.',
         'Un plan d’action avec des responsables désignés et des indicateurs pertinents.',
       ],
@@ -73,13 +73,13 @@ export const services: Service[] = [
     deliverables: localized(
       [
         'Assessment summary with evidence, limitations and priority barriers.',
-        'Policy recommendations and an implementation sequence.',
+        'Policy recommendations or an inclusion decision tool with staff guidance, as scoped.',
         'A measurable inclusion roadmap tailored to your resources.',
         'A leadership briefing and progress-review framework.',
       ],
       [
         'Sommaire d’évaluation précisant les éléments probants, les limites et les obstacles prioritaires.',
-        'Recommandations sur les politiques et séquence de mise en œuvre.',
+        'Recommandations sur les politiques ou outil d’analyse inclusive avec guide, selon la portée.',
         'Feuille de route en inclusion adaptée à vos ressources et assortie de mesures de suivi.',
         'Présentation à la direction et cadre de suivi des progrès.',
       ],

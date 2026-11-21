@@ -34,6 +34,11 @@ export const GET: APIRoute = ({ params }) => {
   );
   add('insights', en ? 'Resources and guides' : 'Ressources et guides');
   add(
+    'idea-advisory',
+    searchTitles['idea-advisory'][locale],
+    'IDEA DEI EDI inclusion lens lenses municipal community engagement accessible communications implementation grille analyse inclusive consultation communautaire communications accessibles mise en œuvre',
+  );
+  add(
     'procurement',
     en ? 'Bids and tenders' : 'Soumissions et appels d’offres',
     'RFP RFQ bids tender tenders procurement public contracts appel appels offre offres soumission marché marchés publics',

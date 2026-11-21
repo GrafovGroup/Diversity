@@ -544,10 +544,7 @@
     "mockup_library_file_id": "libfile_5de7e09d932481919635b10b293d6038",
     "license": "User-supplied artwork for this website",
     "adaptation": "Original hero PNG copied byte-for-byte. Lossless WebP verified to have identical RGB pixels. About photograph extracted from the supplied layout at (52,728)-(625,1024) without retouching or recolouring. Display cropping only uses CSS object-fit/object-position.",
-    "hero_dimensions": [
-      545,
-      405
-    ],
+    "hero_dimensions": [545, 405],
     "variants": [
       {
         "asset": "/images/diversity_option1_exact_hero_crop.png",

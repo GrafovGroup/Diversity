@@ -161,6 +161,7 @@ export const homeImages: Record<string, PageVisual> = {
 
 export const pageImages: Record<string, PageVisual> = {
   ...photographs,
+  'idea-advisory': photographs.government,
   ...coreImages,
   ...servicePhotography,
   ...utilityImages,

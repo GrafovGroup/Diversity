@@ -409,8 +409,8 @@ export const enquiryGroups: {
         wide: true,
         maxLength: 600,
         help: label(
-          'For example: a prioritized assessment report, a practical action plan or a facilitated workshop.',
-          'Par exemple : un rapport d’évaluation avec priorités, un plan d’action concret ou un atelier animé.',
+          'For example: an inclusion lens, staff guide, engagement summary, accessible content recommendations or an implementation roadmap. Specify editable file formats.',
+          'Par exemple : une grille d’analyse inclusive, un guide, une synthèse de consultation, des recommandations de contenu accessible ou une feuille de route. Précisez les formats modifiables.',
         ),
       },
       {
@@ -420,8 +420,8 @@ export const enquiryGroups: {
         wide: true,
         maxLength: 600,
         help: label(
-          'Mention approvals, language needs, available resources or procurement instructions. Do not share confidential tender documents.',
-          'Mentionnez les approbations, les besoins linguistiques, les ressources disponibles ou les instructions d’approvisionnement. Ne transmettez pas de documents d’appel d’offres confidentiels.',
+          'Mention your existing plan, consultation needs, languages, on-site meetings, accessible formats, approvals and available resources. Do not share confidential tender documents.',
+          'Mentionnez le plan actuel, la consultation, les langues, les rencontres sur place, les formats accessibles, les approbations et les ressources disponibles. Ne transmettez pas de documents d’appel d’offres confidentiels.',
         ),
       },
       {

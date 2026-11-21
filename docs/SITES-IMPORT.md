@@ -62,7 +62,6 @@ Validation: Astro check reports zero errors/warnings/hints across 42 files. Twel
 
 The shared Wordmark component now distributes the three slogan phrases and their separators across the wordmark's full width. Header and footer, English and French, retain their existing type sizes and branding. Verified 16 header/footer alignments at 320, 390, 768 and 1440 pixels: first/last slogan word edges align within one pixel of the wordmark box, slogan stays below it, and pages have no horizontal overflow. French desktop appearance visually inspected. Astro check: zero errors, warnings or hints.
 
-
 ## Canadian location expansion — November 1, 2026
 
 Added 52 distinct city/regional guides and 13 province/territory guides in both languages (130 new localized URLs). Rebuilt the national directory with progressive city search and linked it from home/core services. Each location includes all seven service divisions, deliverables, detailed service links, practical planning and clear delivery/quote answers. City guides include three possible project scopes and an official regional-context source. No local offices or client projects are invented.
@@ -73,11 +72,9 @@ Browser QA: 326 checks passed, including 72 responsive layouts (six templates ×
 
 Final static audit passed: 252 unique sitemap URLs and page titles/descriptions, 18,986 internal links/assets, reciprocal locale alternates, 130 location pages with seven area-specific Service entities and matching breadcrumbs. Québec City has a distinct French title from the province. Build output: 254 HTML pages including root redirect/404. Initial asset budgets passed at 9.73 MB total, 49.3 KB largest HTML and 27.9 KB JavaScript.
 
-
 ## Main navigation size — November 1, 2026
 
 Increased main navigation type sizes by exactly 20%: desktop links 0.62rem → 0.744rem; mobile links 0.8rem → 0.96rem; header CTA 0.7rem → 0.84rem; mobile Menu control 0.68rem → 0.816rem. Scope is the primary navigation only. English 320px and French 390px expanded menus fit without horizontal overflow; French 1101px desktop navigation remains on one row. Computed sizes verified at 15.36px mobile and 11.904px desktop. Temporary visual review page removed before publication.
-
 
 ## Button and logo refinement — November 1, 2026
 
@@ -85,13 +82,11 @@ Added a shared 6px corner radius for buttons, including menu and enquiry control
 
 Browser review covered English 320px and French 390px, 1101px and 1201px frames. Header controls remain beside the logo, both header/footer brands contain only Diversity.ca, computed font sizes are 37.44px on phones and 41.28px on desktop, and button radius is 6px. No horizontal document overflow was observed. Temporary review page removed before the production build.
 
-
 ## Full-width homepage photograph — November 1, 2026
 
 Implemented the owner's selected concept 1 on both localized homepages: edge-to-edge existing licensed meeting photograph, graduated navy overlay, white headline/body/buttons, and a lighter blue-purple-pink Progress accent. The current logo, navigation, rounded buttons and remaining sections are retained. At phone widths the readable navy content transitions into a 280px photo band, preserving faces instead of heavily cropping the full image behind text. Responsive image sizes now reflect the full viewport. Existing photo source/licence and descriptive localized alt text are preserved. Superseded homepage styles were removed from the shared stylesheet and replaced with a homepage-specific stylesheet.
 
 Browser review: both languages at 320, 390, 768, 1100, 1440, 1920 and 2560 CSS-pixel frame widths, with no document overflow; every headline stayed on three lines, images loaded, and both hero actions retained the correct localized services/contact links and 54px heights. Desktop composition and final English/French phone photo bands visually inspected. Phone checks repeated after crop refinement. No enquiries sent. Temporary review page removed before packaging.
-
 
 ## French homepage light colour wash — November 1, 2026
 
@@ -99,13 +94,11 @@ Applied the owner's selected concept 3 to the French homepage only: pale blue/li
 
 Browser review: French at 320, 390, 768, 1024, 1440, 1920 and 2560px; English at 390 and 1440px. All nine layouts had no horizontal document overflow, three headline lines, loaded photographs and correct localized services/contact links. French desktop and phone compositions visually inspected; English retained white type and background photography. Temporary review page removed before packaging.
 
-
 ## Enquiry confirmation and consent-field removal — November 1, 2026
 
 Removed the requested checkbox and statement from the shared English/French enquiry form, including the validation gate and consent claim in provider/export records. Retained a plain privacy-notice link. Record schema is now version 3 because the consent property is removed. Successful provider responses replace the entire form, title and instructions with a centered thank-you panel explaining email follow-up. The panel receives focus, is announced as a status, and is brought into view with reduced-motion support. Send another enquiry reopens a cleared form with its original service/location context and focuses the name field. Failed submissions retain answers and allow retry; email-draft/download states do not show the sent confirmation.
 
 Validation: two browser-free unit tests passed for endpoint allowlisting, required data, spam rejection and absence of consent claims in both locales. Existing browser regression expectations updated. CUA browser QA used a temporary local-only provider-response fixture: English/French success, centered display, hidden entry fields, focus transfer, reset to initial service context, HTTP rejection and network failure with retained answers. English 390px/French 320px success panels had no horizontal overflow and were visually checked. No actual provider messages were sent. All temporary fixture routes/files were removed before build.
-
 
 ## Latest GitHub homepage integration — November 2, 2026
 
@@ -115,7 +108,6 @@ The selected source photo is hosted locally in responsive WebP variants (600, 10
 
 Browser review checked English and French homepages in frames of 320, 390, 760, 1024, 1440, 1920 and 2560 CSS pixels. All 14 layouts had no horizontal document overflow, seven service links, loaded hero imagery, correct localized canonical URLs and 54-pixel consultation/services buttons. English desktop and phone, French desktop and phone were visually inspected, and the French mobile menu opened and closed. The temporary review route was removed before packaging.
 
-
 ## Approved Option 1 artwork implementation — November 2, 2026
 
 Replaced the homepage's stock hero with the owner's exact `diversity_option1_exact_hero_crop.png`, stored byte-for-byte in `public/images/`. Its SHA-256 is `7e481f7c9d4f98a164c8473a17b3d29ba499667bb0c30857b995c2aec7d96811`. Browsers receive a 200,246-byte lossless WebP (30% smaller than the 287,320-byte original), with the PNG as fallback. Decoded RGB pixels were verified identical. No photograph was generated, substituted, retouched or recoloured. The supplied Option 1 mockup also provides the about-section photograph; provenance records the source crop.
@@ -123,7 +115,6 @@ Replaced the homepage's stock hero with the owner's exact `diversity_option1_exa
 The English and French homepages now use the approved white header, gradient wordmark/headline, navy and pink pill buttons, right-hand desktop hero photograph and seven service tiles. On phones the same image sits below the headline and both buttons, followed by single-column service rows. Cover positioning retains the lead subject and purple-blue background. Poppins Latin fonts are served locally (400/600/700, 23,740 bytes combined) with the upstream SIL Open Font License from Google Fonts. Other page headers, existing service/location content and enquiry delivery are preserved.
 
 Browser QA covered English and French in 320, 390, 760, 1024, 1440, 1920 and 2560 CSS-pixel frames. All 14 layouts loaded the local WebP, showed seven service tiles, retained at least 46px hero buttons and had no horizontal document overflow. Phone photo position was below both buttons; desktop photo position began at the right half. Desktop EN/FR and narrow phone compositions were visually reviewed. Mobile menus opened and closed with Escape. Search returned English accessibility and accent-insensitive French accessibility matches, showed an empty state, and restored opener focus on Escape. These are browser checks, not physical-device tests. The temporary review route was removed before build and GitHub synchronization.
-
 
 ## Service photography — November 2, 2026
 

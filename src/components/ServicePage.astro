@@ -108,6 +108,17 @@ const related = service.subservices.filter(
               >{en ? 'Explore the scope' : 'Découvrir la démarche'}</a
             >
           </div>
+          {
+            service.slug === 'dei' && !subservice && (
+              <p>
+                <a class="text-link" href={href('idea-advisory')}>
+                  {en
+                    ? 'Explore IDEA tools, community engagement and implementation'
+                    : 'Explorer les outils en IDEA, la consultation et la mise en œuvre'}
+                </a>
+              </p>
+            )
+          }
         </div>
         <PageImage path={path} locale={locale} />
       </div>

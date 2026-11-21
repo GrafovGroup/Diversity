@@ -4,6 +4,7 @@ import BidDesk from './BidDesk.astro';
 import PageImage from './PageImage.astro';
 import CallToAction from './CallToAction.astro';
 import SolutionsTeaser from './SolutionsTeaser.astro';
+import OutcomePaths from './OutcomePaths.astro';
 import type { ContentPage as Page } from '../data/pages';
 interface Props {
   locale: 'en' | 'fr';
@@ -19,6 +20,18 @@ const legal = ['privacy', 'accessibility-statement'].includes(page.slug);
   title={page.title[locale]}
   description={page.intro[locale]}
   path={page.slug}
+  structuredData={page.faq
+    ? [
+        {
+          '@type': 'FAQPage',
+          mainEntity: page.faq.map(({ q, a }) => ({
+            '@type': 'Question',
+            name: q[locale],
+            acceptedAnswer: { '@type': 'Answer', text: a[locale] },
+          })),
+        },
+      ]
+    : []}
 >
   <section class="page-hero">
     <div class="container">
@@ -62,6 +75,7 @@ const legal = ['privacy', 'accessibility-statement'].includes(page.slug);
     </div>
   </section>
   {page.slug === 'procurement' && <BidDesk locale={locale} />}
+  {page.slug === 'government' && <OutcomePaths locale={locale} />}
   <section class="section container content-grid">
     <aside class="side-nav" aria-label={en ? 'On this page' : 'Sur cette page'}>
       <h2>{en ? 'In this section' : 'Dans cette section'}</h2>{
@@ -92,6 +106,25 @@ const legal = ['privacy', 'accessibility-statement'].includes(page.slug);
             )}
           </section>
         ))
+      }
+      {
+        page.faq && (
+          <section class="content-section" aria-labelledby="idea-questions">
+            <h2 id="idea-questions">
+              {en
+                ? 'Questions before you start'
+                : 'Questions avant de commencer'}
+            </h2>
+            <div class="faq-list">
+              {page.faq.map(({ q, a }) => (
+                <details>
+                  <summary>{q[locale]}</summary>
+                  <p>{a[locale]}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )
       }
       {
         legal && (

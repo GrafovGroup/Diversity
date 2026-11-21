@@ -9,6 +9,10 @@ export const searchTitles: Record<string, Record<Locale, string>> = {
     en: 'DEI, Accessibility & Inclusion Services in Canada',
     fr: 'Services en EDI, en accessibilité et en inclusion au Canada',
   },
+  'idea-advisory': {
+    en: 'IDEA Advisory, Inclusion Lenses & Community Engagement in Canada',
+    fr: 'Conseil en IDEA, grilles d’analyse inclusive et consultation au Canada',
+  },
   government: {
     en: 'DEI & Accessibility Consulting for Government in Canada',
     fr: 'Conseil en EDI et en accessibilité pour le secteur public canadien',
