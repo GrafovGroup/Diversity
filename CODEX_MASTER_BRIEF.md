@@ -57,6 +57,15 @@ Equal priority: enterprise corporations and federal/provincial/municipal governm
 5. QA, staging, GitHub review, WHC hosting, domain/DNS/SSL, live verification and Google/Bing submission guidance.
 
 ## Non-negotiables
+
+**Editorial standard · Google E-E-A-T**
+
+Start with the decision the reader came to make. Where first-hand experience helps, use work the publisher can document and share. Identify the real author or reviewer where readers would expect it. Explain the method when it affects interpretation. Support consequential claims with the relevant original source and claim outside recognition only when readers can verify it.
+
+For a workshop or accessibility audit, identify the practitioner’s actual role, the scope and what the client authorized for publication. Use participants’ experiences with consent. Cite the relevant jurisdiction and seek qualified review for consequential interpretations.
+
+During content review, trace a representative claim to its evidence. Qualify or omit unsupported statements in visible copy, translations and structured data. [Google Search Central](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) · [Universal master prompt](https://github.com/GrafovGroup/MasterPrompt/blob/main/MASTER_PROMPT.md).
+
 Do not fabricate accreditations, consultants, certifications, physical offices, project results, client logos, government affiliations or legal compliance. Explicitly label proposed content and request missing credentials. Do not publish a placeholder site as finished. Do not publish until user approves production release.
 
 ## Start now
