@@ -1,0 +1,6 @@
+---
+import { imageAlts, type Lang } from '../data/site';
+interface Props { name: string; lang: Lang; eager?: boolean; class?: string; }
+const {name,lang,eager=false,class:className}=Astro.props;
+---
+<img src={`/images/${name}.webp`} alt={imageAlts[name]?.[lang]??''} width="1600" height="1067" loading={eager?'eager':'lazy'} fetchpriority={eager?'high':'auto'} decoding="async" class={className} />

@@ -1,0 +1,65 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import Arrow from '../components/Arrow.astro';
+import { pathFor, localized, type Lang, type Page } from '../data/site';
+interface Props { page: Page; lang: Lang; notFound?: boolean; }
+const {page,lang,notFound=false}=Astro.props;
+const fr=lang==='fr';
+const t=(en:string,frs:string)=>fr?frs:en;
+const canonical='https://diversity.ca'+localized(page,lang);
+const released=import.meta.env.PUBLIC_RELEASE_APPROVED==='true';
+const noindex=!released||['brand','legal','capabilities'].includes(page.kind??'')||notFound;
+const title=page.id==='home'?t('Diversity.ca | Canadian Consulting & Implementation','Diversity.ca | Conseil et mise en œuvre au Canada'):`${page.title[lang]} | Diversity.ca`;
+const nav=[['services',t('EXPERTISE','EXPERTISES')],['corporate',t('CORPORATE','ENTREPRISES')],['government',t('PUBLIC SECTOR','SECTEUR PUBLIC')],['about',t('ABOUT','À PROPOS')],['resources',t('INSIGHTS','RESSOURCES')]];
+const footerLabels: Record<string,string> = {services:t('Our expertise','Nos expertises'),corporate:t('Corporations','Entreprises'),government:t('Government & public sector','Gouvernement et secteur public'),industries:t('Industries','Secteurs'),coverage:t('Across Canada','Partout au Canada'),about:t('About us','À propos'),approach:t('Our approach','Notre démarche'),delivery:t('People & delivery','Équipe et prestation'),partners:t('Careers & partners','Carrières et partenaires'),resources:t('Insights','Ressources'),proposal:t('Request a proposal','Demander une proposition'),assessment:t('Request an assessment','Demander une évaluation'),'training-enquiry':t('Training enquiry','Demande de formation'),capabilities:t('Capabilities overview','Aperçu des capacités'),contact:t('Contact','Contact')};
+const schema=[{'@context':'https://schema.org','@type':'Organization','@id':'https://diversity.ca/#organization',name:'Diversity.ca',url:'https://diversity.ca/',email:'info@diversity.ca',logo:'https://diversity.ca/brand/wordmark-light.svg'}, {'@context':'https://schema.org','@type':'WebSite','@id':'https://diversity.ca/#website',name:'Diversity.ca',url:'https://diversity.ca/',inLanguage:['en-CA','fr-CA']},{'@context':'https://schema.org','@type':page.kind==='article'?'Article':'WebPage',name:page.title[lang],description:page.summary[lang],url:canonical,inLanguage:fr?'fr-CA':'en-CA',...(page.kind==='article'?{headline:page.title[lang],datePublished:'2026-10-31',dateModified:'2026-10-31',author:{'@type':'Organization',name:'Diversity.ca'},publisher:{'@id':'https://diversity.ca/#organization'}}:{})}];
+if(page.service) schema.push({'@context':'https://schema.org','@type':'Service',name:page.title[lang],description:page.summary[lang],url:canonical,inLanguage:fr?'fr-CA':'en-CA',provider:{'@id':'https://diversity.ca/#organization'},areaServed:{'@type':'Country',name:'Canada'}} as typeof schema[number]);
+if(page.id!=='home'&&!notFound) schema.push({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:t('Home','Accueil'),item:'https://diversity.ca'+pathFor('home',lang)},{'@type':'ListItem',position:2,name:page.title[lang],item:canonical}]} as unknown as typeof schema[number]);
+---
+<!doctype html>
+<html lang={fr?'fr-CA':'en-CA'}>
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta name="theme-color" content="#0a244c" />
+ <title>{title}</title><meta name="description" content={page.summary[lang]} />
+ <meta name="robots" content={noindex?'noindex, nofollow':'index, follow'} />
+ <link rel="canonical" href={canonical} />
+ {!notFound && <><link rel="alternate" hreflang="en-CA" href={'https://diversity.ca'+localized(page,'en')} /><link rel="alternate" hreflang="fr-CA" href={'https://diversity.ca'+localized(page,'fr')} /><link rel="alternate" hreflang="x-default" href={'https://diversity.ca'+localized(page,'en')} /></>}
+ <meta property="og:type" content={page.kind==='article'?'article':'website'} /><meta property="og:site_name" content="Diversity.ca" /><meta property="og:title" content={title} /><meta property="og:description" content={page.summary[lang]} /><meta property="og:url" content={canonical} /><meta property="og:locale" content={fr?'fr_CA':'en_CA'} /><meta property="og:locale:alternate" content={fr?'en_CA':'fr_CA'} /><meta property="og:image" content={`https://diversity.ca/brand/social-${lang}.png`} /><meta property="og:image:alt" content="Diversity.ca" /><meta name="twitter:card" content="summary_large_image" />
+ <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg" />
+ <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+ <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g,'\\u003c')} />
+<noscript><style>.menu-toggle{display:none!important}.header{position:static}.header-inner{height:auto;flex-wrap:wrap;padding-block:18px}.main-nav{display:flex;position:static;flex-wrap:wrap;max-height:none;box-shadow:none;border:0;padding:0}.main-nav>a{white-space:normal}</style></noscript>
+</head>
+<body>
+ <a class="skip-link" href="#main">{t('Skip to main content','Passer au contenu principal')}</a>
+ <div class="utility" role="region" aria-label={t('Regional information and language','Information régionale et langue')}><div class="container utility-inner"><a href={pathFor('coverage',lang)}>{t('ACROSS CANADA','PARTOUT AU CANADA')} <span aria-hidden="true">↗</span></a><div class="utility-right"><a class="email-utility" href="mailto:info@diversity.ca">info@diversity.ca</a><nav class="language" aria-label={t('Language','Langue')}><a href={notFound?'/':localized(page,'en')} hreflang="en-CA" lang="en-CA" aria-current={!fr?'page':undefined}>EN<span class="sr-only"> — English</span></a><span aria-hidden="true">/</span><a href={notFound?'/fr/':localized(page,'fr')} hreflang="fr-CA" lang="fr-CA" aria-current={fr?'page':undefined}>FR<span class="sr-only"> — Français</span></a></nav></div></div></div>
+ <header class="header"><div class="container header-inner">
+ <a class="home-logo" href={pathFor('home',lang)} aria-label={t('Diversity.ca home','Diversity.ca — Accueil')}><Logo lang={lang}/></a>
+ <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav"><span>{t('MENU','MENU')}</span><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+ <nav id="main-nav" class="main-nav" aria-label={t('Main navigation','Navigation principale')}>
+ {nav.map(([id,label])=><a href={pathFor(id,lang)} aria-current={page.id===id?'page':undefined}>{label}</a>)}
+ <a class="button button-small" href={pathFor('contact',lang)}>{t('LET’S TALK','PARLONS-EN')}<Arrow/></a>
+ </nav></div></header>
+ <main id="main" tabindex="-1"><slot /></main>
+ <section class="closing" aria-labelledby="closing-heading"><div class="container closing-grid"><div><p class="eyebrow">{t('YOUR NEXT STEP','VOTRE PROCHAINE ÉTAPE')}</p><h2 id="closing-heading">{t('Let’s move your priorities forward.','Faisons avancer vos priorités.')}</h2></div><div><p>{t('A focused conversation is a good place to start. Tell us what your organization needs.','Une discussion ciblée est un bon point de départ. Présentez-nous les besoins de votre organisation.')}</p><a class="button button-white" href={pathFor('proposal',lang)}>{t('DISCUSS YOUR PROJECT','DISCUTER DE VOTRE PROJET')}<Arrow/></a></div></div></section>
+ <footer class="footer"><div class="container footer-grid"><div class="footer-brand"><a href={pathFor('home',lang)}><Logo lang={lang} descriptor /></a><p>{t('Canadian consulting, advisory and implementation.','Conseil et mise en œuvre au Canada.')}</p><a href="mailto:info@diversity.ca">info@diversity.ca <span aria-hidden="true">↗</span></a></div>
+ <div><h2>{t('EXPLORE','EXPLORER')}</h2>{['services','corporate','government','industries','coverage'].map(id=><a href={pathFor(id,lang)}>{footerLabels[id]}</a>)}</div>
+ <div><h2>{t('DIVERSITY.CA','DIVERSITY.CA')}</h2>{['about','approach','delivery','partners','resources'].map(id=><a href={pathFor(id,lang)}>{footerLabels[id]}</a>)}</div>
+ <div><h2>{t('GET STARTED','PASSER À L’ACTION')}</h2>{['proposal','assessment','training-enquiry','capabilities','contact'].map(id=><a href={pathFor(id,lang)}>{footerLabels[id]}</a>)}</div></div>
+ <div class="container footer-bottom"><span>© 2026 Diversity.ca</span><div><a href={pathFor('privacy',lang)}>{t('Privacy','Confidentialité')}</a><a href={pathFor('accessibility-statement',lang)}>{t('Accessibility','Accessibilité')}</a><a href="/sitemap.xml">{t('Sitemap','Plan du site')}</a></div></div>
+ </footer>
+ <script>
+ const toggle=document.querySelector<HTMLButtonElement>('.menu-toggle');
+ const nav=document.getElementById('main-nav');
+ const close=()=>{toggle?.setAttribute('aria-expanded','false');nav?.classList.remove('is-open');};
+ toggle?.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));nav?.classList.toggle('is-open',!open);});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toggle?.getAttribute('aria-expanded')==='true'){close();toggle.focus();}});
+ nav?.addEventListener('click',e=>{if((e.target as HTMLElement).closest('a'))close();});
+ document.addEventListener('click',e=>{if(!nav?.contains(e.target as Node)&&!toggle?.contains(e.target as Node))close();});
+ document.querySelector<HTMLButtonElement>('[data-print]')?.addEventListener('click',()=>window.print());
+ </script>
+</body>
+</html>

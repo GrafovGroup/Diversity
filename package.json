@@ -1,0 +1,35 @@
+{
+  "name": "diversity-ca",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.20.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "check": "astro check",
+    "lint": "eslint src scripts",
+    "test": "node --test tests/*.test.mjs",
+    "qa": "npm run check && npm run lint && npm run test && npm run build && node scripts/check-dist.mjs",
+    "build:production": "PUBLIC_RELEASE_APPROVED=true astro build",
+    "check:dist": "node scripts/check-dist.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "typescript": "6.0.3",
+    "eslint": "10.14.0",
+    "@eslint/js": "10.0.1",
+    "typescript-eslint": "8.72.1",
+    "eslint-plugin-astro": "3.2.1",
+    "globals": "17.13.0",
+    "axe-core": "4.14.0"
+  },
+  "overrides": {
+    "minimatch": "11.0.1"
+  }
+}
